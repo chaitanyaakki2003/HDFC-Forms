@@ -266,3 +266,95 @@ header nav .nav-sections ul > li > ul > li {
 header nav .nav-tools {
   grid-area: tools;
 }
+
+
+
+
+
+/*============================================================*/
+/* ============================= */
+/* HEADER BACKGROUND             */
+/* ============================= */
+
+.header-wrapper {
+  background: #0b1b3f; /* HDFC dark blue */
+  padding: 18px 30px;
+  position: relative;
+}
+
+/* REMOVE DEFAULT BLOCK SPACING */
+.header-wrapper .header.block {
+  max-width: 100%;
+  margin: 0;
+  padding: 0;
+  position: relative;
+  height: 40px;
+}
+
+/* ============================= */
+/* LEFT LOGO (HDFC)              */
+/* ============================= */
+
+.header-wrapper .header.block::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 120px;
+  height: 32px;
+
+  background-image: url("https://upload.wikimedia.org/wikipedia/commons/2/28/HDFC_Bank_Logo.svg");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: left center;
+}
+
+/* ============================= */
+/* RIGHT BADGE (100% SECURE)     */
+/* ============================= */
+
+.header-wrapper .header.block::after {
+  content: "100% secure";
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+
+  font-size: 12px;
+  font-weight: 600;
+  color: #ffffff;
+
+  background: #1db954; /* green badge */
+  padding: 6px 12px;
+  border-radius: 20px;
+
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* OPTIONAL: ADD SMALL SHIELD ICON */
+.header-wrapper .header.block::after {
+  content: "100% SAFE";
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+
+  font-size: 11px;
+  font-weight: 600;
+  color: #ffffff;
+
+  background: #2ecc71; /* softer green like image */
+  padding: 5px 12px 5px 28px;
+  border-radius: 20px;
+
+  letter-spacing: 0.3px;
+
+  /* shield icon */
+  background-image: url("https://cdn-icons-png.flaticon.com/512/565/565547.png");
+  background-repeat: no-repeat;
+  background-size: 14px;
+  background-position: 8px center;
+}

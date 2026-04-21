@@ -18,3 +18,42 @@ footer .footer p {
     padding: 40px 32px 24px;
   }
 }
+
+
+
+
+
+
+
+
+/* ============================= */
+/* FOOTER BAR (HDFC STYLE)       */
+/* ============================= */
+
+.footer-wrapper {
+  background: #0b1b3f; /* same dark blue */
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+/* REMOVE DEFAULT INNER SPACING (AEM FIX) */
+.footer-wrapper > * {
+  margin: 0;
+  padding: 0;
+}
+
+/* ============================= */
+/* CENTER TEXT USING CSS ONLY    */
+/* ============================= */
+
+.footer-wrapper::before {
+  content: "© Copyright HDFC Bank Ltd.";
+  color: #ffffff;
+  font-size: 12px;
+  font-weight: 400;
+  letter-spacing: 0.3px;
+  text-align: center;
+}
