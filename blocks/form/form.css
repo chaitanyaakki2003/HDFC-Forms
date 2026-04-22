@@ -862,3 +862,28 @@ main .form form select[multiple] {
   background-size: 1px 60%;
   background-repeat: no-repeat;
 }
+
+
+.plain-text-wrapper.field-income-note {
+  background: #fff8e6;
+  border: 1px solid #f5d28c;
+  border-radius: 6px;
+  padding: 10px 14px;
+  margin-top: 8px;
+ 
+  display: inline-block;
+  max-width: 300px;  
+  width: auto;      
+}
+ 
+.plain-text-wrapper.field-income-note p {
+  margin: 0;
+  font-size: 12px;
+  line-height: 1.4;
+  color: #6b5b2c;
+}
+ 
+.plain-text-wrapper b{
+    color: #035fe6;
+}
+ 
