@@ -792,3 +792,73 @@ main div.form-wrapper {
 main .form form select[multiple] {
     height: calc(42px + 50px);
 }
+
+
+
+
+
+
+
+
+/* ============================= */
+/* MOBILE FIELD WRAPPER          */
+/* ============================= */
+
+.text-wrapper.field-mobile-number {
+  position: relative;
+}
+
+/* ============================= */
+/* INPUT STYLING (ADD LEFT SPACE)*/
+/* ============================= */
+
+.text-wrapper.field-mobile-number input {
+  padding-left: 75px !important; /* space for flag + +91 */
+}
+
+/* ============================= */
+/* FLAG + +91 PREFIX             */
+/* ============================= */
+
+.text-wrapper.field-mobile-number::before {
+  content: "+91";
+  position: absolute;
+  left: 40px;
+  top: 50%;
+  transform: translateY(-50%);
+  
+  font-size: 14px;
+  color: #333;
+  font-weight: 500;
+}
+
+/* ============================= */
+/* INDIAN FLAG                  */
+/* ============================= */
+
+.text-wrapper.field-mobile-number::after {
+  content: "";
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  
+  width: 20px;
+  height: 14px;
+
+  background-image: url("https://flagcdn.com/w40/in.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+  border-radius: 2px;
+}
+
+/* ============================= */
+/* OPTIONAL: ADD DIVIDER LINE    */
+/* ============================= */
+
+.text-wrapper.field-mobile-number input {
+  background-image: linear-gradient(to right, #ddd 1px, transparent 1px);
+  background-position: 60px 50%;
+  background-size: 1px 60%;
+  background-repeat: no-repeat;
+}
