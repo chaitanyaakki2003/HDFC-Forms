@@ -850,80 +850,122 @@ main .form .text-wrapper.field-mobile-number input::placeholder {
 
 
 
-
 /* =========================
-   🎯 CARD
+   🎯 CARD CONTAINER (FINAL PERFECT)
    ========================= */
 .panel-wrapper.field-loan-offer-summary {
-  width: 320px !important;
-  max-width: 320px !important;
+  width: 260px !important;
   height: 320px !important;
-
+ 
   background: #f6f0e3 !important;
   border-radius: 20px !important;
-
+ 
   padding: 20px 18px 0 !important;
-
-  position: relative !important;
+  margin-left: 40px !important;
+ 
   display: flex !important;
   flex-direction: column !important;
-
+ 
   overflow: hidden !important;
+  box-sizing: border-box !important;
 }
-
-/* REMOVE LEGEND */
+ 
+/* RESET */
+.panel-wrapper.field-loan-offer-summary *,
+.panel-wrapper.field-loan-offer-summary {
+  margin: 0 !important;
+}
+ 
 .panel-wrapper.field-loan-offer-summary legend {
   display: none !important;
 }
-
+ 
 /* =========================
-   GRID FIX (AEM)
+   INPUT FIX
+   ========================= */
+.panel-wrapper.field-loan-offer-summary input {
+  border: none !important;
+  background: transparent !important;
+  outline: none !important;
+  pointer-events: auto !important;
+}
+ 
+/* =========================
+   TOP SECTION
+   ========================= */
+.text-wrapper.field-avail-xpress-personal-loan-of {
+  border-bottom: 1px dashed #e2d7c3;
+  padding-bottom: 12px;
+  margin-bottom: 16px;
+ 
+  padding-left: 12px !important;   /* ✅ FIX alignment */
+}
+ 
+.field-avail-xpress-personal-loan-of .field-label {
+  font-size: 13px;
+  font-weight: 600;
+  color: #4a5a6a;
+}
+ 
+.field-avail-xpress-personal-loan-of input {
+  font-size: 28px;
+  font-weight: 800;
+  color: #16263c;
+}
+ 
+/* =========================
+   GRID (SHIFT RIGHT)
    ========================= */
 .panel-wrapper.field-loan-offer-details {
   display: grid !important;
   grid-template-columns: 1fr 1fr !important;
-
-  column-gap: 20px !important;
+ 
+  column-gap: 22px !important;
   row-gap: 12px !important;
-
-  padding-left: 12px !important;
+ 
+  padding-left: 12px !important;   /* ✅ balanced shift */
 }
-
-/* 🔥 BREAK AEM WRAPPERS */
-.panel-wrapper.field-loan-offer-details .field-wrapper {
+ 
+/* REMOVE FULL WIDTH */
+.field-loan-offer-details .col-12 {
   width: auto !important;
-  max-width: none !important;
-  flex: none !important;
 }
-
-/* POSITION FIX */
-.field-emi-amount { grid-column: 1 !important; }
-.field-rate-of-interest { grid-column: 2 !important; }
-.field-taxes { grid-column: 1 !important; }
-
+ 
+/* STACK */
+.field-emi-amount,
+.field-rate-of-interest,
+.field-taxes {
+  display: flex !important;
+  flex-direction: column !important;
+}
+ 
 /* =========================
-   LABEL
+   LABEL (FIX GAP)
    ========================= */
 .field-loan-offer-details .field-label {
   font-size: 12px;
   color: #7f8791;
-
-  padding-left: 14px !important;
+ 
+  padding-left: 14px !important;   /* ✅ spacing after line */
   position: relative;
+ 
+  margin-bottom: 4px;
+  white-space: nowrap !important;  /* ✅ FIX line break issue */
 }
-
+ 
+/* ORANGE LINE (NO OVERLAP NOW) */
 .field-loan-offer-details .field-label::before {
   content: "";
   position: absolute;
   left: 0;
   top: 3px;
-
+ 
   width: 3px;
   height: 40px;
-
+ 
   background: #f2a126;
 }
-
+ 
 /* =========================
    VALUES
    ========================= */
@@ -931,59 +973,63 @@ main .form .text-wrapper.field-mobile-number input::placeholder {
   font-size: 15px;
   font-weight: 800;
   color: #16263c;
-
+ 
   padding-left: 14px !important;
-
-  border: none !important;
-  background: transparent !important;
 }
-
 /* =========================
-   DISCLAIMER
+   🔥 PERFECT DISCLAIMER (LOCKED TO BOTTOM)
    ========================= */
+/* 🔥 CARD (add this line only) */
+.panel-wrapper.field-loan-offer-summary {
+  position: relative !important;
+}
+ 
+/* 🔥 DISCLAIMER FINAL FIX */
 .field-loan-offer-disclaimer {
   background: #f2a126 !important;
-
+ 
   position: absolute !important;
   left: 0;
   right: 0;
   bottom: 0;
-
+ 
   width: 100%;
-
+ 
   padding: 16px 20px 18px 56px !important;
-
+ 
   border-radius: 0 0 20px 20px !important;
+ 
+  box-sizing: border-box !important;
 }
-
+ 
+/* ICON */
 .field-loan-offer-disclaimer::before {
   content: "i";
   position: absolute;
-
+ 
   left: 20px;
   top: 50%;
   transform: translateY(-50%);
-
+ 
   border: 1px solid #ffd793;
   border-radius: 50%;
-
+ 
   width: 16px;
   height: 16px;
-
+ 
   font-size: 11px;
   line-height: 16px;
   text-align: center;
   color: #ffd793;
 }
-
+ 
+/* TEXT */
 .field-loan-offer-disclaimer p {
   font-size: 11px !important;
   color: #fff4df !important;
   line-height: 1.4 !important;
   margin: 0 !important;
 }
-
-
 
 
 
