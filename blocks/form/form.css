@@ -1028,7 +1028,17 @@ main .form .text-wrapper.field-mobile-number input::placeholder {
   line-height: 1.4 !important;
   margin: 0 !important;
 }
+.panel-wrapper.field-loan-offer-summary .field-loan-offer-details {
+  display: grid !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+}
 
+.panel-wrapper.field-loan-offer-summary .field-loan-offer-details * {
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+}
 
 
 
