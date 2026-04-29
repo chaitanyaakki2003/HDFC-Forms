@@ -799,94 +799,52 @@ main .form form select[multiple] {
 
 
 
-
 /* ============================= */
-/* MOBILE FIELD WRAPPER          */
+/* ✅ PERFECT ALIGNMENT FIX      */
 /* ============================= */
 
-.text-wrapper.field-mobile-number {
-  position: relative;
+main .form .text-wrapper.field-mobile-number input[type="text"] {
+
+  height: 48px !important;
+  width: 100% !important;
+  box-sizing: border-box !important;
+
+  /* 👇 REDUCED SPACE */
+  padding-left: 75px !important;
+  padding-right: 16px !important;
+
+  font-size: 13px !important;
+  color: #5f6670 !important;
+
+  background-color: #fff !important;
+
+  background-image:
+    url("https://flagcdn.com/w40/in.png"),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='36' height='16'%3E%3Ctext x='0' y='12' font-size='14' fill='%23222'%3E%2B91%3C/text%3E%3C/svg%3E"),
+    linear-gradient(#d6d6d6, #d6d6d6) !important;
+
+  background-repeat: no-repeat, no-repeat, no-repeat !important;
+
+  /* 👇 TIGHTEN POSITIONS */
+  background-position:
+    14px center,   /* flag */
+    42px center,   /* +91 */
+    70px center !important; /* divider */
+
+  background-size:
+    20px 13px,
+    32px 14px,
+    1px 26px !important;
 }
 
-/* ============================= */
-/* INPUT STYLING (ADD LEFT SPACE)*/
-/* ============================= */
-
-.text-wrapper.field-mobile-number input {
-  padding-left: 75px !important; /* space for flag + +91 */
-}
-
-/* ============================= */
-/* FLAG + +91 PREFIX             */
-/* ============================= */
-
-.text-wrapper.field-mobile-number::before {
-  content: "+91";
-  position: absolute;
-  left: 40px;
-  top: 50%;
-  transform: translateY(-50%);
-  
-  font-size: 14px;
-  color: #333;
-  font-weight: 500;
-}
-
-/* ============================= */
-/* INDIAN FLAG                  */
-/* ============================= */
-
-.text-wrapper.field-mobile-number::after {
-  content: "";
-  position: absolute;
-  left: 12px;
-  top: 50%;
-  transform: translateY(-50%);
-  
-  width: 20px;
-  height: 14px;
-
-  background-image: url("https://flagcdn.com/w40/in.png");
-  background-size: cover;
-  background-repeat: no-repeat;
-  border-radius: 2px;
-}
-
-/* ============================= */
-/* OPTIONAL: ADD DIVIDER LINE    */
-/* ============================= */
-
-.text-wrapper.field-mobile-number input {
-  background-image: linear-gradient(to right, #ddd 1px, transparent 1px);
-  background-position: 70px 50%;
-  background-size: 1px 60%;
-  background-repeat: no-repeat;
+/* Placeholder */
+main .form .text-wrapper.field-mobile-number input::placeholder {
+  font-size: 13px !important;
+  color: #7a7a7a !important;
+  opacity: 1 !important;
 }
 
 
-.plain-text-wrapper.field-income-note {
-  background: #fff8e6;
-  border: 1px solid #f5d28c;
-  border-radius: 6px;
-  padding: 10px 14px;
-  margin-top: 8px;
- 
-  display: inline-block;
-  max-width: 300px;  
-  width: auto;      
-}
- 
-.plain-text-wrapper.field-income-note p {
-  margin: 0;
-  font-size: 12px;
-  line-height: 1.4;
-  color: #6b5b2c;
-}
- 
-.plain-text-wrapper b{
-    color: #035fe6;
-}
- 
 
 
 
@@ -1023,24 +981,27 @@ main .form form select[multiple] {
 /* =========================
    🔥 PERFECT DISCLAIMER (LOCKED TO BOTTOM)
    ========================= */
+/* 🔥 CARD (add this line only) */
+.panel-wrapper.field-loan-offer-summary {
+  position: relative !important;
+}
+
+/* 🔥 DISCLAIMER FINAL FIX */
 .field-loan-offer-disclaimer {
   background: #f2a126 !important;
 
-  margin-top: auto !important;
+  position: absolute !important;
+  left: 0;
+  right: 0;
+  bottom: 0;
 
-  /* ✅ FULL BLEED */
-  margin-left: -18px !important;
-  margin-right: -18px !important;
+  width: 100%;
 
-  padding: 14px 18px 14px 44px !important;
+  padding: 16px 20px 18px 56px !important;
 
   border-radius: 0 0 20px 20px !important;
 
-  position: relative !important;
   box-sizing: border-box !important;
-
-  /* ✅ KEY FIX */
-  flex-shrink: 0 !important;
 }
 
 /* ICON */
@@ -1048,7 +1009,7 @@ main .form form select[multiple] {
   content: "i";
   position: absolute;
 
-  left: 18px;
+  left: 20px;
   top: 50%;
   transform: translateY(-50%);
 
@@ -1068,15 +1029,13 @@ main .form form select[multiple] {
 .field-loan-offer-disclaimer p {
   font-size: 11px !important;
   color: #fff4df !important;
-
   line-height: 1.4 !important;
-
   margin: 0 !important;
-
-  /* ✅ CRITICAL FIX */
-  padding: 0 !important;
-  display: block;
 }
+
+
+
+
 
 
 
@@ -1337,62 +1296,46 @@ main .form .field-loan-summary p {
 
 
 
-
 /* =========================
-   🔥 CONTAINER (NO BACKGROUND)
+   ✅ ONLY TARGET REVIEW / FIRST SECTION
    ========================= */
-main .form .field-loan-amount {
+main .form fieldset.field-thank-you .field-loan-amount {
   position: relative;
-
-  background: transparent !important;   /* REMOVE blue bg */
-  padding-left: 16px;                  /* space for line */
+  background: transparent !important;
+  padding-left: 16px;
   margin-top: 12px;
 }
 
-/* =========================
-   🔥 LEFT BLUE LINE ONLY
-   ========================= */
-main .form .field-loan-amount::before {
+/* LEFT BLUE LINE */
+main .form fieldset.field-thank-you .field-loan-amount::before {
   content: "";
   position: absolute;
-
   left: 0;
   top: 6px;
   bottom: 6px;
-
   width: 3px;
   background: #5b6bff;
   border-radius: 2px;
 }
 
-/* =========================
-   🔥 LABEL
-   ========================= */
-main .form .field-loan-amount .field-label {
+/* LABEL */
+main .form fieldset.field-thank-you .field-loan-amount .field-label {
   font-size: 13px;
   color: #8a94a6;
   font-weight: 500;
-
   margin: 0 0 2px 0;
 }
 
-/* =========================
-   🔥 INPUT (TYPEABLE + CLEAN)
-   ========================= */
-main .form .field-loan-amount input {
+/* INPUT */
+main .form fieldset.field-thank-you .field-loan-amount input {
   border: none !important;
   background: transparent !important;
-
   font-size: 18px;
   font-weight: 700;
   color: #1a2b49;
-
   padding: 0;
   margin: 0;
-
   outline: none;
   box-shadow: none;
-
-  pointer-events: auto;   /* ✅ FIX typing issue */
+  pointer-events: auto;
 }
-
