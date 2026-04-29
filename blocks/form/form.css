@@ -850,44 +850,33 @@ main .form .text-wrapper.field-mobile-number input::placeholder {
 
 
 
+
 /* ========================= 
-   🎯 CARD CONTAINER
+   🎯 LOAN OFFER CARD (FINAL STABLE)
    ========================= */
+
+/* CARD CONTAINER */
 main .form form .panel-wrapper.field-loan-offer-summary {
+  grid-column: span 4 !important; /* ✅ fix width in grid */
+
   width: 260px !important;
   height: 320px !important;
 
   background: #f6f0e3 !important;
   border-radius: 20px !important;
 
-  padding: 20px 18px 80px !important;
-  margin-left: 40px !important;
-
-  display: flex !important;              /* ✅ FORCE FLEX */
-  flex-direction: column !important;
-
-  overflow: hidden !important;
-  box-sizing: border-box !important;
+  padding: 20px 18px 80px !important; /* space for footer */
 
   position: relative !important;
+  box-sizing: border-box !important;
 
-  grid-column: span 4 !important;        /* ✅ IMPORTANT FIX */
+  overflow: hidden !important;
 }
 
-/* 🚨 CRITICAL FIX (THIS WAS MISSING) */
-@media (width >= 1200px) {
-  main .form form .panel-wrapper.field-loan-offer-summary {
-    flex: unset !important;              /* STOP flex override */
-    width: 260px !important;             /* lock width */
-  }
-}
-
-/* =========================
-   STOP GRID BREAKING CHILDREN
-   ========================= */
-main .form form .panel-wrapper.field-loan-offer-summary > * {
-  grid-column: unset !important;
-  width: 100% !important;
+/* 🔥 REMOVE LEGEND (VERY IMPORTANT) */
+main .form form .panel-wrapper.field-loan-offer-summary legend,
+main .form form .panel-wrapper.field-loan-offer-details legend {
+  display: none !important;
 }
 
 /* =========================
@@ -900,8 +889,22 @@ main .form form .panel-wrapper.field-loan-offer-summary > * {
   padding-left: 12px !important;
 }
 
+.field-avail-xpress-personal-loan-of .field-label {
+  font-size: 13px;
+  font-weight: 600;
+  color: #4a5a6a;
+}
+
+.field-avail-xpress-personal-loan-of input {
+  font-size: 28px;
+  font-weight: 800;
+  color: #16263c;
+  border: none !important;
+  background: transparent !important;
+}
+
 /* =========================
-   GRID (INSIDE CARD ONLY)
+   GRID INSIDE CARD
    ========================= */
 main .form form 
 .panel-wrapper.field-loan-offer-summary 
@@ -910,31 +913,49 @@ main .form form
   display: grid !important;
   grid-template-columns: 1fr 1fr !important;
 
-  column-gap: 22px !important;
-  row-gap: 12px !important;
+  column-gap: 20px !important;
+  row-gap: 14px !important;
 
-  width: 100% !important;
+  padding-left: 12px !important;
+}
+
+/* REMOVE FULL WIDTH FROM CHILDREN */
+.field-loan-offer-details .col-12 {
+  width: auto !important;
+}
+
+/* STACK ITEMS */
+.field-emi-amount,
+.field-rate-of-interest,
+.field-taxes {
+  display: flex !important;
+  flex-direction: column !important;
 }
 
 /* =========================
-   LABEL
+   LABEL STYLE
    ========================= */
 .field-loan-offer-details .field-label {
   font-size: 12px;
   color: #7f8791;
+
   padding-left: 14px !important;
   position: relative;
+
   margin-bottom: 4px;
-  white-space: nowrap !important;
+  white-space: nowrap;
 }
 
+/* ORANGE LINE */
 .field-loan-offer-details .field-label::before {
   content: "";
   position: absolute;
   left: 0;
   top: 3px;
+
   width: 3px;
   height: 40px;
+
   background: #f2a126;
 }
 
@@ -945,7 +966,9 @@ main .form form
   font-size: 15px;
   font-weight: 800;
   color: #16263c;
+
   padding-left: 14px !important;
+
   border: none !important;
   background: transparent !important;
 }
@@ -962,15 +985,18 @@ main .form form
   bottom: 0;
 
   width: 100%;
+
   padding: 16px 20px 18px 56px !important;
 
   border-radius: 0 0 20px 20px !important;
   box-sizing: border-box !important;
 }
 
+/* ICON */
 .field-loan-offer-disclaimer::before {
   content: "i";
   position: absolute;
+
   left: 20px;
   top: 50%;
   transform: translateY(-50%);
@@ -987,12 +1013,14 @@ main .form form
   color: #ffd793;
 }
 
+/* TEXT */
 .field-loan-offer-disclaimer p {
   font-size: 11px !important;
   color: #fff4df !important;
   line-height: 1.4 !important;
   margin: 0 !important;
 }
+
 
 
 
