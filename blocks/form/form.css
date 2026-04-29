@@ -851,9 +851,10 @@ main .form .text-wrapper.field-mobile-number input::placeholder {
 
 
 /* =========================
-   🎯 CARD CONTAINER (AEM SAFE FIX)
+   🎯 CARD CONTAINER (FINAL AEM FIX)
    ========================= */
-.panel-wrapper.field-loan-offer-summary {
+
+main .form form fieldset.panel-wrapper.field-loan-offer-summary {
   position: relative !important;
 
   width: 260px !important;
@@ -865,68 +866,76 @@ main .form .text-wrapper.field-mobile-number input::placeholder {
   padding: 20px 18px 0 !important;
   margin-left: 40px !important;
 
-  /* 🔥 BREAK AEM GRID COMPLETELY */
+  /* 🔥 FORCE FLEX (override AEM grid) */
   display: flex !important;
   flex-direction: column !important;
 
-  grid-column: unset !important;
+  /* 🔥 BREAK GRID COMPLETELY */
+  grid-column: span 4 !important;
   grid-area: unset !important;
 
   overflow: hidden !important;
   box-sizing: border-box !important;
 }
 
+
 /* =========================
-   🔥 RESET AEM GRID CHILDREN
+   🔥 RESET AEM GRID CHILDREN (STRONG)
    ========================= */
-.panel-wrapper.field-loan-offer-summary .field-wrapper,
-.panel-wrapper.field-loan-offer-summary [class*="col-"] {
+main .form form fieldset.panel-wrapper.field-loan-offer-summary .field-wrapper,
+main .form form fieldset.panel-wrapper.field-loan-offer-summary [class*="col-"] {
   width: 100% !important;
   max-width: 100% !important;
+
+  display: block !important;
 
   grid-column: unset !important;
   grid-area: unset !important;
 }
 
+
 /* REMOVE LEGEND */
-.panel-wrapper.field-loan-offer-summary legend {
+main .form form fieldset.panel-wrapper.field-loan-offer-summary legend {
   display: none !important;
 }
+
 
 /* =========================
    INPUT FIX
    ========================= */
-.panel-wrapper.field-loan-offer-summary input {
+main .form form fieldset.panel-wrapper.field-loan-offer-summary input {
   border: none !important;
   background: transparent !important;
   outline: none !important;
 }
 
+
 /* =========================
    TOP SECTION
    ========================= */
-.text-wrapper.field-avail-xpress-personal-loan-of {
+main .form form .text-wrapper.field-avail-xpress-personal-loan-of {
   border-bottom: 1px dashed #e2d7c3;
-
   padding: 0 0 12px 12px !important;
   margin-bottom: 16px;
 }
 
-.field-avail-xpress-personal-loan-of .field-label {
+main .form form .field-avail-xpress-personal-loan-of .field-label {
   font-size: 13px;
   font-weight: 600;
   color: #4a5a6a;
 }
 
-.field-avail-xpress-personal-loan-of input {
+main .form form .field-avail-xpress-personal-loan-of input {
   font-size: 28px;
   font-weight: 800;
   color: #16263c;
 }
 
+
 /* =========================
-   GRID SECTION (SAFE)
+   GRID SECTION (FIXED)
    ========================= */
+main .form form fieldset.panel-wrapper.field-loan-offer-summary 
 .panel-wrapper.field-loan-offer-details {
   display: grid !important;
   grid-template-columns: 1fr 1fr !important;
@@ -937,6 +946,7 @@ main .form .text-wrapper.field-mobile-number input::placeholder {
   padding-left: 12px !important;
 }
 
+
 /* STACK */
 .field-emi-amount,
 .field-rate-of-interest,
@@ -944,6 +954,7 @@ main .form .text-wrapper.field-mobile-number input::placeholder {
   display: flex !important;
   flex-direction: column !important;
 }
+
 
 /* =========================
    LABEL
@@ -959,6 +970,7 @@ main .form .text-wrapper.field-mobile-number input::placeholder {
   white-space: nowrap !important;
 }
 
+
 /* ORANGE LINE */
 .field-loan-offer-details .field-label::before {
   content: "";
@@ -973,6 +985,7 @@ main .form .text-wrapper.field-mobile-number input::placeholder {
   background: #f2a126;
 }
 
+
 /* VALUES */
 .field-loan-offer-details input {
   font-size: 15px;
@@ -982,10 +995,11 @@ main .form .text-wrapper.field-mobile-number input::placeholder {
   padding-left: 14px !important;
 }
 
+
 /* =========================
-   🔥 DISCLAIMER (FIXED 100%)
+   🔥 DISCLAIMER (FIXED)
    ========================= */
-.field-loan-offer-disclaimer {
+main .form form .field-loan-offer-disclaimer {
   position: absolute !important;
 
   left: 0;
@@ -999,8 +1013,9 @@ main .form .text-wrapper.field-mobile-number input::placeholder {
   border-radius: 0 0 20px 20px !important;
 }
 
+
 /* ICON */
-.field-loan-offer-disclaimer::before {
+main .form form .field-loan-offer-disclaimer::before {
   content: "i";
 
   position: absolute;
@@ -1021,31 +1036,23 @@ main .form .text-wrapper.field-mobile-number input::placeholder {
   color: #ffd793;
 }
 
+
 /* TEXT */
-.field-loan-offer-disclaimer p {
+main .form form .field-loan-offer-disclaimer p {
   font-size: 11px !important;
   color: #fff4df !important;
   line-height: 1.4 !important;
   margin: 0 !important;
 }
+
+
 /* =========================
-   🚀 FIX: AEM GRID WIDTH ISSUE (FINAL)
+   🔥 FINAL SAFETY (CRITICAL)
    ========================= */
-
-/* force card to take proper width */
-main .form form .panel-wrapper.field-loan-offer-summary {
-  grid-column: span 4 !important; /* increase width */
-  max-width: 280px !important;
+main .form form fieldset.panel-wrapper.field-loan-offer-summary * {
+  visibility: visible !important;
+  opacity: 1 !important;
 }
-
-/* optional: for mobile */
-@media (max-width: 768px) {
-  main .form form .panel-wrapper.field-loan-offer-summary {
-    grid-column: span 12 !important;
-    margin-left: 0 !important;
-  }
-}
-
 
 
 
