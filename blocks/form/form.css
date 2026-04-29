@@ -972,6 +972,21 @@ main .form form
   border: none !important;
   background: transparent !important;
 }
+/* 🔥 REMOVE INPUT BOX + FOCUS BORDER */
+.panel-wrapper.field-loan-offer-summary input {
+  border: none !important;
+  outline: none !important;
+  box-shadow: none !important;
+  background: transparent !important;
+}
+
+/* 🔥 REMOVE ON FOCUS (IMPORTANT) */
+.panel-wrapper.field-loan-offer-summary input:focus,
+.panel-wrapper.field-loan-offer-summary input:active {
+  border: none !important;
+  outline: none !important;
+  box-shadow: none !important;
+}
 
 /* =========================
    🔥 DISCLAIMER (BOTTOM FIXED)
