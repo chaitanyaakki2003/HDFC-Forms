@@ -55,8 +55,107 @@ function maskMobileNumber(mobileNumber) {
   // Mask first 5 digits and keep the rest
   return ` ${'*'.repeat(5)}${value.substring(5)}`;
 }
+/**
+ * OTP Timer + Resend + Attempts Logic
+ */
+function handleOtpFlow(globals) {
+  const form = globals.form;
 
+  // CONFIG
+  const TIMER_SECONDS = 30;
+
+  // INITIAL STATE
+  let timeLeft = TIMER_SECONDS;
+  let attemptsLeft = 3;
+
+  // Disable resend initially
+  globals.functions.setProperty(form.resend_otp, {
+    enabled: false
+  });
+
+  // Set attempts text
+  globals.functions.setProperty(form.attempts, {
+    value: `${attemptsLeft}/3`
+  });
+
+  // TIMER FUNCTION
+  const timerInterval = setInterval(() => {
+    timeLeft--;
+
+    // Optional: show timer in UI (if you have a label)
+    // globals.functions.setProperty(form.timer_label, {
+    //   value: `Resend OTP in ${timeLeft}s`
+    // });
+
+    if (timeLeft <= 0) {
+      clearInterval(timerInterval);
+
+      // Enable resend button
+      globals.functions.setProperty(form.resend_otp, {
+        enabled: true
+      });
+    }
+  }, 1000);
+
+  // RESEND BUTTON CLICK HANDLER
+  form.resend_otp?.$on('click', () => {
+    if (timeLeft > 0) return;
+
+    // Reset timer
+    timeLeft = TIMER_SECONDS;
+
+    // Disable again
+    globals.functions.setProperty(form.resend_otp, {
+      enabled: false
+    });
+
+    // Decrease attempts
+    attemptsLeft--;
+
+    globals.functions.setProperty(form.attempts, {
+      value: `${attemptsLeft}/3`
+    });
+
+    // OPTIONAL: call your API again (already configured in AEM rule)
+    // New OTP will come via success handler
+
+    // Restart timer
+    const newTimer = setInterval(() => {
+      timeLeft--;
+
+      if (timeLeft <= 0) {
+        clearInterval(newTimer);
+
+        globals.functions.setProperty(form.resend_otp, {
+          enabled: true
+        });
+      }
+    }, 1000);
+  });
+
+  // OPTIONAL: HANDLE SUBMIT (OTP validation attempt)
+  form.submit?.$on('click', () => {
+    attemptsLeft--;
+
+    globals.functions.setProperty(form.attempts, {
+      value: `${attemptsLeft}/3`
+    });
+
+    if (attemptsLeft <= 0) {
+      // Disable everything
+      globals.functions.setProperty(form.resend_otp, {
+        enabled: false
+      });
+
+      globals.functions.setProperty(form.otp_code, {
+        enabled: false
+      });
+
+      alert("Maximum attempts reached");
+    }
+  });
+}
 // eslint-disable-next-line import/prefer-default-export
 export {
-  getFullName, days, submitFormArrayToString, maskMobileNumber,
+  getFullName, days, submitFormArrayToString, maskMobileNumber, handleOtpFlow,
 };

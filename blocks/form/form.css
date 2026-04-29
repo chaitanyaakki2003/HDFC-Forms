@@ -887,3 +887,512 @@ main .form form select[multiple] {
     color: #035fe6;
 }
  
+
+
+
+
+
+
+
+/* ========================= 
+   🎯 CARD CONTAINER (FINAL PERFECT)
+   ========================= */
+.panel-wrapper.field-loan-offer-summary {
+  width: 260px !important;
+  height: 320px !important;
+
+  background: #f6f0e3 !important;
+  border-radius: 20px !important;
+
+  padding: 20px 18px 0 !important;
+  margin-left: 40px !important;
+
+  display: flex !important;
+  flex-direction: column !important;
+
+  overflow: hidden !important;
+  box-sizing: border-box !important;
+}
+
+/* RESET */
+.panel-wrapper.field-loan-offer-summary *,
+.panel-wrapper.field-loan-offer-summary {
+  margin: 0 !important;
+} 
+
+.panel-wrapper.field-loan-offer-summary legend {
+  display: none !important;
+}
+
+/* =========================
+   INPUT FIX
+   ========================= */
+.panel-wrapper.field-loan-offer-summary input {
+  border: none !important;
+  background: transparent !important;
+  outline: none !important;
+  pointer-events: auto !important;
+}
+
+/* =========================
+   TOP SECTION
+   ========================= */
+.text-wrapper.field-avail-xpress-personal-loan-of {
+  border-bottom: 1px dashed #e2d7c3;
+  padding-bottom: 12px;
+  margin-bottom: 16px;
+
+  padding-left: 12px !important;   /* ✅ FIX alignment */
+}
+
+.field-avail-xpress-personal-loan-of .field-label {
+  font-size: 13px;
+  font-weight: 600;
+  color: #4a5a6a;
+}
+
+.field-avail-xpress-personal-loan-of input {
+  font-size: 28px;
+  font-weight: 800;
+  color: #16263c;
+}
+
+/* =========================
+   GRID (SHIFT RIGHT)
+   ========================= */
+.panel-wrapper.field-loan-offer-details {
+  display: grid !important;
+  grid-template-columns: 1fr 1fr !important;
+
+  column-gap: 22px !important;
+  row-gap: 12px !important;
+
+  padding-left: 12px !important;   /* ✅ balanced shift */
+}
+
+/* REMOVE FULL WIDTH */
+.field-loan-offer-details .col-12 {
+  width: auto !important;
+}
+
+/* STACK */
+.field-emi-amount,
+.field-rate-of-interest,
+.field-taxes {
+  display: flex !important;
+  flex-direction: column !important;
+}
+
+/* =========================
+   LABEL (FIX GAP)
+   ========================= */
+.field-loan-offer-details .field-label {
+  font-size: 12px;
+  color: #7f8791;
+
+  padding-left: 14px !important;   /* ✅ spacing after line */
+  position: relative;
+
+  margin-bottom: 4px;
+  white-space: nowrap !important;  /* ✅ FIX line break issue */
+}
+
+/* ORANGE LINE (NO OVERLAP NOW) */
+.field-loan-offer-details .field-label::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 3px;
+
+  width: 3px;
+  height: 40px;
+
+  background: #f2a126;
+}
+
+/* =========================
+   VALUES
+   ========================= */
+.field-loan-offer-details input {
+  font-size: 15px;
+  font-weight: 800;
+  color: #16263c;
+
+  padding-left: 14px !important;
+}
+/* =========================
+   🔥 PERFECT DISCLAIMER (LOCKED TO BOTTOM)
+   ========================= */
+.field-loan-offer-disclaimer {
+  background: #f2a126 !important;
+
+  margin-top: auto !important;
+
+  /* ✅ FULL BLEED */
+  margin-left: -18px !important;
+  margin-right: -18px !important;
+
+  padding: 14px 18px 14px 44px !important;
+
+  border-radius: 0 0 20px 20px !important;
+
+  position: relative !important;
+  box-sizing: border-box !important;
+
+  /* ✅ KEY FIX */
+  flex-shrink: 0 !important;
+}
+
+/* ICON */
+.field-loan-offer-disclaimer::before {
+  content: "i";
+  position: absolute;
+
+  left: 18px;
+  top: 50%;
+  transform: translateY(-50%);
+
+  border: 1px solid #ffd793;
+  border-radius: 50%;
+
+  width: 16px;
+  height: 16px;
+
+  font-size: 11px;
+  line-height: 16px;
+  text-align: center;
+  color: #ffd793;
+}
+
+/* TEXT */
+.field-loan-offer-disclaimer p {
+  font-size: 11px !important;
+  color: #fff4df !important;
+
+  line-height: 1.4 !important;
+
+  margin: 0 !important;
+
+  /* ✅ CRITICAL FIX */
+  padding: 0 !important;
+  display: block;
+}
+
+
+
+
+
+
+
+/* REMOVE icon from OUTER <p> */
+main .form .field-loan-offer > p::before {
+  content: none !important;
+  display: none !important;
+}
+
+/* STYLE INNER TEXT */
+main .form .field-loan-offer > p > p {
+  margin: 0 0 18px;
+  font-size: 16px;
+  font-weight: 700;
+  color: #2f3742;
+
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* ADD ONLY ONE ICON */
+main .form .field-loan-offer > p > p::before {
+  content: "🎉";
+  font-size: 18px;
+}
+
+/* =========================
+   🔥 REMOVE ALL OLD ICONS
+   ========================= */
+main .form .field-plain-text1777356206070 p::before,
+main .form .field-plain-text1777356206070 p p::before {
+  content: none !important;
+  display: none !important;
+}
+
+/* =========================
+   💰 TARGET INNER <p> (IMPORTANT)
+   ========================= */
+main .form .field-plain-text1777356206070 p > p {
+  position: relative;
+
+  max-width: 704px;
+  min-height: 58px;
+
+  padding: 14px 20px 14px 55px;
+  border-radius: 14px;
+  background: #eefdff;
+
+  display: flex;
+  align-items: center;
+
+  font-size: 16px;
+  font-weight: 700;
+  color: #0c2742;
+
+  margin: 0;
+}
+
+/* =========================
+   💰 ADD ICON (ONLY ONE)
+   ========================= */
+main .form .field-plain-text1777356206070 p > p::before {
+  content: "💰";
+
+  position: absolute;
+  left: 18px;
+  top: 50%;
+  transform: translateY(-50%);
+
+  font-size: 20px;
+}
+
+
+
+
+/* 🔥 REMOVE ALL AEM VERTICAL SPACING (MASTER FIX) */
+main .form fieldset.panel-wrapper,
+main .form .field-wrapper,
+main .form .plain-text-wrapper {
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+}
+
+/* 🔥 FORCE TITLE → CARD TIGHT SPACING */
+main .form .field-loan-offer {
+  margin-bottom: 1px !important;
+}
+
+/* 🔥 REMOVE GAP ABOVE CARD */
+main .form .field-get-loan {
+  margin-top: 0 !important;
+}
+
+/* 🔥 REMOVE DEFAULT <p> SPACING */
+main .form .field-loan-offer > p,
+main .form .field-get-loan > p {
+  margin: 0 !important;
+}
+
+/* 🔥 REMOVE INNER EXTRA SPACE */
+main .form .field-get-loan > p > p {
+  margin-top: 0 !important;
+}
+
+/* 🔥 FINAL MICRO ADJUSTMENT (MATCH DESIGN) */
+main .form .field-loan-offer > p > p {
+  margin-bottom: 4px !important;
+}
+
+/* 🔥 TARGET CORRECT TEXT */
+main .form .field-loan-amount-and-tenure p p {
+  font-size: 18px;
+  font-weight: 700;
+  color: #000 !important;   /* black */
+
+  margin: 12px 0 16px;      /* spacing like design */
+}
+
+/*========================================/*
+
+
+/* 🔥 REVIEW DETAILS TITLE FIX */
+main .form .field-review-details p p {
+  font-size: 18px;
+  font-weight: 700;
+  color: #000 !important;   /* pure black */
+  margin: 0 0 8px;
+}
+
+
+
+
+
+/* =========================
+   🔥 MAIN LAYOUT
+   ========================= */
+main .form .field-loan-application-number {
+  display: grid;
+  grid-template-columns: 44px 1fr; /* icon | text */
+  column-gap: 12px;
+  align-items: center;
+
+  background: transparent !important;
+  padding: 0 !important;
+  margin-top: 12px;
+
+  position: relative;
+}
+
+/* =========================
+   🔥 LEFT ICON
+   ========================= */
+main .form .field-loan-application-number::before {
+  content: "📄";
+
+  width: 44px;
+  height: 44px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: #eef2ff;
+  border-radius: 50%;
+
+  font-size: 20px;
+}
+
+/* =========================
+   🔥 TEXT BLOCK
+   ========================= */
+main .form .field-loan-application-number label,
+main .form .field-loan-application-number input {
+  grid-column: 2;
+  display: block;
+}
+
+/* label */
+main .form .field-loan-application-number label {
+  font-size: 13px;
+  color: #8a94a6;
+  font-weight: 500;
+  margin: 0;
+}
+
+/* =========================
+   🔥 VALUE + COPY ICON WRAP
+   ========================= */
+main .form .field-loan-application-number input {
+  border: none !important;
+  background: transparent !important;
+
+  font-size: 20px;
+  font-weight: 700 !important;
+  color: #1a2b49;
+
+  margin-top: 2px;
+  padding-right: 26px; /* space for icon */
+
+  outline: none;
+  box-shadow: none;
+
+  position: relative;
+}
+
+/* =========================
+   🔥 COPY ICON (NEXT TO NUMBER)
+   ========================= */
+main .form .field-loan-application-number input::after {
+  content: "📋";
+
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+
+  font-size: 16px;
+  color: #5b6b8c;
+}
+
+
+/* =========================
+   🔥 HELPER TEXT (FINAL TUNED)
+   ========================= */
+main .form .field-help {
+  margin-top: 2px !important;   /* 🔥 reduce gap */
+}
+
+main .form .field-help p {
+  margin: 0 !important;
+
+  font-size: 14px;              /* 🔥 slightly bigger */
+  line-height: 20px;
+
+  color: #8a94a6;
+  font-weight: 400;
+}
+
+
+
+/* =========================
+   🔥 SECTION TITLE (FIX)
+   ========================= */
+main .form .field-loan-summary p {
+  font-size: 16px;
+  font-weight: 700;   /* bold */
+  color: #000000;     /* pure black */
+
+  margin: 0;
+}
+
+
+
+
+/* =========================
+   🔥 CONTAINER (NO BACKGROUND)
+   ========================= */
+main .form .field-loan-amount {
+  position: relative;
+
+  background: transparent !important;   /* REMOVE blue bg */
+  padding-left: 16px;                  /* space for line */
+  margin-top: 12px;
+}
+
+/* =========================
+   🔥 LEFT BLUE LINE ONLY
+   ========================= */
+main .form .field-loan-amount::before {
+  content: "";
+  position: absolute;
+
+  left: 0;
+  top: 6px;
+  bottom: 6px;
+
+  width: 3px;
+  background: #5b6bff;
+  border-radius: 2px;
+}
+
+/* =========================
+   🔥 LABEL
+   ========================= */
+main .form .field-loan-amount .field-label {
+  font-size: 13px;
+  color: #8a94a6;
+  font-weight: 500;
+
+  margin: 0 0 2px 0;
+}
+
+/* =========================
+   🔥 INPUT (TYPEABLE + CLEAN)
+   ========================= */
+main .form .field-loan-amount input {
+  border: none !important;
+  background: transparent !important;
+
+  font-size: 18px;
+  font-weight: 700;
+  color: #1a2b49;
+
+  padding: 0;
+  margin: 0;
+
+  outline: none;
+  box-shadow: none;
+
+  pointer-events: auto;   /* ✅ FIX typing issue */
+}
+
