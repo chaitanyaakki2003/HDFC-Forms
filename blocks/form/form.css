@@ -851,7 +851,6 @@ main .form .text-wrapper.field-mobile-number input::placeholder {
 
 
 
-
 /* ========================= 
    🎯 CARD CONTAINER (FINAL PERFECT)
    ========================= */
@@ -862,7 +861,7 @@ main .form .text-wrapper.field-mobile-number input::placeholder {
   background: #f6f0e3 !important;
   border-radius: 20px !important;
 
-  padding: 20px 18px 0 !important;
+  padding: 20px 18px 80px !important; /* ✅ FIX: bottom space for footer */
   margin-left: 40px !important;
 
   display: flex !important;
@@ -870,6 +869,8 @@ main .form .text-wrapper.field-mobile-number input::placeholder {
 
   overflow: hidden !important;
   box-sizing: border-box !important;
+
+  position: relative !important; /* needed for absolute footer */
 }
 
 /* RESET */
@@ -899,8 +900,7 @@ main .form .text-wrapper.field-mobile-number input::placeholder {
   border-bottom: 1px dashed #e2d7c3;
   padding-bottom: 12px;
   margin-bottom: 16px;
-
-  padding-left: 12px !important;   /* ✅ FIX alignment */
+  padding-left: 12px !important;
 }
 
 .field-avail-xpress-personal-loan-of .field-label {
@@ -916,24 +916,20 @@ main .form .text-wrapper.field-mobile-number input::placeholder {
 }
 
 /* =========================
-   GRID (SHIFT RIGHT)
+   GRID
    ========================= */
 .panel-wrapper.field-loan-offer-details {
   display: grid !important;
   grid-template-columns: 1fr 1fr !important;
-
   column-gap: 22px !important;
   row-gap: 12px !important;
-
-  padding-left: 12px !important;   /* ✅ balanced shift */
+  padding-left: 12px !important;
 }
 
-/* REMOVE FULL WIDTH */
 .field-loan-offer-details .col-12 {
   width: auto !important;
 }
 
-/* STACK */
 .field-emi-amount,
 .field-rate-of-interest,
 .field-taxes {
@@ -942,29 +938,24 @@ main .form .text-wrapper.field-mobile-number input::placeholder {
 }
 
 /* =========================
-   LABEL (FIX GAP)
+   LABEL
    ========================= */
 .field-loan-offer-details .field-label {
   font-size: 12px;
   color: #7f8791;
-
-  padding-left: 14px !important;   /* ✅ spacing after line */
+  padding-left: 14px !important;
   position: relative;
-
   margin-bottom: 4px;
-  white-space: nowrap !important;  /* ✅ FIX line break issue */
+  white-space: nowrap !important;
 }
 
-/* ORANGE LINE (NO OVERLAP NOW) */
 .field-loan-offer-details .field-label::before {
   content: "";
   position: absolute;
   left: 0;
   top: 3px;
-
   width: 3px;
   height: 40px;
-
   background: #f2a126;
 }
 
@@ -975,18 +966,12 @@ main .form .text-wrapper.field-mobile-number input::placeholder {
   font-size: 15px;
   font-weight: 800;
   color: #16263c;
-
   padding-left: 14px !important;
 }
-/* =========================
-   🔥 PERFECT DISCLAIMER (LOCKED TO BOTTOM)
-   ========================= */
-/* 🔥 CARD (add this line only) */
-.panel-wrapper.field-loan-offer-summary {
-  position: relative !important;
-}
 
-/* 🔥 DISCLAIMER FINAL FIX */
+/* =========================
+   🔥 DISCLAIMER (BOTTOM FIXED)
+   ========================= */
 .field-loan-offer-disclaimer {
   background: #f2a126 !important;
 
@@ -996,19 +981,15 @@ main .form .text-wrapper.field-mobile-number input::placeholder {
   bottom: 0;
 
   width: 100%;
-
   padding: 16px 20px 18px 56px !important;
 
   border-radius: 0 0 20px 20px !important;
-
   box-sizing: border-box !important;
 }
 
-/* ICON */
 .field-loan-offer-disclaimer::before {
   content: "i";
   position: absolute;
-
   left: 20px;
   top: 50%;
   transform: translateY(-50%);
@@ -1025,17 +1006,12 @@ main .form .text-wrapper.field-mobile-number input::placeholder {
   color: #ffd793;
 }
 
-/* TEXT */
 .field-loan-offer-disclaimer p {
   font-size: 11px !important;
   color: #fff4df !important;
   line-height: 1.4 !important;
   margin: 0 !important;
 }
-
-
-
-
 
 
 
