@@ -849,211 +849,223 @@ main .form .text-wrapper.field-mobile-number input::placeholder {
 
 
 
+/*====== OFFER PANEL (FINAL - AEM SAFE + FRIEND STYLE) ============*/
 
-/* =========================
-   🎯 CARD CONTAINER (FINAL AEM FIX)
-   ========================= */
+/* CARD CONTAINER */
+main .form form .panel-wrapper.field-loan-offer-summary,
+main .form form .panel-wrapper.field-loan-offer-summary.field-wrapper {
 
-main .form form fieldset.panel-wrapper.field-loan-offer-summary {
-  position: relative !important;
-
-  width: 260px !important;
-  height: 320px !important;
+  width: 292px !important;
+  max-width: 292px !important;
+  min-width: 292px !important;
 
   background: #f6f0e3 !important;
   border-radius: 20px !important;
 
-  padding: 20px 18px 0 !important;
-  margin-left: 40px !important;
-
-  /* 🔥 FORCE FLEX (override AEM grid) */
-  display: flex !important;
-  flex-direction: column !important;
-
-  /* 🔥 BREAK GRID COMPLETELY */
-  grid-column: span 4 !important;
-  grid-area: unset !important;
-
   overflow: hidden !important;
+  padding: 38px 18px 0 !important;
+
   box-sizing: border-box !important;
-}
 
+  border: none !important;
+  box-shadow: none !important;
 
-/* =========================
-   🔥 RESET AEM GRID CHILDREN (STRONG)
-   ========================= */
-main .form form fieldset.panel-wrapper.field-loan-offer-summary .field-wrapper,
-main .form form fieldset.panel-wrapper.field-loan-offer-summary [class*="col-"] {
-  width: 100% !important;
-  max-width: 100% !important;
+  margin: 0 !important;
+  align-self: start !important;
 
+  /* 🔥 CRITICAL AEM FIX */
   display: block !important;
-
-  grid-column: unset !important;
-  grid-area: unset !important;
+  grid-column: span 4 !important;
 }
 
 
-/* REMOVE LEGEND */
-main .form form fieldset.panel-wrapper.field-loan-offer-summary legend {
+/* REMOVE LEGENDS */
+main .form form .panel-wrapper.field-loan-offer-summary > legend,
+main .form form .field-loan-offer-details > legend {
   display: none !important;
 }
 
 
 /* =========================
-   INPUT FIX
+   HEADING + MAIN AMOUNT
    ========================= */
-main .form form fieldset.panel-wrapper.field-loan-offer-summary input {
+main .form form .text-wrapper.field-avail-xpress-personal-loan-of {
+  margin: 0 0 6px !important;
+  padding: 0 0 12px !important;
+
+  border-bottom: 1px dashed #e2d7c3 !important;
+}
+
+
+/* TITLE */
+main .form form .field-avail-xpress-personal-loan-of .field-label {
+  font-size: 16px !important;
+  font-weight: 700 !important;
+  color: #22364a !important;
+  margin-bottom: 10px !important;
+}
+
+
+/* MAIN AMOUNT */
+main .form form .text-wrapper.field-avail-xpress-personal-loan-of input {
+  font-size: 27px !important;
+  font-weight: 800 !important;
+  color: #16263c !important;
+
+  border: none !important;
+  background: transparent !important;
+}
+
+
+/* REMOVE INPUT CHROME */
+main .form form 
+.field-avail-xpress-personal-loan-of input,
+main .form form 
+.field-loan-offer-details input {
   border: none !important;
   background: transparent !important;
   outline: none !important;
+  box-shadow: none !important;
+  padding: 0 !important;
 }
 
 
 /* =========================
-   TOP SECTION
+   DETAILS GRID (YOUR CLASS)
    ========================= */
-main .form form .text-wrapper.field-avail-xpress-personal-loan-of {
-  border-bottom: 1px dashed #e2d7c3;
-  padding: 0 0 12px 12px !important;
-  margin-bottom: 16px;
-}
+main .form form .field-loan-offer-details {
 
-main .form form .field-avail-xpress-personal-loan-of .field-label {
-  font-size: 13px;
-  font-weight: 600;
-  color: #4a5a6a;
-}
-
-main .form form .field-avail-xpress-personal-loan-of input {
-  font-size: 28px;
-  font-weight: 800;
-  color: #16263c;
-}
-
-
-/* =========================
-   GRID SECTION (FIXED)
-   ========================= */
-main .form form fieldset.panel-wrapper.field-loan-offer-summary 
-.panel-wrapper.field-loan-offer-details {
   display: grid !important;
   grid-template-columns: 1fr 1fr !important;
+  grid-template-areas:
+    "emi rate"
+    "taxes .";
 
-  column-gap: 20px !important;
-  row-gap: 14px !important;
+  column-gap: 26px !important;
+  row-gap: 16px !important;
+}
+
+
+/* MAP YOUR FIELDS */
+main .form form .field-loan-offer-details .field-emi-amount {
+  grid-area: emi !important;
+}
+
+main .form form .field-loan-offer-details .field-rate-of-interest {
+  grid-area: rate !important;
+}
+
+main .form form .field-loan-offer-details .field-taxes {
+  grid-area: taxes !important;
+}
+
+
+/* CLEAN WRAPPERS */
+main .form form 
+.field-loan-offer-details .field-emi-amount,
+main .form form 
+.field-loan-offer-details .field-rate-of-interest,
+main .form form 
+.field-loan-offer-details .field-taxes {
+
+  padding-top: 4px !important;
+  position: relative !important;
+}
+
+
+/* LABELS */
+main .form form 
+.field-loan-offer-details .field-label {
 
   padding-left: 12px !important;
-}
+  font-size: 12px !important;
+  font-weight: 600 !important;
+  color: #7f8791 !important;
 
-
-/* STACK */
-.field-emi-amount,
-.field-rate-of-interest,
-.field-taxes {
-  display: flex !important;
-  flex-direction: column !important;
-}
-
-
-/* =========================
-   LABEL
-   ========================= */
-.field-loan-offer-details .field-label {
-  font-size: 12px;
-  color: #7f8791;
-
-  padding-left: 14px !important;
   position: relative;
-
-  margin-bottom: 4px;
-  white-space: nowrap !important;
 }
 
 
 /* ORANGE LINE */
+main .form form 
 .field-loan-offer-details .field-label::before {
+
   content: "";
   position: absolute;
 
   left: 0;
-  top: 2px;
+  top: 0;
 
-  width: 3px;
-  height: 38px;
+  width: 2px;
+  height: 30px;
 
   background: #f2a126;
 }
 
 
 /* VALUES */
+main .form form 
 .field-loan-offer-details input {
-  font-size: 15px;
-  font-weight: 800;
-  color: #16263c;
 
-  padding-left: 14px !important;
+  font-size: 15px !important;
+  font-weight: 800 !important;
+  color: #1b2738 !important;
+
+  padding-left: 12px !important;
+
+  display: block !important;
 }
 
 
 /* =========================
-   🔥 DISCLAIMER (FIXED)
+   DISCLAIMER
    ========================= */
 main .form form .field-loan-offer-disclaimer {
-  position: absolute !important;
 
-  left: 0;
-  right: 0;
-  bottom: 0;
+  position: relative !important;
+
+  margin: 0 -18px !important;
+  padding: 12px 16px 12px 40px !important;
 
   background: #f2a126 !important;
-
-  padding: 16px 20px 18px 56px !important;
-
   border-radius: 0 0 20px 20px !important;
+
+  width: calc(100% + 36px) !important;
 }
 
 
 /* ICON */
 main .form form .field-loan-offer-disclaimer::before {
-  content: "i";
 
+  content: "i";
   position: absolute;
-  left: 20px;
+
+  left: 14px;
   top: 50%;
+
   transform: translateY(-50%);
 
-  width: 16px;
-  height: 16px;
+  width: 15px;
+  height: 15px;
 
-  border: 1px solid #ffd793;
+  border: 1.5px solid #ffd793;
   border-radius: 50%;
 
-  font-size: 11px;
-  line-height: 16px;
-  text-align: center;
-
   color: #ffd793;
+  font-size: 10px;
+  text-align: center;
 }
 
 
 /* TEXT */
 main .form form .field-loan-offer-disclaimer p {
-  font-size: 11px !important;
+
+  font-size: 10px !important;
+  font-weight: 600 !important;
   color: #fff4df !important;
-  line-height: 1.4 !important;
+
   margin: 0 !important;
 }
-
-
-/* =========================
-   🔥 FINAL SAFETY (CRITICAL)
-   ========================= */
-main .form form fieldset.panel-wrapper.field-loan-offer-summary * {
-  visibility: visible !important;
-  opacity: 1 !important;
-}
-
 
 
 
