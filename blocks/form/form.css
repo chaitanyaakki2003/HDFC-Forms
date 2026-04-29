@@ -850,47 +850,44 @@ main .form .text-wrapper.field-mobile-number input::placeholder {
 
 
 
-
 /* ========================= 
-   🎯 CARD CONTAINER (FINAL PERFECT)
+   🎯 CARD CONTAINER
    ========================= */
-.panel-wrapper.field-loan-offer-summary {
+main .form form .panel-wrapper.field-loan-offer-summary {
   width: 260px !important;
   height: 320px !important;
 
   background: #f6f0e3 !important;
   border-radius: 20px !important;
 
-  padding: 20px 18px 80px !important; /* ✅ FIX: bottom space for footer */
+  padding: 20px 18px 80px !important;
   margin-left: 40px !important;
 
-  display: flex !important;
+  display: flex !important;              /* ✅ FORCE FLEX */
   flex-direction: column !important;
 
   overflow: hidden !important;
   box-sizing: border-box !important;
 
-  position: relative !important; /* needed for absolute footer */
+  position: relative !important;
+
+  grid-column: span 4 !important;        /* ✅ IMPORTANT FIX */
 }
 
-/* RESET */
-.panel-wrapper.field-loan-offer-summary *,
-.panel-wrapper.field-loan-offer-summary {
-  margin: 0 !important;
-} 
-
-.panel-wrapper.field-loan-offer-summary legend {
-  display: none !important;
+/* 🚨 CRITICAL FIX (THIS WAS MISSING) */
+@media (width >= 1200px) {
+  main .form form .panel-wrapper.field-loan-offer-summary {
+    flex: unset !important;              /* STOP flex override */
+    width: 260px !important;             /* lock width */
+  }
 }
 
 /* =========================
-   INPUT FIX
+   STOP GRID BREAKING CHILDREN
    ========================= */
-.panel-wrapper.field-loan-offer-summary input {
-  border: none !important;
-  background: transparent !important;
-  outline: none !important;
-  pointer-events: auto !important;
+main .form form .panel-wrapper.field-loan-offer-summary > * {
+  grid-column: unset !important;
+  width: 100% !important;
 }
 
 /* =========================
@@ -903,38 +900,20 @@ main .form .text-wrapper.field-mobile-number input::placeholder {
   padding-left: 12px !important;
 }
 
-.field-avail-xpress-personal-loan-of .field-label {
-  font-size: 13px;
-  font-weight: 600;
-  color: #4a5a6a;
-}
-
-.field-avail-xpress-personal-loan-of input {
-  font-size: 28px;
-  font-weight: 800;
-  color: #16263c;
-}
-
 /* =========================
-   GRID
+   GRID (INSIDE CARD ONLY)
    ========================= */
+main .form form 
+.panel-wrapper.field-loan-offer-summary 
 .panel-wrapper.field-loan-offer-details {
+
   display: grid !important;
   grid-template-columns: 1fr 1fr !important;
+
   column-gap: 22px !important;
   row-gap: 12px !important;
-  padding-left: 12px !important;
-}
 
-.field-loan-offer-details .col-12 {
-  width: auto !important;
-}
-
-.field-emi-amount,
-.field-rate-of-interest,
-.field-taxes {
-  display: flex !important;
-  flex-direction: column !important;
+  width: 100% !important;
 }
 
 /* =========================
@@ -967,6 +946,8 @@ main .form .text-wrapper.field-mobile-number input::placeholder {
   font-weight: 800;
   color: #16263c;
   padding-left: 14px !important;
+  border: none !important;
+  background: transparent !important;
 }
 
 /* =========================
@@ -1012,35 +993,6 @@ main .form .text-wrapper.field-mobile-number input::placeholder {
   line-height: 1.4 !important;
   margin: 0 !important;
 }
-/* =========================
-   🚨 FIX: PREVENT GRID BREAKING CARD
-   ========================= */
-
-/* Force ONLY this card to behave as flex (override AEM grid) */
-main .form form .panel-wrapper.field-loan-offer-summary {
-  display: flex !important;
-  flex-direction: column !important;
-}
-
-/* VERY IMPORTANT: stop children from behaving like grid items */
-main .form form .panel-wrapper.field-loan-offer-summary > * {
-  grid-column: unset !important;
-  width: 100% !important;
-}
-
-/* Ensure inner details stay inside card */
-main .form form 
-.panel-wrapper.field-loan-offer-summary 
-.panel-wrapper.field-loan-offer-details {
-  display: grid !important;
-  grid-template-columns: 1fr 1fr !important;
-
-  column-gap: 22px !important;
-  row-gap: 12px !important;
-
-  width: 100% !important;
-}
-
 
 
 
