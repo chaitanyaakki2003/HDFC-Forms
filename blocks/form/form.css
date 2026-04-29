@@ -1029,36 +1029,21 @@ main .form .text-wrapper.field-mobile-number input::placeholder {
   margin: 0 !important;
 }
 /* =========================
-   ✅ FIX AEM OPEN PAGE ISSUE
+   🚀 FIX: AEM GRID WIDTH ISSUE (FINAL)
    ========================= */
-.panel-wrapper.field-loan-offer-summary .field-loan-offer-details {
-  display: grid !important;
-  grid-template-columns: 1fr 1fr !important;
 
-  visibility: visible !important;
-  opacity: 1 !important;
+/* force card to take proper width */
+main .form form .panel-wrapper.field-loan-offer-summary {
+  grid-column: span 4 !important; /* increase width */
+  max-width: 280px !important;
 }
 
-/* 🔥 DO NOT USE * (this was breaking everything) */
-/* Fix only actual wrappers */
-.panel-wrapper.field-loan-offer-summary .field-loan-offer-details .field-wrapper {
-  display: flex !important;
-  flex-direction: column !important;
-
-  visibility: visible !important;
-  opacity: 1 !important;
-}
-
-/* ensure values appear */
-.panel-wrapper.field-loan-offer-summary .field-loan-offer-details input {
-  display: block !important;
-  visibility: visible !important;
-  opacity: 1 !important;
-}
-
-/* keep labels normal */
-.panel-wrapper.field-loan-offer-summary .field-loan-offer-details label {
-  display: block !important;
+/* optional: for mobile */
+@media (max-width: 768px) {
+  main .form form .panel-wrapper.field-loan-offer-summary {
+    grid-column: span 12 !important;
+    margin-left: 0 !important;
+  }
 }
 
 
