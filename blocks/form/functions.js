@@ -165,23 +165,21 @@ function handleOtpFlow(globals) {
  */
 function updateLoanOffer(globals) {
 
-  console.log("✅ FUNCTION RUNNING");
+  console.log("✅ RUNNING");
 
   // ===== GET VALUES =====
   const loanAmount = Number(globals.form.get_loan.loan_amount?.value || 0);
   const tenureMonths = Number(globals.form.get_loan.loan_tenure?.value || 0);
 
-  console.log("Loan:", loanAmount, "Tenure:", tenureMonths);
-
   // ===== CONSTANTS =====
-  const annualInterestRate = 10.97;
+  const interest = 10.97;
   const taxes = 4000;
 
-  const r = annualInterestRate / 12 / 100;
+  const r = interest / 12 / 100;
 
   // ===== EMI =====
   let emi = 0;
-  if (loanAmount > 0 && tenureMonths > 0) {
+  if (loanAmount && tenureMonths) {
     const pow = Math.pow(1 + r, tenureMonths);
     emi = (loanAmount * r * pow) / (pow - 1);
   }
@@ -191,51 +189,41 @@ function updateLoanOffer(globals) {
   // ===== FORMAT =====
   const formattedLoan = `₹${loanAmount.toLocaleString("en-IN")}`;
   const formattedEmi = `₹${emi.toLocaleString("en-IN")}`;
-  const formattedInterest = `${annualInterestRate}%`;
-  const formattedTaxes = `₹${taxes.toLocaleString("en-IN")}`;
 
-  // ===== CORRECT PATH =====
-  const root = globals.form.personal_loan_offer;
-
-  console.log("Root:", root);
-
-  // 👉 go step by step safely
-  const offerDisplay = root?.offer_display;
-  const loanCard = offerDisplay?.avail_XPRESS_Person;
-
-  console.log("Loan Card:", loanCard);
-
-  if (!loanCard) {
-    console.log("❌ loanCard path wrong — fix name");
-    return;
-  }
-
-  // ===== UPDATE UI =====
+  // ===== 🔥 DIRECT PATH (NO VARIABLES) =====
 
   // Title
-  globals.functions.setProperty(loanCard, {
-    value: `Avail XPRESS Personal Loan of ${formattedLoan}`
-  });
+  globals.functions.setProperty(
+    globals.form.get_loan.offer_display_panel.avail_XPRESS_Personal_Loan.avail_XPRESS_Personal_Loan_of,
+    {
+      value: `Avail XPRESS Personal Loan of ${formattedLoan}`
+    }
+  );
 
   // EMI
   globals.functions.setProperty(
-    loanCard.loan_offer_details.emi_amount,
-    { value: formattedEmi }
+    globals.form.get_loan.offer_display_panel.avail_XPRESS_Personal_Loan.offer_details.emi_amount,
+    {
+      value: formattedEmi
+    }
   );
 
   // Interest
   globals.functions.setProperty(
-    loanCard.loan_offer_details.rate_of_interest,
-    { value: formattedInterest }
+    globals.form.get_loan.offer_display_panel.avail_XPRESS_Personal_Loan.offer_details.rate_of_interest,
+    {
+      value: `${interest}%`
+    }
   );
 
   // Taxes
   globals.functions.setProperty(
-    loanCard.loan_offer_details.taxes,
-    { value: formattedTaxes }
+    globals.form.get_loan.offer_display_panel.avail_XPRESS_Personal_Loan.offer_details.taxes,
+    {
+      value: `₹${taxes}`
+    }
   );
 }
-
 // eslint-disable-next-line import/prefer-default-export
 export {
   getFullName, days, submitFormArrayToString, maskMobileNumber, handleOtpFlow, updateLoanOffer,
