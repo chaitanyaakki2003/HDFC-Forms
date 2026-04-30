@@ -165,19 +165,14 @@ function handleOtpFlow(globals) {
  */
 function updateLoanOffer(globals) {
 
-  console.log("✅ RUNNING");
+  const loanAmount = Number(globals.form.get_loan.offer_panel.loan_amount?.value || 0);
+  const tenureMonths = Number(globals.form.get_loan.offer_panel.loan_tenure?.value || 0);
 
-  // ===== GET VALUES =====
-  const loanAmount = Number(globals.form.get_loan.loan_amount?.value || 0);
-  const tenureMonths = Number(globals.form.get_loan.loan_tenure?.value || 0);
-
-  // ===== CONSTANTS =====
   const interest = 10.97;
   const taxes = 4000;
 
   const r = interest / 12 / 100;
 
-  // ===== EMI =====
   let emi = 0;
   if (loanAmount && tenureMonths) {
     const pow = Math.pow(1 + r, tenureMonths);
@@ -186,15 +181,15 @@ function updateLoanOffer(globals) {
 
   emi = Math.round(emi);
 
-  // ===== FORMAT =====
   const formattedLoan = `₹${loanAmount.toLocaleString("en-IN")}`;
   const formattedEmi = `₹${emi.toLocaleString("en-IN")}`;
 
-  // ===== 🔥 DIRECT PATH (NO VARIABLES) =====
+  const loanCard =
+    globals.form.get_loan.offer_display.avail_XPRESS_Personal_Loan;
 
   // Title
   globals.functions.setProperty(
-    globals.form.get_loan.offer_display_panel.avail_XPRESS_Personal_Loan.avail_XPRESS_Personal_Loan_of,
+    loanCard.avail_XPRESS_Personal_Loan_of,
     {
       value: `Avail XPRESS Personal Loan of ${formattedLoan}`
     }
@@ -202,26 +197,20 @@ function updateLoanOffer(globals) {
 
   // EMI
   globals.functions.setProperty(
-    globals.form.get_loan.offer_display_panel.avail_XPRESS_Personal_Loan.offer_details.emi_amount,
-    {
-      value: formattedEmi
-    }
+    loanCard.offer_details.emi_amount,
+    { value: formattedEmi }
   );
 
   // Interest
   globals.functions.setProperty(
-    globals.form.get_loan.offer_display_panel.avail_XPRESS_Personal_Loan.offer_details.rate_of_interest,
-    {
-      value: `${interest}%`
-    }
+    loanCard.offer_details.rate_of_interest,
+    { value: `${interest}%` }
   );
 
   // Taxes
   globals.functions.setProperty(
-    globals.form.get_loan.offer_display_panel.avail_XPRESS_Personal_Loan.offer_details.taxes,
-    {
-      value: `₹${taxes}`
-    }
+    loanCard.offer_details.taxes,
+    { value: `₹${taxes}` }
   );
 }
 // eslint-disable-next-line import/prefer-default-export
