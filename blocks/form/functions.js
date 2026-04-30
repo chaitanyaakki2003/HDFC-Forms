@@ -160,64 +160,72 @@ function handleOtpFlow(globals) {
 }
 
 /**
+ * Update Loan Offer Card
  * @param {scope} globals
- * @returns {string}
  */
 function updateLoanOffer(globals) {
   try {
-    // ===== GET VALUES =====
-    const loanAmount = Number(globals.form.loan_amount.value || 0);
-    const tenure = Number(globals.form.loan_tenure.value || 0);
+
+    // ✅ CORRECT PATH (FROM YOUR UI)
+    const loanAmount = Number(
+      globals.form.getLoan.loanAmount.value || 0
+    );
+
+    const tenure = Number(
+      globals.form.getLoan.loanTenure.value || 0
+    );
 
     if (!loanAmount || !tenure) return;
 
-    // ===== CONSTANTS =====
+    // ✅ CONSTANTS
     const rate = 10.97;
     const taxes = 4000;
 
     const r = rate / 12 / 100;
     const n = tenure;
 
-    // ===== EMI =====
+    // ✅ EMI CALCULATION
     const emi =
       (loanAmount * r * Math.pow(1 + r, n)) /
       (Math.pow(1 + r, n) - 1);
 
-    // ===== FORMAT =====
+    // ✅ FORMAT
     const formattedLoan = `₹${loanAmount.toLocaleString("en-IN")}`;
     const formattedEmi = `₹${Math.round(emi).toLocaleString("en-IN")}`;
     const formattedRate = `${rate}%`;
     const formattedTaxes = `₹${taxes.toLocaleString("en-IN")}`;
 
-    // ===== UPDATE CARD =====
+    // =================================================
+    // ✅ CORRECT OUTPUT PATH (FROM YOUR RIGHT PANEL)
+    // =================================================
 
-    // 👉 Loan Amount Title
+    // 🔹 Loan Amount (Top Title)
     globals.functions.setProperty(
-      globals.form.offer_display.loan_offer_summary.avail_XPRESS_Personal_Loan_of,
+      globals.form.getLoan.offerDisplayPanel.availXPRESSPersonalLoan.availXPRESSPersonalLoanOf,
       {
         label: { value: formattedLoan }
       }
     );
 
-    // 👉 EMI
+    // 🔹 EMI
     globals.functions.setProperty(
-      globals.form.offer_display.loan_offer_summary.loan_offer_details.emi_amount,
+      globals.form.getLoan.offerDisplayPanel.availXPRESSPersonalLoan.loanOfferDetails.emiAmount,
       {
         label: { value: formattedEmi }
       }
     );
 
-    // 👉 Interest
+    // 🔹 Interest
     globals.functions.setProperty(
-      globals.form.offer_display.loan_offer_summary.loan_offer_details.rate_of_interest,
+      globals.form.getLoan.offerDisplayPanel.availXPRESSPersonalLoan.loanOfferDetails.rateOfInterest,
       {
         label: { value: formattedRate }
       }
     );
 
-    // 👉 Taxes
+    // 🔹 Taxes
     globals.functions.setProperty(
-      globals.form.offer_display.loan_offer_summary.loan_offer_details.taxes,
+      globals.form.getLoan.offerDisplayPanel.availXPRESSPersonalLoan.loanOfferDetails.taxes,
       {
         label: { value: formattedTaxes }
       }
@@ -227,7 +235,6 @@ function updateLoanOffer(globals) {
     console.log("ERROR:", e);
   }
 }
-
 
 // eslint-disable-next-line import/prefer-default-export
 export {
