@@ -55,9 +55,12 @@ function maskMobileNumber(mobileNumber) {
   // Mask first 5 digits and keep the rest
   return ` ${'*'.repeat(5)}${value.substring(5)}`;
 }
+
 /**
- * OTP Timer + Resend + Attempts Logic
+ * @param {scope} globals
+ * @returns {string}
  */
+
 function handleOtpFlow(globals) {
   const form = globals.form;
 
@@ -155,7 +158,91 @@ function handleOtpFlow(globals) {
     }
   });
 }
+
+/**
+ * @param {scope} globals
+ * @returns {string}
+ */
+function updateLoanOffer(globals) {
+
+  // ===== 1. GET VALUES FROM SLIDERS =====
+  const loanAmount = Number(
+    globals.form.getLoan.loanAmount.value || 0
+  ); // P
+
+  const tenureMonths = Number(
+    globals.form.getLoan.loanTenure.value || 0
+  ); // n
+
+  // ===== 2. CONSTANT VALUES =====
+  const annualInterestRate = 10.97; // ثابت
+  const taxes = 4000; // ثابت
+
+  // Monthly interest rate
+  const r = annualInterestRate / 12 / 100;
+
+  // ===== 3. EMI CALCULATION =====
+  let emi = 0;
+
+  if (loanAmount > 0 && tenureMonths > 0) {
+    const pow = Math.pow(1 + r, tenureMonths);
+    emi = (loanAmount * r * pow) / (pow - 1);
+  }
+
+  emi = Math.round(emi);
+
+  // ===== 4. FORMAT VALUES =====
+  const formattedLoan = `₹${loanAmount.toLocaleString("en-IN")}`;
+  const formattedEmi = `₹${emi.toLocaleString("en-IN")}`;
+  const formattedInterest = `${annualInterestRate}%`;
+  const formattedTaxes = `₹${taxes.toLocaleString("en-IN")}`;
+
+  // ===== 5. UPDATE UI USING FULL PATH =====
+
+  // Loan Amount (Title)
+  globals.functions.setProperty(
+    globals.form.offerDisplayPanel.availXpressPersonalLoan.loanAmountTitle,
+    {
+      value: formattedLoan
+    }
+  );
+
+  // EMI Amount
+  globals.functions.setProperty(
+    globals.form.offerDisplayPanel.availXpressPersonalLoan.offerDetails.emiAmount,
+    {
+      value: formattedEmi
+    }
+  );
+
+  // Rate of Interest (CONSTANT)
+  globals.functions.setProperty(
+    globals.form.offerDisplayPanel.availXpressPersonalLoan.offerDetails.rateOfInterest,
+    {
+      value: formattedInterest
+    }
+  );
+
+  // Taxes (CONSTANT)
+  globals.functions.setProperty(
+    globals.form.offerDisplayPanel.availXpressPersonalLoan.offerDetails.taxes,
+    {
+      value: formattedTaxes
+    }
+  );
+}
+
+
 // eslint-disable-next-line import/prefer-default-export
 export {
-  getFullName, days, submitFormArrayToString, maskMobileNumber, handleOtpFlow,
+  getFullName, days, submitFormArrayToString, maskMobileNumber, handleOtpFlow, updateLoanOffer,
 };
+
+
+
+
+
+
+
+
+
