@@ -164,76 +164,76 @@ function handleOtpFlow(globals) {
  * @param {scope} globals
  */
 function updateLoanOffer(globals) {
-  try {
 
-    // ✅ CORRECT PATH (FROM YOUR UI)
-    const loanAmount = Number(
-      globals.form.getLoan.loanAmount.value || 0
-    );
+  console.log("✅ FUNCTION RUNNING");
 
-    const tenure = Number(
-      globals.form.getLoan.loanTenure.value || 0
-    );
+  // ===== GET VALUES =====
+  const loanAmount = Number(globals.form.get_loan.loan_amount?.value || 0);
+  const tenureMonths = Number(globals.form.get_loan.loan_tenure?.value || 0);
 
-    if (!loanAmount || !tenure) return;
+  console.log("Loan:", loanAmount, "Tenure:", tenureMonths);
 
-    // ✅ CONSTANTS
-    const rate = 10.97;
-    const taxes = 4000;
+  // ===== CONSTANTS =====
+  const annualInterestRate = 10.97;
+  const taxes = 4000;
 
-    const r = rate / 12 / 100;
-    const n = tenure;
+  const r = annualInterestRate / 12 / 100;
 
-    // ✅ EMI CALCULATION
-    const emi =
-      (loanAmount * r * Math.pow(1 + r, n)) /
-      (Math.pow(1 + r, n) - 1);
-
-    // ✅ FORMAT
-    const formattedLoan = `₹${loanAmount.toLocaleString("en-IN")}`;
-    const formattedEmi = `₹${Math.round(emi).toLocaleString("en-IN")}`;
-    const formattedRate = `${rate}%`;
-    const formattedTaxes = `₹${taxes.toLocaleString("en-IN")}`;
-
-    // =================================================
-    // ✅ CORRECT OUTPUT PATH (FROM YOUR RIGHT PANEL)
-    // =================================================
-
-    // 🔹 Loan Amount (Top Title)
-    globals.functions.setProperty(
-      globals.form.getLoan.offerDisplayPanel.availXPRESSPersonalLoan.availXPRESSPersonalLoanOf,
-      {
-        label: { value: formattedLoan }
-      }
-    );
-
-    // 🔹 EMI
-    globals.functions.setProperty(
-      globals.form.getLoan.offerDisplayPanel.availXPRESSPersonalLoan.loanOfferDetails.emiAmount,
-      {
-        label: { value: formattedEmi }
-      }
-    );
-
-    // 🔹 Interest
-    globals.functions.setProperty(
-      globals.form.getLoan.offerDisplayPanel.availXPRESSPersonalLoan.loanOfferDetails.rateOfInterest,
-      {
-        label: { value: formattedRate }
-      }
-    );
-
-    // 🔹 Taxes
-    globals.functions.setProperty(
-      globals.form.getLoan.offerDisplayPanel.availXPRESSPersonalLoan.loanOfferDetails.taxes,
-      {
-        label: { value: formattedTaxes }
-      }
-    );
-
-  } catch (e) {
-    console.log("ERROR:", e);
+  // ===== EMI =====
+  let emi = 0;
+  if (loanAmount > 0 && tenureMonths > 0) {
+    const pow = Math.pow(1 + r, tenureMonths);
+    emi = (loanAmount * r * pow) / (pow - 1);
   }
+
+  emi = Math.round(emi);
+
+  // ===== FORMAT =====
+  const formattedLoan = `₹${loanAmount.toLocaleString("en-IN")}`;
+  const formattedEmi = `₹${emi.toLocaleString("en-IN")}`;
+  const formattedInterest = `${annualInterestRate}%`;
+  const formattedTaxes = `₹${taxes.toLocaleString("en-IN")}`;
+
+  // ===== CORRECT PATH =====
+  const root = globals.form.personal_loan_offer;
+
+  console.log("Root:", root);
+
+  // 👉 go step by step safely
+  const offerDisplay = root?.offer_display;
+  const loanCard = offerDisplay?.avail_XPRESS_Person;
+
+  console.log("Loan Card:", loanCard);
+
+  if (!loanCard) {
+    console.log("❌ loanCard path wrong — fix name");
+    return;
+  }
+
+  // ===== UPDATE UI =====
+
+  // Title
+  globals.functions.setProperty(loanCard, {
+    value: `Avail XPRESS Personal Loan of ${formattedLoan}`
+  });
+
+  // EMI
+  globals.functions.setProperty(
+    loanCard.loan_offer_details.emi_amount,
+    { value: formattedEmi }
+  );
+
+  // Interest
+  globals.functions.setProperty(
+    loanCard.loan_offer_details.rate_of_interest,
+    { value: formattedInterest }
+  );
+
+  // Taxes
+  globals.functions.setProperty(
+    loanCard.loan_offer_details.taxes,
+    { value: formattedTaxes }
+  );
 }
 
 // eslint-disable-next-line import/prefer-default-export
