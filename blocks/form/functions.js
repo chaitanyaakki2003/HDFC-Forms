@@ -165,53 +165,29 @@ function handleOtpFlow(globals) {
  */
 function updateLoanOffer(globals) {
 
-  const loanAmount = Number(globals.form.get_loan.offer_panel.loan_amount?.value || 0);
-  const tenureMonths = Number(globals.form.get_loan.offer_panel.loan_tenure?.value || 0);
+  // ✅ READ INPUT VALUE
+  const loanAmount =
+    globals.form.get_loan.offer_panel.loan_amount.valueOf();
 
-  const interest = 10.97;
-  const taxes = 4000;
+  console.log("Loan Amount:", loanAmount);
 
-  const r = interest / 12 / 100;
+  if (!loanAmount) return;
 
-  let emi = 0;
-  if (loanAmount && tenureMonths) {
-    const pow = Math.pow(1 + r, tenureMonths);
-    emi = (loanAmount * r * pow) / (pow - 1);
+  // ✅ GET OUTPUT FIELD (CORRECT PATH)
+  const targetField =
+    globals.form.get_loan.offer_display
+      .loan_offer_summary
+      .avail_XPRESS_Personal_Loan_of;
+
+  if (!targetField) {
+    console.log("❌ Target field not found");
+    return;
   }
 
-  emi = Math.round(emi);
+  // ✅ SET VALUE (THIS WAS MISSING)
+  targetField.value = "₹ " + loanAmount.toLocaleString();
 
-  const formattedLoan = `₹${loanAmount.toLocaleString("en-IN")}`;
-  const formattedEmi = `₹${emi.toLocaleString("en-IN")}`;
-
-  const loanCard =
-    globals.form.get_loan.offer_display.avail_XPRESS_Personal_Loan;
-
-  // Title
-  globals.functions.setProperty(
-    loanCard.avail_XPRESS_Personal_Loan_of,
-    {
-      value: `Avail XPRESS Personal Loan of ${formattedLoan}`
-    }
-  );
-
-  // EMI
-  globals.functions.setProperty(
-    loanCard.offer_details.emi_amount,
-    { value: formattedEmi }
-  );
-
-  // Interest
-  globals.functions.setProperty(
-    loanCard.offer_details.rate_of_interest,
-    { value: `${interest}%` }
-  );
-
-  // Taxes
-  globals.functions.setProperty(
-    loanCard.offer_details.taxes,
-    { value: `₹${taxes}` }
-  );
+  console.log("✅ Value set successfully");
 }
 // eslint-disable-next-line import/prefer-default-export
 export {
