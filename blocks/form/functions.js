@@ -163,10 +163,6 @@ function handleOtpFlow(globals) {
  * @param {scope} globals
  * @returns {string}
  */
-/**
- * Update Loan Offer Card
- * @param {scope} globals
- */
 function updateLoanOffer(globals) {
   try {
     // ===== GET VALUES =====
