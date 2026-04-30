@@ -209,7 +209,7 @@ function updateLoanOffer(globals) {
 
   // EMI Amount
   globals.functions.setProperty(
-    globals.form.offerDisplayPanel.availXpressPersonalLoan.offerDetails.emiAmount,
+    globals.form.get_loan.offer_display.loan_offer_summary.loan_offer_details.emi_amount,
     {
       value: formattedEmi
     }
