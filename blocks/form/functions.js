@@ -199,29 +199,16 @@ function calculateEMI(globals) {
   try {
     const form = globals.form;
 
-    // ✅ TRY FROM AEM FIELD
-    let loanAmount = Number(
-      form.range_panel.loan_amount_inr?.$element?.dataset?.actualValue
-    );
+    // ✅ GET REAL VALUES FROM SLIDER (FIX)
+    const loanAmount = Number(
+      document.querySelector('[name="loan_amount_inr"]')?.dataset?.actualValue
+    ) || 0;
 
-    let tenure = Number(
-      form.range_panel.loan_tenure_months?.$element?.dataset?.actualValue
-    );
+    const tenure = Number(
+      document.querySelector('[name="loan_tenure_months"]')?.dataset?.actualValue
+    ) || 0;
 
-    // 🔥 FALLBACK (IMPORTANT FIX)
-    if (!loanAmount) {
-      loanAmount = Number(
-        document.querySelector('[name="loan_amount_inr"]')?.dataset?.actualValue
-      ) || 0;
-    }
-
-    if (!tenure) {
-      tenure = Number(
-        document.querySelector('[name="loan_tenure_months"]')?.dataset?.actualValue
-      ) || 0;
-    }
-
-    console.log("✅ FINAL Loan:", loanAmount, "Tenure:", tenure);
+    console.log("✅ Loan:", loanAmount, "Tenure:", tenure);
 
     if (!loanAmount || !tenure) return;
 
@@ -269,7 +256,7 @@ function calculateEMI(globals) {
     );
 
   } catch (e) {
-    console.error("❌ EMI ERROR:", e);
+    console.error("EMI ERROR:", e);
   }
 }
  
