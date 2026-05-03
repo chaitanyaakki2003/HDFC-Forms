@@ -202,19 +202,27 @@ function calculateEMI(globals) {
     const amountSlider = document.querySelector('[name="loan_amount_inr"]');
     const tenureSlider = document.querySelector('[name="loan_tenure_months"]');
 
-    const percent = Number(amountSlider?.value) || 0;
+    if (!amountSlider || !tenureSlider) return;
+
+    // ✅ FIX: USE REAL SLIDER RANGE (NOT 0–100 ASSUMPTION)
+    const sliderMin = Number(amountSlider.min) || 0;
+    const sliderMax = Number(amountSlider.max) || 100;
+    const sliderValue = Number(amountSlider.value) || 0;
 
     const MIN = 50000;
     const MAX = 1500000;
 
-    // ✅ SMOOTH VALUE
-    let loanAmount = MIN + (percent / 100) * (MAX - MIN);
+    // ✅ CORRECT NORMALIZATION
+    const ratio = (sliderValue - sliderMin) / (sliderMax - sliderMin);
 
-    // ✅ ROUND LIKE BANK UI
+    let loanAmount = MIN + ratio * (MAX - MIN);
+
+    // ✅ ROUND CLEANLY
     loanAmount = Math.round(loanAmount / 1000) * 1000;
 
+    // ✅ TENURE (correct already)
     const tenure = Number(
-      tenureSlider?.dataset?.actualValue
+      tenureSlider.dataset.actualValue
     ) || 0;
 
     if (!loanAmount || !tenure) return;
@@ -229,32 +237,13 @@ function calculateEMI(globals) {
         Math.pow(1 + monthlyRate, tenure)) /
       (Math.pow(1 + monthlyRate, tenure) - 1);
 
-    const emiRounded = Math.floor(emi);
+    const emiRounded = Math.round(emi);
 
     const tax = 4000;
 
-    // 🔥🔥🔥 IMPORTANT FIX (FOR BUBBLE / INPUT DISPLAY)
     const displayAmount = "₹" + loanAmount.toLocaleString("en-IN");
 
-    // 👉 FORCE UPDATE TEXT INPUT (THIS FIXES YOUR ISSUE)
-    const amountInputBox = amountSlider
-      ?.closest('.field-wrapper')
-      ?.querySelector('input[type="text"]');
-
-    if (amountInputBox) {
-      amountInputBox.value = displayAmount;
-    }
-
-    // 👉 ALSO UPDATE BUBBLE
-    const bubble = amountSlider
-      ?.closest('.range-widget-wrapper')
-      ?.querySelector('.range-bubble');
-
-    if (bubble) {
-      bubble.innerText = displayAmount;
-    }
-
-    // ✅ UPDATE RIGHT PANEL
+    // ✅ UPDATE UI (ONLY RIGHT PANEL — DO NOT FIGHT SLIDER UI)
     globals.functions.setProperty(
       form.amount_display.personal_loan,
       { value: displayAmount }
