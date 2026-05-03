@@ -11,7 +11,28 @@ function updateBubble(input, element) {
   const bubbleWidth = bubble.getBoundingClientRect().width || 31;
   const left = `${(current / total) * 100}% - ${(current / total) * bubbleWidth}px`;
  
-  bubble.innerText = formatValue(input, value);
+  const fieldName = input.name;
+
+const amountValues = [50000, 200000, 400000, 600000, 800000, 1000000, 1500000];
+const tenureValues = [12, 24, 36, 48, 60, 72, 84];
+
+let actualValue = value;
+
+if (fieldName === "loan_amount_inr") {
+  const index = Math.round((value / 100) * (amountValues.length - 1));
+  actualValue = amountValues[index];
+}
+
+if (fieldName === "loan_tenure_months") {
+  const index = Math.round((value / 100) * (tenureValues.length - 1));
+  actualValue = tenureValues[index];
+}
+
+// ✅ IMPORTANT: update actual value in form
+input.dataset.actualValue = actualValue;
+
+// UI display
+bubble.innerText = formatValue(input, value);
   const steps = {
     '--total-steps': Math.ceil((max - min) / step),
     '--current-steps': Math.ceil((value - min) / step),

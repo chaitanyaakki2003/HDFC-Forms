@@ -2,13 +2,26 @@
    FORMAT VALUE
 ========================= */
 export function formatValue(input, value) {
-  const max = parseInt(input.max);
+  const fieldName = input.name;
 
-  if (max <= 120) {
-    return `${value} months`;
+  const amountValues = [50000, 200000, 400000, 600000, 800000, 1000000, 1500000];
+  const tenureValues = [12, 24, 36, 48, 60, 72, 84];
+
+  if (fieldName === "loan_amount_inr") {
+    const index = Math.round((value / 100) * (amountValues.length - 1));
+    const actualValue = amountValues[index];
+
+    return `₹${actualValue.toLocaleString('en-IN')}`;
   }
 
-  return `₹${Number(value).toLocaleString('en-IN')}`;
+  if (fieldName === "loan_tenure_months") {
+    const index = Math.round((value / 100) * (tenureValues.length - 1));
+    const actualValue = tenureValues[index];
+
+    return `${actualValue} months`;
+  }
+
+  return value;
 }
 
 
