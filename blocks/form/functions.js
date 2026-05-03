@@ -189,73 +189,83 @@ function updateLoanOffer(globals) {
 
   console.log("✅ Value updated");
 }
-// eslint-disable-next-line import/prefer-default-export
+
+
 /**
- * EMI Calculation + Field Binding
- * @param {scope} globals - Global scope object
+ * EMI Calculation (FINAL WORKING)
+ * @param {scope} globals
  */
 function calculateEMI(globals) {
   try {
-    // 👉 Get values from form
-    const loanAmount = Number(globals.form.range_panel.loan_amount.value) || 0;
-    const tenure = Number(globals.form.range_panel.loan_tenure.value) || 0;
+    const form = globals.form;
 
-    // 👉 Set interest rate (you can also fetch dynamically)
-    const annualRate = 12; // example: 12%
-    const monthlyRate = annualRate / (12 * 100); // r
+    // ✅ READ VALUES (CORRECT PATH)
+    const loanAmount = Number(form.range_panel.loan_amount_inr?.value) || 0;
+    const tenure = Number(form.range_panel.loan_tenure_months?.value) || 0;
 
-    let emi = 0;
+    console.log("Loan:", loanAmount, "Tenure:", tenure);
 
-    if (loanAmount > 0 && tenure > 0) {
-      emi =
-        (loanAmount *
-          monthlyRate *
-          Math.pow(1 + monthlyRate, tenure)) /
-        (Math.pow(1 + monthlyRate, tenure) - 1);
+    if (!loanAmount || !tenure) {
+      console.log("⚠️ Missing values");
+      return;
     }
 
-    emi = Math.round(emi);
+    // ✅ INTEREST
+    const annualRate = 12;
+    const monthlyRate = annualRate / (12 * 100);
 
-    // 👉 Set Loan Amount → "Avail XPRESS Personal Loan of"
+    // ✅ EMI CALCULATION
+    const emi =
+      (loanAmount *
+        monthlyRate *
+        Math.pow(1 + monthlyRate, tenure)) /
+      (Math.pow(1 + monthlyRate, tenure) - 1);
+
+    const emiRounded = Math.round(emi);
+
+    // ✅ UPDATE LOAN AMOUNT CARD
     globals.functions.setProperty(
-      globals.form.range_panel.amount_display.personal_loan,
+      form.range_panel.amount_display.personal_loan,
       {
-        value: loanAmount.toLocaleString("en-IN"),
+        value: "₹ " + loanAmount.toLocaleString("en-IN"),
       }
     );
 
-    // 👉 Set EMI Amount
+    // ✅ UPDATE EMI
     globals.functions.setProperty(
-      globals.form.range_panel.amount_display.amount_emi,
+      form.range_panel.amount_display.amount_emi,
       {
-        value: emi.toLocaleString("en-IN"),
+        value: "₹ " + emiRounded.toLocaleString("en-IN"),
       }
     );
 
-    // 👉 Optional: set interest rate field
+    // ✅ INTEREST RATE
     globals.functions.setProperty(
-      globals.form.range_panel.amount_display.rate_interest,
+      form.range_panel.amount_display.rate_interest,
       {
         value: annualRate + "%",
       }
     );
 
-    // 👉 Optional: tax calculation (example 18%)
-    const tax = Math.round(emi * 0.18);
+    // ✅ TAX (18%)
+    const tax = Math.round(emiRounded * 0.18);
 
     globals.functions.setProperty(
-      globals.form.range_panel.amount_display.tax,
+      form.range_panel.amount_display.tax,
       {
-        value: tax.toLocaleString("en-IN"),
+        value: "₹ " + tax.toLocaleString("en-IN"),
       }
     );
 
+    console.log("✅ EMI updated:", emiRounded);
+
   } catch (e) {
-    console.error("EMI Calculation Error:", e);
+    console.error("❌ EMI ERROR:", e);
   }
 }
+// eslint-disable-next-line import/prefer-default-export
 export {
-  getFullName, days, submitFormArrayToString, maskMobileNumber, handleOtpFlow, updateLoanOffer,calculateEMI,
+  getFullName, days, submitFormArrayToString, maskMobileNumber, handleOtpFlow, updateLoanOffer, calculateEMI,
 };
 
 
