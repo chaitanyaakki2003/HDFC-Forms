@@ -199,11 +199,16 @@ function calculateEMI(globals) {
   try {
     const form = globals.form;
 
-    // ✅ CORRECT VALUE ACCESS (FINAL FIX)
-    const loanAmount = Number(form.range_panel.loan_amount_inr?.value) || 0;
-    const tenure = Number(form.range_panel.loan_tenure_months?.value) || 0;
+    // ✅ READ ACTUAL VALUES FROM DATASET (IMPORTANT FIX)
+    const loanAmount = Number(
+      form.range_panel.loan_amount_inr?.$element?.dataset?.actualValue
+    ) || 0;
 
-    console.log("Loan:", loanAmount, "Tenure:", tenure);
+    const tenure = Number(
+      form.range_panel.loan_tenure_months?.$element?.dataset?.actualValue
+    ) || 0;
+
+    console.log("✅ Actual Loan:", loanAmount, "Tenure:", tenure);
 
     if (!loanAmount || !tenure) return;
 
@@ -211,7 +216,7 @@ function calculateEMI(globals) {
     const annualRate = 10.97;
     const monthlyRate = annualRate / (12 * 100);
 
-    // ✅ EMI FORMULA
+    // ✅ EMI FORMULA (CORRECT)
     const emi =
       (loanAmount *
         monthlyRate *
@@ -221,7 +226,7 @@ function calculateEMI(globals) {
     const emiRounded = Math.round(emi);
     const tax = 4000;
 
-    // ✅ OUTPUT (CORRECT PANEL PATH)
+    // ✅ UPDATE UI (CORRECT PATH)
     globals.functions.setProperty(
       form.amount_display.personal_loan,
       {
@@ -251,7 +256,7 @@ function calculateEMI(globals) {
     );
 
   } catch (e) {
-    console.error("EMI ERROR:", e);
+    console.error("❌ EMI ERROR:", e);
   }
 }
  
