@@ -199,13 +199,26 @@ function calculateEMI(globals) {
   try {
     const form = globals.form;
 
-    // ✅ ALWAYS READ ACTUAL VALUE (DO NOT RE-CALCULATE)
-    const loanAmount = Number(
-      document.querySelector('[name="loan_amount_inr"]')?.dataset?.actualValue
-    ) || 0;
+    // 👉 SLIDERS
+    const amountSlider = document.querySelector('[name="loan_amount_inr"]');
+    const tenureSlider = document.querySelector('[name="loan_tenure_months"]');
 
+    // 👉 GET % VALUE
+    const percent = Number(amountSlider?.value) || 0;
+
+    // 👉 EXACT RANGE FROM DESIGN
+    const MIN = 50000;
+    const MAX = 1500000;
+
+    // ✅ SMOOTH VALUE (FIXES MIDDLE VALUES)
+    let loanAmount = MIN + (percent / 100) * (MAX - MIN);
+
+    // ✅ ROUND TO NEAREST 1000 (UI LIKE BANK APP)
+    loanAmount = Math.round(loanAmount / 1000) * 1000;
+
+    // 👉 TENURE (THIS IS CORRECT FROM DATASET)
     const tenure = Number(
-      document.querySelector('[name="loan_tenure_months"]')?.dataset?.actualValue
+      tenureSlider?.dataset?.actualValue
     ) || 0;
 
     console.log("✅ Loan:", loanAmount, "Tenure:", tenure);
@@ -216,37 +229,45 @@ function calculateEMI(globals) {
     const annualRate = 10.97;
     const monthlyRate = annualRate / (12 * 100);
 
-    // ✅ EMI FORMULA (CORRECT)
+    // ✅ EMI FORMULA
     const emi =
       (loanAmount *
         monthlyRate *
         Math.pow(1 + monthlyRate, tenure)) /
       (Math.pow(1 + monthlyRate, tenure) - 1);
 
-    const emiRounded = Math.round(emi);
+    // 🔥 IMPORTANT → MATCH REFERENCE (NOT ROUND)
+    const emiRounded = Math.floor(emi);
 
-    // ✅ TAX (MATCH DESIGN)
     const tax = 4000;
 
-    // ✅ UPDATE UI (CORRECT PATHS)
+    // ✅ UI UPDATE
     globals.functions.setProperty(
       form.amount_display.personal_loan,
-      { value: "₹" + loanAmount.toLocaleString("en-IN") }
+      {
+        value: "₹" + loanAmount.toLocaleString("en-IN"),
+      }
     );
 
     globals.functions.setProperty(
       form.amount_display.amount_emi,
-      { value: "₹" + emiRounded.toLocaleString("en-IN") }
+      {
+        value: "₹" + emiRounded.toLocaleString("en-IN"),
+      }
     );
 
     globals.functions.setProperty(
       form.amount_display.rate_interest,
-      { value: annualRate.toFixed(2) + "%" }
+      {
+        value: annualRate.toFixed(2) + "%",
+      }
     );
 
     globals.functions.setProperty(
       form.amount_display.tax,
-      { value: "₹" + tax.toLocaleString("en-IN") }
+      {
+        value: "₹" + tax.toLocaleString("en-IN"),
+      }
     );
 
   } catch (e) {
