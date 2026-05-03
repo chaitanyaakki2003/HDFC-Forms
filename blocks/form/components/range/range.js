@@ -1,4 +1,5 @@
 import { formatValue, addTicks } from './range-enhancer.js';
+import { calculateEMI } from '../functions.js';
 function updateBubble(input, element) {
   const step = input.step || 1;
   const max = input.max || 0;
@@ -46,12 +47,21 @@ export default async function decorate(fieldDiv, fieldJson) {
   div.appendChild(rangeMaxEl);
   addTicks(div);
   input.addEventListener('input', (e) => {
-    updateBubble(e.target, div);
-  });
+  updateBubble(e.target, div);
+
+  // 🔥 CALL EMI FUNCTION
+  if (window?.formBridge?.globals) {
+    calculateEMI(window.formBridge.globals);
+  }
+});
   updateBubble(input, div);
 
-// ✅ ADD THIS LINE HERE
-initRangeEnhancer();
+updateBubble(input, div);
+
+// 🔥 INITIAL EMI CALCULATION
+if (window?.formBridge?.globals) {
+  calculateEMI(window.formBridge.globals);
+}
 
 return fieldDiv;
 }

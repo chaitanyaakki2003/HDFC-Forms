@@ -1379,7 +1379,7 @@ main .form fieldset.field-thank-you .field-loan-amount input {
 
 
 /* =========================
-   CARD (COMPACT + SQUARE FEEL)
+   CARD ONLY (STRICT SCOPE)
    ========================= */
 main .form .panel-wrapper.field-amount-display {
   display: grid !important;
@@ -1390,7 +1390,7 @@ main .form .panel-wrapper.field-amount-display {
     "taxes ."
     "disclaimer disclaimer";
 
-  width: 270px !important;        /* compact */
+  width: 270px !important;
   max-width: 270px !important;
 
   background: #f6f0e3 !important;
@@ -1401,11 +1401,11 @@ main .form .panel-wrapper.field-amount-display {
   box-sizing: border-box !important;
 
   column-gap: 18px !important;
-  row-gap: 10px !important;       /* tighter vertical spacing */
+  row-gap: 10px !important;
 }
 
 /* =========================
-   REMOVE INPUT UI
+   REMOVE INPUT UI (ONLY CARD)
    ========================= */
 main .form .panel-wrapper.field-amount-display input {
   border: none !important;
@@ -1416,41 +1416,40 @@ main .form .panel-wrapper.field-amount-display input {
 }
 
 /* =========================
-   TITLE
+   TITLE (ONLY CARD)
    ========================= */
-main .form .field-personal-loan {
+main .form .panel-wrapper.field-amount-display .field-personal-loan {
   grid-area: title;
   border-bottom: 1px dashed #e2d7c3 !important;
   padding-bottom: 8px !important;
-  margin-bottom: 4px !important;
 }
 
-main .form .field-personal-loan .field-label {
+main .form .panel-wrapper.field-amount-display .field-personal-loan .field-label {
   font-size: 14px !important;
   font-weight: 700 !important;
   color: #22364a !important;
 }
 
-main .form .field-personal-loan input {
+main .form .panel-wrapper.field-amount-display .field-personal-loan input {
   font-size: 24px !important;
   font-weight: 800 !important;
-  margin-top: 4px !important;   /* reduced */
+  margin-top: 4px !important;
 }
 
 /* =========================
    GRID AREAS
    ========================= */
-main .form .field-amount-emi { grid-area: emi; }
-main .form .field-rate-intrest { grid-area: rate; }
-main .form .field-tax { grid-area: taxes; }
-main .form .field-disclaimer { grid-area: disclaimer; }
+main .form .panel-wrapper.field-amount-display .field-amount-emi { grid-area: emi; }
+main .form .panel-wrapper.field-amount-display .field-rate-intrest { grid-area: rate; }
+main .form .panel-wrapper.field-amount-display .field-tax { grid-area: taxes; }
+main .form .panel-wrapper.field-amount-display .field-disclaimer { grid-area: disclaimer; }
 
 /* =========================
-   FIELD BLOCK (TIGHT)
+   FIELD BLOCK
    ========================= */
-main .form .field-amount-emi,
-main .form .field-rate-intrest,
-main .form .field-tax {
+main .form .panel-wrapper.field-amount-display .field-amount-emi,
+main .form .panel-wrapper.field-amount-display .field-rate-intrest,
+main .form .panel-wrapper.field-amount-display .field-tax {
   position: relative !important;
   padding-left: 12px !important;
 }
@@ -1458,79 +1457,83 @@ main .form .field-tax {
 /* =========================
    ORANGE LINE
    ========================= */
-main .form .field-amount-emi::before,
-main .form .field-rate-intrest::before,
-main .form .field-tax::before {
+main .form .panel-wrapper.field-amount-display .field-amount-emi::before,
+main .form .panel-wrapper.field-amount-display .field-rate-intrest::before,
+main .form .panel-wrapper.field-amount-display .field-tax::before {
   content: "";
   position: absolute;
   left: 0;
   top: 2px;
   width: 2px;
-  height: 34px;  /* balanced height */
+  height: 34px;
   background: #f2a126;
 }
 
 /* =========================
-   LABEL (LESS GAP)
+   LABELS (STRICT FIX)
    ========================= */
-main .form .field-label {
+main .form 
+.panel-wrapper.field-amount-display 
+.text-wrapper.field-amount-emi .field-label,
+main .form 
+.panel-wrapper.field-amount-display 
+.text-wrapper.field-rate-intrest .field-label,
+main .form 
+.panel-wrapper.field-amount-display 
+.text-wrapper.field-tax .field-label {
+
   font-size: 11px !important;
   font-weight: 600 !important;
   color: #7f8791 !important;
-
-  margin-bottom: 2px !important; /* 👈 key fix */
-  line-height: 1.1 !important;
-  white-space: nowrap !important;
+  margin-bottom: 2px !important;
 }
 
 /* =========================
-   VALUE (VERY CLOSE)
+   VALUES (STRICT FIX)
    ========================= */
-main .form .field-amount-emi input,
-main .form .field-rate-intrest input,
-main .form .field-tax input {
-  display: block !important;
+main .form 
+.panel-wrapper.field-amount-display 
+.text-wrapper.field-amount-emi input,
+main .form 
+.panel-wrapper.field-amount-display 
+.text-wrapper.field-rate-intrest input,
+main .form 
+.panel-wrapper.field-amount-display 
+.text-wrapper.field-tax input {
 
   font-size: 14px !important;
   font-weight: 800 !important;
   color: #1b2738 !important;
-
-  margin-top: 0 !important;      /* 👈 key fix */
-  line-height: 1.1 !important;
 }
 
 /* =========================
    DISCLAIMER
    ========================= */
-main .form .field-disclaimer {
+main .form .panel-wrapper.field-amount-display .field-disclaimer {
   margin: 0 -16px !important;
   padding: 10px 14px 10px 36px !important;
-
   background: #f2a126 !important;
   border-radius: 0 0 20px 20px !important;
   position: relative !important;
 }
 
-main .form .field-disclaimer::before {
+main .form .panel-wrapper.field-amount-display .field-disclaimer::before {
   content: "i";
   position: absolute;
   left: 12px;
   top: 50%;
   transform: translateY(-50%);
-
   width: 14px;
   height: 14px;
-
   border: 1.5px solid #ffd793;
   border-radius: 50%;
   color: #ffd793;
-
   font-size: 9px;
   text-align: center;
   line-height: 12px;
 }
 
-main .form .field-disclaimer p {
+main .form .panel-wrapper.field-amount-display .field-disclaimer p {
   font-size: 9px !important;
   font-weight: 600 !important;
   color: #fff4df !important;
