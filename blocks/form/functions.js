@@ -165,15 +165,13 @@ function handleOtpFlow(globals) {
  */
 function updateLoanOffer(globals) {
 
-  // ✅ READ INPUT VALUE
+  // 1. READ LOAN AMOUNT
   const loanAmount =
     globals.form.get_loan.offer_panel.loan_amount.valueOf();
 
-  console.log("Loan Amount:", loanAmount);
-
   if (!loanAmount) return;
 
-  // ✅ GET OUTPUT FIELD (CORRECT PATH)
+  // 2. GET TARGET FIELD (YOUR TEXT INPUT)
   const targetField =
     globals.form.get_loan.offer_display
       .loan_offer_summary
@@ -184,10 +182,12 @@ function updateLoanOffer(globals) {
     return;
   }
 
-  // ✅ SET VALUE (THIS WAS MISSING)
-  targetField.value = "₹ " + loanAmount.toLocaleString();
+  // 3. SET VALUE (CORRECT WAY)
+  globals.functions.setProperty(targetField, {
+    value: "₹ " + loanAmount.toLocaleString()
+  });
 
-  console.log("✅ Value set successfully");
+  console.log("✅ Value updated");
 }
 // eslint-disable-next-line import/prefer-default-export
 export {
