@@ -192,21 +192,16 @@ function updateLoanOffer(globals) {
 
 
 /**
- * EMI Calculation (FINAL CORRECT - MATCHES UI)
+ * EMI Calculation (FINAL FIXED PATH)
  * @param {scope} globals
  */
 function calculateEMI(globals) {
   try {
     const form = globals.form;
 
-    // ✅ IMPORTANT FIX: use valueOf()
-    const loanAmount = Number(
-      form.range_panel.loan_amount_inr?.valueOf()
-    ) || 0;
-
-    const tenure = Number(
-      form.range_panel.loan_tenure_months?.valueOf()
-    ) || 0;
+    // ✅ VALUES (these were correct)
+    const loanAmount = Number(form.range_panel.loan_amount_inr?.valueOf()) || 0;
+    const tenure = Number(form.range_panel.loan_tenure_months?.valueOf()) || 0;
 
     console.log("Loan:", loanAmount, "Tenure:", tenure);
 
@@ -216,7 +211,6 @@ function calculateEMI(globals) {
     const annualRate = 10.97;
     const monthlyRate = annualRate / (12 * 100);
 
-    // ✅ EMI
     const emi =
       (loanAmount *
         monthlyRate *
@@ -225,27 +219,26 @@ function calculateEMI(globals) {
 
     const emiRounded = Math.round(emi);
 
-    // ✅ FIXED TAX
     const tax = 4000;
 
-    // ✅ SET VALUES (THIS PART IS CORRECT)
+    // ✅ CORRECT PATH HERE 👇 (IMPORTANT FIX)
     globals.functions.setProperty(
-      form.range_panel.amount_display.personal_loan,
+      form.amount_display.personal_loan,
       { value: "₹" + loanAmount.toLocaleString("en-IN") }
     );
 
     globals.functions.setProperty(
-      form.range_panel.amount_display.amount_emi,
+      form.amount_display.amount_emi,
       { value: "₹" + emiRounded.toLocaleString("en-IN") }
     );
 
     globals.functions.setProperty(
-      form.range_panel.amount_display.rate_interest,
+      form.amount_display.rate_interest,
       { value: annualRate + "%" }
     );
 
     globals.functions.setProperty(
-      form.range_panel.amount_display.tax,
+      form.amount_display.tax,
       { value: "₹" + tax.toLocaleString("en-IN") }
     );
 
