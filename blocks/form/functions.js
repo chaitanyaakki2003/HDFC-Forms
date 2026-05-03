@@ -199,14 +199,20 @@ function calculateEMI(globals) {
   try {
     const form = globals.form;
 
-    // ✅ GET REAL VALUES FROM SLIDER (FIX)
-    const loanAmount = Number(
-      document.querySelector('[name="loan_amount_inr"]')?.dataset?.actualValue
-    ) || 0;
+    // 👉 GET SLIDER RAW VALUE (0–100)
+    const amountSlider = document.querySelector('[name="loan_amount_inr"]');
+    const tenureSlider = document.querySelector('[name="loan_tenure_months"]');
 
-    const tenure = Number(
-      document.querySelector('[name="loan_tenure_months"]')?.dataset?.actualValue
-    ) || 0;
+    const amountPercent = Number(amountSlider?.value) || 0;
+    const tenure = Number(tenureSlider?.dataset?.actualValue) || 0;
+
+    // ✅ CONVERT % → ACTUAL AMOUNT (SMOOTH RANGE)
+    const MIN_AMOUNT = 50000;
+    const MAX_AMOUNT = 1500000;
+
+    const loanAmount = Math.round(
+      MIN_AMOUNT + (amountPercent / 100) * (MAX_AMOUNT - MIN_AMOUNT)
+    );
 
     console.log("✅ Loan:", loanAmount, "Tenure:", tenure);
 
@@ -226,7 +232,7 @@ function calculateEMI(globals) {
     const emiRounded = Math.round(emi);
     const tax = 4000;
 
-    // ✅ UPDATE UI
+    // ✅ UI UPDATE
     globals.functions.setProperty(
       form.amount_display.personal_loan,
       {
