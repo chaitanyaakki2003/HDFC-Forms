@@ -29,10 +29,14 @@ export function setupSliderSteps(slider) {
 /* =========================
    ADD TICKS (FIXED VALUES)
 ========================= */
-export function addTicks(wrapper, fieldName) {
+export function addTicks(wrapper) {
   const slider = wrapper.querySelector('input[type="range"]');
   if (!slider) return;
 
+  const min = parseInt(slider.min);
+  const max = parseInt(slider.max);
+
+  // Remove old ticks
   let existing = wrapper.querySelector('.range-ticks');
   if (existing) existing.remove();
 
@@ -41,18 +45,34 @@ export function addTicks(wrapper, fieldName) {
 
   let values = [];
 
-  // 🔥 EXACT VALUES (MATCH DESIGN)
-  if (fieldName === "loan_amount_inr") {
-    values = [50000, 200000, 400000, 600000, 800000, 1000000, 1500000];
+  /* 🔥 IMPORTANT FIX */
+  if (max > 120) {
+    // Loan Amount → exact lakhs
+    values = [
+      50000,
+      300000,
+      600000,
+      900000,
+      1200000,
+      1500000
+    ];
   } else {
-    values = [12, 24, 36, 48, 60, 72, 84];
+    // Tenure
+    values = [
+      12,
+      26,
+      41,
+      55,
+      70,
+      84
+    ];
   }
 
-  values.forEach((val, index) => {
+  values.forEach((val) => {
     const span = document.createElement('span');
 
-    // LABEL FORMAT
-    if (fieldName === "loan_amount_inr") {
+    // Label
+    if (max > 120) {
       if (val >= 100000) {
         span.textContent = val / 100000 + 'L';
       } else {
@@ -62,10 +82,9 @@ export function addTicks(wrapper, fieldName) {
       span.textContent = val + 'm';
     }
 
-    // 🔥 CLICK → MOVE SLIDER
+    /* 🔥 CLICK → EXACT VALUE */
     span.addEventListener('click', () => {
-      const percent = (index / (values.length - 1)) * 100;
-      slider.value = percent;
+      slider.value = val;
 
       slider.dispatchEvent(new Event('input', { bubbles: true }));
     });
