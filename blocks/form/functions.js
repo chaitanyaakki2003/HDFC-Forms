@@ -199,17 +199,24 @@ function calculateEMI(globals) {
   try {
     const form = globals.form;
 
-    // ✅ READ VALUES (CORRECT PATH)
-    const loanAmount = Number(form.range_panel.loan_amount_inr?.value) || 0;
-    const tenure = Number(form.range_panel.loan_tenure_months?.value) || 0;
+    // ✅ IMPORTANT FIX: use valueOf()
+    const loanAmount = Number(
+      form.range_panel.loan_amount_inr?.valueOf()
+    ) || 0;
+
+    const tenure = Number(
+      form.range_panel.loan_tenure_months?.valueOf()
+    ) || 0;
+
+    console.log("Loan:", loanAmount, "Tenure:", tenure);
 
     if (!loanAmount || !tenure) return;
 
-    // ✅ FIXED INTEREST (AS PER YOUR UI)
+    // ✅ FIXED INTEREST
     const annualRate = 10.97;
     const monthlyRate = annualRate / (12 * 100);
 
-    // ✅ EMI FORMULA
+    // ✅ EMI
     const emi =
       (loanAmount *
         monthlyRate *
@@ -221,36 +228,25 @@ function calculateEMI(globals) {
     // ✅ FIXED TAX
     const tax = 4000;
 
-    // ✅ UPDATE CARD - LOAN AMOUNT
+    // ✅ SET VALUES (THIS PART IS CORRECT)
     globals.functions.setProperty(
       form.range_panel.amount_display.personal_loan,
-      {
-        value: "₹" + loanAmount.toLocaleString("en-IN"),
-      }
+      { value: "₹" + loanAmount.toLocaleString("en-IN") }
     );
 
-    // ✅ UPDATE EMI
     globals.functions.setProperty(
       form.range_panel.amount_display.amount_emi,
-      {
-        value: "₹" + emiRounded.toLocaleString("en-IN"),
-      }
+      { value: "₹" + emiRounded.toLocaleString("en-IN") }
     );
 
-    // ✅ UPDATE INTEREST
     globals.functions.setProperty(
       form.range_panel.amount_display.rate_interest,
-      {
-        value: annualRate + "%",
-      }
+      { value: annualRate + "%" }
     );
 
-    // ✅ UPDATE TAX (FIXED)
     globals.functions.setProperty(
       form.range_panel.amount_display.tax,
-      {
-        value: "₹" + tax.toLocaleString("en-IN"),
-      }
+      { value: "₹" + tax.toLocaleString("en-IN") }
     );
 
   } catch (e) {
