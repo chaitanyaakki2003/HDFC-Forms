@@ -199,9 +199,14 @@ function calculateEMI(globals) {
   try {
     const form = globals.form;
 
-    // ✅ VALUES (these were correct)
-    const loanAmount = Number(form.range_panel.loan_amount_inr?.valueOf()) || 0;
-    const tenure = Number(form.range_panel.loan_tenure_months?.valueOf()) || 0;
+    // ✅ GET ACTUAL VALUES (FIXED)
+    const loanAmount = Number(
+      form.range_panel.loan_amount_inr?.$element?.dataset?.actualValue
+    ) || 0;
+
+    const tenure = Number(
+      form.range_panel.loan_tenure_months?.$element?.dataset?.actualValue
+    ) || 0;
 
     console.log("Loan:", loanAmount, "Tenure:", tenure);
 
@@ -211,6 +216,7 @@ function calculateEMI(globals) {
     const annualRate = 10.97;
     const monthlyRate = annualRate / (12 * 100);
 
+    // ✅ EMI FORMULA
     const emi =
       (loanAmount *
         monthlyRate *
@@ -219,9 +225,10 @@ function calculateEMI(globals) {
 
     const emiRounded = Math.round(emi);
 
+    // ✅ FIXED TAX
     const tax = 4000;
 
-    // ✅ CORRECT PATH HERE 👇 (IMPORTANT FIX)
+    // ✅ UPDATE UI (YOUR PATH IS CORRECT 👍)
     globals.functions.setProperty(
       form.amount_display.personal_loan,
       { value: "₹" + loanAmount.toLocaleString("en-IN") }
