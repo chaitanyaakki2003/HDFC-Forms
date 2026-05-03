@@ -190,8 +190,72 @@ function updateLoanOffer(globals) {
   console.log("✅ Value updated");
 }
 // eslint-disable-next-line import/prefer-default-export
+/**
+ * EMI Calculation + Field Binding
+ * @param {scope} globals - Global scope object
+ */
+function calculateEMI(globals) {
+  try {
+    // 👉 Get values from form
+    const loanAmount = Number(globals.form.range_panel.loan_amount.value) || 0;
+    const tenure = Number(globals.form.range_panel.loan_tenure.value) || 0;
+
+    // 👉 Set interest rate (you can also fetch dynamically)
+    const annualRate = 12; // example: 12%
+    const monthlyRate = annualRate / (12 * 100); // r
+
+    let emi = 0;
+
+    if (loanAmount > 0 && tenure > 0) {
+      emi =
+        (loanAmount *
+          monthlyRate *
+          Math.pow(1 + monthlyRate, tenure)) /
+        (Math.pow(1 + monthlyRate, tenure) - 1);
+    }
+
+    emi = Math.round(emi);
+
+    // 👉 Set Loan Amount → "Avail XPRESS Personal Loan of"
+    globals.functions.setProperty(
+      globals.form.range_panel.amount_display.personal_loan,
+      {
+        value: loanAmount.toLocaleString("en-IN"),
+      }
+    );
+
+    // 👉 Set EMI Amount
+    globals.functions.setProperty(
+      globals.form.range_panel.amount_display.amount_emi,
+      {
+        value: emi.toLocaleString("en-IN"),
+      }
+    );
+
+    // 👉 Optional: set interest rate field
+    globals.functions.setProperty(
+      globals.form.range_panel.amount_display.rate_interest,
+      {
+        value: annualRate + "%",
+      }
+    );
+
+    // 👉 Optional: tax calculation (example 18%)
+    const tax = Math.round(emi * 0.18);
+
+    globals.functions.setProperty(
+      globals.form.range_panel.amount_display.tax,
+      {
+        value: tax.toLocaleString("en-IN"),
+      }
+    );
+
+  } catch (e) {
+    console.error("EMI Calculation Error:", e);
+  }
+}
 export {
-  getFullName, days, submitFormArrayToString, maskMobileNumber, handleOtpFlow, updateLoanOffer,
+  getFullName, days, submitFormArrayToString, maskMobileNumber, handleOtpFlow, updateLoanOffer,calculateEMI,
 };
 
 
