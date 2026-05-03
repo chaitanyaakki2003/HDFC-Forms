@@ -192,7 +192,7 @@ function updateLoanOffer(globals) {
 
 
 /**
- * EMI Calculation (FINAL WORKING)
+ * EMI Calculation (FINAL CORRECT - MATCHES UI)
  * @param {scope} globals
  */
 function calculateEMI(globals) {
@@ -203,18 +203,13 @@ function calculateEMI(globals) {
     const loanAmount = Number(form.range_panel.loan_amount_inr?.value) || 0;
     const tenure = Number(form.range_panel.loan_tenure_months?.value) || 0;
 
-    console.log("Loan:", loanAmount, "Tenure:", tenure);
+    if (!loanAmount || !tenure) return;
 
-    if (!loanAmount || !tenure) {
-      console.log("⚠️ Missing values");
-      return;
-    }
-
-    // ✅ INTEREST
-    const annualRate = 12;
+    // ✅ FIXED INTEREST (AS PER YOUR UI)
+    const annualRate = 10.97;
     const monthlyRate = annualRate / (12 * 100);
 
-    // ✅ EMI CALCULATION
+    // ✅ EMI FORMULA
     const emi =
       (loanAmount *
         monthlyRate *
@@ -223,11 +218,14 @@ function calculateEMI(globals) {
 
     const emiRounded = Math.round(emi);
 
-    // ✅ UPDATE LOAN AMOUNT CARD
+    // ✅ FIXED TAX
+    const tax = 4000;
+
+    // ✅ UPDATE CARD - LOAN AMOUNT
     globals.functions.setProperty(
       form.range_panel.amount_display.personal_loan,
       {
-        value: "₹ " + loanAmount.toLocaleString("en-IN"),
+        value: "₹" + loanAmount.toLocaleString("en-IN"),
       }
     );
 
@@ -235,11 +233,11 @@ function calculateEMI(globals) {
     globals.functions.setProperty(
       form.range_panel.amount_display.amount_emi,
       {
-        value: "₹ " + emiRounded.toLocaleString("en-IN"),
+        value: "₹" + emiRounded.toLocaleString("en-IN"),
       }
     );
 
-    // ✅ INTEREST RATE
+    // ✅ UPDATE INTEREST
     globals.functions.setProperty(
       form.range_panel.amount_display.rate_interest,
       {
@@ -247,20 +245,16 @@ function calculateEMI(globals) {
       }
     );
 
-    // ✅ TAX (18%)
-    const tax = Math.round(emiRounded * 0.18);
-
+    // ✅ UPDATE TAX (FIXED)
     globals.functions.setProperty(
       form.range_panel.amount_display.tax,
       {
-        value: "₹ " + tax.toLocaleString("en-IN"),
+        value: "₹" + tax.toLocaleString("en-IN"),
       }
     );
 
-    console.log("✅ EMI updated:", emiRounded);
-
   } catch (e) {
-    console.error("❌ EMI ERROR:", e);
+    console.error("EMI ERROR:", e);
   }
 }
 // eslint-disable-next-line import/prefer-default-export

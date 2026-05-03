@@ -50,8 +50,5 @@ export default async function decorate(fieldDiv, fieldJson) {
   });
   updateBubble(input, div);
 
-// ✅ ADD THIS LINE HERE
-initRangeEnhancer();
-
 return fieldDiv;
 }
