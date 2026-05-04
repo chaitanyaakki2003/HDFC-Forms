@@ -601,11 +601,9 @@ main .form fieldset.panel-wrapper.field-employer-details
   margin: 4px 0 !important;
 }
 
-/* ================= DISCLAIMER ================= */
+/* ================= DISCLAIMER (FIXED) ================= */
 main .form fieldset.panel-wrapper.field-employer-details
-.field-selected-industry-disclaimer,
-main .form fieldset.panel-wrapper.field-employer-details
-[id*="text-"] i {
+.plain-text-wrapper.field-selected-industry-disclaimer {
   display: block !important;
   grid-column: 1 / -1 !important;
 
@@ -617,6 +615,12 @@ main .form fieldset.panel-wrapper.field-employer-details
 
   padding: 9px 12px !important;
   border-radius: 6px !important;
+}
+
+/* FIX TEXT INSIDE */
+main .form fieldset.panel-wrapper.field-employer-details
+.plain-text-wrapper.field-selected-industry-disclaimer i {
+  font-style: normal !important;
 }
 
 /* ================= MOBILE ================= */
