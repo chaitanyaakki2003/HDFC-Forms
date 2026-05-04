@@ -614,7 +614,11 @@ main .form fieldset.panel-wrapper.field-employer-details
     grid-column: 1 / -1 !important;
   }
 }
-
+/* REMOVE DISCLAIMER ONLY IN EMPLOYER DETAILS */
+main .form fieldset.panel-wrapper.field-employer-details
+.plain-text-wrapper.field-selected-industry-disclaimer {
+  display: none !important;
+}
 
 
 
