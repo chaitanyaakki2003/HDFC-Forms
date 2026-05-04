@@ -825,6 +825,15 @@ main .form fieldset.panel-wrapper + fieldset.panel-wrapper {
 }
 
 
+/* 🔥 EXTEND EMPLOYER PANEL TO MATCH ADDRESS WIDTH (NO OTHER STYLE CHANGE) */
+main .form fieldset.panel-wrapper.field-employer-details {
+  width: calc(100% - 0px) !important;
+  max-width: 100% !important;
+
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+}
+
 
 
 
