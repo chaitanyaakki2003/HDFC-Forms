@@ -613,8 +613,13 @@ main .form fieldset.panel-wrapper.field-employer-details
   }
 }
 
-
-
+/* =========================================
+   🔥 FINAL FIX — REMOVE DISCLAIMER
+========================================= */
+main .form 
+.plain-text-wrapper.field-selected-industry-disclaimer {
+  display: none !important;
+}
 
 
 /* ===================================================== */
@@ -783,6 +788,7 @@ main .form fieldset.panel-wrapper.field-type-of-loan-panel {
     grid-column: 1 / -1 !important;
   }
 }
+
 
 
 
