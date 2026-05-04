@@ -794,3 +794,124 @@ main .form fieldset.panel-wrapper.field-type-of-loan-panel {
 
 
 
+
+/* ================= REMOVE REVIEW TITLE DESIGN ================= */
+main .form fieldset.panel-wrapper.field-review-details > legend.field-label {
+  all: unset !important;
+  display: block !important;
+  font-size: 18px !important;
+  font-weight: 700 !important;
+  margin-bottom: 12px !important;
+  color: #2c2c2c !important;
+}
+
+/* ================= INNER ACCORDION CARDS ================= */
+main .form fieldset.panel-wrapper.field-review-details
+fieldset.panel-wrapper {
+  margin-bottom: 16px;
+  border-radius: 14px;
+  background: #f4f7fc;
+  border: none;
+  overflow: hidden;
+}
+
+/* ================= HEADER ================= */
+main .form fieldset.panel-wrapper.field-review-details
+fieldset.panel-wrapper > legend.field-label {
+  padding: 16px 20px;
+  background: #cfd8e6;
+
+  font-size: 15px;
+  font-weight: 700;
+  color: #1c2b4a;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  border-radius: 14px;
+}
+
+/* ================= ARROW ================= */
+main .form fieldset.panel-wrapper.field-review-details
+fieldset.panel-wrapper > legend.field-label::after {
+  content: "";
+  width: 10px;
+  height: 10px;
+  border-right: 2px solid #2f63e5;
+  border-bottom: 2px solid #2f63e5;
+  transform: rotate(45deg);
+  transition: 0.2s;
+}
+
+/* OPEN STATE */
+main .form fieldset.panel-wrapper.field-review-details
+fieldset.panel-wrapper[data-index="0"]
+> legend.field-label::after {
+  transform: rotate(225deg);
+}
+
+/* REMOVE ICONS */
+main .form fieldset.panel-wrapper.field-review-details
+fieldset.panel-wrapper > legend.field-label i,
+main .form fieldset.panel-wrapper.field-review-details
+fieldset.panel-wrapper > legend.field-label svg {
+  display: none !important;
+}
+
+/* ================= CONTENT BOX ================= */
+main .form fieldset.panel-wrapper.field-review-details
+fieldset.panel-wrapper > .field-wrapper {
+  padding: 18px;
+  background: #ffffff;
+  border-radius: 0 0 14px 14px;
+}
+
+/* ================= GRID LAYOUT ================= */
+main .form fieldset.panel-wrapper.field-review-details
+.field-wrapper.col-3 {
+  width: 24%;
+  display: inline-block;
+  vertical-align: top;
+}
+
+main .form fieldset.panel-wrapper.field-review-details
+.field-wrapper.col-6 {
+  width: 48%;
+  display: inline-block;
+}
+
+main .form fieldset.panel-wrapper.field-review-details
+.field-wrapper.col-12 {
+  width: 100%;
+}
+
+/* ================= LABEL ================= */
+main .form fieldset.panel-wrapper.field-review-details
+.field-wrapper label {
+  font-size: 12px;
+  color: #7a8494;
+  margin-bottom: 6px;
+  display: block;
+}
+
+/* ================= VALUE ================= */
+main .form fieldset.panel-wrapper.field-review-details
+.field-wrapper input {
+  border: none;
+  background: transparent;
+  font-size: 14px;
+  font-weight: 600;
+  color: #202636;
+  padding: 0;
+}
+
+/* ================= MOBILE ================= */
+@media (max-width: 640px) {
+  main .form fieldset.panel-wrapper.field-review-details
+  .field-wrapper.col-3,
+  main .form fieldset.panel-wrapper.field-review-details
+  .field-wrapper.col-6 {
+    width: 100%;
+  }
+}
