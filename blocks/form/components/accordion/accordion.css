@@ -1011,78 +1011,39 @@ main .form fieldset.panel-wrapper.field-review-details
   }
 }
 
-
 /* =========================================
-   🚨 FINAL OVERLAP FIX (DO NOT BREAK GRID)
+   ✅ FINAL FIX (NO OVERLAP, NO DOUBLE)
 ========================================= */
 
-/* KEEP GRID ON PARENT (IMPORTANT) */
-main .form fieldset.panel-wrapper.field-review-details
-fieldset.panel-wrapper {
-  display: grid; /* keep your original */
+/* Apply grid ONLY to DIRECT CHILDREN */
+main .form fieldset.panel-wrapper.field-review-details > fieldset {
+  display: grid;
   grid-template-columns: repeat(12, 1fr);
-  position: relative;
 }
 
-/* HEADER (LEGEND) - FIX OVERLAP */
-main .form fieldset.panel-wrapper.field-review-details
-fieldset.panel-wrapper > legend.field-label {
-  grid-column: 1 / -1; /* full width */
-  margin-bottom: 10px; /* spacing fix */
-  z-index: 2;
-  position: relative;
+/* Ensure legend takes full row */
+main .form fieldset.panel-wrapper.field-review-details > fieldset > legend {
+  grid-column: 1 / -1;
+  margin-bottom: 10px;
 }
 
-/* CONTENT SHOULD COME BELOW HEADER */
-main .form fieldset.panel-wrapper.field-review-details
-fieldset.panel-wrapper > .field-wrapper {
-  position: relative;
-  z-index: 1;
-}
-
-/* FIX: ENSURE EACH FIELD RESPECTS GRID */
-main .form fieldset.panel-wrapper.field-review-details .field-wrapper {
+/* Only direct field-wrapper should be grid items */
+main .form fieldset.panel-wrapper.field-review-details > fieldset > .field-wrapper {
   margin: 0 !important;
   padding: 14px 18px 10px;
 }
 
-/* GRID COLUMN FIXES (KEEP SAME AS YOURS) */
-main .form fieldset.panel-wrapper.field-review-details .col-3 {
-  grid-column: span 3;
+/* Prevent nested wrappers from breaking layout */
+main .form fieldset.panel-wrapper.field-review-details .field-wrapper .field-wrapper {
+  display: block;
 }
 
-main .form fieldset.panel-wrapper.field-review-details .col-4 {
-  grid-column: span 4;
+/* FIX spacing so sections don't overlap */
+main .form fieldset.panel-wrapper.field-review-details > fieldset {
+  align-items: start;
 }
 
-main .form fieldset.panel-wrapper.field-review-details .col-6 {
-  grid-column: span 6;
-}
-
-main .form fieldset.panel-wrapper.field-review-details .col-12 {
-  grid-column: 1 / -1;
-}
-
-/* 🔥 FIX FOR LOAN DETAILS (MAIN ISSUE) */
-main .form fieldset.panel-wrapper.field-review-details
-.field-loan-details > .field-wrapper {
-  display: contents; /* keeps grid but removes wrapper conflict */
-}
-
-/* 🔥 FIX FOR PERSONAL DETAILS */
-main .form fieldset.panel-wrapper.field-review-details
-.field-personal-details > .field-wrapper {
-  display: contents;
-}
-
-/* ENSURE NO STACKING ISSUES */
-main .form fieldset.panel-wrapper.field-review-details
-fieldset.panel-wrapper > * {
-  position: relative;
-}
-
-/* SAFETY: REMOVE ANY OVERFLOW CUTTING */
-main .form fieldset.panel-wrapper.field-review-details
-fieldset.panel-wrapper {
+/* Safety: remove overflow cut */
+main .form fieldset.panel-wrapper.field-review-details > fieldset {
   overflow: visible;
 }
