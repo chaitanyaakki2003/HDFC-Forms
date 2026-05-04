@@ -795,41 +795,38 @@ main .form fieldset.panel-wrapper.field-type-of-loan-panel {
 
 
 
-/* ================= REMOVE REVIEW TITLE DESIGN ================= */
+/* ================= REMOVE REVIEW TITLE STYLE ================= */
 main .form fieldset.panel-wrapper.field-review-details > legend.field-label {
   all: unset !important;
   display: block !important;
-  font-size: 18px !important;
-  font-weight: 700 !important;
-  margin-bottom: 12px !important;
-  color: #2c2c2c !important;
+  font-size: 20px;
+  font-weight: 700;
+  margin-bottom: 16px;
+  color: #1a1a1a;
 }
 
-/* ================= INNER ACCORDION CARDS ================= */
+/* ================= SECTION WRAPPER ================= */
 main .form fieldset.panel-wrapper.field-review-details
 fieldset.panel-wrapper {
-  margin-bottom: 16px;
-  border-radius: 14px;
-  background: #f4f7fc;
-  border: none;
+  background: #eef2f7;
+  border-radius: 18px;
+  margin-bottom: 18px;
   overflow: hidden;
+  border: none;
 }
 
-/* ================= HEADER ================= */
+/* ================= HEADER (LIKE IMAGE 6) ================= */
 main .form fieldset.panel-wrapper.field-review-details
 fieldset.panel-wrapper > legend.field-label {
-  padding: 16px 20px;
-  background: #cfd8e6;
-
-  font-size: 15px;
+  background: #cfd7e6;
+  padding: 18px 22px;
+  font-size: 16px;
   font-weight: 700;
-  color: #1c2b4a;
-
+  color: #1b2b4a;
+  border-radius: 18px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-
-  border-radius: 14px;
 }
 
 /* ================= ARROW ================= */
@@ -844,7 +841,7 @@ fieldset.panel-wrapper > legend.field-label::after {
   transition: 0.2s;
 }
 
-/* OPEN STATE */
+/* OPEN */
 main .form fieldset.panel-wrapper.field-review-details
 fieldset.panel-wrapper[data-index="0"]
 > legend.field-label::after {
@@ -853,32 +850,54 @@ fieldset.panel-wrapper[data-index="0"]
 
 /* REMOVE ICONS */
 main .form fieldset.panel-wrapper.field-review-details
-fieldset.panel-wrapper > legend.field-label i,
+legend.field-label i,
 main .form fieldset.panel-wrapper.field-review-details
-fieldset.panel-wrapper > legend.field-label svg {
+legend.field-label svg {
   display: none !important;
 }
 
-/* ================= CONTENT BOX ================= */
+/* ================= CONTENT ================= */
 main .form fieldset.panel-wrapper.field-review-details
 fieldset.panel-wrapper > .field-wrapper {
-  padding: 18px;
-  background: #ffffff;
-  border-radius: 0 0 14px 14px;
+  padding: 20px;
 }
 
-/* ================= GRID LAYOUT ================= */
+/* ================= FIELD CARD (KEY FIX) ================= */
+main .form fieldset.panel-wrapper.field-review-details
+.field-wrapper {
+  background: #ffffff;
+  border-radius: 14px;
+  padding: 14px 16px;
+  margin-bottom: 14px;
+  position: relative;
+}
+
+/* LEFT BLUE BAR */
+main .form fieldset.panel-wrapper.field-review-details
+.field-wrapper::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 10px;
+  bottom: 10px;
+  width: 3px;
+  background: #4c74ff;
+  border-radius: 2px;
+}
+
+/* ================= GRID ================= */
 main .form fieldset.panel-wrapper.field-review-details
 .field-wrapper.col-3 {
-  width: 24%;
+  width: 23%;
   display: inline-block;
-  vertical-align: top;
+  margin-right: 1%;
 }
 
 main .form fieldset.panel-wrapper.field-review-details
 .field-wrapper.col-6 {
   width: 48%;
   display: inline-block;
+  margin-right: 2%;
 }
 
 main .form fieldset.panel-wrapper.field-review-details
@@ -890,7 +909,7 @@ main .form fieldset.panel-wrapper.field-review-details
 main .form fieldset.panel-wrapper.field-review-details
 .field-wrapper label {
   font-size: 12px;
-  color: #7a8494;
+  color: #7c8798;
   margin-bottom: 6px;
   display: block;
 }
@@ -900,18 +919,36 @@ main .form fieldset.panel-wrapper.field-review-details
 .field-wrapper input {
   border: none;
   background: transparent;
-  font-size: 14px;
+  font-size: 15px;
   font-weight: 600;
-  color: #202636;
+  color: #1e2530;
   padding: 0;
 }
 
+/* ================= REMOVE INPUT BOX STYLE ================= */
+main .form fieldset.panel-wrapper.field-review-details
+input {
+  box-shadow: none !important;
+  border: none !important;
+}
+
+/* ================= VERIFY EMAIL FIX ================= */
+main .form fieldset.panel-wrapper.field-review-details
+.field-wrapper button {
+  border-radius: 8px;
+  background: #4c74ff;
+  color: #fff;
+  border: none;
+  padding: 10px 18px;
+}
+
 /* ================= MOBILE ================= */
-@media (max-width: 640px) {
+@media (max-width: 768px) {
   main .form fieldset.panel-wrapper.field-review-details
   .field-wrapper.col-3,
   main .form fieldset.panel-wrapper.field-review-details
   .field-wrapper.col-6 {
     width: 100%;
+    margin-right: 0;
   }
 }
