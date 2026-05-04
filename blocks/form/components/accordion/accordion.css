@@ -350,7 +350,7 @@ main .form fieldset.panel-wrapper.field-full-name-as-per-pan input:focus {
   box-shadow: 0 0 0 2px rgba(79, 70, 229, 0.1);
 }
 
-/* ===== PERSONAL DETAILS (FINAL FIXED) ===== */
+/* ===== PERSONAL DETAILS - FINAL CLEAN ===== */
 
 main .form fieldset.panel-wrapper.field-personal-details {
   background: #ffffff;
@@ -360,7 +360,7 @@ main .form fieldset.panel-wrapper.field-personal-details {
   margin-bottom: 20px;
 }
 
-/* ===== HEADER ===== */
+/* ===== HEADER (EXACT SAME AS FULL NAME) ===== */
 main .form fieldset.panel-wrapper.field-personal-details > legend {
   background: #dfe6f4;
   padding: 16px 20px;
@@ -379,7 +379,7 @@ main .form fieldset.panel-wrapper.field-personal-details > div {
   background: #ffffff;
 }
 
-/* ===== KEEP GRID SYSTEM ===== */
+/* ===== IMPORTANT: KEEP GRID (DON’T TOUCH LAYOUT ENGINE) ===== */
 main .form fieldset.panel-wrapper.field-personal-details .field-wrapper.col-6 {
   grid-column: span 6 !important;
 }
@@ -388,7 +388,18 @@ main .form fieldset.panel-wrapper.field-personal-details .field-wrapper.col-12 {
   grid-column: span 12 !important;
 }
 
-/* ===== INPUTS ===== */
+/* ===== REMOVE ALL SYSTEM BLUE LINES ===== */
+main .form fieldset.panel-wrapper.field-personal-details .field-wrapper::before,
+main .form fieldset.panel-wrapper.field-personal-details .field-wrapper::after {
+  display: none !important;
+}
+
+main .form fieldset.panel-wrapper.field-personal-details .field-wrapper {
+  border-left: none !important;
+  padding-left: 0 !important;
+}
+
+/* ===== INPUT / SELECT (MATCH FULL NAME) ===== */
 main .form fieldset.panel-wrapper.field-personal-details input,
 main .form fieldset.panel-wrapper.field-personal-details select {
   width: 100%;
@@ -399,6 +410,14 @@ main .form fieldset.panel-wrapper.field-personal-details select {
   font-size: 14px;
   background: #ffffff;
   color: #111;
+  outline: none;
+}
+
+/* ===== FOCUS ===== */
+main .form fieldset.panel-wrapper.field-personal-details input:focus,
+main .form fieldset.panel-wrapper.field-personal-details select:focus {
+  border-color: #4f46e5;
+  box-shadow: 0 0 0 2px rgba(79,70,229,0.1);
 }
 
 /* ===== LABEL ===== */
@@ -409,55 +428,7 @@ main .form fieldset.panel-wrapper.field-personal-details .field-label {
   display: block;
 }
 
-/* ===== REMOVE ALL BLUE LINES FIRST ===== */
-main .form fieldset.panel-wrapper.field-personal-details .field-wrapper {
-  border-left: none !important;
-  padding-left: 0 !important;
-}
-
-/* ===== ADD BLUE LINE ONLY FOR FIRST ROW (Gender + PAN) ===== */
-main .form fieldset.panel-wrapper.field-personal-details 
-.field-wrapper.field-gender,
-main .form fieldset.panel-wrapper.field-personal-details 
-.field-wrapper.field-pan-number {
-  position: relative;
-  padding-left: 14px;
-}
-
-main .form fieldset.panel-wrapper.field-personal-details 
-.field-wrapper.field-gender::before,
-main .form fieldset.panel-wrapper.field-personal-details 
-.field-wrapper.field-pan-number::before {
-  content: "";
-  position: absolute;
-  left: 0;              /* pushed properly to left */
-  top: 4px;
-  bottom: 4px;
-  width: 3px;
-  background: #6c63ff;
-  border-radius: 2px;
-}
-
-/* ===== REMOVE BLUE LINE FROM EMAIL + BUTTON ===== */
-main .form fieldset.panel-wrapper.field-personal-details 
-.field-email-id,
-main .form fieldset.panel-wrapper.field-personal-details 
-.field-verify-email,
-main .form fieldset.panel-wrapper.field-personal-details 
-.field-email-suggestions {
-  padding-left: 0 !important;
-}
-
-main .form fieldset.panel-wrapper.field-personal-details 
-.field-email-id::before,
-main .form fieldset.panel-wrapper.field-personal-details 
-.field-verify-email::before,
-main .form fieldset.panel-wrapper.field-personal-details 
-.field-email-suggestions::before {
-  display: none !important;
-}
-
-/* ===== VERIFY BUTTON ALIGNMENT ===== */
+/* ===== VERIFY BUTTON FIX ===== */
 main .form fieldset.panel-wrapper.field-personal-details .button-wrapper {
   display: flex;
   align-items: flex-end;
@@ -474,7 +445,7 @@ main .form fieldset.panel-wrapper.field-personal-details .button {
   font-weight: 600;
 }
 
-/* ===== EMAIL SUGGESTIONS ===== */
+/* ===== EMAIL TEXT ===== */
 main .form fieldset.panel-wrapper.field-personal-details .field-email-suggestions {
   margin-top: 10px;
 }
