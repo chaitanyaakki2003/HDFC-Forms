@@ -1083,3 +1083,48 @@ main .form fieldset.panel-wrapper.field-review-details
 fieldset.panel-wrapper.accordion-collapse {
   background: transparent;
 }
+
+
+/* =========================================
+   🔥 FINAL FIX FOR LOAN + PERSONAL ONLY
+========================================= */
+
+/* Remove outer background ONLY for these two sections */
+main .form fieldset.panel-wrapper.field-review-details
+.field-loan-details,
+main .form fieldset.panel-wrapper.field-review-details
+.field-personal-details {
+  background: transparent !important;
+}
+
+/* Keep only header styled */
+main .form fieldset.panel-wrapper.field-review-details
+.field-loan-details > legend,
+main .form fieldset.panel-wrapper.field-review-details
+.field-personal-details > legend {
+  background: linear-gradient(90deg, #eef3ff, #dbe6ff) !important;
+}
+
+/* Remove inner wrapper background */
+main .form fieldset.panel-wrapper.field-review-details
+.field-loan-details .field-wrapper,
+main .form fieldset.panel-wrapper.field-review-details
+.field-personal-details .field-wrapper {
+  background: transparent !important;
+}
+
+/* VERY IMPORTANT: stop overlay expansion */
+main .form fieldset.panel-wrapper.field-review-details
+.field-loan-details.accordion-collapse,
+main .form fieldset.panel-wrapper.field-review-details
+.field-personal-details.accordion-collapse {
+  background: transparent !important;
+}
+
+/* Remove hidden overflow causing block effect */
+main .form fieldset.panel-wrapper.field-review-details
+.field-loan-details,
+main .form fieldset.panel-wrapper.field-review-details
+.field-personal-details {
+  overflow: visible !important;
+}
