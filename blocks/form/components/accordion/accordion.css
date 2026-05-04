@@ -812,13 +812,32 @@ main .form fieldset.panel-wrapper.field-review-details {
 }
 
 /* ================= EACH ACCORDION ================= */
+/* =========================================
+   ✅ CLEAN ACCORDION CONTAINER (FINAL)
+========================================= */
+
 main .form fieldset.panel-wrapper.field-review-details
 fieldset.panel-wrapper {
-  background: #f8fbff;
+  background: transparent !important;   /* 🔥 REMOVE BLUE BOX */
   border-radius: 12px;
   margin-bottom: 18px;
   border: none;
-  overflow: hidden;
+  overflow: visible !important;        /* 🔥 REMOVE BLOCK EFFECT */
+}
+
+/* =========================================
+   ✅ FIX INNER CONTENT BACKGROUND
+========================================= */
+
+main .form fieldset.panel-wrapper.field-review-details
+fieldset.panel-wrapper > .field-wrapper {
+  background: transparent !important;
+}
+
+/* Ensure NO section gets blue fill */
+main .form fieldset.panel-wrapper.field-review-details
+fieldset.panel-wrapper > div {
+  background: transparent !important;
 }
 
 /* ================= HEADER ================= */
