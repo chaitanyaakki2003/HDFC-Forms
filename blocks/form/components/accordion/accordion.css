@@ -1047,3 +1047,39 @@ main .form fieldset.panel-wrapper.field-review-details > fieldset {
 main .form fieldset.panel-wrapper.field-review-details > fieldset {
   overflow: visible;
 }
+
+
+
+/* =========================================
+   🔥 REMOVE EXTRA LIGHT BLUE BACKGROUND
+========================================= */
+
+/* Remove background ONLY when expanded content shows */
+main .form fieldset.panel-wrapper.field-review-details
+fieldset.panel-wrapper.accordion-collapse.show {
+  background: transparent !important;
+}
+
+/* Keep header styled but remove body background */
+main .form fieldset.panel-wrapper.field-review-details
+fieldset.panel-wrapper > .field-wrapper {
+  background: transparent !important;
+}
+
+/* Fix inner content stretching */
+main .form fieldset.panel-wrapper.field-review-details
+fieldset.panel-wrapper > div {
+  background: transparent !important;
+}
+
+/* IMPORTANT: prevent full blue overlay */
+main .form fieldset.panel-wrapper.field-review-details
+fieldset.panel-wrapper {
+  background-clip: padding-box;
+}
+
+/* Fix weird blue expansion on mobile */
+main .form fieldset.panel-wrapper.field-review-details
+fieldset.panel-wrapper.accordion-collapse {
+  background: transparent;
+}
