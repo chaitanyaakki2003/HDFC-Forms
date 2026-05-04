@@ -1212,28 +1212,22 @@ main .form fieldset.panel-wrapper.field-review-details
 
 
 /* =========================================
-   🔥 REMOVE ALL GAPS BETWEEN ACCORDIONS
+   ✨ SMALL CLEAN SPACING BETWEEN ACCORDIONS
 ========================================= */
 
-/* Remove bottom gap from every accordion */
 main .form fieldset.panel-wrapper.field-review-details
 fieldset.panel-wrapper {
-  margin-bottom: 0 !important;
+  margin-bottom: 6px !important;  /* 🔥 small gap */
 }
 
-/* Remove top gap from every accordion */
+/* remove extra top spacing just in case */
 main .form fieldset.panel-wrapper.field-review-details
 fieldset.panel-wrapper + fieldset.panel-wrapper {
   margin-top: 0 !important;
 }
 
-/* Remove any hidden spacing from field wrappers */
+/* remove header extra spacing */
 main .form fieldset.panel-wrapper.field-review-details
 fieldset.panel-wrapper > legend.field-label {
-  margin-bottom: 0 !important;
-}
-
-/* Remove spacing caused by parent container */
-main .form fieldset.panel-wrapper.field-review-details {
   margin-bottom: 0 !important;
 }
