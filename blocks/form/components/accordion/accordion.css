@@ -799,44 +799,70 @@ main .form fieldset.panel-wrapper.field-type-of-loan-panel {
 main .form fieldset.panel-wrapper.field-review-details > legend.field-label {
   all: unset !important;
   display: block !important;
-  font-size: 20px;
-  font-weight: 700;
-  margin-bottom: 16px;
-  color: #1a1a1a;
+  font-size: 18px !important;
+  font-weight: 800 !important;
+  margin-bottom: 12px !important;
+  color: #111827 !important;
 }
 
-/* ================= ACCORDION WRAPPER ================= */
+/* ================= SECTION WRAPPER ================= */
+main .form fieldset.panel-wrapper.field-review-details {
+  width: 100% !important;
+  margin: 20px 0 30px !important;
+}
+
+/* ================= EACH ACCORDION ================= */
 main .form fieldset.panel-wrapper.field-review-details
 fieldset.panel-wrapper {
-  margin-bottom: 16px;
+  background: #f8fbff;
+  border-radius: 12px;
+  margin-bottom: 18px;
   border: none;
+  overflow: hidden;
 }
 
 /* ================= HEADER ================= */
 main .form fieldset.panel-wrapper.field-review-details
 fieldset.panel-wrapper > legend.field-label {
-  background: #cfd7e6;
-  padding: 16px 20px;
-  border-radius: 16px;
-  font-weight: 700;
-  color: #1b2b4a;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+  width: 100%;
+  padding: 14px 18px 14px 44px;
+  background: linear-gradient(90deg, #eef3ff, #dbe6ff);
+  font-size: 13px;
+  font-weight: 800;
+  color: #111827;
+  position: relative;
+  border-radius: 12px;
 }
 
-/* ================= ARROW ================= */
+/* LEFT ICON */
+main .form fieldset.panel-wrapper.field-review-details
+fieldset.panel-wrapper > legend.field-label::before {
+  content: "";
+  position: absolute;
+  left: 18px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 16px;
+  height: 16px;
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
+/* RIGHT ARROW */
 main .form fieldset.panel-wrapper.field-review-details
 fieldset.panel-wrapper > legend.field-label::after {
   content: "";
-  width: 10px;
-  height: 10px;
-  border-right: 2px solid #2f63e5;
-  border-bottom: 2px solid #2f63e5;
-  transform: rotate(45deg);
+  position: absolute;
+  right: 18px;
+  top: 50%;
+  width: 8px;
+  height: 8px;
+  border-right: 2px solid #2454ff;
+  border-bottom: 2px solid #2454ff;
+  transform: translateY(-60%) rotate(225deg);
 }
 
-/* ================= REMOVE ICON ================= */
+/* REMOVE ANY ICON TAG */
 main .form fieldset.panel-wrapper.field-review-details
 legend.field-label i,
 main .form fieldset.panel-wrapper.field-review-details
@@ -844,143 +870,143 @@ legend.field-label svg {
   display: none !important;
 }
 
-/* ================= CONTENT LAYOUT ================= */
+/* ================= GRID LAYOUT (IMPORTANT FIX) ================= */
 main .form fieldset.panel-wrapper.field-review-details
-fieldset.panel-wrapper > div {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 18px;
-  padding: 16px 10px;
+fieldset.panel-wrapper {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
 }
 
-/* ================= FIELD CARD ================= */
+/* ================= FIELD WRAPPER ================= */
 main .form fieldset.panel-wrapper.field-review-details
-.text-wrapper,
-main .form fieldset.panel-wrapper.field-review-details
-.email-wrapper,
-main .form fieldset.panel-wrapper.field-review-details
-.date-wrapper,
-main .form fieldset.panel-wrapper.field-review-details
-.plain-text-wrapper {
-  background: #ffffff;
-  border-radius: 12px;
-  padding: 12px 16px;
-  position: relative;
-  flex: 1 1 calc(25% - 18px);
-  min-width: 220px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
+.field-wrapper {
+  padding: 14px 18px 10px;
+  margin: 0;
+  border: none;
 }
 
-/* ================= WIDTH CONTROL ================= */
-main .form fieldset.panel-wrapper.field-review-details .col-12 {
-  flex: 1 1 100% !important;
+/* GRID SIZES */
+main .form fieldset.panel-wrapper.field-review-details .col-3 {
+  grid-column: span 3;
+}
+
+main .form fieldset.panel-wrapper.field-review-details .col-4 {
+  grid-column: span 4;
 }
 
 main .form fieldset.panel-wrapper.field-review-details .col-6 {
-  flex: 1 1 calc(50% - 18px) !important;
+  grid-column: span 6;
 }
 
-/* ================= LEFT BLUE LINE ================= */
-main .form fieldset.panel-wrapper.field-review-details
-.text-wrapper::before,
-main .form fieldset.panel-wrapper.field-review-details
-.email-wrapper::before,
-main .form fieldset.panel-wrapper.field-review-details
-.date-wrapper::before {
-  content: "";
-  position: absolute;
-  left: 0;
-  top: 10px;
-  bottom: 10px;
-  width: 3px;
-  background: #4c74ff;
-  border-radius: 2px;
+main .form fieldset.panel-wrapper.field-review-details .col-12 {
+  grid-column: 1 / -1;
 }
 
 /* ================= LABEL ================= */
-main .form fieldset.panel-wrapper.field-review-details
-.field-label {
-  font-size: 12px;
-  color: #7c8798;
-  margin-bottom: 6px;
+main .form fieldset.panel-wrapper.field-review-details label {
+  display: block;
+  margin-bottom: 4px;
+  font-size: 11px;
+  color: #6b7280;
+  font-weight: 600;
   white-space: nowrap;
 }
 
-/* ================= VALUE (IMPORTANT FIX) ================= */
+/* ================= VALUE (CRITICAL FIX) ================= */
 main .form fieldset.panel-wrapper.field-review-details input {
+  width: 100%;
   border: none !important;
   background: transparent !important;
-  font-size: 14px;
-  font-weight: 600;
-  color: #1e2530;
-  padding: 0;
-  outline: none !important;
   box-shadow: none !important;
-  width: 100%;
+  outline: none !important;
+
+  font-size: 12px;
+  font-weight: 800;
+  color: #111827;
+
+  padding: 0;
+  margin: 0;
+
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
 
-/* 🔥 REMOVE BLACK BORDER ON CLICK */
+/* REMOVE BLACK BORDER */
 main .form fieldset.panel-wrapper.field-review-details input:focus {
   outline: none !important;
   box-shadow: none !important;
   border: none !important;
 }
 
-/* ================= EMAIL + BUTTON FIX ================= */
+/* ================= BLUE LEFT LINE ================= */
 main .form fieldset.panel-wrapper.field-review-details
-.email-wrapper {
-  display: flex;
-  flex-direction: column;
+.text-wrapper,
+main .form fieldset.panel-wrapper.field-review-details
+.date-wrapper {
+  position: relative;
+  padding-left: 22px;
 }
 
 main .form fieldset.panel-wrapper.field-review-details
-.button-wrapper {
+.text-wrapper::before,
+main .form fieldset.panel-wrapper.field-review-details
+.date-wrapper::before {
+  content: "";
+  position: absolute;
+  left: 10px;
+  top: 14px;
+  bottom: 8px;
+  width: 2px;
+  background: #9bbcff;
+  border-radius: 2px;
+}
+
+/* ================= VERIFY EMAIL (SPECIAL LAYOUT) ================= */
+main .form fieldset.panel-wrapper.field-review-details
+.field-verify-email-id {
+  display: grid !important;
+  grid-template-columns: 1fr 90px 1fr 90px;
+  column-gap: 20px;
+  row-gap: 6px;
+}
+
+/* INPUT BOXES (ONLY HERE) */
+main .form fieldset.panel-wrapper.field-review-details
+.field-verify-email-id input {
+  height: 36px;
+  border: 1px solid #dbe2ea !important;
+  border-radius: 8px;
+  padding: 0 10px;
+  background: #fff !important;
+}
+
+/* BUTTON */
+main .form fieldset.panel-wrapper.field-review-details
+.field-verify-email-id button {
+  height: 36px;
+  width: 80px;
+  border-radius: 8px;
+  border: 1px solid #8fb0ff;
+  background: #fff;
+  color: #2454ff;
+  font-weight: 700;
+
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-/* VERIFY BUTTON */
-main .form fieldset.panel-wrapper.field-review-details
-.button-wrapper button {
-  background: linear-gradient(180deg, #5a7bff, #4c74ff);
-  color: #fff;
-  border: none;
-  border-radius: 8px;
-  padding: 10px 18px;
-  font-weight: 600;
-}
-
-/* ================= REMOVE EXTRA WRAPPER SPACE ================= */
-main .form fieldset.panel-wrapper.field-review-details
-.field-wrapper {
-  margin: 0 !important;
-  padding: 0 !important;
-  background: transparent !important;
-}
-
-/* ================= TEXT NOTES ================= */
-main .form fieldset.panel-wrapper.field-review-details
-.plain-text-wrapper {
-  background: transparent;
-  padding: 0;
-  color: #6b7280;
-  font-size: 13px;
-}
-
 /* ================= MOBILE ================= */
 @media (max-width: 768px) {
+  main .form fieldset.panel-wrapper.field-review-details .col-3,
+  main .form fieldset.panel-wrapper.field-review-details .col-4,
+  main .form fieldset.panel-wrapper.field-review-details .col-6 {
+    grid-column: 1 / -1;
+  }
+
   main .form fieldset.panel-wrapper.field-review-details
-  .text-wrapper,
-  main .form fieldset.panel-wrapper.field-review-details
-  .email-wrapper,
-  main .form fieldset.panel-wrapper.field-review-details
-  .date-wrapper {
-    flex: 1 1 100%;
+  .field-verify-email-id {
+    grid-template-columns: 1fr;
   }
 }
