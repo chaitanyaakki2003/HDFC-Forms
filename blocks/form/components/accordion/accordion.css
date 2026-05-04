@@ -1010,3 +1010,46 @@ main .form fieldset.panel-wrapper.field-review-details
     grid-template-columns: 1fr;
   }
 }
+
+
+/* =========================================
+   🚨 FINAL OVERLAP FIX (SAFE PATCH)
+========================================= */
+
+/* STEP 1: Remove grid from accordion container ONLY */
+main .form fieldset.panel-wrapper.field-review-details
+fieldset.panel-wrapper {
+  display: block !important;   /* remove grid from parent */
+}
+
+/* STEP 2: Keep legend OUTSIDE layout */
+main .form fieldset.panel-wrapper.field-review-details
+fieldset.panel-wrapper > legend.field-label {
+  display: block !important;
+  width: 100% !important;
+  position: relative !important;
+  z-index: 2;
+}
+
+/* STEP 3: Apply grid ONLY to inner content */
+main .form fieldset.panel-wrapper.field-review-details
+fieldset.panel-wrapper > .field-wrapper {
+  display: grid !important;
+  grid-template-columns: repeat(12, 1fr);
+  width: 100%;
+}
+
+/* STEP 4: Fix spacing so nothing overlaps */
+main .form fieldset.panel-wrapper.field-review-details
+fieldset.panel-wrapper > .field-wrapper {
+  margin-top: 6px !important;
+}
+
+/* STEP 5: Special fix for Loan & Personal sections */
+main .form fieldset.panel-wrapper.field-review-details
+.field-loan-details > .field-wrapper,
+main .form fieldset.panel-wrapper.field-review-details
+.field-personal-details > .field-wrapper {
+  display: grid !important;
+  grid-template-columns: repeat(12, 1fr);
+}
