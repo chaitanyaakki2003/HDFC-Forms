@@ -822,10 +822,6 @@ main .form fieldset.panel-wrapper.field-employer-details {
   padding: 20px !important;      /* ✅ already same but force */
 }
 
-/* Income panel spacing fix (top gap consistency) */
-main .form fieldset.panel-wrapper.field-income-details {
-  margin-top: 20px !important;   /* ✅ equal spacing from Employer */
-}
 
 
 
