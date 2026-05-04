@@ -841,26 +841,25 @@ main .form fieldset.panel-wrapper.field-type-of-loan-panel {
 
 
 /* =========================================
-   ✨ SMALL CONSISTENT GAP (FINAL FIX)
+   🔥 FINAL FORCE SMALL GAP (WORKING FIX)
 ========================================= */
 
-/* Reduce spacing for ALL these panels */
+/* Override ALL existing margins */
 main .form fieldset.panel-wrapper.field-employer-details,
 main .form fieldset.panel-wrapper.field-income-details,
 main .form fieldset.panel-wrapper.field-work-email-id-panel,
 main .form fieldset.panel-wrapper.field-type-of-loan-panel {
-  margin: 6px 0 !important;   /* 🔥 small gap */
-}
-
-/* Remove forced 18px rule */
-main .form fieldset.panel-wrapper + fieldset.panel-wrapper {
   margin-top: 6px !important;
+  margin-bottom: 6px !important;
 }
 
-/* Fix specific employer → income gap */
-main .form 
-fieldset.panel-wrapper.field-employer-details + 
-fieldset.panel-wrapper.field-income-details {
+/* Kill AEM default spacing completely */
+main .form fieldset.panel-wrapper {
+  margin-bottom: 6px !important;
+}
+
+/* Fix stacked spacing (this is the main issue) */
+main .form fieldset.panel-wrapper + fieldset.panel-wrapper {
   margin-top: 6px !important;
 }
 
