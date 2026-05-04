@@ -601,8 +601,6 @@ main .form fieldset.panel-wrapper.field-employer-details
   margin: 4px 0 !important;
 }
 
-
-
 /* ================= MOBILE ================= */
 @media (max-width: 640px) {
   main .form fieldset.panel-wrapper.field-employer-details {
@@ -614,12 +612,6 @@ main .form fieldset.panel-wrapper.field-employer-details
     grid-column: 1 / -1 !important;
   }
 }
-/* REMOVE DISCLAIMER ONLY IN EMPLOYER DETAILS */
-main .form fieldset.panel-wrapper.field-employer-details
-.plain-text-wrapper.field-selected-industry-disclaimer {
-  display: none !important;
-}
-
 
 
 
