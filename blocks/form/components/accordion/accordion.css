@@ -862,7 +862,20 @@ main .form fieldset.panel-wrapper {
 main .form fieldset.panel-wrapper + fieldset.panel-wrapper {
   margin-top: 6px !important;
 }
+/* =========================================
+   🔥 FIX ONLY EMPLOYER → INCOME GAP
+========================================= */
 
+/* Reduce ONLY this gap */
+main .form 
+fieldset.panel-wrapper.field-employer-details {
+  margin-bottom: 6px !important;
+}
+
+main .form 
+fieldset.panel-wrapper.field-income-details {
+  margin-top: 0 !important;
+}
 
 
 
