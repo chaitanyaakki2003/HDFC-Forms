@@ -350,6 +350,11 @@ main .form fieldset.panel-wrapper.field-full-name-as-per-pan input:focus {
   box-shadow: 0 0 0 2px rgba(79, 70, 229, 0.1);
 }
 
+
+
+
+
+
 /* ===== ONLY Personal Details Accordion ===== */
 main .form fieldset.panel-wrapper.field-personal-details {
   background: #ffffff;
@@ -359,11 +364,11 @@ main .form fieldset.panel-wrapper.field-personal-details {
   margin-bottom: 20px;
 }
 
-/* ===== HEADER (MATCH FULL NAME STYLE) ===== */
+/* HEADER */
 main .form fieldset.panel-wrapper.field-personal-details > legend {
   background: #dfe6f4;
   padding: 16px 20px;
-  font-size: 16px;        /* same as Full Name */
+  font-size: 16px;
   font-weight: 600;
   color: #2c3e50;
   border-radius: 16px 16px 0 0;
@@ -372,26 +377,30 @@ main .form fieldset.panel-wrapper.field-personal-details > legend {
   align-items: center;
 }
 
-/* ===== CONTENT AREA (REMOVE GREY BG ISSUE) ===== */
+/* CONTENT */
 main .form fieldset.panel-wrapper.field-personal-details > div {
-  background: #ffffff;   /* FIX: removes grey overlay */
+  background: #ffffff;
   padding: 20px;
 }
 
-/* ===== GRID FIX ===== */
+/* ✅ FIX: USE FLEX INSTEAD OF INLINE-BLOCK */
+main .form fieldset.panel-wrapper.field-personal-details {
+  display: block;
+}
+
+main .form fieldset.panel-wrapper.field-personal-details > div {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+/* EACH FIELD */
 main .form fieldset.panel-wrapper.field-personal-details .field-wrapper.col-6 {
-  width: 48%;
-  display: inline-block;
-  vertical-align: top;
-  margin-right: 2%;
+  flex: 1 1 calc(50% - 8px);
+  min-width: 250px;
 }
 
-/* remove margin on right side */
-main .form fieldset.panel-wrapper.field-personal-details .field-wrapper.col-6:nth-child(2n) {
-  margin-right: 0;
-}
-
-/* ===== INPUT / SELECT ===== */
+/* INPUT */
 main .form fieldset.panel-wrapper.field-personal-details input,
 main .form fieldset.panel-wrapper.field-personal-details select {
   width: 100%;
@@ -404,7 +413,7 @@ main .form fieldset.panel-wrapper.field-personal-details select {
   color: #111;
 }
 
-/* ===== LABEL ===== */
+/* LABEL */
 main .form fieldset.panel-wrapper.field-personal-details .field-label {
   font-size: 13px;
   color: #6b7280;
@@ -412,13 +421,17 @@ main .form fieldset.panel-wrapper.field-personal-details .field-label {
   display: block;
 }
 
-/* ===== BLUE LEFT BORDER (LIKE YOUR DESIGN) ===== */
+/* LEFT BLUE LINE */
 main .form fieldset.panel-wrapper.field-personal-details .field-wrapper {
   border-left: 3px solid #6c63ff;
   padding-left: 12px;
 }
 
-/* ===== VERIFY BUTTON ===== */
+/* VERIFY BUTTON FIX */
+main .form fieldset.panel-wrapper.field-personal-details .button-wrapper {
+  align-self: flex-end;
+}
+
 main .form fieldset.panel-wrapper.field-personal-details .button {
   background: #5b7dbd;
   color: #fff;
@@ -429,9 +442,7 @@ main .form fieldset.panel-wrapper.field-personal-details .button {
   font-weight: 600;
 }
 
-/* ===== EMAIL SUGGESTIONS ===== */
-main .form fieldset.panel-wrapper.field-personal-details .field-email-suggestions p {
-  font-size: 13px;
-  color: #6b7280;
-  margin-top: 10px;
+/* EMAIL SUGGESTIONS */
+main .form fieldset.panel-wrapper.field-personal-details .field-email-suggestions {
+  width: 100%;
 }
