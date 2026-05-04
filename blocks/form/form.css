@@ -1609,7 +1609,7 @@ main .form .text-wrapper.field-full-name.field-wrapper.col-12:focus-within {
 
 
 /* =========================================
-   ADDRESS DETAILS - EXACT MATCH (FINAL)
+   ADDRESS DETAILS - FINAL PERFECT MATCH
 ========================================= */
 
 /* ===== CARD ===== */
@@ -1617,33 +1617,34 @@ main .form fieldset.panel-wrapper.field-address-details {
   background: #f3effc;
   border-radius: 16px;
   border: none;
-  padding: 18px 22px;
+  padding: 20px 22px;
   margin-top: 16px;
   position: relative;
 }
 
-/* ===== LEFT PURPLE LINE ===== */
+/* ===== SMALL LEFT PURPLE LINE ===== */
 main .form fieldset.panel-wrapper.field-address-details::before {
   content: "";
   position: absolute;
-  left: 10px;
-  top: 24px;
-  bottom: 24px;
+  left: 18px;
+  top: 60px;
+  height: 40px;
   width: 3px;
   background: #7c6df2;
   border-radius: 3px;
 }
 
-/* ===== HEADER WITH ICON ===== */
+/* ===== TITLE INSIDE CARD ===== */
 main .form fieldset.panel-wrapper.field-address-details > legend {
   font-size: 15px;
   font-weight: 600;
   color: #2c3e50;
-  margin-bottom: 10px;
+  margin-bottom: 12px;
   padding-left: 26px;
   position: relative;
 }
 
+/* ICON */
 main .form fieldset.panel-wrapper.field-address-details > legend::before {
   content: "📍";
   position: absolute;
@@ -1656,42 +1657,45 @@ main .form fieldset.panel-wrapper.field-address-details > legend::before {
 main .form fieldset.panel-wrapper.field-address-details .plain-text-wrapper p {
   font-size: 12px;
   color: #6b7280;
-  margin-bottom: 4px;
+  margin-bottom: 6px;
   padding-left: 26px;
 }
 
-/* ===== ADDRESS TEXT (MAIN CONTENT) ===== */
-main .form fieldset.panel-wrapper.field-address-details .field-aadhaar-address-display {
-  padding-left: 26px;
-  margin-bottom: 12px;
-}
-
-main .form fieldset.panel-wrapper.field-address-details .field-aadhaar-address-display p {
-  font-size: 13px;
-  color: #374151;
-  line-height: 1.5;
-}
-
-/* ===== REMOVE INPUT COMPLETELY (IMPORTANT) ===== */
+/* ===== INPUT FIELD (EDITABLE + CLEAN) ===== */
 main .form fieldset.panel-wrapper.field-address-details input[type="text"] {
-  display: none !important;
+  width: 100%;
+  height: 44px;
+  border: none;
+  border-radius: 10px;
+  padding: 10px 12px;
+  background: #ffffff;
+  font-size: 14px;
+  margin-bottom: 16px;
+  margin-left: 26px;
+  width: calc(100% - 26px);
+  box-shadow: inset 0 0 0 1px #e1e5ef;
 }
 
 /* ===== QUESTION TEXT ===== */
-main .form fieldset.panel-wrapper.field-address-details .radio-group-wrapper > legend,
 main .form fieldset.panel-wrapper.field-address-details .field-label {
-  font-size: 13px;
-  font-weight: 500;
+  font-size: 14px;
   color: #374151;
-  margin-bottom: 8px;
+  margin: 10px 0 10px;
   padding-left: 26px;
 }
 
-/* ===== RADIO GROUP ===== */
-main .form fieldset.panel-wrapper.field-address-details .radio-wrapper,
+/* ===== RADIO GROUP (FIX ALIGNMENT) ===== */
+main .form fieldset.panel-wrapper.field-address-details .radio-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* ===== RADIO CONTAINER (ROW) ===== */
+main .form fieldset.panel-wrapper.field-address-details .radio-group-wrapper,
 main .form fieldset.panel-wrapper.field-address-details .horizontal {
   display: flex;
-  gap: 22px;
+  gap: 30px;
   align-items: center;
   padding-left: 26px;
 }
@@ -1699,21 +1703,19 @@ main .form fieldset.panel-wrapper.field-address-details .horizontal {
 /* ===== RADIO BUTTON ===== */
 main .form fieldset.panel-wrapper.field-address-details input[type="radio"] {
   accent-color: #6c63ff;
-  width: 14px;
-  height: 14px;
+  width: 16px;
+  height: 16px;
+  margin: 0;
 }
 
-/* ===== RADIO LABEL ===== */
+/* ===== RADIO LABEL TEXT ===== */
 main .form fieldset.panel-wrapper.field-address-details label {
-  font-size: 13px;
+  font-size: 14px;
   color: #374151;
-  display: flex;
-  align-items: center;
-  gap: 6px;
   cursor: pointer;
 }
 
-/* ===== REMOVE ALL DEFAULT BLUE LINES ===== */
+/* ===== REMOVE DEFAULT BLUE LINES ===== */
 main .form fieldset.panel-wrapper.field-address-details .field-wrapper,
 main .form fieldset.panel-wrapper.field-address-details .field-wrapper::before,
 main .form fieldset.panel-wrapper.field-address-details .field-wrapper::after {
