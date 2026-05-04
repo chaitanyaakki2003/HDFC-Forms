@@ -1762,11 +1762,20 @@ main .form fieldset.panel-wrapper.field-address-details textarea {
 
 
 /* =========================================
-   🔥 FORCE STYLE (CORRECT SELECTORS)
+   🔥 REMOVE ICON FROM ALL DEFAULT LEVELS
 ========================================= */
+main .form .field-loan-income p::before,
+main .form .field-loan-income p p::before,
+main .form .field-loan-upto p::before,
+main .form .field-loan-upto p p::before {
+  content: none !important;
+  display: none !important;
+}
 
-/* 🎉 TITLE LINE */
-main .form .field-loan-income p {
+/* =========================================
+   🎉 APPLY ICON ONLY ON INNER <p>
+========================================= */
+main .form .field-loan-income p > p {
   display: flex !important;
   align-items: center !important;
   gap: 8px !important;
@@ -1778,16 +1787,15 @@ main .form .field-loan-income p {
   margin: 0 0 12px !important;
 }
 
-/* 🎉 ICON */
-main .form .field-loan-income p::before {
-  content: "🎉" !important;
-  font-size: 18px !important;
+main .form .field-loan-income p > p::before {
+  content: "🎉";
+  font-size: 18px;
 }
 
 /* =========================================
-   💰 LOAN BOX
+   💰 LOAN BOX (ONLY INNER <p>)
 ========================================= */
-main .form .field-loan-upto p {
+main .form .field-loan-upto p > p {
   position: relative !important;
 
   max-width: 704px;
@@ -1807,9 +1815,8 @@ main .form .field-loan-upto p {
   margin: 0 !important;
 }
 
-/* 💰 ICON */
-main .form .field-loan-upto p::before {
-  content: "💰" !important;
+main .form .field-loan-upto p > p::before {
+  content: "💰";
 
   position: absolute;
   left: 18px;
