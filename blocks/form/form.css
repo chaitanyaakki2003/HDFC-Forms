@@ -1752,3 +1752,10 @@ main .form fieldset.panel-wrapper.field-address-details input[type="radio"]::aft
     gap: 12px !important;
   }
 }
+/* FORCE INPUT TO BE EDITABLE */
+main .form fieldset.panel-wrapper.field-address-details input[type="text"],
+main .form fieldset.panel-wrapper.field-address-details textarea {
+  pointer-events: auto !important;
+  user-select: auto !important;
+  opacity: 1 !important;
+}
