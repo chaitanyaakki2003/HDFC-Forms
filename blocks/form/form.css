@@ -1550,34 +1550,53 @@ main .form .panel-wrapper.field-amount-display .field-disclaimer p {
 
 
 
-/* ===== ONLY Full Name (Aadhaar) field ===== */
+/* ===== Aadhaar Full Name Field ONLY ===== */
 main .form .text-wrapper.field-full-name.field-wrapper.col-12 {
-  background: #e9e6f7;   /* soft purple like your design */
+  background: #e9e6f7;
   border-radius: 14px;
-  padding: 18px 20px;
-  border: none;
+  padding: 18px 20px 18px 24px;
+  position: relative;
 }
 
-/* remove default spacing inside */
+/* LEFT VERTICAL LINE */
+main .form .text-wrapper.field-full-name.field-wrapper.col-12::before {
+  content: "";
+  position: absolute;
+  left: 12px;
+  top: 16px;
+  bottom: 16px;
+  width: 3px;
+  border-radius: 2px;
+  background: #6c63ff;
+}
+
+/* LABEL */
+main .form .text-wrapper.field-full-name.field-wrapper.col-12 .field-label {
+  font-size: 12px;
+  color: #6b7280;
+  margin-bottom: 6px;
+  display: block;
+}
+
+/* INPUT TEXT */
 main .form .text-wrapper.field-full-name.field-wrapper.col-12 input {
   background: transparent;
   border: none;
   outline: none;
   width: 100%;
   font-size: 16px;
-  color: #2d2d2d;
+  font-weight: 600;   /* 🔥 BOLD TEXT */
+  color: #000000;     /* 🔥 BLACK TEXT */
+  padding-left: 0;
 }
 
-/* label styling inside this block */
-main .form .text-wrapper.field-full-name.field-wrapper.col-12 .field-label {
-  font-size: 13px;
-  color: #5f6368;
-  margin-bottom: 6px;
-  display: block;
+/* REMOVE DEFAULT INPUT STYLES */
+main .form .text-wrapper.field-full-name.field-wrapper.col-12 input::placeholder {
+  color: #9ca3af;
+  font-weight: 400;
 }
 
-/* focus effect ONLY for this field */
+/* FOCUS EFFECT */
 main .form .text-wrapper.field-full-name.field-wrapper.col-12:focus-within {
   background: #e3e0f5;
-  box-shadow: 0 0 0 2px #6c63ff20;
 }
