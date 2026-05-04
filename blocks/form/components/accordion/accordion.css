@@ -813,9 +813,15 @@ main .form fieldset.panel-wrapper.field-type-of-loan-panel {
   }
 }
 
-/* 🔥 FIX ONLY EMPLOYER → INCOME GAP */
-main .form fieldset.panel-wrapper.field-employer-details {
-  margin-bottom: 18px !important;
+/* 🔥 FORCE SAME GAP BETWEEN EMPLOYER → INCOME ONLY */
+main .form 
+fieldset.panel-wrapper.field-employer-details + fieldset.panel-wrapper.field-income-details {
+  margin-top: 18px !important;
+}
+
+/* 🔥 REMOVE EXTRA AEM SPACING */
+main .form fieldset.panel-wrapper + fieldset.panel-wrapper {
+  margin-top: 18px !important;
 }
 
 
