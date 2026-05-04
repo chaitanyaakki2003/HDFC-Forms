@@ -614,3 +614,176 @@ main .form fieldset.panel-wrapper.field-employer-details
     grid-column: 1 / -1 !important;
   }
 }
+
+
+
+
+
+
+
+/* ===================================================== */
+/* APPLY SAME CARD STYLE TO OTHER PANELS (SCOPED ONLY) */
+/* ===================================================== */
+
+main .form fieldset.panel-wrapper.field-income-details,
+main .form fieldset.panel-wrapper.field-work-email-id-panel,
+main .form fieldset.panel-wrapper.field-type-of-loan-panel {
+
+  max-width: 890px;
+  margin: 18px auto;
+  padding: 0 16px 18px;
+
+  background: #ffffff;
+  border: 1px solid #e7ebf3;
+  border-radius: 14px;
+
+  display: grid !important;
+  grid-template-columns: repeat(12, 1fr) !important;
+  column-gap: 18px !important;
+  row-gap: 14px !important;
+}
+
+/* ================= HEADER ================= */
+main .form fieldset.panel-wrapper.field-income-details > legend.field-label,
+main .form fieldset.panel-wrapper.field-work-email-id-panel > legend.field-label,
+main .form fieldset.panel-wrapper.field-type-of-loan-panel > legend.field-label {
+
+  grid-column: 1 / -1 !important;
+
+  width: calc(100% + 32px) !important;
+  margin: 0 0 14px -16px !important;
+  padding: 14px 18px !important;
+
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+
+  background: #dce8fb !important;
+  border-radius: 14px 14px 0 0 !important;
+
+  font-size: 14px !important;
+  font-weight: 700 !important;
+  color: #17213b !important;
+}
+
+/* ================= ARROW ================= */
+main .form fieldset.panel-wrapper.field-income-details > legend.field-label::after,
+main .form fieldset.panel-wrapper.field-work-email-id-panel > legend.field-label::after,
+main .form fieldset.panel-wrapper.field-type-of-loan-panel > legend.field-label::after {
+
+  content: "";
+  width: 12px;
+  height: 12px;
+  border-right: 2px solid #2f63e5;
+  border-bottom: 2px solid #2f63e5;
+  transform: rotate(45deg);
+  transition: 0.2s;
+}
+
+/* OPEN STATE */
+main .form fieldset.panel-wrapper.field-income-details[data-index] > legend.field-label::after,
+main .form fieldset.panel-wrapper.field-work-email-id-panel[data-index] > legend.field-label::after,
+main .form fieldset.panel-wrapper.field-type-of-loan-panel[data-index] > legend.field-label::after {
+  transform: rotate(225deg);
+}
+
+/* REMOVE ICON */
+main .form fieldset.panel-wrapper.field-income-details > legend.field-label i,
+main .form fieldset.panel-wrapper.field-work-email-id-panel > legend.field-label i,
+main .form fieldset.panel-wrapper.field-type-of-loan-panel > legend.field-label i {
+  display: none !important;
+}
+
+/* ================= GRID ================= */
+
+/* col-6 fields */
+main .form fieldset.panel-wrapper.field-income-details .field-wrapper.col-6,
+main .form fieldset.panel-wrapper.field-work-email-id-panel .field-wrapper.col-6,
+main .form fieldset.panel-wrapper.field-type-of-loan-panel .field-wrapper.col-6 {
+  grid-column: span 6 !important;
+}
+
+/* col-12 full width */
+main .form fieldset.panel-wrapper.field-income-details .field-wrapper.col-12,
+main .form fieldset.panel-wrapper.field-work-email-id-panel .field-wrapper.col-12,
+main .form fieldset.panel-wrapper.field-type-of-loan-panel .field-wrapper.col-12 {
+  grid-column: 1 / -1 !important;
+}
+
+/* ================= LABEL ================= */
+main .form fieldset.panel-wrapper.field-income-details label.field-label,
+main .form fieldset.panel-wrapper.field-work-email-id-panel label.field-label,
+main .form fieldset.panel-wrapper.field-type-of-loan-panel label.field-label {
+
+  font-size: 11.5px !important;
+  font-weight: 500 !important;
+  color: #7a8494 !important;
+  margin-bottom: 4px !important;
+}
+
+/* ================= INPUT ================= */
+main .form fieldset.panel-wrapper.field-income-details input,
+main .form fieldset.panel-wrapper.field-income-details select,
+main .form fieldset.panel-wrapper.field-work-email-id-panel input,
+main .form fieldset.panel-wrapper.field-type-of-loan-panel select {
+
+  width: 100% !important;
+  height: 42px !important;
+
+  border: 1px solid #dfe5ef !important;
+  border-radius: 8px !important;
+
+  padding: 8px 12px !important;
+  font-size: 13px !important;
+  font-weight: 600 !important;
+  color: #202636 !important;
+
+  background: #ffffff !important;
+}
+
+/* ================= HELP TEXT ================= */
+main .form fieldset.panel-wrapper.field-income-details .plain-text-wrapper p,
+main .form fieldset.panel-wrapper.field-work-email-id-panel .plain-text-wrapper p {
+
+  font-size: 12px !important;
+  color: #6f7a8a !important;
+  margin: 4px 0 !important;
+}
+
+/* ================= FIX DISCLAIMER (INSIDE ONLY) ================= */
+main .form fieldset.panel-wrapper.field-employer-details
+.plain-text-wrapper.field-selected-industry-disclaimer {
+  grid-column: 1 / -1 !important;
+  position: relative !important;
+  display: block !important;
+
+  background: #f3f6ff !important;
+  color: #315fdb !important;
+
+  padding: 9px 12px !important;
+  border-radius: 6px !important;
+
+  margin-top: 4px !important;
+}
+
+/* ================= PREVENT OVERFLOW ISSUE ================= */
+main .form fieldset.panel-wrapper.field-income-details,
+main .form fieldset.panel-wrapper.field-work-email-id-panel,
+main .form fieldset.panel-wrapper.field-type-of-loan-panel {
+  overflow: hidden !important;
+}
+
+/* ================= MOBILE ================= */
+@media (max-width: 640px) {
+  main .form fieldset.panel-wrapper.field-income-details,
+  main .form fieldset.panel-wrapper.field-work-email-id-panel,
+  main .form fieldset.panel-wrapper.field-type-of-loan-panel {
+    grid-template-columns: 1fr !important;
+  }
+
+  main .form fieldset.panel-wrapper.field-income-details .field-wrapper,
+  main .form fieldset.panel-wrapper.field-work-email-id-panel .field-wrapper,
+  main .form fieldset.panel-wrapper.field-type-of-loan-panel .field-wrapper {
+    grid-column: 1 / -1 !important;
+  }
+}
