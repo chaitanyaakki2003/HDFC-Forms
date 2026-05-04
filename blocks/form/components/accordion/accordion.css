@@ -825,15 +825,18 @@ main .form fieldset.panel-wrapper + fieldset.panel-wrapper {
 }
 
 
-/* 🔥 EXTEND EMPLOYER PANEL TO MATCH ADDRESS WIDTH (NO OTHER STYLE CHANGE) */
-main .form fieldset.panel-wrapper.field-employer-details {
-  width: calc(100% - 0px) !important;
+/* 🔥 EXTEND ALL ACCORDION PANELS TO FULL WIDTH (MATCH ADDRESS PANEL) */
+main .form fieldset.panel-wrapper.field-employer-details,
+main .form fieldset.panel-wrapper.field-income-details,
+main .form fieldset.panel-wrapper.field-work-email-id-panel,
+main .form fieldset.panel-wrapper.field-type-of-loan-panel {
+
+  width: 100% !important;
   max-width: 100% !important;
 
   margin-left: 0 !important;
   margin-right: 0 !important;
 }
-
 
 
 
