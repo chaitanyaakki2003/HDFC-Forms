@@ -1825,3 +1825,69 @@ main .form .field-loan-upto p > p::before {
 
   font-size: 20px;
 }
+
+
+/* =========================================
+   🔥 REMOVE ICON FROM OUTER <p> ONLY
+========================================= */
+main .form .field-loan-income > p::before,
+main .form .field-loan-upto > p::before {
+  content: none !important;
+  display: none !important;
+}
+
+/* =========================================
+   🎉 TITLE (INNER <p>)
+========================================= */
+main .form .field-loan-income > p > p {
+  display: flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+
+  font-size: 16px !important;
+  font-weight: 700 !important;
+  color: #2f3742 !important;
+
+  margin: 0 0 12px !important;
+}
+
+/* 🎉 ICON */
+main .form .field-loan-income > p > p::before {
+  content: "🎉" !important;
+  font-size: 18px;
+}
+
+/* =========================================
+   💰 LOAN BOX
+========================================= */
+main .form .field-loan-upto > p > p {
+  position: relative !important;
+
+  max-width: 704px;
+  min-height: 58px;
+
+  padding: 14px 20px 14px 60px !important;
+  border-radius: 14px;
+  background: #eefdff !important;
+
+  display: flex !important;
+  align-items: center !important;
+
+  font-size: 16px !important;
+  font-weight: 700 !important;
+  color: #0c2742 !important;
+
+  margin: 0 !important;
+}
+
+/* 💰 ICON */
+main .form .field-loan-upto > p > p::before {
+  content: "💰" !important;
+
+  position: absolute;
+  left: 18px;
+  top: 50%;
+  transform: translateY(-50%);
+
+  font-size: 20px;
+}
