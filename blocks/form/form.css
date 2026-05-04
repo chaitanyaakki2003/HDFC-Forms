@@ -1609,22 +1609,25 @@ main .form .text-wrapper.field-full-name.field-wrapper.col-12:focus-within {
 
 
 /* =========================================
-   ADDRESS DETAILS - FINAL FIXED VERSION
+   ADDRESS DETAILS - FINAL (FULL WIDTH MATCH)
 ========================================= */
 
-/* ===== CARD ===== */
+/* ===== CARD (MATCH FULL NAME WIDTH) ===== */
 main .form fieldset.panel-wrapper.field-address-details {
-  max-width: 890px;
-  margin: 18px auto;
-  padding: 16px 20px 18px;
+  width: 100% !important;
+  max-width: 100% !important;
+
+  margin: 20px 0 !important;   /* no center alignment */
+  padding: 20px !important;
+
   background: #f3f0fb;
   border: 1px solid #e3def7;
-  border-radius: 14px;
+  border-radius: 16px;
+
   box-sizing: border-box;
-  position: relative;
 }
 
-/* ===== REMOVE AEM DEFAULT BLUE LINES ===== */
+/* ===== REMOVE AEM DEFAULT LINES ===== */
 main .form fieldset.panel-wrapper.field-address-details .field-wrapper,
 main .form fieldset.panel-wrapper.field-address-details .field-wrapper::before,
 main .form fieldset.panel-wrapper.field-address-details .field-wrapper::after {
@@ -1639,49 +1642,46 @@ main .form fieldset.panel-wrapper.field-address-details > legend.field-label {
   display: flex !important;
   align-items: center !important;
   gap: 8px !important;
-  font-size: 15px !important;
-  font-weight: 700 !important;
-  color: #17194a !important;
+
+  font-size: 16px !important;
+  font-weight: 600 !important;
+  color: #2c3e50 !important;
+
   margin-bottom: 14px !important;
   padding: 0 !important;
   background: transparent !important;
 }
 
-/* ===== FIELD WRAPPER RESET ===== */
+/* ===== FIELD WRAPPER ===== */
 main .form fieldset.panel-wrapper.field-address-details > .field-wrapper {
   width: 100% !important;
-  margin-bottom: 14px !important;
+  margin-bottom: 16px !important;
   padding: 0 !important;
-  background: transparent !important;
-  border: 0 !important;
 }
 
 /* ===== LABEL ===== */
 main .form fieldset.panel-wrapper.field-address-details label.field-label {
-  font-size: 12px !important;
+  font-size: 13px !important;
   font-weight: 500 !important;
-  color: #626b7a !important;
-  margin-bottom: 5px !important;
-  display: block !important;
+  color: #6b7280 !important;
+  margin-bottom: 6px !important;
 }
 
-/* ===== INPUT (FIXED PURPLE LINE + EDITABLE) ===== */
+/* ===== INPUT (PURPLE LINE STYLE) ===== */
 main .form fieldset.panel-wrapper.field-address-details input[type="text"],
 main .form fieldset.panel-wrapper.field-address-details textarea {
   width: 100% !important;
-  height: 32px !important;
+  height: 36px !important;
 
   border: none !important;
-  border-left: 3px solid #c7b8ff !important;  /* PURPLE LINE */
+  border-left: 3px solid #c7b8ff !important;
 
-  border-radius: 0 !important;
-  padding: 4px 10px !important;
-  font-size: 12.5px !important;
+  padding: 6px 10px !important;
+  font-size: 13px !important;
   font-weight: 600 !important;
   color: #283044 !important;
 
   background: transparent !important;
-  box-shadow: none !important;
 }
 
 /* focus */
@@ -1695,23 +1695,24 @@ main .form fieldset.panel-wrapper.field-address-details textarea:focus {
 main .form fieldset.panel-wrapper.field-address-details fieldset.radio-group-wrapper {
   display: flex !important;
   flex-wrap: wrap !important;
-  gap: 18px !important;
+  gap: 20px !important;
   align-items: center !important;
 
-  margin-top: 4px !important;
+  margin-top: 6px !important;
   border: 0 !important;
 }
 
-/* ===== QUESTION TEXT ===== */
-main .form fieldset.panel-wrapper.field-address-details fieldset.radio-group-wrapper > legend.field-label {
+/* ===== QUESTION ===== */
+main .form fieldset.panel-wrapper.field-address-details
+fieldset.radio-group-wrapper > legend.field-label {
   width: 100% !important;
-  font-size: 13px !important;
-  font-weight: 700 !important;
+  font-size: 14px !important;
+  font-weight: 600 !important;
   color: #2f3542 !important;
-  margin-bottom: 6px !important;
+  margin-bottom: 8px !important;
 }
 
-/* ===== EACH RADIO ITEM (FIX ALIGNMENT ISSUE) ===== */
+/* ===== RADIO ITEM ===== */
 main .form fieldset.panel-wrapper.field-address-details .radio-wrapper {
   display: flex !important;
   align-items: center !important;
@@ -1720,42 +1721,34 @@ main .form fieldset.panel-wrapper.field-address-details .radio-wrapper {
 
 /* ===== RADIO BUTTON ===== */
 main .form fieldset.panel-wrapper.field-address-details input[type="radio"] {
-  width: 13px !important;
-  height: 13px !important;
-  margin: 0 !important;
+  width: 14px !important;
+  height: 14px !important;
   accent-color: #4c6edb !important;
-  cursor: pointer !important;
 }
 
-/* ===== RADIO LABEL TEXT ===== */
+/* ===== RADIO TEXT ===== */
 main .form fieldset.panel-wrapper.field-address-details .radio-wrapper label {
-  font-size: 12.5px !important;
-  font-weight: 600 !important;
+  font-size: 13px !important;
+  font-weight: 500 !important;
   color: #202636 !important;
   cursor: pointer !important;
-  white-space: nowrap !important;
 }
 
-/* ===== REMOVE CUSTOM RADIO EFFECTS ===== */
-main .form fieldset.panel-wrapper.field-address-details input[type="radio"]::before,
-main .form fieldset.panel-wrapper.field-address-details input[type="radio"]::after {
-  display: none !important;
-}
-
-/* ===== MOBILE ===== */
-@media (max-width: 640px) {
-  main .form fieldset.panel-wrapper.field-address-details {
-    padding: 14px 16px;
-  }
-
-  main .form fieldset.panel-wrapper.field-address-details fieldset.radio-group-wrapper {
-    gap: 12px !important;
-  }
-}
-/* FORCE INPUT TO BE EDITABLE */
+/* ===== FORCE EDITABLE INPUT ===== */
 main .form fieldset.panel-wrapper.field-address-details input[type="text"],
 main .form fieldset.panel-wrapper.field-address-details textarea {
   pointer-events: auto !important;
   user-select: auto !important;
   opacity: 1 !important;
+}
+
+/* ===== MOBILE ===== */
+@media (max-width: 640px) {
+  main .form fieldset.panel-wrapper.field-address-details {
+    padding: 16px !important;
+  }
+
+  main .form fieldset.panel-wrapper.field-address-details fieldset.radio-group-wrapper {
+    gap: 12px !important;
+  }
 }
