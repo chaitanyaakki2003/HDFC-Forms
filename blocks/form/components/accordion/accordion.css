@@ -822,6 +822,11 @@ main .form fieldset.panel-wrapper.field-employer-details {
   padding: 20px !important;      /* ✅ already same but force */
 }
 
+/* 🔥 FIX EXTRA GAP CAUSED BY FLEX WRAP */
+main .form fieldset.panel-wrapper.field-employer-details {
+  align-content: flex-start !important;
+}
+
 
 
 
