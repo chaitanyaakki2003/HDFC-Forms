@@ -1150,11 +1150,11 @@ main .form fieldset.panel-wrapper.field-review-details
 
 
 /* =========================================
-   🔥 FIX GAP ONLY BETWEEN LOAN & PERSONAL
+   🔥 FIX GAP BETWEEN LOAN & PERSONAL (FINAL)
 ========================================= */
 
-/* Reduce bottom gap ONLY for Loan Details */
+/* Remove extra TOP space from Personal Details */
 main .form fieldset.panel-wrapper.field-review-details
-.field-loan-details {
-  margin-bottom: 10px !important;  /* 🔥 match others visually */
+.field-personal-details {
+  margin-top: 0 !important;
 }
