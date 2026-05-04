@@ -1762,7 +1762,16 @@ main .form fieldset.panel-wrapper.field-address-details textarea {
 
 
 /* =========================================
-   🎉 TITLE TEXT (SINGLE ICON)
+   🔥 REMOVE ICON FROM OUTER <p>
+========================================= */
+main .form .field-loan-income > p::before,
+main .form .field-loan-upto > p::before {
+  content: none !important;
+  display: none !important;
+}
+
+/* =========================================
+   🎉 APPLY ICON ONLY ON INNER TEXT
 ========================================= */
 main .form .field-loan-income p {
   display: flex !important;
@@ -1781,9 +1790,8 @@ main .form .field-loan-income p::before {
   font-size: 18px;
 }
 
-
 /* =========================================
-   💰 LOAN BOX (SINGLE ICON)
+   💰 LOAN BOX
 ========================================= */
 main .form .field-loan-upto p {
   position: relative !important;
