@@ -350,7 +350,7 @@ main .form fieldset.panel-wrapper.field-full-name-as-per-pan input:focus {
   box-shadow: 0 0 0 2px rgba(79, 70, 229, 0.1);
 }
 
-/* ===== PERSONAL DETAILS (FIXED - USE GRID, NOT INLINE BLOCK) ===== */
+/* ===== PERSONAL DETAILS (FINAL FIXED) ===== */
 
 main .form fieldset.panel-wrapper.field-personal-details {
   background: #ffffff;
@@ -360,7 +360,7 @@ main .form fieldset.panel-wrapper.field-personal-details {
   margin-bottom: 20px;
 }
 
-/* ===== HEADER (MATCH FULL NAME) ===== */
+/* ===== HEADER ===== */
 main .form fieldset.panel-wrapper.field-personal-details > legend {
   background: #dfe6f4;
   padding: 16px 20px;
@@ -379,16 +379,16 @@ main .form fieldset.panel-wrapper.field-personal-details > div {
   background: #ffffff;
 }
 
-/* ===== IMPORTANT: DO NOT BREAK GRID ===== */
+/* ===== KEEP GRID SYSTEM ===== */
 main .form fieldset.panel-wrapper.field-personal-details .field-wrapper.col-6 {
-  grid-column: span 6 !important;   /* KEEP GRID */
+  grid-column: span 6 !important;
 }
 
 main .form fieldset.panel-wrapper.field-personal-details .field-wrapper.col-12 {
   grid-column: span 12 !important;
 }
 
-/* ===== INPUT / SELECT ===== */
+/* ===== INPUTS ===== */
 main .form fieldset.panel-wrapper.field-personal-details input,
 main .form fieldset.panel-wrapper.field-personal-details select {
   width: 100%;
@@ -409,13 +409,55 @@ main .form fieldset.panel-wrapper.field-personal-details .field-label {
   display: block;
 }
 
-/* ===== REMOVE BLUE LINES ===== */
+/* ===== REMOVE ALL BLUE LINES FIRST ===== */
 main .form fieldset.panel-wrapper.field-personal-details .field-wrapper {
   border-left: none !important;
   padding-left: 0 !important;
 }
 
-/* ===== VERIFY BUTTON (RIGHT SIDE LIKE REFERENCE) ===== */
+/* ===== ADD BLUE LINE ONLY FOR FIRST ROW (Gender + PAN) ===== */
+main .form fieldset.panel-wrapper.field-personal-details 
+.field-wrapper.field-gender,
+main .form fieldset.panel-wrapper.field-personal-details 
+.field-wrapper.field-pan-number {
+  position: relative;
+  padding-left: 14px;
+}
+
+main .form fieldset.panel-wrapper.field-personal-details 
+.field-wrapper.field-gender::before,
+main .form fieldset.panel-wrapper.field-personal-details 
+.field-wrapper.field-pan-number::before {
+  content: "";
+  position: absolute;
+  left: 0;              /* pushed properly to left */
+  top: 4px;
+  bottom: 4px;
+  width: 3px;
+  background: #6c63ff;
+  border-radius: 2px;
+}
+
+/* ===== REMOVE BLUE LINE FROM EMAIL + BUTTON ===== */
+main .form fieldset.panel-wrapper.field-personal-details 
+.field-email-id,
+main .form fieldset.panel-wrapper.field-personal-details 
+.field-verify-email,
+main .form fieldset.panel-wrapper.field-personal-details 
+.field-email-suggestions {
+  padding-left: 0 !important;
+}
+
+main .form fieldset.panel-wrapper.field-personal-details 
+.field-email-id::before,
+main .form fieldset.panel-wrapper.field-personal-details 
+.field-verify-email::before,
+main .form fieldset.panel-wrapper.field-personal-details 
+.field-email-suggestions::before {
+  display: none !important;
+}
+
+/* ===== VERIFY BUTTON ALIGNMENT ===== */
 main .form fieldset.panel-wrapper.field-personal-details .button-wrapper {
   display: flex;
   align-items: flex-end;
