@@ -811,6 +811,21 @@ main .form fieldset.panel-wrapper.field-type-of-loan-panel {
     grid-column: 1 / -1 !important;
   }
 }
+/* =========================================
+   🔥 FINAL GAP + PADDING MATCH FIX
+   (MATCH ADDRESS DETAILS EXACTLY)
+========================================= */
+
+/* Employer Details spacing fix */
+main .form fieldset.panel-wrapper.field-employer-details {
+  margin: 20px 0 !important;     /* ✅ match Address panel */
+  padding: 20px !important;      /* ✅ already same but force */
+}
+
+/* Income panel spacing fix (top gap consistency) */
+main .form fieldset.panel-wrapper.field-income-details {
+  margin-top: 20px !important;   /* ✅ equal spacing from Employer */
+}
 
 
 
