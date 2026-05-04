@@ -493,10 +493,20 @@ main .form fieldset.panel-wrapper.field-employer-details {
   border: 1px solid #e7ebf3;
   border-radius: 14px;
 
-  display: grid !important;
-  grid-template-columns: repeat(12, 1fr) !important;
-  column-gap: 18px !important;
-  row-gap: 14px !important;
+  display: flex !important;
+  flex-wrap: wrap !important;
+  gap: 14px 18px !important;
+}
+/* 2 column layout */
+main .form fieldset.panel-wrapper.field-employer-details 
+.field-wrapper.col-6 {
+  width: calc(50% - 9px) !important;
+}
+
+/* full width */
+main .form fieldset.panel-wrapper.field-employer-details 
+.field-wrapper.col-12 {
+  width: 100% !important;
 }
 
 /* ================= HEADER ================= */
