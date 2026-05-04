@@ -1609,77 +1609,115 @@ main .form .text-wrapper.field-full-name.field-wrapper.col-12:focus-within {
 
 
 /* =========================================
-   ADDRESS DETAILS - EXACT MATCH (SAFE SCOPE)
+   ADDRESS DETAILS - EXACT MATCH (FINAL)
 ========================================= */
 
-/* ===== MAIN CARD ===== */
+/* ===== CARD ===== */
 main .form fieldset.panel-wrapper.field-address-details {
-  background: #f4efff; /* light purple */
+  background: #f3effc;
   border-radius: 16px;
   border: none;
-  padding: 16px 18px;
+  padding: 18px 22px;
   margin-top: 16px;
+  position: relative;
 }
 
-/* ===== HEADER ===== */
+/* ===== LEFT PURPLE LINE ===== */
+main .form fieldset.panel-wrapper.field-address-details::before {
+  content: "";
+  position: absolute;
+  left: 10px;
+  top: 24px;
+  bottom: 24px;
+  width: 3px;
+  background: #7c6df2;
+  border-radius: 3px;
+}
+
+/* ===== HEADER WITH ICON ===== */
 main .form fieldset.panel-wrapper.field-address-details > legend {
   font-size: 15px;
   font-weight: 600;
   color: #2c3e50;
-  margin-bottom: 6px;
+  margin-bottom: 10px;
+  padding-left: 26px;
+  position: relative;
 }
 
-/* ===== ADDRESS TEXT ===== */
+main .form fieldset.panel-wrapper.field-address-details > legend::before {
+  content: "📍";
+  position: absolute;
+  left: 0;
+  top: 1px;
+  font-size: 14px;
+}
+
+/* ===== LABEL TEXT ===== */
+main .form fieldset.panel-wrapper.field-address-details .plain-text-wrapper p {
+  font-size: 12px;
+  color: #6b7280;
+  margin-bottom: 4px;
+  padding-left: 26px;
+}
+
+/* ===== ADDRESS TEXT (MAIN CONTENT) ===== */
+main .form fieldset.panel-wrapper.field-address-details .field-aadhaar-address-display {
+  padding-left: 26px;
+  margin-bottom: 12px;
+}
+
 main .form fieldset.panel-wrapper.field-address-details .field-aadhaar-address-display p {
   font-size: 13px;
-  color: #4b5563;
-  margin: 4px 0 12px 0;
+  color: #374151;
   line-height: 1.5;
 }
 
-/* ===== INPUT BOX ===== */
-main .form fieldset.panel-wrapper.field-address-details input {
-  width: 100%;
-  height: 44px;
-  border: 1px solid #d6d9e3;
-  border-radius: 10px;
-  padding: 10px 12px;
-  background: #ffffff;
-  font-size: 14px;
-  margin-bottom: 14px;
+/* ===== REMOVE INPUT COMPLETELY (IMPORTANT) ===== */
+main .form fieldset.panel-wrapper.field-address-details input[type="text"] {
+  display: none !important;
 }
 
-/* ===== RADIO GROUP CONTAINER ===== */
-main .form fieldset.panel-wrapper.field-address-details .radio-group-wrapper {
-  display: flex;
-  gap: 20px;
-  align-items: center;
-  margin-top: 10px;
-}
-
-/* ===== RADIO LABEL ===== */
-main .form fieldset.panel-wrapper.field-address-details .radio-group-wrapper label {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  font-size: 14px;
+/* ===== QUESTION TEXT ===== */
+main .form fieldset.panel-wrapper.field-address-details .radio-group-wrapper > legend,
+main .form fieldset.panel-wrapper.field-address-details .field-label {
+  font-size: 13px;
+  font-weight: 500;
   color: #374151;
-  cursor: pointer;
+  margin-bottom: 8px;
+  padding-left: 26px;
+}
+
+/* ===== RADIO GROUP ===== */
+main .form fieldset.panel-wrapper.field-address-details .radio-wrapper,
+main .form fieldset.panel-wrapper.field-address-details .horizontal {
+  display: flex;
+  gap: 22px;
+  align-items: center;
+  padding-left: 26px;
 }
 
 /* ===== RADIO BUTTON ===== */
 main .form fieldset.panel-wrapper.field-address-details input[type="radio"] {
-  accent-color: #5b7dbd;
-  width: 16px;
-  height: 16px;
+  accent-color: #6c63ff;
+  width: 14px;
+  height: 14px;
 }
 
-/* ===== REMOVE DEFAULT AEM STYLES ===== */
+/* ===== RADIO LABEL ===== */
+main .form fieldset.panel-wrapper.field-address-details label {
+  font-size: 13px;
+  color: #374151;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+}
+
+/* ===== REMOVE ALL DEFAULT BLUE LINES ===== */
 main .form fieldset.panel-wrapper.field-address-details .field-wrapper,
 main .form fieldset.panel-wrapper.field-address-details .field-wrapper::before,
 main .form fieldset.panel-wrapper.field-address-details .field-wrapper::after {
   border: none !important;
   background: none !important;
   box-shadow: none !important;
-  padding-left: 0 !important;
 }
