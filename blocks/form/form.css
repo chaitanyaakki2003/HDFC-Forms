@@ -1755,104 +1755,66 @@ main .form fieldset.panel-wrapper.field-address-details textarea {
 
 
 
-/* =========================================
-   🔥 REMOVE ALL DEFAULT / DUPLICATE ICONS
-========================================= */
-main .form .field-offer-text p::before,
-main .form .field-offer-text p p::before {
-  content: none !important;
-  display: none !important;
-}
+
+
+
+
+
 
 /* =========================================
-   🎉 TITLE TEXT (TOP LINE)
+   🔥 FORCE STYLE (CORRECT SELECTORS)
 ========================================= */
-main .form .field-offer-text > p {
+
+/* 🎉 TITLE LINE */
+main .form .field-loan-income p {
+  display: flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+
+  font-size: 16px !important;
+  font-weight: 700 !important;
+  color: #2f3742 !important;
+
   margin: 0 0 12px !important;
 }
 
-main .form .field-offer-text > p > p {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-
-  font-size: 16px;
-  font-weight: 700;
-  color: #2f3742;
-
-  margin: 0 !important;
-}
-
 /* 🎉 ICON */
-main .form .field-offer-text > p > p::before {
-  content: "🎉";
-  font-size: 18px;
+main .form .field-loan-income p::before {
+  content: "🎉" !important;
+  font-size: 18px !important;
 }
 
 /* =========================================
-   💰 LOAN OFFER CARD (MAIN BOX)
+   💰 LOAN BOX
 ========================================= */
-main .form .field-offer-loan {
-  position: relative;
+main .form .field-loan-upto p {
+  position: relative !important;
 
   max-width: 704px;
   min-height: 58px;
 
-  padding: 14px 20px 14px 70px; /* space for icon */
+  padding: 14px 20px 14px 60px !important;
   border-radius: 14px;
-  background: #eefdff;
+  background: #eefdff !important;
 
-  display: flex;
-  align-items: center;
+  display: flex !important;
+  align-items: center !important;
+
+  font-size: 16px !important;
+  font-weight: 700 !important;
+  color: #0c2742 !important;
+
+  margin: 0 !important;
 }
 
 /* 💰 ICON */
-main .form .field-offer-loan::before {
-  content: "💰";
+main .form .field-loan-upto p::before {
+  content: "💰" !important;
 
   position: absolute;
-  left: 22px;
+  left: 18px;
   top: 50%;
   transform: translateY(-50%);
 
-  font-size: 22px;
-}
-
-/* =========================================
-   💰 TEXT INSIDE BOX
-========================================= */
-main .form .field-offer-loan p,
-main .form .field-offer-loan .field-label {
-  margin: 0 !important;
-
-  font-size: 16px;
-  font-weight: 700;
-  color: #0c2742;
-}
-
-/* =========================================
-   💰 INPUT ALIGNMENT
-========================================= */
-main .form .field-offer-loan input[name="offer_loan"] {
-  display: inline-block;
-
-  width: auto;
-  min-width: 100px;
-
-  border: 0 !important;
-  outline: 0 !important;
-  box-shadow: none !important;
-
-  background: transparent;
-
-  font-size: 14px;
-  font-weight: 700;
-  color: #0c2742;
-
-  margin-left: 6px;
-
-  vertical-align: middle;
-  height: 20px;
-  position: relative;
-  top: 2px;
+  font-size: 20px;
 }
