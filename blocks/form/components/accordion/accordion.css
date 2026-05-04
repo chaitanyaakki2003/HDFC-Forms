@@ -626,6 +626,15 @@ fieldset.panel-wrapper.field-employer-details
   margin-top: 6px !important;
 }
 
+/* =========================================
+   🔥 FINAL FIX — EXPAND PANEL HEIGHT
+========================================= */
+main .form fieldset.panel-wrapper.field-employer-details {
+  overflow: visible !important;
+  height: auto !important;
+}
+
+
 /* ===================================================== */
 /* APPLY SAME CARD STYLE TO OTHER PANELS (SCOPED ONLY) */
 /* ===================================================== */
