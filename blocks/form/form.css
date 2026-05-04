@@ -1550,88 +1550,34 @@ main .form .panel-wrapper.field-amount-display .field-disclaimer p {
 
 
 
-/* ===== Form Container ===== */
-main .form {
-  font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
-}
-
-/* ===== Section Title (Customer Details) ===== */
-.form .field-label,
-.form legend {
-  font-size: 14px;
-  font-weight: 600;
-  color: #1a1a1a;
-  margin-bottom: 8px;
-  display: block;
-}
-
-/* ===== Field Wrapper ===== */
-.form .field-wrapper {
-  margin-bottom: 20px;
-}
-
-/* ===== Input Wrapper (your highlighted div) ===== */
-.form .text-wrapper.field-full-name {
-  background: #f3f0ff; /* light purple like your 1st image */
-  border-radius: 12px;
-  padding: 14px 16px;
-  border: 1px solid transparent;
-  transition: all 0.2s ease;
-}
-
-/* ===== Input Field ===== */
-.form input[type="text"],
-.form input[type="email"],
-.form input[type="tel"] {
-  width: 100%;
+/* ===== ONLY Full Name (Aadhaar) field ===== */
+main .form .text-wrapper.field-full-name.field-wrapper.col-12 {
+  background: #e9e6f7;   /* soft purple like your design */
+  border-radius: 14px;
+  padding: 18px 20px;
   border: none;
+}
+
+/* remove default spacing inside */
+main .form .text-wrapper.field-full-name.field-wrapper.col-12 input {
   background: transparent;
-  font-size: 15px;
-  color: #333;
+  border: none;
   outline: none;
+  width: 100%;
+  font-size: 16px;
+  color: #2d2d2d;
 }
 
-/* ===== Placeholder Styling ===== */
-.form input::placeholder {
-  color: #9aa0a6;
-}
-
-/* ===== Focus State ===== */
-.form .text-wrapper.field-full-name:focus-within {
-  border: 1px solid #6c63ff;
-  background: #f0edff;
-}
-
-/* ===== Label inside field ===== */
-.form label.field-label {
-  font-size: 12px;
-  color: #6b7280;
-  margin-bottom: 4px;
+/* label styling inside this block */
+main .form .text-wrapper.field-full-name.field-wrapper.col-12 .field-label {
+  font-size: 13px;
+  color: #5f6368;
+  margin-bottom: 6px;
   display: block;
 }
 
-/* ===== Rounded Panel Sections ===== */
-.form fieldset.panel-wrapper {
-  background: #ffffff;
-  border-radius: 16px;
-  padding: 20px;
-  border: 1px solid #e5e7eb;
-  margin-bottom: 20px;
-}
-
-/* ===== Optional: subtle shadow for card look ===== */
-.form fieldset.panel-wrapper {
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
-}
-
-/* ===== Grid full width fix ===== */
-.form .field-wrapper.col-12 {
-  grid-column: span 12;
-}
-
-/* ===== Mobile spacing ===== */
-@media (max-width: 768px) {
-  .form .text-wrapper.field-full-name {
-    padding: 12px;
-  }
+/* focus effect ONLY for this field */
+main .form .text-wrapper.field-full-name.field-wrapper.col-12:focus-within {
+  background: #e3e0f5;
+  box-shadow: 0 0 0 2px #6c63ff20;
 }
