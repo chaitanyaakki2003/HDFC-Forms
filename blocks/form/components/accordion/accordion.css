@@ -493,13 +493,16 @@ main .form fieldset.panel-wrapper.field-employer-details {
   border: 1px solid #e7ebf3;
   border-radius: 14px;
 
-display: grid !important;
+  display: grid !important;
 grid-template-columns: repeat(12, 1fr) !important;
 column-gap: 18px !important;
 row-gap: 14px !important;
 }
 /* 2 column layout */
-
+main .form fieldset.panel-wrapper.field-employer-details 
+.field-wrapper.col-6 {
+  width: calc(50% - 9px) !important;
+}
 
 /* full width */
 main .form fieldset.panel-wrapper.field-employer-details 
@@ -814,12 +817,21 @@ main .form fieldset.panel-wrapper.field-type-of-loan-panel {
    (MATCH ADDRESS DETAILS EXACTLY)
 ========================================= */
 
-main .form fieldset.panel-wrapper {
-  margin: 18px auto !important;
+/* Employer Details spacing fix */
+main .form fieldset.panel-wrapper.field-employer-details {
+  margin: 20px 0 !important;     /* ✅ match Address panel */
+  padding: 20px !important;      /* ✅ already same but force */
 }
 
+/* 🔥 FIX EXTRA GAP CAUSED BY FLEX WRAP */
+main .form fieldset.panel-wrapper.field-employer-details {
+  align-content: flex-start !important;
+}
 
-
+/* 🔥 FINAL GAP FIX — MATCH ALL PANELS */
+main .form fieldset.panel-wrapper.field-employer-details {
+  margin: 18px 0 !important;
+}
 
 
 
