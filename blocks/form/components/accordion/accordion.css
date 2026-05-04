@@ -614,13 +614,25 @@ main .form fieldset.panel-wrapper.field-employer-details
 }
 
 /* =========================================
-   🔥 FINAL FIX — REMOVE DISCLAIMER
+   🔥 FIX DISCLAIMER POSITION (INSIDE CARD)
 ========================================= */
 main .form 
+fieldset.panel-wrapper.field-employer-details 
 .plain-text-wrapper.field-selected-industry-disclaimer {
-  display: none !important;
-}
 
+  display: block !important;
+
+  grid-column: 1 / -1 !important;   /* FULL WIDTH INSIDE GRID */
+  width: 100% !important;
+
+  margin-top: 6px !important;
+
+  background: #f3f6ff !important;
+  color: #315fdb !important;
+
+  padding: 10px 12px !important;
+  border-radius: 6px !important;
+}
 
 /* ===================================================== */
 /* APPLY SAME CARD STYLE TO OTHER PANELS (SCOPED ONLY) */
