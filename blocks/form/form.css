@@ -1609,16 +1609,29 @@ main .form .text-wrapper.field-full-name.field-wrapper.col-12:focus-within {
 
 
 /* =========================================
-   ADDRESS DETAILS - EXACT MATCH (SAFE SCOPE)
+   ADDRESS DETAILS - FINAL MATCH (PURPLE UI)
 ========================================= */
 
-/* ===== MAIN CARD ===== */
+/* ===== CARD ===== */
 main .form fieldset.panel-wrapper.field-address-details {
-  background: #f4efff; /* light purple */
+  background: #f3effc;
   border-radius: 16px;
   border: none;
-  padding: 16px 18px;
+  padding: 18px 20px;
   margin-top: 16px;
+  position: relative;
+}
+
+/* ===== LEFT PURPLE ACCENT LINE ===== */
+main .form fieldset.panel-wrapper.field-address-details::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 16px;
+  bottom: 16px;
+  width: 4px;
+  background: #7c6df2;
+  border-radius: 4px;
 }
 
 /* ===== HEADER ===== */
@@ -1627,21 +1640,23 @@ main .form fieldset.panel-wrapper.field-address-details > legend {
   font-weight: 600;
   color: #2c3e50;
   margin-bottom: 6px;
+  padding-left: 10px;
 }
 
 /* ===== ADDRESS TEXT ===== */
 main .form fieldset.panel-wrapper.field-address-details .field-aadhaar-address-display p {
   font-size: 13px;
   color: #4b5563;
-  margin: 4px 0 12px 0;
+  margin: 6px 0 14px;
   line-height: 1.5;
+  padding-left: 10px;
 }
 
-/* ===== INPUT BOX ===== */
-main .form fieldset.panel-wrapper.field-address-details input {
+/* ===== INPUT (FIX BORDER ISSUE) ===== */
+main .form fieldset.panel-wrapper.field-address-details input[type="text"] {
   width: 100%;
   height: 44px;
-  border: 1px solid #d6d9e3;
+  border: 1px solid #e1e5ef; /* light border */
   border-radius: 10px;
   padding: 10px 12px;
   background: #ffffff;
@@ -1649,12 +1664,21 @@ main .form fieldset.panel-wrapper.field-address-details input {
   margin-bottom: 14px;
 }
 
-/* ===== RADIO GROUP CONTAINER ===== */
+/* ===== QUESTION TEXT ===== */
+main .form fieldset.panel-wrapper.field-address-details .field-label {
+  font-size: 14px;
+  color: #374151;
+  margin: 10px 0 10px;
+  display: block;
+  padding-left: 10px;
+}
+
+/* ===== RADIO GROUP ===== */
 main .form fieldset.panel-wrapper.field-address-details .radio-group-wrapper {
   display: flex;
-  gap: 20px;
+  gap: 22px;
   align-items: center;
-  margin-top: 10px;
+  padding-left: 10px;
 }
 
 /* ===== RADIO LABEL ===== */
@@ -1667,19 +1691,18 @@ main .form fieldset.panel-wrapper.field-address-details .radio-group-wrapper lab
   cursor: pointer;
 }
 
-/* ===== RADIO BUTTON ===== */
+/* ===== RADIO BUTTON STYLE ===== */
 main .form fieldset.panel-wrapper.field-address-details input[type="radio"] {
-  accent-color: #5b7dbd;
+  accent-color: #6c63ff;
   width: 16px;
   height: 16px;
 }
 
-/* ===== REMOVE DEFAULT AEM STYLES ===== */
+/* ===== REMOVE ALL DEFAULT BLUE LINES ===== */
 main .form fieldset.panel-wrapper.field-address-details .field-wrapper,
 main .form fieldset.panel-wrapper.field-address-details .field-wrapper::before,
 main .form fieldset.panel-wrapper.field-address-details .field-wrapper::after {
   border: none !important;
   background: none !important;
   box-shadow: none !important;
-  padding-left: 0 !important;
 }
