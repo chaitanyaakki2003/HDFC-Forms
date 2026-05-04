@@ -483,24 +483,26 @@ main .form fieldset.panel-wrapper.field-personal-details .field-email-suggestion
 
 
 
-/* ================= EMPLOYER DETAILS CARD ================= */
-main .form fieldset.panel-wrapper.field-employer-details {
-  max-width: 890px;
-  margin: 18px auto;
-  padding: 0 16px 18px;
+/* ================= COMMON PANEL (ALL SECTIONS) ================= */
+main .form fieldset.panel-wrapper {
+  max-width: 890px !important;
+  margin: 18px auto !important;
+  padding: 0 16px 18px !important;
 
-  background: #ffffff;
-  border: 1px solid #e7ebf3;
-  border-radius: 14px;
+  background: #ffffff !important;
+  border: 1px solid #e7ebf3 !important;
+  border-radius: 14px !important;
 
   display: grid !important;
   grid-template-columns: repeat(12, 1fr) !important;
   column-gap: 18px !important;
   row-gap: 14px !important;
+
+  box-sizing: border-box !important;
 }
 
 /* ================= HEADER ================= */
-main .form fieldset.panel-wrapper.field-employer-details > legend.field-label {
+main .form fieldset.panel-wrapper > legend.field-label {
   grid-column: 1 / -1 !important;
 
   width: calc(100% + 32px) !important;
@@ -519,8 +521,8 @@ main .form fieldset.panel-wrapper.field-employer-details > legend.field-label {
   color: #17213b !important;
 }
 
-/* ARROW */
-main .form fieldset.panel-wrapper.field-employer-details > legend.field-label::after {
+/* CHEVRON */
+main .form fieldset.panel-wrapper > legend.field-label::after {
   content: "";
   width: 12px;
   height: 12px;
@@ -531,44 +533,33 @@ main .form fieldset.panel-wrapper.field-employer-details > legend.field-label::a
 }
 
 /* OPEN STATE */
-main .form fieldset.panel-wrapper.field-employer-details[data-index="0"]
-> legend.field-label::after {
+main .form fieldset.panel-wrapper[data-index] > legend.field-label::after {
   transform: rotate(225deg);
 }
 
 /* REMOVE ICON */
-main .form fieldset.panel-wrapper.field-employer-details > legend.field-label i,
-main .form fieldset.panel-wrapper.field-employer-details > legend.field-label svg {
+main .form fieldset.panel-wrapper > legend.field-label i,
+main .form fieldset.panel-wrapper > legend.field-label svg {
   display: none !important;
 }
 
-/* ================= GRID FIX USING YOUR CLASSES ================= */
+/* ================= REMOVE AEM DEFAULT ACCORDION PADDING ================= */
+main .form fieldset.accordion > fieldset:not(legend) {
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
 
-/* FIRST ROW (2 fields) */
-main .form fieldset.panel-wrapper.field-employer-details
-.drop-down-wrapper.field-wrapper.col-6 {
+/* ================= GRID FIX ================= */
+main .form .field-wrapper.col-6 {
   grid-column: span 6 !important;
 }
 
-main .form fieldset.panel-wrapper.field-employer-details
-.text-wrapper.field-wrapper.col-6 {
-  grid-column: span 6 !important;
-}
-
-/* HELP TEXT FULL WIDTH */
-main .form fieldset.panel-wrapper.field-employer-details
-.plain-text-wrapper.field-wrapper.col-12 {
+main .form .field-wrapper.col-12 {
   grid-column: 1 / -1 !important;
 }
 
-/* INDUSTRY FIELD */
-main .form fieldset.panel-wrapper.field-employer-details
-.drop-down-wrapper.field-wrapper.col-6:nth-of-type(3) {
-  grid-column: span 6 !important;
-}
-
 /* ================= LABEL ================= */
-main .form fieldset.panel-wrapper.field-employer-details label.field-label {
+main .form label.field-label {
   font-size: 11.5px !important;
   font-weight: 500 !important;
   color: #7a8494 !important;
@@ -576,8 +567,8 @@ main .form fieldset.panel-wrapper.field-employer-details label.field-label {
 }
 
 /* ================= INPUT ================= */
-main .form fieldset.panel-wrapper.field-employer-details input,
-main .form fieldset.panel-wrapper.field-employer-details select {
+main .form input,
+main .form select {
   width: 100% !important;
   height: 42px !important;
 
@@ -593,20 +584,16 @@ main .form fieldset.panel-wrapper.field-employer-details select {
 }
 
 /* ================= HELP TEXT ================= */
-main .form fieldset.panel-wrapper.field-employer-details
-.plain-text-wrapper p {
+main .form .plain-text-wrapper p {
   font-size: 12px !important;
   font-weight: 400 !important;
   color: #6f7a8a !important;
   margin: 4px 0 !important;
 }
 
-/* ================= DISCLAIMER ================= */
-main .form fieldset.panel-wrapper.field-employer-details
-.field-selected-industry-disclaimer,
-main .form fieldset.panel-wrapper.field-employer-details
-[id*="text-"] i {
-  display: block !important;
+/* ================= FIX DISCLAIMER (IMPORTANT) ================= */
+main .form .plain-text-wrapper.field-selected-industry-disclaimer,
+main .form .field-selected-industry-disclaimer {
   grid-column: 1 / -1 !important;
 
   background: #f3f6ff !important;
@@ -617,16 +604,54 @@ main .form fieldset.panel-wrapper.field-employer-details
 
   padding: 9px 12px !important;
   border-radius: 6px !important;
+
+  margin-top: 4px !important;
+}
+
+/* REMOVE FLOAT/OVERFLOW ISSUE */
+main .form fieldset.panel-wrapper {
+  overflow: hidden !important;
+}
+
+/* ================= WORK EMAIL FIX ================= */
+main .form .email-wrapper {
+  grid-column: span 6 !important;
+  position: relative !important;
+}
+
+main .form .button-wrapper {
+  grid-column: span 2 !important;
+  display: flex !important;
+  align-items: flex-end !important;
+}
+
+/* BUTTON */
+main .form .button-wrapper button {
+  height: 42px !important;
+  border-radius: 8px !important;
+  background: transparent !important;
+  border: 1px solid #dfe5ef !important;
+  color: #2f63e5 !important;
+  font-weight: 700 !important;
+  padding: 0 12px !important;
+}
+
+/* ================= TYPE OF LOAN ================= */
+main .form .drop-down-wrapper.field-wrapper.col-6 {
+  grid-column: span 6 !important;
 }
 
 /* ================= MOBILE ================= */
 @media (max-width: 640px) {
-  main .form fieldset.panel-wrapper.field-employer-details {
+  main .form fieldset.panel-wrapper {
     grid-template-columns: 1fr !important;
   }
 
-  main .form fieldset.panel-wrapper.field-employer-details
-  .field-wrapper {
+  main .form .field-wrapper {
+    grid-column: 1 / -1 !important;
+  }
+
+  main .form .button-wrapper {
     grid-column: 1 / -1 !important;
   }
 }
