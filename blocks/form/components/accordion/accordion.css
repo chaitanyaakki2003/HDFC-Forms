@@ -1150,30 +1150,11 @@ main .form fieldset.panel-wrapper.field-review-details
 
 
 /* =========================================
-   🔥 FINAL GAP FIX (ALL SECTIONS SAME)
+   🔥 FIX GAP ONLY BETWEEN LOAN & PERSONAL
 ========================================= */
 
-/* Remove extra spacing after headers */
+/* Reduce bottom gap ONLY for Loan Details */
 main .form fieldset.panel-wrapper.field-review-details
-fieldset.panel-wrapper > legend {
-  margin-bottom: 6px !important;   /* 🔥 reduce gap */
-}
-
-/* Normalize spacing inside all sections */
-main .form fieldset.panel-wrapper.field-review-details
-fieldset.panel-wrapper > .field-wrapper {
-  padding-top: 10px !important;
-  padding-bottom: 10px !important;
-}
-
-/* Ensure consistent spacing between sections */
-main .form fieldset.panel-wrapper.field-review-details
-fieldset.panel-wrapper {
-  margin-bottom: 14px !important;  /* 🔥 equal spacing */
-}
-
-/* Remove extra bottom space from last row */
-main .form fieldset.panel-wrapper.field-review-details
-fieldset.panel-wrapper .field-wrapper:last-child {
-  padding-bottom: 8px !important;
+.field-loan-details {
+  margin-bottom: 10px !important;  /* 🔥 match others visually */
 }
