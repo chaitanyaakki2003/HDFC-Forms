@@ -295,8 +295,15 @@ function initSalaryBankUI() {
   container.appendChild(dropdownWrapper);
 }
 
-  radioGroup.parentNode.insertBefore(container, radioGroup);
-  radioGroup.style.display = "none";
+  // ✅ insert AFTER legend (safe position)
+const legend = panel.querySelector("legend.field-label");
+
+if (legend) {
+  legend.insertAdjacentElement("afterend", container);
+}
+
+// ✅ keep radioGroup hidden BUT NOT REMOVED FROM FLOW
+radioGroup.style.display = "none";
 
   const radios = radioGroup.querySelectorAll("input[type='radio']");
 
