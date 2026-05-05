@@ -286,37 +286,35 @@ function initSalaryBankUI() {
   const radios = radioGroup.querySelectorAll("input[type='radio']");
 
   radios.forEach((radio) => {
-  const rawValue = radio.value;
-  const value = rawValue ? rawValue.trim() : "";
+    const value = radio.value.trim(); // ✅ FIX
+    const labelText = radio.nextElementSibling?.innerText || value;
 
-  console.log("RADIO VALUE:", value); // 🔥 DEBUG
+    const card = document.createElement("div");
+    card.className = "bank-card";
 
-  const imgSrc = bankLogos[value];
+    card.innerHTML = `
+      <img src="${bankLogos[value] || ''}" 
+           onerror="this.style.display='none'" />
+      <span>${labelText}</span>
+    `;
 
-  const card = document.createElement("div");
-  card.className = "bank-card";
+    if (radio.checked) card.classList.add("active");
 
-  card.innerHTML = `
-    <img src="${imgSrc ? imgSrc : '/content/dam/akki/default.png'}" />
-    <span>${radio.nextElementSibling?.innerText || value}</span>
-  `;
+    card.onclick = () => {
+      radios.forEach(r => r.checked = false);
+      radio.checked = true;
 
-  if (radio.checked) card.classList.add("active");
+      document.querySelectorAll(".bank-card")
+        .forEach(c => c.classList.remove("active"));
 
-  card.onclick = () => {
-    radios.forEach(r => r.checked = false);
-    radio.checked = true;
+      card.classList.add("active");
 
-    document.querySelectorAll(".bank-card")
-      .forEach(c => c.classList.remove("active"));
+      if (dropdown) dropdown.value = value;
+    };
 
-    card.classList.add("active");
-
-    if (dropdown) dropdown.value = value;
-  };
-
-  cards.appendChild(card);
-});
+    cards.appendChild(card);
+  });
+}
 
 /* SAFE LOAD */
 document.addEventListener("DOMContentLoaded", initSalaryBankUI);
