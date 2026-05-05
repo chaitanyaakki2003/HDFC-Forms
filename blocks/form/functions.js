@@ -322,92 +322,48 @@ window.addEventListener("load", initSalaryBankUI);
 setTimeout(initSalaryBankUI, 500);
 setTimeout(initSalaryBankUI, 1500);
 
-function generateOTP(globals) {
+window.generateOtp = function (globals) {
   try {
-    const data = globals.functions.exportData();
+    const form = globals.form;
 
-    // ✅ CORRECT FIELD MAPPING (YOUR FORM)
     const payload = {
-      mobile: data.mobile_number || '',
-      pan: data.pan || null,
-      dob: data.date_of_birth || null,
+      mobile: form.personal_loan_offer.mobile_number?.$value || '',
+      dob: form.personal_loan_offer.date_of_birth?.$value || null,
+      pan: form.personal_loan_offer.pan?.$value || null
     };
 
-    console.log("📤 Payload:", payload);
+    console.log("📤 Generate Payload:", payload);
 
-    // ✅ VALIDATION
     if (!payload.mobile || (!payload.pan && !payload.dob)) {
-      alert('Enter Mobile and PAN or DOB');
+      console.error("❌ Mobile / PAN / DOB missing");
       return;
     }
 
-    fetch('https://craftsman-resonant-asparagus.ngrok-free.dev/generate-otp', {
-      method: 'POST',
+    fetch("https://craftsman-resonant-asparagus.ngrok-free.dev/generate-otp", {
+      method: "POST",
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json"
       },
-      body: JSON.stringify(payload),
+      body: JSON.stringify(payload)
     })
-      .then((res) => res.json())
-      .then((result) => {
-        console.log("✅ OTP Response:", result);
+    .then(res => res.json())
+    .then(data => {
+      console.log("✅ OTP Response:", data);
 
-        const { form } = globals;
+      if (data.status === "success") {
 
-        const otpField = form.enter_otp_panel.otp_code;
-        const resendBtn = form.enter_otp_panel.resend_otp;
-
-        // ✅ INIT attempt counter
-        if (window.otpTryCount === undefined) {
-          window.otpTryCount = 0;
-        }
-
-        const remaining = 3 - window.otpTryCount;
-
-        // (optional) if you have attempts field
-        if (form.enter_otp_panel.attempts) {
-          globals.functions.setProperty(
-            form.enter_otp_panel.attempts,
-            {
-              value:
-                remaining > 0
-                  ? `${remaining} attempts left`
-                  : 'No attempts left',
-            }
-          );
-        }
-
-        // ✅ SHOW OTP PANEL
         globals.functions.setProperty(
           form.enter_otp_panel,
           { visible: true }
         );
 
-        // ✅ Autofill OTP (ONLY FOR TESTING)
-        if (result?.otp) {
-          globals.functions.setProperty(otpField, {
-            value: String(result.otp),
-          });
-        }
-
-        // ✅ Disable resend initially
-        if (resendBtn) {
-          globals.functions.setProperty(resendBtn, {
-            enabled: false,
-          });
-        }
-
-      })
-      .catch((err) => {
-        console.error('❌ Generate OTP Error:', err);
-        alert('API Error');
-      });
+      }
+    });
 
   } catch (e) {
-    console.error("❌ JS Error:", e);
+    console.error(e);
   }
-}
-
+};
 function verifyOtp(globals) {
   try {
     const form = globals.form;
