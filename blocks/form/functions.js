@@ -252,20 +252,21 @@ function calculateEMI(globals) {
 function initSalaryBankUI() {
   const panel = document.querySelector(".field-salary-bank-selection");
   const radioGroup = panel?.querySelector(".radio-group-wrapper");
-  const dropdown = document.querySelector(".drop-down-wrapper.field-salary-bank select");
+  const dropdownWrapper = panel?.querySelector(".drop-down-wrapper");
+  const dropdown = dropdownWrapper?.querySelector("select");
 
   if (!panel || !radioGroup || panel.dataset.ready === "true") return;
   panel.dataset.ready = "true";
 
   const bankLogos = {
-  "hdfc_bank": "/content/dam/akki/hdfc.png",
-  "icici_bank": "/content/dam/akki/icici.png",
-  "axis_bank": "/content/dam/akki/axis.png",
-  "kotak_bank": "/content/dam/akki/kotak.png",
-  "sbi": "/content/dam/akki/sbi.png",
-  "bank_of_baroda": "/content/dam/akki/bob.jpeg",
-  "idfc_first_bank": "/content/dam/akki/idfc.png"
-};
+    "hdfc_bank": "/content/dam/akki/hdfc.png",
+    "icici_bank": "/content/dam/akki/icici.png",
+    "axis_bank": "/content/dam/akki/axis.png",
+    "kotak_bank": "/content/dam/akki/kotak.png",
+    "sbi": "/content/dam/akki/sbi.png",
+    "bank_of_baroda": "/content/dam/akki/bob.jpeg",
+    "idfc_first_bank": "/content/dam/akki/idfc.png"
+  };
 
   const container = document.createElement("div");
   container.className = "salary-bank-content-row";
@@ -275,9 +276,8 @@ function initSalaryBankUI() {
 
   container.appendChild(cards);
 
-  // ✅ keep dropdown inside same row
-  if (dropdown) {
-    container.appendChild(dropdown.parentElement);
+  if (dropdownWrapper) {
+    container.appendChild(dropdownWrapper);
   }
 
   radioGroup.parentNode.insertBefore(container, radioGroup);
@@ -285,10 +285,14 @@ function initSalaryBankUI() {
 
   const radios = radioGroup.querySelectorAll("input[type='radio']");
 
+  // 🔥 CLEAR DROPDOWN
+  if (dropdown) dropdown.innerHTML = "";
+
   radios.forEach((radio) => {
-    const value = radio.value.trim(); // ✅ FIX
+    const value = radio.value.trim();
     const labelText = radio.nextElementSibling?.innerText || value;
 
+    /* ---------- CARD ---------- */
     const card = document.createElement("div");
     card.className = "bank-card";
 
@@ -313,15 +317,24 @@ function initSalaryBankUI() {
     };
 
     cards.appendChild(card);
+
+    /* ---------- DROPDOWN OPTION ---------- */
+    if (dropdown) {
+      const option = document.createElement("option");
+      option.value = value;
+      option.textContent = labelText;
+      dropdown.appendChild(option);
+    }
   });
+
+  /* DEFAULT OPTION */
+  if (dropdown) {
+    const other = document.createElement("option");
+    other.value = "other_bank";
+    other.textContent = "Other Bank";
+    dropdown.appendChild(other);
+  }
 }
-
-/* SAFE LOAD */
-document.addEventListener("DOMContentLoaded", initSalaryBankUI);
-window.addEventListener("load", initSalaryBankUI);
-setTimeout(initSalaryBankUI, 500);
-setTimeout(initSalaryBankUI, 1500);
-
 
 /**
  * Generate OTP API call

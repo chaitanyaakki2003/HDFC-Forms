@@ -1787,12 +1787,29 @@ main .form .field-loan-upto p::before {
 }
 
 /* MAIN ROW (CARDS + DROPDOWN) */
-/* MAIN ROW */
+
 .salary-bank-content-row {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 20px;
+  gap: 16px;
+  width: 100%;
+}
+
+/* LEFT SIDE (CARDS TAKE FULL SPACE) */
+.bank-card-container {
+  display: flex;
+  gap: 12px;
+  flex: 1;              /* 🔥 THIS FIXES ALIGNMENT */
+  align-items: center;
+  overflow-x: auto;     /* prevents breaking */
+}
+
+/* RIGHT SIDE (DROPDOWN FIXED WIDTH) */
+.field-salary-bank-selection .drop-down-wrapper {
+  width: 220px;
+  flex-shrink: 0;
+  margin-left: auto;    /* 🔥 PUSHES RIGHT */
 }
 
 /* LEFT SIDE */
@@ -1808,7 +1825,7 @@ main .form .field-loan-upto p::before {
   width: 64px;
   height: 64px;
   border-radius: 12px;
-  border: 1px solid #dfe5f0;
+  border: 1px solid #e2e8f0;
   background: #fff;
 
   display: flex;
@@ -1818,30 +1835,29 @@ main .form .field-loan-upto p::before {
 
   cursor: pointer;
   transition: all 0.2s ease;
+  flex-shrink: 0; /* 🔥 IMPORTANT */
 }
 
-/* HOVER */
 .bank-card:hover {
   border-color: #2f55e7;
 }
 
-/* ACTIVE */
 .bank-card.active {
   border: 2px solid #2f55e7;
+  box-shadow: 0 0 0 2px rgba(47,85,231,0.1);
 }
 
-/* IMAGE */
 .bank-card img {
-  width: 26px;
-  height: 26px;
+  width: 28px;
+  height: 28px;
   object-fit: contain;
 }
 
-/* LABEL */
 .bank-card span {
   font-size: 10px;
   margin-top: 4px;
   text-align: center;
+  white-space: nowrap;
 }
 
 /* RIGHT SIDE DROPDOWN */
@@ -1850,10 +1866,14 @@ main .form .field-loan-upto p::before {
   flex-shrink: 0;
 }
 
-.drop-down-wrapper.field-salary-bank select {
+.field-salary-bank-selection .drop-down-wrapper select {
   height: 44px;
   width: 100%;
-  border-radius: 8px;
+  border-radius: 10px;
+  border: 1px solid #dfe5f0;
+  padding: 0 12px;
+  background: #fff;
+  font-size: 14px;
 }
 
 /* ✅ HIDE ONLY PANEL 1 EXTRA TEXT */
