@@ -277,29 +277,26 @@ function initSalaryBankUI() {
 
   container.appendChild(cards);
 
-  if (dropdownWrapper) {
-    container.appendChild(dropdownWrapper);
-  }
+  if (dropdownWrapper) container.appendChild(dropdownWrapper);
 
   radioGroup.parentNode.insertBefore(container, radioGroup);
   radioGroup.style.display = "none";
 
   const radios = radioGroup.querySelectorAll("input[type='radio']");
 
-  /* CLEAR DROPDOWN */
   if (dropdown) dropdown.innerHTML = "";
 
   radios.forEach((radio) => {
     const value = radio.value.trim();
     const labelText = radio.nextElementSibling?.innerText || value;
 
-    /* CARD */
+    const imgSrc = bankLogos[value];
+
     const card = document.createElement("div");
     card.className = "bank-card";
 
     card.innerHTML = `
-      <img src="${bankLogos[value] || ''}" 
-           onerror="this.style.display='none'" />
+      ${imgSrc ? `<img src="${imgSrc}" />` : ""}
       <span>${labelText}</span>
     `;
 
@@ -319,7 +316,6 @@ function initSalaryBankUI() {
 
     cards.appendChild(card);
 
-    /* DROPDOWN OPTION */
     if (dropdown) {
       const option = document.createElement("option");
       option.value = value;
@@ -328,7 +324,6 @@ function initSalaryBankUI() {
     }
   });
 
-  /* ADD OTHER BANK */
   if (dropdown) {
     const other = document.createElement("option");
     other.value = "other_bank";
@@ -337,11 +332,15 @@ function initSalaryBankUI() {
   }
 }
 
-/* LOAD SAFELY */
-document.addEventListener("DOMContentLoaded", initSalaryBankUI);
-window.addEventListener("load", initSalaryBankUI);
-setTimeout(initSalaryBankUI, 500);
-setTimeout(initSalaryBankUI, 1500);
+/* 🔥 AEM SAFE LOAD */
+function waitForAEM() {
+  const panel = document.querySelector(".field-salary-bank-selection");
+  if (!panel) return setTimeout(waitForAEM, 300);
+
+  initSalaryBankUI();
+}
+
+waitForAEM();
 
 /**
  * Generate OTP API call
