@@ -277,7 +277,15 @@ function initSalaryBankUI() {
 
   container.appendChild(cards);
 
-  if (dropdownWrapper) container.appendChild(dropdownWrapper);
+  if (dropdownWrapper) {
+  dropdownWrapper.classList.remove("col-4");   // ❌ remove AEM grid
+  dropdownWrapper.style.gridColumn = "unset";
+  dropdownWrapper.style.width = "230px";
+  dropdownWrapper.style.marginLeft = "auto";
+  dropdownWrapper.style.flex = "0 0 230px";
+
+  container.appendChild(dropdownWrapper);
+}
 
   radioGroup.parentNode.insertBefore(container, radioGroup);
   radioGroup.style.display = "none";
