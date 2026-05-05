@@ -487,7 +487,6 @@ function verifyOtp(globals) {
   return "OTP verification triggered";
 }
 
-
 // eslint-disable-next-line import/prefer-default-export
 export {
   getFullName, days, submitFormArrayToString, maskMobileNumber, handleOtpFlow, updateLoanOffer, calculateEMI, initSalaryBankUI, generateOtp, verifyOtp, 
