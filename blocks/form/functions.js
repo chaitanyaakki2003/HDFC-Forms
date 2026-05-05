@@ -496,12 +496,12 @@ function verifyOtp(globals) {
       if (response.status === "success") {
 
         globals.functions.setProperty(otpPanel.success_msg, {
-          value: "OTP Verified ✅",
+          value: "OTP Verified ",
           visible: true
         });
 
       } else {
-        globals.functions.setProperty(otpPanel.otp_help_text, {
+        globals.functions.setProperty(otpPanel.success_msg, {
           value: "Invalid OTP",
           visible: true
         });
