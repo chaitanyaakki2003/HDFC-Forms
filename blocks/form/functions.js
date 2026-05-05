@@ -2,7 +2,7 @@
 window.otpState = {
   attempts: 3,
   timer: null,
-  timeLeft: 30
+  timeLeft: 5
 };
 
 /**
@@ -377,12 +377,14 @@ window.otpState = {
  */
 function generateOtp(globals) {
 
-  const form = globals.form;
-  const otpPanel = form.enter_otp_panel;
+  const mobile =
+    globals.form.personal_loan_offer.mobile_number?.$value || "";
 
-  const mobile = form.personal_loan_offer.mobile_number?.$value || "";
-  const dob = form.personal_loan_offer.date_of_birth?.$value || "";
-  const pan = form.personal_loan_offer.pan?.$value || "";
+  const dob =
+    globals.form.personal_loan_offer.date_of_birth?.$value || "";
+
+  const pan =
+    globals.form.personal_loan_offer.pan?.$value || "";
 
   if (!mobile) {
     globals.functions.setProperty(
@@ -415,16 +417,16 @@ function generateOtp(globals) {
 
     if (response.status === "success") {
 
-      // ✅ RESET ATTEMPTS
-      window.otpState.attempts = 3;
+      // ✅ ONLY FIRST TIME
+      if (window.otpState.attempts === undefined) {
+        window.otpState.attempts = 3;
+      }
 
-      // ✅ SHOW OTP PANEL
       globals.functions.setProperty(
         globals.form.enter_otp_panel,
         { visible: true }
       );
 
-      // ✅ AUTO FILL OTP (TEST)
       if (response.otp) {
         globals.functions.setProperty(
           globals.form.enter_otp_panel.otp_code,
@@ -432,31 +434,23 @@ function generateOtp(globals) {
         );
       }
 
-      // ✅ SET ATTEMPTS
       globals.functions.setProperty(
         globals.form.enter_otp_panel.attempts,
-        { value: "3/3 attempts left" }
+        {
+          value: window.otpState.attempts + "/3 attempts left"
+        }
       );
 
-      // ✅ DISABLE RESEND
       globals.functions.setProperty(
         globals.form.enter_otp_panel.resend_otp,
         {
           enabled: false,
-          value: "Resend OTP in : 30 sec"
+          value: "Resend OTP in : 5 sec"
         }
       );
 
-      // ✅ START TIMER
       startOtpTimer(globals);
     }
-
-  })
-  .catch(() => {
-    globals.functions.setProperty(
-      globals.form.enter_otp_panel.otp_help_text,
-      { value: "OTP generation failed", visible: true }
-    );
   });
 
   return "OTP generated";
@@ -533,9 +527,7 @@ function verifyOtp(globals) {
  */
 function startOtpTimer(globals) {
 
-  const otpPanel = globals.form.enter_otp_panel;
-
-  window.otpState.timeLeft = 30;
+  window.otpState.timeLeft = 5;
 
   if (window.otpState.timer) {
     clearInterval(window.otpState.timer);
@@ -576,8 +568,6 @@ function startOtpTimer(globals) {
  */
 function resendOtp(globals) {
 
-  const otpPanel = globals.form.enter_otp_panel;
-
   if (window.otpState.attempts <= 0) {
 
     globals.functions.setProperty(
@@ -588,7 +578,7 @@ function resendOtp(globals) {
     return;
   }
 
-  // 🔽 REDUCE ATTEMPTS
+  // ✅ REDUCE ATTEMPTS FIRST
   window.otpState.attempts--;
 
   globals.functions.setProperty(
@@ -598,12 +588,42 @@ function resendOtp(globals) {
     }
   );
 
-  // 🔁 CALL GENERATE AGAIN
-  generateOtp(globals);
+  // ✅ CALL API DIRECTLY (NOT generateOtp)
+  fetch("https://craftsman-resonant-asparagus.ngrok-free.dev/generate-otp", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      mobile: globals.form.personal_loan_offer.mobile_number?.$value,
+      dob: globals.form.personal_loan_offer.date_of_birth?.$value || null,
+      pan: globals.form.personal_loan_offer.pan?.$value || null
+    })
+  })
+  .then(res => res.json())
+  .then(response => {
+
+    if (response.status === "success") {
+
+      if (response.otp) {
+        globals.functions.setProperty(
+          globals.form.enter_otp_panel.otp_code,
+          { value: String(response.otp) }
+        );
+      }
+
+      globals.functions.setProperty(
+        globals.form.enter_otp_panel.resend_otp,
+        {
+          enabled: false,
+          value: "Resend OTP in : 5 sec"
+        }
+      );
+
+      startOtpTimer(globals);
+    }
+  });
 
   return "Resend triggered";
 }
-
 
 // eslint-disable-next-line import/prefer-default-export
 export {
