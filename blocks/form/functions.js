@@ -252,7 +252,7 @@ function calculateEMI(globals) {
 function initSalaryBankUI() {
   const panel = document.querySelector(".field-salary-bank-selection");
   const radioGroup = panel?.querySelector(".radio-group-wrapper");
-  const dropdown = document.querySelector(".drop-down-wrapper.field-other-bank select");
+  const dropdown = document.querySelector(".drop-down-wrapper.field-salary-bank select");
 
   if (!panel || !radioGroup || panel.dataset.ready === "true") return;
   panel.dataset.ready = "true";
@@ -261,11 +261,19 @@ function initSalaryBankUI() {
     hdfc_bank: "/content/dam/akki/hdfc.png",
     icici_bank: "/content/dam/akki/icici.png",
     axis_bank: "/content/dam/akki/axis.png",
-    kotak_bank: "/content/dam/akki/kotak.png",
+    kotak: "/content/dam/akki/kotak.png",
     sbi: "/content/dam/akki/sbi.png",
     bank_of_baroda: "/content/dam/akki/bob.jpeg",
-    idfc_first_bank: "/content/dam/akki/idfc.png"
+    idfc_first: "/content/dam/akki/idfc.png"
   };
+
+  // ✅ FIX DROPDOWN OPTIONS
+  if (dropdown) {
+    dropdown.innerHTML = `
+      <option value="hdfc_bank">HDFC Bank</option>
+      <option value="other_bank">Other Bank</option>
+    `;
+  }
 
   const container = document.createElement("div");
   container.className = "salary-bank-content-row";
@@ -274,11 +282,9 @@ function initSalaryBankUI() {
   cards.className = "bank-card-container";
 
   container.appendChild(cards);
+  container.appendChild(dropdown.parentElement);
 
-  // ✅ INSERT IN CORRECT POSITION (IMPORTANT FIX)
   radioGroup.parentNode.insertBefore(container, radioGroup);
-
-  // hide original radios
   radioGroup.style.display = "none";
 
   const radios = radioGroup.querySelectorAll("input[type='radio']");
@@ -310,13 +316,6 @@ function initSalaryBankUI() {
     cards.appendChild(card);
   });
 }
-
-/* AEM SAFE LOAD */
-document.addEventListener("DOMContentLoaded", initSalaryBankUI);
-window.addEventListener("load", initSalaryBankUI);
-setTimeout(initSalaryBankUI, 500);
-setTimeout(initSalaryBankUI, 1500);
-
 // eslint-disable-next-line import/prefer-default-export
 export {
   getFullName, days, submitFormArrayToString, maskMobileNumber, handleOtpFlow, updateLoanOffer, calculateEMI, initSalaryBankUI,

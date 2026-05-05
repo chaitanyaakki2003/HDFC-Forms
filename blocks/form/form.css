@@ -1918,7 +1918,18 @@ main .form .field-loan-upto p::before {
   border-radius: 0 0 12px 12px;
 }
 
-/* 🔥 HIDE DUPLICATE TEXT FROM AEM */
-.field-salary-bank-selection .plain-text-wrapper {
+/* ✅ HIDE DUPLICATE TEXT ONLY INSIDE PANEL 2 */
+.field-income-verification-method .plain-text-wrapper {
   display: none !important;
+}
+
+.salary-bank-content-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* push dropdown to right */
+.drop-down-wrapper.field-other-bank {
+  margin-left: auto;
 }
