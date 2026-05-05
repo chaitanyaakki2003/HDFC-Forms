@@ -321,9 +321,132 @@ document.addEventListener("DOMContentLoaded", initSalaryBankUI);
 window.addEventListener("load", initSalaryBankUI);
 setTimeout(initSalaryBankUI, 500);
 setTimeout(initSalaryBankUI, 1500);
+
+
+/**
+ * Generate OTP API Call
+ * @param {scope} globals
+ */
+function generateOtp(globals) {
+
+  const form = globals.form;
+
+  // 👉 Read values using full path (UPDATE paths as per your form)
+  const mobile = form.mobile?.value;
+  const dob = form.dob?.value;
+  const pan = form.pan?.value;
+
+  const payload = {
+    mobile: mobile,
+    dob: dob || null,
+    pan: pan || null
+  };
+
+  fetch("https://craftsman-resonant-asparagus.ngrok-free.dev/generate-otp", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify(payload)
+  })
+  .then(res => res.json())
+  .then(data => {
+
+    console.log("OTP Response:", data);
+
+    if (data.status === "success") {
+
+      // ✅ Store OTP (for testing only)
+      globals.functions.setProperty(form.generatedOtp, {
+        value: data.otp
+      });
+
+      // ✅ Show OTP panel
+      globals.functions.setProperty(form.enter_otp_panel, {
+        visible: true
+      });
+
+      // ✅ Success message
+      globals.functions.setProperty(form.otp_status, {
+        value: "OTP Sent Successfully"
+      });
+
+    } else {
+
+      globals.functions.setProperty(form.otp_status, {
+        value: data.message
+      });
+
+    }
+  })
+  .catch(err => {
+    console.error(err);
+
+    globals.functions.setProperty(form.otp_status, {
+      value: "API Error"
+    });
+  });
+}
+
+/**
+ * Verify OTP API Call
+ * @param {scope} globals
+ */
+function verifyOtp(globals) {
+
+  const form = globals.form;
+
+  const payload = {
+    mobile: form.mobile?.value,
+    otp: form.otp?.value,
+    dob: form.dob?.value || null,
+    pan: form.pan?.value || null
+  };
+
+  fetch("https://craftsman-resonant-asparagus.ngrok-free.dev/verify-otp", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify(payload)
+  })
+  .then(res => res.json())
+  .then(data => {
+
+    console.log("Verify Response:", data);
+
+    if (data.status === "success") {
+
+      // ✅ Success message
+      globals.functions.setProperty(form.otp_status, {
+        value: "OTP Verified Successfully"
+      });
+
+      // ✅ Enable next step / button
+      globals.functions.setProperty(form.view_loan_eligibility, {
+        enabled: true
+      });
+
+    } else {
+
+      globals.functions.setProperty(form.otp_status, {
+        value: data.message
+      });
+
+    }
+  })
+  .catch(err => {
+    console.error(err);
+
+    globals.functions.setProperty(form.otp_status, {
+      value: "Verification Failed"
+    });
+  });
+}
+
 // eslint-disable-next-line import/prefer-default-export
 export {
-  getFullName, days, submitFormArrayToString, maskMobileNumber, handleOtpFlow, updateLoanOffer, calculateEMI, initSalaryBankUI,
+  getFullName, days, submitFormArrayToString, maskMobileNumber, handleOtpFlow, updateLoanOffer, calculateEMI, initSalaryBankUI, generateOtp, verifyOtp, 
 };
 
 
