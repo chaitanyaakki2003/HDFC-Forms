@@ -1917,3 +1917,8 @@ main .form .field-loan-upto p::before {
   padding: 4px;
   border-radius: 0 0 12px 12px;
 }
+
+/* 🔥 HIDE DUPLICATE TEXT FROM AEM */
+.field-salary-bank-selection .plain-text-wrapper {
+  display: none !important;
+}
