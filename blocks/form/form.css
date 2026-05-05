@@ -1956,28 +1956,40 @@ main .form .field-loan-upto p::before {
   display: none !important;
 }
 
-/* 🔥 FINAL FIX — FORCE DROPDOWN RIGHT (NO OVERLAP) */
+/* ============================= */
+/* 🔥 FORCE DROPDOWN RIGHT (AEM OVERRIDE) */
+/* ============================= */
 
 .field-salary-bank-selection .salary-bank-content-row {
   display: flex !important;
   align-items: center !important;
+  width: 100% !important;
 }
 
-/* let cards take full space */
+/* LEFT CARDS */
 .field-salary-bank-selection .bank-card-container {
+  display: flex !important;
   flex: 1 1 auto !important;
   min-width: 0 !important;
+  gap: 16px !important;
 }
 
-/* fix dropdown */
+/* 🔥 KILL AEM GRID BEHAVIOUR */
+.field-salary-bank-selection .drop-down-wrapper.field-wrapper,
+.field-salary-bank-selection .drop-down-wrapper.field-other-bank,
 .field-salary-bank-selection .drop-down-wrapper {
-  position: static !important;   /* 🔥 removes overlap */
-  margin-left: auto !important;  /* 🔥 pushes right */
+  position: relative !important;
+  display: block !important;
+  float: none !important;
+  grid-column: unset !important;
+
+  margin-left: auto !important;
   flex: 0 0 230px !important;
   width: 230px !important;
 }
 
-/* fix select inside */
+/* SELECT FIX */
 .field-salary-bank-selection .drop-down-wrapper select {
   width: 100% !important;
+  display: block !important;
 }
