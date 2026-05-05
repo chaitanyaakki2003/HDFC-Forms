@@ -1955,3 +1955,29 @@ main .form .field-loan-upto p::before {
 .field-income-verification-method > .plain-text-wrapper {
   display: none !important;
 }
+
+/* 🔥 FINAL FIX — FORCE DROPDOWN RIGHT (NO OVERLAP) */
+
+.field-salary-bank-selection .salary-bank-content-row {
+  display: flex !important;
+  align-items: center !important;
+}
+
+/* let cards take full space */
+.field-salary-bank-selection .bank-card-container {
+  flex: 1 1 auto !important;
+  min-width: 0 !important;
+}
+
+/* fix dropdown */
+.field-salary-bank-selection .drop-down-wrapper {
+  position: static !important;   /* 🔥 removes overlap */
+  margin-left: auto !important;  /* 🔥 pushes right */
+  flex: 0 0 230px !important;
+  width: 230px !important;
+}
+
+/* fix select inside */
+.field-salary-bank-selection .drop-down-wrapper select {
+  width: 100% !important;
+}
