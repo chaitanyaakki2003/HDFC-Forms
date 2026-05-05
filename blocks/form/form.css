@@ -1956,9 +1956,22 @@ main .form .field-loan-upto p::before {
   display: none !important;
 }
 
+/* 🔥 FORCE DROPDOWN INTO FLEX FLOW (FIX OVERLAP) */
+.field-salary-bank-selection .drop-down-wrapper {
+  position: static !important;   /* 💥 THIS IS THE MAIN FIX */
+  float: none !important;
+  clear: none !important;
+
+  margin-left: auto !important;
+  flex: 0 0 230px !important;
+  width: 230px !important;
+}
+
+/* 🔥 ENSURE FLEX BEHAVIOR */
 .field-salary-bank-selection .salary-bank-content-row {
   display: flex !important;
   align-items: center !important;
+  justify-content: space-between !important;
   width: 100% !important;
 }
 
@@ -1966,10 +1979,4 @@ main .form .field-loan-upto p::before {
   flex: 1 !important;
   display: flex !important;
   gap: 16px !important;
-}
-
-.field-salary-bank-selection .drop-down-wrapper {
-  margin-left: auto !important;
-  flex: 0 0 230px !important;
-  width: 230px !important;
 }
