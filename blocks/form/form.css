@@ -1886,7 +1886,7 @@ main .form .field-loan-upto p::before {
 }
 
 /* DESCRIPTION */
-.radio-wrapper label::after {
+.field-income-verification-method .radio-wrapper label::after {
   display: block;
   margin-top: 6px;
   font-size: 12px;
@@ -1925,10 +1925,25 @@ main .form .field-loan-upto p::before {
   display: none !important;
 }
 
-/* ✅ PANEL 2: hide only bottom description block */
-.field-income-verification-method 
-> .plain-text-wrapper {
-  display: none !important;
+.field-salary-bank-selection .field-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* push dropdown right */
+.field-salary-bank-selection .drop-down-wrapper {
+  margin-left: auto;
+}
+
+/* PANEL 1 ONLY */
+.field-salary-bank-selection .plain-text-wrapper {
+  display: none;
+}
+
+/* PANEL 2 ONLY */
+.field-income-verification-method > .plain-text-wrapper {
+  display: none;
 }
 
 .salary-bank-content-row {
@@ -1937,17 +1952,8 @@ main .form .field-loan-upto p::before {
   gap: 20px;
 }
 
-/* LEFT SIDE (cards) */
 .bank-card-container {
   display: flex;
   gap: 14px;
-  flex-wrap: wrap;   /* ✅ prevents overflow */
-  flex: 1;
-}
-
-/* RIGHT SIDE (dropdown) */
-.drop-down-wrapper.field-salary-bank {
-  min-width: 220px;
-  max-width: 220px;
-  flex-shrink: 0;
+  flex-wrap: wrap;
 }

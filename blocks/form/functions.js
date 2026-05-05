@@ -257,15 +257,15 @@ function initSalaryBankUI() {
   if (!panel || !radioGroup || panel.dataset.ready === "true") return;
   panel.dataset.ready = "true";
 
-  const bankLogos = {
-    hdfc_bank: "/content/dam/akki/hdfc.png",
-    icici_bank: "/content/dam/akki/icici.png",
-    axis_bank: "/content/dam/akki/axis.png",
-    kotak: "/content/dam/akki/kotak.png",
-    sbi: "/content/dam/akki/sbi.png",
-    bank_of_baroda: "/content/dam/akki/bob.jpeg",
-    idfc_first: "/content/dam/akki/idfc.png"
-  };
+ const bankLogos = {
+  hdfc_bank: "/content/dam/akki/hdfc.png",
+  icici_bank: "/content/dam/akki/icici.png",
+  axis_bank: "/content/dam/akki/axis.png",
+  kotak_bank: "/content/dam/akki/kotak.png",
+  sbi: "/content/dam/akki/sbi.png",
+  bank_of_baroda: "/content/dam/akki/bob.jpeg",
+  idfc_first_bank: "/content/dam/akki/idfc.png"
+};
 
   // ✅ FIX DROPDOWN OPTIONS
   if (dropdown) {
@@ -282,8 +282,7 @@ function initSalaryBankUI() {
   cards.className = "bank-card-container";
 
   container.appendChild(cards);
-  container.appendChild(dropdown.parentElement);
-
+  
   radioGroup.parentNode.insertBefore(container, radioGroup);
   radioGroup.style.display = "none";
 
