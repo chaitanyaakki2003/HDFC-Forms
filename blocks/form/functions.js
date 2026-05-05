@@ -323,125 +323,125 @@ setTimeout(initSalaryBankUI, 500);
 setTimeout(initSalaryBankUI, 1500);
 
 
-/**
- * Generate OTP API Call
- * @param {scope} globals
- */
 function generateOtp(globals) {
+  try {
+    const form = globals.form;
 
-  const form = globals.form;
+    // ✅ CORRECT PATHS (as you provided)
+    const mobile = form.personal_loan_offer.mobile_number?.value;
+    const dob = form.personal_loan_offer.date_of_birth?.value;
+    const pan = form.personal_loan_offer.pan?.value;
 
-  // 👉 Read values using full path (UPDATE paths as per your form)
-  const mobile = form.mobile?.value;
-  const dob = form.dob?.value;
-  const pan = form.pan?.value;
+    console.log("📤 Generate Payload:", { mobile, dob, pan });
 
-  const payload = {
-    mobile: mobile,
-    dob: dob || null,
-    pan: pan || null
-  };
-
-  fetch("https://craftsman-resonant-asparagus.ngrok-free.dev/generate-otp", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json"
-    },
-    body: JSON.stringify(payload)
-  })
-  .then(res => res.json())
-  .then(data => {
-
-    console.log("OTP Response:", data);
-
-    if (data.status === "success") {
-
-      // ✅ Store OTP (for testing only)
-      globals.functions.setProperty(form.generatedOtp, {
-        value: data.otp
-      });
-
-      // ✅ Show OTP panel
-      globals.functions.setProperty(form.enter_otp_panel, {
-        visible: true
-      });
-
-      // ✅ Success message
-      globals.functions.setProperty(form.otp_status, {
-        value: "OTP Sent Successfully"
-      });
-
-    } else {
-
-      globals.functions.setProperty(form.otp_status, {
-        value: data.message
-      });
-
+    // ✅ VALIDATION (prevents 400 error)
+    if (!mobile) {
+      console.error("❌ Mobile is required");
+      return;
     }
-  })
-  .catch(err => {
-    console.error(err);
 
-    globals.functions.setProperty(form.otp_status, {
-      value: "API Error"
+    if (!dob && !pan) {
+      console.error("❌ Either DOB or PAN required");
+      return;
+    }
+
+    const payload = {
+      mobile: mobile,
+      dob: dob || null,
+      pan: pan || null
+    };
+
+    fetch("https://craftsman-resonant-asparagus.ngrok-free.dev/generate-otp", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(payload)
+    })
+    .then(res => res.json())
+    .then(data => {
+
+      console.log("✅ OTP Response:", data);
+
+      if (data.status === "success") {
+
+        // ✅ SHOW OTP PANEL
+        globals.functions.setProperty(
+          form.enter_otp_panel,
+          { visible: true }
+        );
+
+        // ✅ CLEAR OTP FIELD BEFORE USER TYPES
+        globals.functions.setProperty(
+          form.enter_otp_panel.otp_code,
+          { value: "" }
+        );
+
+      } else {
+        console.error("❌ API Error:", data.message);
+      }
+
+    })
+    .catch(err => {
+      console.error("❌ Fetch Error:", err);
     });
-  });
+
+  } catch (e) {
+    console.error("❌ JS Error:", e);
+  }
 }
 
-/**
- * Verify OTP API Call
- * @param {scope} globals
- */
 function verifyOtp(globals) {
+  try {
+    const form = globals.form;
 
-  const form = globals.form;
+    const payload = {
+      mobile: form.personal_loan_offer.mobile_number?.value,
+      otp: form.enter_otp_panel.otp_code?.value,
+      dob: form.personal_loan_offer.date_of_birth?.value || null,
+      pan: form.personal_loan_offer.pan?.value || null
+    };
 
-  const payload = {
-    mobile: form.mobile?.value,
-    otp: form.otp?.value,
-    dob: form.dob?.value || null,
-    pan: form.pan?.value || null
-  };
+    console.log("📤 Verify Payload:", payload);
 
-  fetch("https://craftsman-resonant-asparagus.ngrok-free.dev/verify-otp", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json"
-    },
-    body: JSON.stringify(payload)
-  })
-  .then(res => res.json())
-  .then(data => {
-
-    console.log("Verify Response:", data);
-
-    if (data.status === "success") {
-
-      // ✅ Success message
-      globals.functions.setProperty(form.otp_status, {
-        value: "OTP Verified Successfully"
-      });
-
-      // ✅ Enable next step / button
-      globals.functions.setProperty(form.view_loan_eligibility, {
-        enabled: true
-      });
-
-    } else {
-
-      globals.functions.setProperty(form.otp_status, {
-        value: data.message
-      });
-
+    // ✅ VALIDATION
+    if (!payload.mobile || !payload.otp) {
+      console.error("❌ Mobile and OTP required");
+      return;
     }
-  })
-  .catch(err => {
-    console.error(err);
 
-    globals.functions.setProperty(form.otp_status, {
-      value: "Verification Failed"
+    fetch("https://craftsman-resonant-asparagus.ngrok-free.dev/verify-otp", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(payload)
+    })
+    .then(res => res.json())
+    .then(data => {
+
+      console.log("✅ Verify Response:", data);
+
+      if (data.status === "success") {
+
+        // ✅ SUCCESS → ENABLE BUTTON / NEXT FLOW
+        globals.functions.setProperty(
+          form.view_loan_eligibility,
+          { enabled: true }
+        );
+
+      } else {
+        console.error("❌ Invalid OTP");
+      }
+
+    })
+    .catch(err => {
+      console.error("❌ Verify Error:", err);
     });
-  });
+
+  } catch (e) {
+    console.error("❌ JS Error:", e);
+  }
 }
 
 // eslint-disable-next-line import/prefer-default-export
