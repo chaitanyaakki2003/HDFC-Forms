@@ -267,7 +267,6 @@ function initSalaryBankUI() {
     idfc_first_bank: "/content/dam/akki/idfc.png"
   };
 
-  // Create container
   const container = document.createElement("div");
   container.className = "salary-bank-content-row";
 
@@ -275,25 +274,27 @@ function initSalaryBankUI() {
   cards.className = "bank-card-container";
 
   container.appendChild(cards);
-  container.appendChild(dropdown.parentElement);
 
-  // Insert above radios (DO NOT MOVE DROPDOWN)
+  // ✅ keep dropdown inside same row
+  if (dropdown) {
+    container.appendChild(dropdown.parentElement);
+  }
+
   radioGroup.parentNode.insertBefore(container, radioGroup);
-
-  // Hide original radios
   radioGroup.style.display = "none";
 
   const radios = radioGroup.querySelectorAll("input[type='radio']");
 
   radios.forEach((radio) => {
-    const value = radio.value;
+    const value = radio.value.trim().toLowerCase();   // ✅ FIX
     const labelText = radio.nextElementSibling?.innerText || value;
 
     const card = document.createElement("div");
     card.className = "bank-card";
 
     card.innerHTML = `
-      <img src="${bankLogos[value] || ''}" onerror="this.style.display='none'" />
+      <img src="${bankLogos[value] || ''}" 
+           onerror="this.style.display='none'" />
       <span>${labelText}</span>
     `;
 
