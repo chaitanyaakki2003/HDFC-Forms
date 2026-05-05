@@ -1956,12 +1956,12 @@ main .form .field-loan-upto p::before {
   display: none !important;
 }
 
-.field-salary-bank-selection .bank-card-container {
-  flex: 1 1 0% !important;
-  min-width: 0 !important;
-}
-
+/* 🔥 FORCE DROPDOWN TO BE FLEX ITEM (WITHOUT BREAKING AEM) */
 .field-salary-bank-selection .drop-down-wrapper {
+  display: block !important;
+  position: static !important;
+  grid-column: unset !important;
+
   margin-left: auto !important;
   flex: 0 0 230px !important;
   width: 230px !important;
