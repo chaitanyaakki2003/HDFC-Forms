@@ -278,11 +278,22 @@ function initSalaryBankUI() {
   container.appendChild(cards);
 
   if (dropdownWrapper) {
-  dropdownWrapper.classList.remove("col-4");   // ❌ remove AEM grid
+  // 💥 REMOVE AEM GRID BEHAVIOR
+  dropdownWrapper.classList.remove("field-wrapper");
+  dropdownWrapper.classList.remove("col-4");
+
+  // 💥 FORCE FLEX CHILD
+  dropdownWrapper.style.display = "block";
+  dropdownWrapper.style.position = "relative";
   dropdownWrapper.style.gridColumn = "unset";
-  dropdownWrapper.style.width = "230px";
+
+  // 💥 ALIGN RIGHT
   dropdownWrapper.style.marginLeft = "auto";
   dropdownWrapper.style.flex = "0 0 230px";
+  dropdownWrapper.style.width = "230px";
+
+  container.appendChild(dropdownWrapper);
+}
 
   container.appendChild(dropdownWrapper);
 }
