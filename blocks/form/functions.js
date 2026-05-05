@@ -275,6 +275,7 @@ function initSalaryBankUI() {
   cards.className = "bank-card-container";
 
   container.appendChild(cards);
+  container.appendChild(dropdown.parentElement);
 
   // Insert above radios (DO NOT MOVE DROPDOWN)
   radioGroup.parentNode.insertBefore(container, radioGroup);
