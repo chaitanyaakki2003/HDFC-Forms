@@ -260,13 +260,13 @@ function initSalaryBankUI() {
   const dropdown = dropdownWrapper?.querySelector("select");
 
   const bankLogos = {
-    "hdfc_bank": "/content/dam/akki/hdfc.png",
-    "icici_bank": "/content/dam/akki/icici.png",
-    "axis_bank": "/content/dam/akki/axis.png",
-    "kotak_bank": "/content/dam/akki/kotak.png",
-    "sbi": "/content/dam/akki/sbi.png",
-    "bank_of_baroda": "/content/dam/akki/bob.jpeg",
-    "idfc_first_bank": "/content/dam/akki/idfc.png"
+    hdfc_bank: "/content/dam/akki/hdfc.png",
+    icici_bank: "/content/dam/akki/icici.png",
+    axis_bank: "/content/dam/akki/axis.png",
+    kotak_bank: "/content/dam/akki/kotak.png",
+    sbi: "/content/dam/akki/sbi.png",
+    bank_of_baroda: "/content/dam/akki/bob.jpeg",
+    idfc_first_bank: "/content/dam/akki/idfc.png"
   };
 
   const container = document.createElement("div");
@@ -332,11 +332,10 @@ function initSalaryBankUI() {
   }
 }
 
-/* 🔥 AEM SAFE LOAD */
+/* AEM SAFE LOAD */
 function waitForAEM() {
   const panel = document.querySelector(".field-salary-bank-selection");
   if (!panel) return setTimeout(waitForAEM, 300);
-
   initSalaryBankUI();
 }
 
