@@ -278,23 +278,20 @@ function initSalaryBankUI() {
   container.appendChild(cards);
 
   if (dropdownWrapper) {
-  // 💥 REMOVE AEM GRID BEHAVIOR
-  dropdownWrapper.classList.remove("field-wrapper");
+  // ❌ DO NOT REMOVE field-wrapper
   dropdownWrapper.classList.remove("col-4");
 
-  // 💥 FORCE FLEX CHILD
+  // ✅ override instead of removing
   dropdownWrapper.style.display = "block";
-  dropdownWrapper.style.position = "relative";
+  dropdownWrapper.style.position = "static";
   dropdownWrapper.style.gridColumn = "unset";
 
-  // 💥 ALIGN RIGHT
   dropdownWrapper.style.marginLeft = "auto";
   dropdownWrapper.style.flex = "0 0 230px";
   dropdownWrapper.style.width = "230px";
 
   container.appendChild(dropdownWrapper);
 }
-
   container.appendChild(dropdownWrapper);
 }
 
@@ -349,7 +346,7 @@ function initSalaryBankUI() {
     other.textContent = "Other Bank";
     dropdown.appendChild(other);
   }
-}
+
 
 /* AEM SAFE LOAD */
 function waitForAEM() {
