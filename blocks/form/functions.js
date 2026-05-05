@@ -322,6 +322,7 @@ window.addEventListener("load", initSalaryBankUI);
 setTimeout(initSalaryBankUI, 500);
 setTimeout(initSalaryBankUI, 1500);
 
+
 function generateOtp(globals) {
   try {
     const form = globals.form;
@@ -443,58 +444,7 @@ function verifyOtp(globals) {
   }
 }
 
-function verifyOtp(globals) {
-  try {
-    const form = globals.form;
 
-    const payload = {
-      mobile: form.personal_loan_offer.mobile_number?.value,
-      otp: form.enter_otp_panel.otp_code?.value,
-      dob: form.personal_loan_offer.date_of_birth?.value || null,
-      pan: form.personal_loan_offer.pan?.value || null
-    };
-
-    console.log("📤 Verify Payload:", payload);
-
-    // ✅ VALIDATION
-    if (!payload.mobile || !payload.otp) {
-      console.error("❌ Mobile and OTP required");
-      return;
-    }
-
-    fetch("https://craftsman-resonant-asparagus.ngrok-free.dev/verify-otp", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify(payload)
-    })
-    .then(res => res.json())
-    .then(data => {
-
-      console.log("✅ Verify Response:", data);
-
-      if (data.status === "success") {
-
-        // ✅ SUCCESS → ENABLE BUTTON / NEXT FLOW
-        globals.functions.setProperty(
-          form.view_loan_eligibility,
-          { enabled: true }
-        );
-
-      } else {
-        console.error("❌ Invalid OTP");
-      }
-
-    })
-    .catch(err => {
-      console.error("❌ Verify Error:", err);
-    });
-
-  } catch (e) {
-    console.error("❌ JS Error:", e);
-  }
-}
 
 // eslint-disable-next-line import/prefer-default-export
 export {
