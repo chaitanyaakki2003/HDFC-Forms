@@ -1918,27 +1918,36 @@ main .form .field-loan-upto p::before {
   border-radius: 0 0 12px 12px;
 }
 
-/* FIX TEXT DUPLICATION */
-.field-salary-bank-selection .plain-text-wrapper {
+/* ✅ PANEL 1: hide only description text under radios */
+.field-salary-bank-selection 
+.radio-group-wrapper 
+.plain-text-wrapper {
   display: none !important;
 }
 
-.field-income-verification-method > .plain-text-wrapper {
+/* ✅ PANEL 2: hide only bottom description block */
+.field-income-verification-method 
+> .plain-text-wrapper {
   display: none !important;
-}
-
-/* FIX DROPDOWN ALIGNMENT */
-.drop-down-wrapper.field-salary-bank {
-  margin-left: auto;
 }
 
 .salary-bank-content-row {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  gap: 20px;
 }
 
-/* push dropdown to right */
-.drop-down-wrapper.field-other-bank {
-  margin-left: auto;
+/* LEFT SIDE (cards) */
+.bank-card-container {
+  display: flex;
+  gap: 14px;
+  flex-wrap: wrap;   /* ✅ prevents overflow */
+  flex: 1;
+}
+
+/* RIGHT SIDE (dropdown) */
+.drop-down-wrapper.field-salary-bank {
+  min-width: 220px;
+  max-width: 220px;
+  flex-shrink: 0;
 }

@@ -297,9 +297,10 @@ function initSalaryBankUI() {
     card.className = "bank-card";
 
     card.innerHTML = `
-      <img src="${bankLogos[value] || ""}" />
-      <span>${labelText}</span>
-    `;
+  <img src="${bankLogos[value] || ''}" 
+       onerror="this.style.display='none'" />
+  <span>${labelText}</span>
+`;
 
     if (radio.checked) card.classList.add("active");
 
