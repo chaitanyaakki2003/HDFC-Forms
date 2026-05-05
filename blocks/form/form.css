@@ -1793,62 +1793,28 @@ main .form .field-loan-upto p::before {
   font-weight: 700;
 }
 
-/* MAIN ROW */
+/* RIGHT SIDE DROPDOWN — FIXED */
 .field-salary-bank-selection .salary-bank-content-row {
-  display: flex;
-  align-items: center;
-  gap: 24px;
-  width: 100%;
+  display: flex !important;
+  align-items: center !important;
+  width: 100% !important;
 }
 
-/* LEFT SIDE */
 .field-salary-bank-selection .bank-card-container {
-  display: flex;
-  gap: 16px;
-  flex: 1 1 auto;
-  min-width: 0;
+  display: flex !important;
+  gap: 16px !important;
+  flex: 1 1 auto !important;
 }
 
-/* CARD */
-.bank-card {
-  width: 88px;
-  height: 88px;
-  min-width: 88px;
-  border: 1px solid #dfe5f0;
-  border-radius: 12px;
-  background: #fff;
-
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-
-  cursor: pointer;
-}
-
-.bank-card.active {
-  border: 2px solid #2563ff;
-}
-
-/* IMAGE */
-.bank-card img {
-  width: 34px;
-  height: 34px;
-  object-fit: contain;
-}
-
-/* LABEL */
-.bank-card span {
-  font-size: 12px;
-  text-align: center;
-}
-
-/* RIGHT SIDE DROPDOWN */
+/* 🔥 THIS IS THE ONLY IMPORTANT PART */
 .field-salary-bank-selection .drop-down-wrapper {
-  flex: 0 0 230px;
-  width: 230px;
-  margin-left: auto;
+  margin-left: auto !important;   /* pushes to right */
+  flex: 0 0 230px !important;
+  width: 230px !important;
+
+  display: block !important;
+  position: static !important;
+  grid-column: unset !important;
 }
 
 /* DROPDOWN */
