@@ -251,9 +251,7 @@ function calculateEMI(globals) {
 }
 function initSalaryBankUI() {
   const panel = document.querySelector(".field-salary-bank-selection");
-  const radioGroup = panel?.querySelector(
-  ".radio-group-wrapper.field-salary-bank"
-);
+  const radioGroup = panel?.querySelector(".radio-group-wrapper"); // ✅ FIXED
 
   if (!panel || !radioGroup || panel.dataset.ready === "true") return;
   panel.dataset.ready = "true";
@@ -280,13 +278,9 @@ function initSalaryBankUI() {
   container.appendChild(cards);
 
   if (dropdownWrapper) {
-  // 🔥 completely detach from AEM layout
-  dropdownWrapper.removeAttribute("class");
-
-  dropdownWrapper.className = "drop-down-wrapper"; // reset clean class
-
-  container.appendChild(dropdownWrapper);
-}
+    dropdownWrapper.classList.remove("col-4"); // ✅ FIXED
+    container.appendChild(dropdownWrapper);
+  }
 
   radioGroup.parentNode.insertBefore(container, radioGroup);
   radioGroup.style.display = "none";
@@ -340,15 +334,6 @@ function initSalaryBankUI() {
     dropdown.appendChild(other);
   }
 }
-
-/* AEM SAFE LOAD */
-function waitForAEM() {
-  const panel = document.querySelector(".field-salary-bank-selection");
-  if (!panel) return setTimeout(waitForAEM, 300);
-  initSalaryBankUI();
-}
-
-waitForAEM();
 
 /**
  * Generate OTP API call
