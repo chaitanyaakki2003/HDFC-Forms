@@ -249,44 +249,89 @@ function calculateEMI(globals) {
     console.error("EMI ERROR:", e);
   }
 }
- document.addEventListener("DOMContentLoaded", function () {
-  const bankIcons = {
+ function initSalaryBankUI() {
+  const panel = document.querySelector(".field-salary-bank-selection");
+  const dropdownWrapper = document.querySelector(".drop-down-wrapper.field-salary-bank");
+  const select = document.querySelector("select[name='salary_bank']");
+
+  if (!panel || !dropdownWrapper || !select || panel.dataset.ready === "true") return;
+
+  panel.dataset.ready = "true";
+
+  const bankLogos = {
     hdfc_bank: "/content/dam/akki/hdfc.png",
     icici_bank: "/content/dam/akki/icici.png",
     axis_bank: "/content/dam/akki/axis.png",
-    kotak_bank: "/content/dam/akki/kotak.png",
+    kotak: "/content/dam/akki/kotak.png",
     sbi: "/content/dam/akki/sbi.png",
-    bank_of_baroda: "/content/dam/akki/bob.png",
-    idfc_first_bank: "/content/dam/akki/idfc.png"
+    bank_of_baroda: "/content/dam/akki/bob.jpeg",
+    idfc_first: "/content/dam/akki/idfc.png"
   };
 
-  document.querySelectorAll(
-    '.field-salary-bank-selection .radio-wrapper input'
-  ).forEach((input) => {
-    const value = input.value;
-    const label = input.nextElementSibling;
+  const banks = [
+    { value: "hdfc_bank", text: "HDFC Bank" },
+    { value: "icici_bank", text: "ICICI Bank" },
+    { value: "axis_bank", text: "Axis Bank" },
+    { value: "kotak", text: "Kotak" },
+    { value: "sbi", text: "SBI" },
+    { value: "bank_of_baroda", text: "Bank of Baroda" },
+    { value: "idfc_first", text: "IDFC First" }
+  ];
 
-    if (bankIcons[value] && label) {
-      label.style.setProperty(
-        "--icon",
-        `url(${bankIcons[value]})`
-      );
+  const row = document.createElement("div");
+  row.className = "salary-bank-content-row";
 
-      label.style.setProperty(
-        "background-image",
-        `url(${bankIcons[value]})`
-      );
+  const cardContainer = document.createElement("div");
+  cardContainer.className = "bank-card-container";
 
-      label.style.backgroundSize = "28px";
-      label.style.backgroundRepeat = "no-repeat";
-      label.style.backgroundPosition = "center 8px";
-      label.style.paddingTop = "38px";
-    }
-  });
-});
+  row.appendChild(cardContainer);
+  row.appendChild(dropdownWrapper);
+
+  const legend = panel.querySelector("legend");
+
+  legend.insertAdjacentElement("afterend", row);
+
+  function renderCards() {
+    cardContainer.innerHTML = "";
+
+    banks.forEach((bank) => {
+      const card = document.createElement("div");
+      card.className = "bank-card";
+      card.dataset.value = bank.value;
+
+      card.innerHTML = `
+        <img src="${bankLogos[bank.value]}" />
+        <span>${bank.text}</span>
+      `;
+
+      if (select.value === bank.value) {
+        card.classList.add("active");
+      }
+
+      card.onclick = () => {
+        select.value = bank.value;
+
+        document.querySelectorAll(".bank-card").forEach(c => c.classList.remove("active"));
+        card.classList.add("active");
+      };
+
+      cardContainer.appendChild(card);
+    });
+  }
+
+  select.value = "hdfc_bank";
+  renderCards();
+
+  select.addEventListener("change", renderCards);
+}
+
+/* AEM safe triggers */
+document.addEventListener("DOMContentLoaded", initSalaryBankUI);
+window.addEventListener("load", initSalaryBankUI);
+setTimeout(initSalaryBankUI, 1000);
 // eslint-disable-next-line import/prefer-default-export
 export {
-  getFullName, days, submitFormArrayToString, maskMobileNumber, handleOtpFlow, updateLoanOffer, calculateEMI,
+  getFullName, days, submitFormArrayToString, maskMobileNumber, handleOtpFlow, updateLoanOffer, calculateEMI, initSalaryBankUI,
 };
 
 
