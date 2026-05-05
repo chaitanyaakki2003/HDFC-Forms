@@ -251,23 +251,16 @@ function calculateEMI(globals) {
 }
 function initSalaryBankUI() {
   const panel = document.querySelector(".field-salary-bank-selection");
-  const radioGroup = panel?.querySelector(".radio-group-wrapper"); // ✅ FIXED
+
+  const radioGroup = panel?.querySelector(
+    "fieldset.radio-group-wrapper[name='salary_bank']"
+  ); // ✅ FIXED
 
   if (!panel || !radioGroup || panel.dataset.ready === "true") return;
   panel.dataset.ready = "true";
 
   const dropdownWrapper = panel.querySelector(".drop-down-wrapper");
   const dropdown = dropdownWrapper?.querySelector("select");
-
-  const bankLogos = {
-    hdfc_bank: "/content/dam/akki/hdfc.png",
-    icici_bank: "/content/dam/akki/icici.png",
-    axis_bank: "/content/dam/akki/axis.png",
-    kotak_bank: "/content/dam/akki/kotak.png",
-    sbi: "/content/dam/akki/sbi.png",
-    bank_of_baroda: "/content/dam/akki/bob.jpeg",
-    idfc_first_bank: "/content/dam/akki/idfc.png"
-  };
 
   const container = document.createElement("div");
   container.className = "salary-bank-content-row";
@@ -278,7 +271,9 @@ function initSalaryBankUI() {
   container.appendChild(cards);
 
   if (dropdownWrapper) {
-    dropdownWrapper.classList.remove("col-4"); // ✅ FIXED
+    dropdownWrapper.classList.remove("col-4"); // ✅ SAFE FIX
+    dropdownWrapper.style.gridColumn = "unset";
+
     container.appendChild(dropdownWrapper);
   }
 
@@ -287,54 +282,18 @@ function initSalaryBankUI() {
 
   const radios = radioGroup.querySelectorAll("input[type='radio']");
 
-  if (dropdown) dropdown.innerHTML = "";
-
   radios.forEach((radio) => {
     const value = radio.value.trim();
     const labelText = radio.nextElementSibling?.innerText || value;
 
-    const imgSrc = bankLogos[value];
-
     const card = document.createElement("div");
     card.className = "bank-card";
 
-    card.innerHTML = `
-      ${imgSrc ? `<img src="${imgSrc}" />` : ""}
-      <span>${labelText}</span>
-    `;
-
-    if (radio.checked) card.classList.add("active");
-
-    card.onclick = () => {
-      radios.forEach(r => r.checked = false);
-      radio.checked = true;
-
-      document.querySelectorAll(".bank-card")
-        .forEach(c => c.classList.remove("active"));
-
-      card.classList.add("active");
-
-      if (dropdown) dropdown.value = value;
-    };
+    card.innerHTML = `<span>${labelText}</span>`;
 
     cards.appendChild(card);
-
-    if (dropdown) {
-      const option = document.createElement("option");
-      option.value = value;
-      option.textContent = labelText;
-      dropdown.appendChild(option);
-    }
   });
-
-  if (dropdown) {
-    const other = document.createElement("option");
-    other.value = "other_bank";
-    other.textContent = "Other Bank";
-    dropdown.appendChild(other);
-  }
 }
-
 /**
  * Generate OTP API call
  * @param {scope} globals
