@@ -627,14 +627,16 @@ function resendOtp(globals) {
 
 
 /**
- * CUSTOMER DETAILS API CALL
- * @param {scope} globals
+ * Submit Customer Details API
+ * @param {scope} globals - Global scope object
  */
 function submitCustomerDetails(globals) {
 
   const form = globals.form;
 
-  // ✅ CORRECT PATHS (FROM YOUR UI)
+  console.log("🚀 Function Triggered");
+
+  // ✅ GET VALUES (FULL SAFE PATHS)
 
   const firstName =
     form.customer_details.person_details.full_name_as_per_pan.first_name_as_per_pan?.$value || "";
@@ -655,17 +657,21 @@ function submitCustomerDetails(globals) {
     form.customer_details.address_details.aadhaar_address?.$value || "";
 
   const income =
-    form.customer_details.income_details.monthly_net_income?.$value || "";
+    form.customer_details.income_details.monthly_net_income?.$value ||
+    form.customer_details.income_details.monthly_net_income_input?.$value ||
+    "";
 
   console.log("📤 Payload:", {
     firstName, middleName, lastName, gender, email, address, income
   });
 
-  // ✅ BASIC VALIDATION
+  // ❌ IF EMPTY → STOP (THIS WAS YOUR ISSUE)
   if (!firstName || !lastName || !email || !income) {
 
+    console.log("❌ Validation Failed");
+
     globals.functions.setProperty(
-      form.customer_details.personal_details.email_id,
+      globals.form.customer_details.personal_details.email_id,
       { valid: false }
     );
 
@@ -688,7 +694,10 @@ function submitCustomerDetails(globals) {
       income
     })
   })
-  .then(res => res.json())
+  .then(res => {
+    console.log("STATUS:", res.status);
+    return res.json();
+  })
   .then(response => {
 
     console.log("✅ API Response:", response);
@@ -697,9 +706,9 @@ function submitCustomerDetails(globals) {
 
       const data = response.data;
 
-      // ✅ SET LOAN AMOUNT (ADJUST FIELD NAME IF DIFFERENT)
+      // ✅ SET LOAN AMOUNT (FULL PATH)
       globals.functions.setProperty(
-        form.offer_display.loan_amount,
+        globals.form.offer_display.loan_income,
         {
           value: data.loanAmount
         }
@@ -707,7 +716,7 @@ function submitCustomerDetails(globals) {
 
       // ✅ SHOW OFFER PANEL
       globals.functions.setProperty(
-        form.offer_display,
+        globals.form.offer_display,
         {
           visible: true
         }
@@ -715,7 +724,7 @@ function submitCustomerDetails(globals) {
 
       // ✅ HIDE CUSTOMER DETAILS
       globals.functions.setProperty(
-        form.customer_details,
+        globals.form.customer_details,
         {
           visible: false
         }
@@ -724,7 +733,7 @@ function submitCustomerDetails(globals) {
     } else {
 
       globals.functions.setProperty(
-        form.customer_details.personal_details.email_id,
+        globals.form.customer_details.personal_details.email_id,
         {
           valid: false
         }
