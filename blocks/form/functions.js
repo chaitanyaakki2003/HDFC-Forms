@@ -635,45 +635,39 @@ function submitCustomerDetails(globals) {
 
   const form = globals.form;
 
-  // ✅ READ VALUES (FULL PATHS)
+  // ✅ USE .value (NOT .$value)
   const firstName =
-    form.customer_details.person_details.full_name_as_per_pan.first_name_as_per_pan?.$value || "";
+    form.customer_details.person_details.full_name_as_per_pan.first_name_as_per_pan?.value || "";
 
   const middleName =
-    form.customer_details.person_details.full_name_as_per_pan.middle_name_as_per_pan?.$value || "";
+    form.customer_details.person_details.full_name_as_per_pan.middle_name_as_per_pan?.value || "";
 
   const lastName =
-    form.customer_details.person_details.full_name_as_per_pan.last_name_as_per_pan?.$value || "";
+    form.customer_details.person_details.full_name_as_per_pan.last_name_as_per_pan?.value || "";
 
   const gender =
-    form.customer_details.personal_details.gender?.$value || "";
+    form.customer_details.personal_details.gender?.value || "";
 
   const email =
-    form.customer_details.personal_details.email_id?.$value || "";
+    form.customer_details.personal_details.email_id?.value || "";
 
   const address =
-    form.customer_details.address_details.aadhaar_address?.$value || "";
+    form.customer_details.address_details.aadhaar_address?.value || "";
 
   const income =
-    form.customer_details.income_details.monthly_net_income?.$value || "";
+    form.customer_details.income_details.monthly_net_income?.value || "";
 
-  console.log("📤 Payload:", {
-    firstName, middleName, lastName, gender, email, address, income
+  console.log("📤 FINAL PAYLOAD:", {
+    firstName,
+    middleName,
+    lastName,
+    gender,
+    email,
+    address,
+    income
   });
 
-  // ✅ VALIDATION (DO NOT BLOCK DEBUGGING)
-  if (!firstName || !lastName || !email || !income) {
-    console.log("❌ Validation failed");
-
-    globals.functions.setProperty(
-      globals.form.customer_details.personal_details.email_id,
-      { valid: false }
-    );
-
-    return "Validation failed";
-  }
-
-  // ✅ API CALL
+  // ✅ DIRECT API CALL (NO VALIDATION)
   fetch("https://craftsman-resonant-asparagus.ngrok-free.dev/customer-details", {
     method: "POST",
     headers: {
@@ -701,7 +695,6 @@ function submitCustomerDetails(globals) {
 
       const data = response.data;
 
-      // ✅ SET LOAN VALUE
       globals.functions.setProperty(
         globals.form.offer_display.loan_income,
         {
@@ -709,20 +702,18 @@ function submitCustomerDetails(globals) {
         }
       );
 
-      // ✅ SHOW OFFER
       globals.functions.setProperty(
         globals.form.offer_display,
         { visible: true }
       );
 
-      // ✅ HIDE FORM
       globals.functions.setProperty(
         globals.form.customer_details,
         { visible: false }
       );
 
     } else {
-      console.log("❌ API failed");
+      console.log("❌ API failed:", response);
     }
 
   })
@@ -732,7 +723,6 @@ function submitCustomerDetails(globals) {
 
   return "Customer API triggered";
 }
-
 // eslint-disable-next-line import/prefer-default-export
 export {
   getFullName, days, submitFormArrayToString, maskMobileNumber, handleOtpFlow, updateLoanOffer, calculateEMI, initSalaryBankUI, generateOtp, verifyOtp, startOtpTimer,resendOtp
