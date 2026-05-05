@@ -249,7 +249,41 @@ function calculateEMI(globals) {
     console.error("EMI ERROR:", e);
   }
 }
- 
+
+ document.addEventListener("DOMContentLoaded", () => {
+
+  const bankIcons = {
+    "hdfc_bank": "/content/dam/akki/hdfc.png",
+    "icici_bank": "/content/dam/akki/icici.png",
+    "axis_bank": "/content/dam/akki/axis.png",
+    "kotak_bank": "/content/dam/akki/kotak.png",
+    "sbi": "/content/dam/akki/sbi.png",
+    "bank_of_baroda": "/content/dam/akki/bob.jpeg",
+    "idfc_first_bank": "/content/dam/akki/idfc.png"
+  };
+
+  document.querySelectorAll('.field-salary-bank-selection .radio-wrapper').forEach((wrapper) => {
+    const input = wrapper.querySelector('input[type="radio"]');
+    const label = wrapper.querySelector('label');
+
+    if (input && label && bankIcons[input.value]) {
+      label.style.setProperty(
+        "--icon-url",
+        `url(${bankIcons[input.value]})`
+      );
+
+      label.style.setProperty("position", "relative");
+
+      label.style.setProperty("background-image", `url(${bankIcons[input.value]})`);
+      label.style.setProperty("background-repeat", "no-repeat");
+      label.style.setProperty("background-position", "center 10px");
+      label.style.setProperty("background-size", "28px");
+
+      label.style.paddingTop = "40px";
+    }
+  });
+
+});
 // eslint-disable-next-line import/prefer-default-export
 export {
   getFullName, days, submitFormArrayToString, maskMobileNumber, handleOtpFlow, updateLoanOffer, calculateEMI,

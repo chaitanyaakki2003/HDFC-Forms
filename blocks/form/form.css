@@ -1751,3 +1751,151 @@ main .form .field-loan-upto p::before {
 
   font-size: 20px;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* ---------- PANEL CONTAINER ---------- */
+.panel-wrapper {
+  background: #f7f9fc;
+  border-radius: 16px;
+  padding: 20px;
+  margin-bottom: 20px;
+}
+
+/* ---------- SECTION TITLE ---------- */
+.panel-wrapper > legend.field-label {
+  font-size: 18px;
+  font-weight: 600;
+  color: #1a2b49;
+  margin-bottom: 16px;
+}
+
+/* ---------- BANK OPTIONS (TOP ROW) ---------- */
+.field-salary-bank-selection .radio-group-wrapper {
+  display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+
+/* EACH BANK CARD */
+.field-salary-bank-selection .radio-wrapper {
+  position: relative;
+}
+
+/* HIDE RADIO */
+.field-salary-bank-selection input[type="radio"] {
+  display: none;
+}
+
+/* LABEL = CARD */
+.field-salary-bank-selection label.field-label {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 90px;
+  height: 80px;
+  border-radius: 12px;
+  border: 1px solid #d6dbe6;
+  background: #fff;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 12px;
+}
+
+/* ICON IMAGE */
+.field-salary-bank-selection label::before {
+  content: "";
+  width: 32px;
+  height: 32px;
+  margin-bottom: 6px;
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
+/* SELECTED STATE */
+.field-salary-bank-selection input[type="radio"]:checked + label {
+  border: 2px solid #2f6fed;
+  background: #eef4ff;
+}
+
+/* ---------- METHOD OPTIONS (BOTTOM CARDS) ---------- */
+.field-income-verification-method .radio-group-wrapper {
+  display: flex;
+  gap: 16px;
+}
+
+/* CARD STYLE */
+.field-income-verification-method .radio-wrapper {
+  flex: 1;
+}
+
+/* HIDE RADIO */
+.field-income-verification-method input[type="radio"] {
+  display: none;
+}
+
+/* LABEL CARD */
+.field-income-verification-method label.field-label {
+  display: block;
+  padding: 16px;
+  border-radius: 14px;
+  border: 1px solid #d6dbe6;
+  background: #fff;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-weight: 500;
+}
+
+/* DESCRIPTION TEXT BELOW */
+.field-income-verification-method .plain-text-wrapper {
+  font-size: 13px;
+  color: #6b7280;
+  margin-top: 6px;
+}
+
+/* SELECTED CARD */
+.field-income-verification-method input[type="radio"]:checked + label {
+  border: 2px solid #2f6fed;
+  background: #eef4ff;
+}
+
+/* RECOMMENDED TAG */
+.field-income-verification-method input[value="account_aggregator"]:checked + label {
+  position: relative;
+}
+
+.field-income-verification-method input[value="account_aggregator"]:checked + label::after {
+  content: "Recommended";
+  position: absolute;
+  bottom: -10px;
+  left: 0;
+  right: 0;
+  background: #16a34a;
+  color: white;
+  font-size: 11px;
+  text-align: center;
+  padding: 4px;
+  border-radius: 0 0 10px 10px;
+}
+
+/* ---------- BUTTON ---------- */
+.button-wrapper .button {
+  background: #2f6fed;
+  color: white;
+  border-radius: 10px;
+  padding: 12px 28px;
+  border: none;
+  font-weight: 600;
+}
