@@ -1786,17 +1786,20 @@ main .form .field-loan-upto p::before {
   font-weight: 600;
 }
 
-/* ROW */
+/* MAIN ROW (CARDS + DROPDOWN) */
 .salary-bank-content-row {
   display: flex;
   align-items: center;
+  justify-content: space-between;
+  gap: 20px;
 }
 
-/* LEFT SIDE */
+/* LEFT SIDE: BANK CARDS */
 .bank-card-container {
   display: flex;
   gap: 14px;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;          /* ✅ FIX: force horizontal */
+  align-items: center;
 }
 
 /* CARD */
@@ -1806,11 +1809,19 @@ main .form .field-loan-upto p::before {
   border-radius: 12px;
   border: 1px solid #dfe5f0;
   background: #fff;
+
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+
   cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+/* HOVER */
+.bank-card:hover {
+  border-color: #2f55e7;
 }
 
 /* ACTIVE */
@@ -1822,17 +1833,21 @@ main .form .field-loan-upto p::before {
 .bank-card img {
   width: 26px;
   height: 26px;
+  object-fit: contain;
 }
 
 /* LABEL */
 .bank-card span {
   font-size: 10px;
+  margin-top: 4px;
+  text-align: center;
 }
 
 /* RIGHT SIDE DROPDOWN */
 .field-salary-bank-selection .drop-down-wrapper {
   margin-left: auto;
   width: 220px;
+  flex-shrink: 0;   /* ✅ prevents overlap */
 }
 
 .drop-down-wrapper.field-salary-bank select {
@@ -1868,7 +1883,7 @@ main .form .field-loan-upto p::before {
   border-radius: 16px 16px 0 0;
 }
 
-/* CARDS */
+/* CARD ROW */
 .field-income-verification-method .radio-group-wrapper {
   display: flex !important;
   gap: 16px;
@@ -1881,6 +1896,7 @@ main .form .field-loan-upto p::before {
   border-radius: 12px;
   padding: 16px 16px 16px 40px;
   position: relative;
+  transition: all 0.2s ease;
 }
 
 /* RADIO */
@@ -1896,7 +1912,7 @@ main .form .field-loan-upto p::before {
   border: 2px solid #2f55e7;
 }
 
-/* ✅ DESCRIPTION (SCOPED ONLY HERE) */
+/* DESCRIPTION (SCOPED ONLY HERE) */
 .field-income-verification-method 
 .radio-group-wrapper 
 .radio-wrapper label::after {
@@ -1941,7 +1957,7 @@ main .form .field-loan-upto p::before {
   border-radius: 0 0 12px 12px;
 }
 
-/* ✅ HIDE ONLY PANEL 2 BOTTOM TEXT */
+/* ✅ HIDE ONLY PANEL 2 EXTRA TEXT */
 .field-income-verification-method > .plain-text-wrapper {
   display: none !important;
 }
