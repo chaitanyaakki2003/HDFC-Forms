@@ -417,6 +417,36 @@ function generateOtp(globals) {
 
       if (response.status === "success") {
 
+        // ✅ RESET ATTEMPTS
+  window.otpState.attempts = 3;
+
+  // ✅ SHOW PANEL
+  globals.functions.setProperty(otpPanel, {
+    visible: true
+  });
+
+  // ✅ AUTO FILL OTP (TEST)
+  if (response.otp) {
+    globals.functions.setProperty(otpPanel.otp_code, {
+      value: String(response.otp)
+    });
+  }
+
+  // ✅ UPDATE ATTEMPTS UI
+  globals.functions.setProperty(
+    otpPanel.attempts,
+    { value: "3/3 attempts left" }
+  );
+
+  // ✅ DISABLE RESEND
+  globals.functions.setProperty(
+    otpPanel.resend_otp,
+    { enabled: false }
+  );
+
+  // ✅ START TIMER
+  startOtpTimer(globals);
+
         // ✅ SHOW OTP PANEL
         globals.functions.setProperty(otpPanel, {
           visible: true
@@ -495,6 +525,28 @@ function verifyOtp(globals) {
 
       if (response.status === "success") {
 
+        globals.functions.setProperty(
+    otpPanel.success_msg,
+    { value: "OTP Verified", visible: true }
+  );
+
+} else {
+
+  // ❌ REDUCE ATTEMPTS
+  window.otpState.attempts--;
+
+  globals.functions.setProperty(
+    otpPanel.attempts,
+    {
+      value: window.otpState.attempts + "/3 attempts left"
+    }
+  );
+
+  globals.functions.setProperty(
+    otpPanel.success_msg,
+    { value: "Invalid OTP", visible: true }
+  );
+
         globals.functions.setProperty(otpPanel.success_msg, {
           value: "OTP Verified ",
           visible: true
@@ -514,9 +566,84 @@ function verifyOtp(globals) {
   return "OTP verification triggered";
 }
 
+
+function startOtpTimer(globals) {
+
+  const form = globals.form;
+  const otpPanel = form.enter_otp_panel;
+
+  // RESET TIMER
+  window.otpState.timeLeft = 30;
+
+  if (window.otpState.timer) {
+    clearInterval(window.otpState.timer);
+  }
+
+  window.otpState.timer = setInterval(() => {
+
+    window.otpState.timeLeft--;
+
+    // ✅ UPDATE RESEND TEXT FIELD
+    globals.functions.setProperty(
+      otpPanel.resend_otp,
+      {
+        value: "Resend OTP in : " + window.otpState.timeLeft + " sec"
+      }
+    );
+
+    if (window.otpState.timeLeft <= 0) {
+
+      clearInterval(window.otpState.timer);
+
+      // ✅ ENABLE BUTTON
+      globals.functions.setProperty(
+        otpPanel.resend_otp,
+        {
+          enabled: true,
+          value: "Resend OTP"
+        }
+      );
+    }
+
+  }, 1000);
+}
+
+function resendOtp(globals) {
+
+  const form = globals.form;
+  const otpPanel = form.enter_otp_panel;
+
+  // ❌ NO ATTEMPTS LEFT
+  if (window.otpState.attempts <= 0) {
+
+    globals.functions.setProperty(
+      otpPanel.success_msg,
+      { value: "No attempts left", visible: true }
+    );
+
+    return;
+  }
+
+  // 🔽 REDUCE ATTEMPTS
+  window.otpState.attempts--;
+
+  // ✅ UPDATE ATTEMPTS UI
+  globals.functions.setProperty(
+    otpPanel.attempts,
+    {
+      value: window.otpState.attempts + "/3 attempts left"
+    }
+  );
+
+  // ✅ CALL GENERATE AGAIN
+  generateOtp(globals);
+
+  return "Resend triggered";
+}
+
 // eslint-disable-next-line import/prefer-default-export
 export {
-  getFullName, days, submitFormArrayToString, maskMobileNumber, handleOtpFlow, updateLoanOffer, calculateEMI, initSalaryBankUI, generateOtp, verifyOtp, 
+  getFullName, days, submitFormArrayToString, maskMobileNumber, handleOtpFlow, updateLoanOffer, calculateEMI, initSalaryBankUI, generateOtp, verifyOtp, startOtpTimer,resendOtp
 };
 
 
