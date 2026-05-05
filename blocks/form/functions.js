@@ -252,11 +252,12 @@ function calculateEMI(globals) {
 function initSalaryBankUI() {
   const panel = document.querySelector(".field-salary-bank-selection");
   const radioGroup = panel?.querySelector(".radio-group-wrapper");
-  const dropdownWrapper = panel?.querySelector(".drop-down-wrapper");
-  const dropdown = dropdownWrapper?.querySelector("select");
 
   if (!panel || !radioGroup || panel.dataset.ready === "true") return;
   panel.dataset.ready = "true";
+
+  const dropdownWrapper = panel.querySelector(".drop-down-wrapper");
+  const dropdown = dropdownWrapper?.querySelector("select");
 
   const bankLogos = {
     "hdfc_bank": "/content/dam/akki/hdfc.png",
@@ -285,14 +286,14 @@ function initSalaryBankUI() {
 
   const radios = radioGroup.querySelectorAll("input[type='radio']");
 
-  // 🔥 CLEAR DROPDOWN
+  /* CLEAR DROPDOWN */
   if (dropdown) dropdown.innerHTML = "";
 
   radios.forEach((radio) => {
     const value = radio.value.trim();
     const labelText = radio.nextElementSibling?.innerText || value;
 
-    /* ---------- CARD ---------- */
+    /* CARD */
     const card = document.createElement("div");
     card.className = "bank-card";
 
@@ -318,7 +319,7 @@ function initSalaryBankUI() {
 
     cards.appendChild(card);
 
-    /* ---------- DROPDOWN OPTION ---------- */
+    /* DROPDOWN OPTION */
     if (dropdown) {
       const option = document.createElement("option");
       option.value = value;
@@ -327,7 +328,7 @@ function initSalaryBankUI() {
     }
   });
 
-  /* DEFAULT OPTION */
+  /* ADD OTHER BANK */
   if (dropdown) {
     const other = document.createElement("option");
     other.value = "other_bank";
@@ -335,6 +336,12 @@ function initSalaryBankUI() {
     dropdown.appendChild(other);
   }
 }
+
+/* LOAD SAFELY */
+document.addEventListener("DOMContentLoaded", initSalaryBankUI);
+window.addEventListener("load", initSalaryBankUI);
+setTimeout(initSalaryBankUI, 500);
+setTimeout(initSalaryBankUI, 1500);
 
 /**
  * Generate OTP API call
