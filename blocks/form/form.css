@@ -1766,10 +1766,27 @@ main .form .field-loan-upto p::before {
 
 
 /* ===================== */
-/* PANEL 1: FINAL FIX */
+/* PANEL 1: BANK SELECT */
 /* ===================== */
 
-/* MAIN ROW */
+.field-salary-bank-selection {
+  background: #fff;
+  border-radius: 16px;
+  border: 1px solid #e6ebf5;
+  padding: 0 20px 20px;
+  margin-bottom: 24px;
+}
+
+/* HEADER */
+.field-salary-bank-selection > legend.field-label {
+  background: #dbe5f6;
+  margin: 0 -20px 20px;
+  padding: 16px 20px;
+  border-radius: 16px 16px 0 0;
+  font-weight: 600;
+}
+
+/* MAIN ROW (CARDS + DROPDOWN) */
 .salary-bank-content-row {
   display: flex;
   align-items: center;
@@ -1777,22 +1794,23 @@ main .form .field-loan-upto p::before {
   width: 100%;
 }
 
-/* LEFT SIDE (CARDS) */
+/* LEFT SIDE (BANK CARDS) */
 .bank-card-container {
   display: flex;
   gap: 14px;
   align-items: center;
 
-  flex: 1;              /* take remaining space */
-  min-width: 0;         /* 🔥 MOST IMPORTANT FIX */
-  overflow: hidden;     /* 🔥 prevents overlap */
+  flex: 1;
+  min-width: 0;
+
+  overflow-x: auto;   /* ✅ FIX: show all cards */
 }
 
 /* CARD */
 .bank-card {
   width: 64px;
   height: 64px;
-  flex: 0 0 64px;       /* 🔥 prevent shrinking/stretching */
+  flex: 0 0 64px;
 
   border-radius: 12px;
   border: 1px solid #dfe5f0;
@@ -1804,6 +1822,12 @@ main .form .field-loan-upto p::before {
   justify-content: center;
 
   cursor: pointer;
+  transition: 0.2s;
+}
+
+/* HOVER */
+.bank-card:hover {
+  border-color: #2f55e7;
 }
 
 /* ACTIVE */
@@ -1827,7 +1851,7 @@ main .form .field-loan-upto p::before {
 
 /* RIGHT SIDE DROPDOWN */
 .field-salary-bank-selection .drop-down-wrapper {
-  flex: 0 0 220px;      /* 🔥 FIXED WIDTH */
+  flex: 0 0 220px;
   width: 220px;
 }
 
@@ -1838,9 +1862,16 @@ main .form .field-loan-upto p::before {
   border-radius: 8px;
 }
 
+/* HIDE ORIGINAL RADIO TEXT (ONLY PANEL 1) */
+.field-salary-bank-selection 
+.radio-group-wrapper 
+.plain-text-wrapper {
+  display: none !important;
+}
+
 
 /* ===================== */
-/* PANEL 2 */
+/* PANEL 2: METHODS */
 /* ===================== */
 
 .field-income-verification-method {
@@ -1871,23 +1902,23 @@ main .form .field-loan-upto p::before {
   border-radius: 12px;
   padding: 16px 16px 16px 40px;
   position: relative;
-  transition: all 0.2s ease;
+  transition: 0.2s;
 }
 
-/* RADIO */
+/* RADIO POSITION */
 .field-income-verification-method input {
   position: absolute;
   left: 12px;
   top: 18px;
 }
 
-/* SELECTED */
+/* SELECTED STATE */
 .field-income-verification-method 
 .radio-wrapper:has(input:checked) {
   border: 2px solid #2f55e7;
 }
 
-/* DESCRIPTION (SCOPED ONLY HERE) */
+/* DESCRIPTION TEXT */
 .field-income-verification-method 
 .radio-group-wrapper 
 .radio-wrapper label::after {
@@ -1916,7 +1947,7 @@ main .form .field-loan-upto p::before {
   content: "Processed via uploading bank statement of the last 6 months.";
 }
 
-/* RECOMMENDED */
+/* RECOMMENDED BADGE */
 .field-income-verification-method 
 .radio-group-wrapper 
 .radio-wrapper:first-child:has(input:checked)::after {
@@ -1932,7 +1963,7 @@ main .form .field-loan-upto p::before {
   border-radius: 0 0 12px 12px;
 }
 
-/* ✅ HIDE ONLY PANEL 2 EXTRA TEXT */
+/* HIDE EXTRA TEXT */
 .field-income-verification-method > .plain-text-wrapper {
   display: none !important;
 }
