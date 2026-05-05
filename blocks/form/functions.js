@@ -625,19 +625,17 @@ function resendOtp(globals) {
   return "Resend triggered";
 }
 
-
 /**
  * Submit Customer Details API
  * @param {scope} globals - Global scope object
  */
 function submitCustomerDetails(globals) {
 
+  console.log("🚀 submitCustomerDetails triggered");
+
   const form = globals.form;
 
-  console.log("🚀 Function Triggered");
-
-  // ✅ GET VALUES (FULL SAFE PATHS)
-
+  // ✅ READ VALUES (FULL PATHS)
   const firstName =
     form.customer_details.person_details.full_name_as_per_pan.first_name_as_per_pan?.$value || "";
 
@@ -657,18 +655,15 @@ function submitCustomerDetails(globals) {
     form.customer_details.address_details.aadhaar_address?.$value || "";
 
   const income =
-    form.customer_details.income_details.monthly_net_income?.$value ||
-    form.customer_details.income_details.monthly_net_income_input?.$value ||
-    "";
+    form.customer_details.income_details.monthly_net_income?.$value || "";
 
   console.log("📤 Payload:", {
     firstName, middleName, lastName, gender, email, address, income
   });
 
-  // ❌ IF EMPTY → STOP (THIS WAS YOUR ISSUE)
+  // ✅ VALIDATION (DO NOT BLOCK DEBUGGING)
   if (!firstName || !lastName || !email || !income) {
-
-    console.log("❌ Validation Failed");
+    console.log("❌ Validation failed");
 
     globals.functions.setProperty(
       globals.form.customer_details.personal_details.email_id,
@@ -695,7 +690,7 @@ function submitCustomerDetails(globals) {
     })
   })
   .then(res => {
-    console.log("STATUS:", res.status);
+    console.log("🌐 STATUS:", res.status);
     return res.json();
   })
   .then(response => {
@@ -706,7 +701,7 @@ function submitCustomerDetails(globals) {
 
       const data = response.data;
 
-      // ✅ SET LOAN AMOUNT (FULL PATH)
+      // ✅ SET LOAN VALUE
       globals.functions.setProperty(
         globals.form.offer_display.loan_income,
         {
@@ -714,36 +709,25 @@ function submitCustomerDetails(globals) {
         }
       );
 
-      // ✅ SHOW OFFER PANEL
+      // ✅ SHOW OFFER
       globals.functions.setProperty(
         globals.form.offer_display,
-        {
-          visible: true
-        }
+        { visible: true }
       );
 
-      // ✅ HIDE CUSTOMER DETAILS
+      // ✅ HIDE FORM
       globals.functions.setProperty(
         globals.form.customer_details,
-        {
-          visible: false
-        }
+        { visible: false }
       );
 
     } else {
-
-      globals.functions.setProperty(
-        globals.form.customer_details.personal_details.email_id,
-        {
-          valid: false
-        }
-      );
-
+      console.log("❌ API failed");
     }
 
   })
   .catch(err => {
-    console.error("❌ Error:", err);
+    console.error("❌ Fetch Error:", err);
   });
 
   return "Customer API triggered";
