@@ -327,14 +327,14 @@ function generateOtp(globals) {
   try {
     const form = globals.form;
 
-    // ✅ CORRECT PATHS (as you provided)
-    const mobile = form.personal_loan_offer.mobile_number?.value;
-    const dob = form.personal_loan_offer.date_of_birth?.value;
-    const pan = form.personal_loan_offer.pan?.value;
+    // ✅ CORRECT PATHS
+    const mobile = form.personal_loan_offer.mobile_number?.$value || '';
+    const dob    = form.personal_loan_offer.date_of_birth?.$value || '';
+    const pan    = form.personal_loan_offer.pan?.$value || '';
 
     console.log("📤 Generate Payload:", { mobile, dob, pan });
 
-    // ✅ VALIDATION (prevents 400 error)
+    // ✅ VALIDATION
     if (!mobile) {
       console.error("❌ Mobile is required");
       return;
@@ -345,18 +345,16 @@ function generateOtp(globals) {
       return;
     }
 
-    const payload = {
-      mobile: mobile,
-      dob: dob || null,
-      pan: pan || null
-    };
-
     fetch("https://craftsman-resonant-asparagus.ngrok-free.dev/generate-otp", {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
       },
-      body: JSON.stringify(payload)
+      body: JSON.stringify({
+        mobile,
+        dob: dob || null,
+        pan: pan || null
+      })
     })
     .then(res => res.json())
     .then(data => {
@@ -371,7 +369,7 @@ function generateOtp(globals) {
           { visible: true }
         );
 
-        // ✅ CLEAR OTP FIELD BEFORE USER TYPES
+        // ✅ CLEAR OTP FIELD
         globals.functions.setProperty(
           form.enter_otp_panel.otp_code,
           { value: "" }
