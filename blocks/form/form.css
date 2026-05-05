@@ -1918,9 +1918,18 @@ main .form .field-loan-upto p::before {
   border-radius: 0 0 12px 12px;
 }
 
-/* ✅ HIDE DUPLICATE TEXT ONLY INSIDE PANEL 2 */
-.field-income-verification-method .plain-text-wrapper {
+/* FIX TEXT DUPLICATION */
+.field-salary-bank-selection .plain-text-wrapper {
   display: none !important;
+}
+
+.field-income-verification-method > .plain-text-wrapper {
+  display: none !important;
+}
+
+/* FIX DROPDOWN ALIGNMENT */
+.drop-down-wrapper.field-salary-bank {
+  margin-left: auto;
 }
 
 .salary-bank-content-row {
