@@ -1956,18 +1956,26 @@ main .form .field-loan-upto p::before {
   display: none !important;
 }
 
+/* 🔥 FINAL REAL FIX */
+
 .field-salary-bank-selection .salary-bank-content-row {
-  display: flex;
-  align-items: center;
-  width: 100%;
+  display: flex !important;
+  align-items: center !important;
+  width: 100% !important;
 }
 
+/* 🚨 THIS LINE FIXES EVERYTHING */
 .field-salary-bank-selection .bank-card-container {
-  flex: 1;
+  flex: 1 1 0% !important;   /* allow shrinking */
+  min-width: 0 !important;   /* CRITICAL */
+  overflow: hidden !important;
 }
 
+/* dropdown stays fixed right */
 .field-salary-bank-selection .drop-down-wrapper {
-  margin-left: auto;
-  width: 230px;
-  flex-shrink: 0;
+  flex: 0 0 230px !important;
+  width: 230px !important;
+  margin-left: auto !important;
+  position: relative !important;
+  z-index: 2 !important;
 }
