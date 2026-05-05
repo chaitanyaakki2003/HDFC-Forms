@@ -1966,27 +1966,3 @@ main .form .field-loan-upto p::before {
   flex: 0 0 230px !important;
   width: 230px !important;
 }
-
-
-.field-salary-bank-selection .salary-bank-content-row {
-  display: flex;
-  align-items: center;
-  gap: 16px;
-  width: 100%;
-}
-
-/* LEFT SIDE (cards) */
-.field-salary-bank-selection .bank-card-container {
-  flex: 1 1 auto;
-  display: flex;
-  gap: 16px;
-  min-width: 0;
-  flex-wrap: wrap; /* ✅ prevents overflow on mobile */
-}
-
-/* RIGHT SIDE (dropdown) */
-.field-salary-bank-selection .drop-down-wrapper {
-  margin-left: auto;        /* ✅ pushes to right */
-  flex: 0 0 230px;          /* fixed width on desktop */
-  width: 230px;
-}
