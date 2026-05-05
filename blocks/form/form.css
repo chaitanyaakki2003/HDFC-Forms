@@ -1790,13 +1790,13 @@ main .form .field-loan-upto p::before {
 .salary-bank-content-row {
   display: flex;
   align-items: center;
-  justify-content: space-between;
 }
 
-/* CARD CONTAINER */
+/* LEFT SIDE */
 .bank-card-container {
   display: flex;
   gap: 14px;
+  flex-wrap: wrap;
 }
 
 /* CARD */
@@ -1806,12 +1806,10 @@ main .form .field-loan-upto p::before {
   border-radius: 12px;
   border: 1px solid #dfe5f0;
   background: #fff;
-
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-
   cursor: pointer;
 }
 
@@ -1831,11 +1829,23 @@ main .form .field-loan-upto p::before {
   font-size: 10px;
 }
 
-/* DROPDOWN */
+/* RIGHT SIDE DROPDOWN */
+.field-salary-bank-selection .drop-down-wrapper {
+  margin-left: auto;
+  width: 220px;
+}
+
 .drop-down-wrapper.field-salary-bank select {
   height: 44px;
-  width: 200px;
+  width: 100%;
   border-radius: 8px;
+}
+
+/* ✅ HIDE ONLY PANEL 1 EXTRA TEXT */
+.field-salary-bank-selection 
+.radio-group-wrapper 
+.plain-text-wrapper {
+  display: none !important;
 }
 
 
@@ -1881,11 +1891,14 @@ main .form .field-loan-upto p::before {
 }
 
 /* SELECTED */
-.field-income-verification-method .radio-wrapper:has(input:checked) {
+.field-income-verification-method 
+.radio-wrapper:has(input:checked) {
   border: 2px solid #2f55e7;
 }
 
-/* DESCRIPTION */
+/* ✅ DESCRIPTION (SCOPED ONLY HERE) */
+.field-income-verification-method 
+.radio-group-wrapper 
 .radio-wrapper label::after {
   display: block;
   margin-top: 6px;
@@ -1893,18 +1906,28 @@ main .form .field-loan-upto p::before {
   color: #6b7280;
 }
 
-/* TEXTS */
+/* TEXT CONTENT */
+.field-income-verification-method 
+.radio-group-wrapper 
 .radio-wrapper:nth-child(1) label::after {
   content: "Instant & secure, processed via RBI-regulated partner.";
 }
+
+.field-income-verification-method 
+.radio-group-wrapper 
 .radio-wrapper:nth-child(2) label::after {
   content: "Quick & hassle-free, processed via NetBanking.";
 }
+
+.field-income-verification-method 
+.radio-group-wrapper 
 .radio-wrapper:nth-child(3) label::after {
   content: "Processed via uploading bank statement of the last 6 months.";
 }
 
 /* RECOMMENDED */
+.field-income-verification-method 
+.radio-group-wrapper 
 .radio-wrapper:first-child:has(input:checked)::after {
   content: "Recommended";
   position: absolute;
@@ -1918,30 +1941,7 @@ main .form .field-loan-upto p::before {
   border-radius: 0 0 12px 12px;
 }
 
-/* ✅ PANEL 1: hide only description text under radios */
-.field-salary-bank-selection 
-.radio-group-wrapper 
-.plain-text-wrapper {
-  display: none !important;
-}
-
-.field-salary-bank-selection .field-wrapper {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-/* push dropdown right */
-.field-salary-bank-selection .drop-down-wrapper {
-  margin-left: auto;
-}
-
-/* PANEL 1 ONLY */
-.field-salary-bank-selection .plain-text-wrapper {
-  display: none;
-}
-
-/* PANEL 2 ONLY */
+/* ✅ HIDE ONLY PANEL 2 BOTTOM TEXT */
 .field-income-verification-method > .plain-text-wrapper {
-  display: none;
+  display: none !important;
 }

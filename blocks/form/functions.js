@@ -257,24 +257,17 @@ function initSalaryBankUI() {
   if (!panel || !radioGroup || panel.dataset.ready === "true") return;
   panel.dataset.ready = "true";
 
- const bankLogos = {
-  hdfc_bank: "/content/dam/akki/hdfc.png",
-  icici_bank: "/content/dam/akki/icici.png",
-  axis_bank: "/content/dam/akki/axis.png",
-  kotak_bank: "/content/dam/akki/kotak.png",
-  sbi: "/content/dam/akki/sbi.png",
-  bank_of_baroda: "/content/dam/akki/bob.jpeg",
-  idfc_first_bank: "/content/dam/akki/idfc.png"
-};
+  const bankLogos = {
+    hdfc_bank: "/content/dam/akki/hdfc.png",
+    icici_bank: "/content/dam/akki/icici.png",
+    axis_bank: "/content/dam/akki/axis.png",
+    kotak_bank: "/content/dam/akki/kotak.png",
+    sbi: "/content/dam/akki/sbi.png",
+    bank_of_baroda: "/content/dam/akki/bob.jpeg",
+    idfc_first_bank: "/content/dam/akki/idfc.png"
+  };
 
-  // ✅ FIX DROPDOWN OPTIONS
-  if (dropdown) {
-    dropdown.innerHTML = `
-      <option value="hdfc_bank">HDFC Bank</option>
-      <option value="other_bank">Other Bank</option>
-    `;
-  }
-
+  // Create container
   const container = document.createElement("div");
   container.className = "salary-bank-content-row";
 
@@ -282,8 +275,11 @@ function initSalaryBankUI() {
   cards.className = "bank-card-container";
 
   container.appendChild(cards);
-  
+
+  // Insert above radios (DO NOT MOVE DROPDOWN)
   radioGroup.parentNode.insertBefore(container, radioGroup);
+
+  // Hide original radios
   radioGroup.style.display = "none";
 
   const radios = radioGroup.querySelectorAll("input[type='radio']");
@@ -296,10 +292,9 @@ function initSalaryBankUI() {
     card.className = "bank-card";
 
     card.innerHTML = `
-  <img src="${bankLogos[value] || ''}" 
-       onerror="this.style.display='none'" />
-  <span>${labelText}</span>
-`;
+      <img src="${bankLogos[value] || ''}" onerror="this.style.display='none'" />
+      <span>${labelText}</span>
+    `;
 
     if (radio.checked) card.classList.add("active");
 
@@ -307,7 +302,9 @@ function initSalaryBankUI() {
       radios.forEach(r => r.checked = false);
       radio.checked = true;
 
-      document.querySelectorAll(".bank-card").forEach(c => c.classList.remove("active"));
+      document.querySelectorAll(".bank-card")
+        .forEach(c => c.classList.remove("active"));
+
       card.classList.add("active");
 
       if (dropdown) dropdown.value = value;
@@ -316,6 +313,12 @@ function initSalaryBankUI() {
     cards.appendChild(card);
   });
 }
+
+/* SAFE LOAD */
+document.addEventListener("DOMContentLoaded", initSalaryBankUI);
+window.addEventListener("load", initSalaryBankUI);
+setTimeout(initSalaryBankUI, 500);
+setTimeout(initSalaryBankUI, 1500);
 // eslint-disable-next-line import/prefer-default-export
 export {
   getFullName, days, submitFormArrayToString, maskMobileNumber, handleOtpFlow, updateLoanOffer, calculateEMI, initSalaryBankUI,
