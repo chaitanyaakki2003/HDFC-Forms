@@ -625,6 +625,121 @@ function resendOtp(globals) {
   return "Resend triggered";
 }
 
+
+/**
+ * CUSTOMER DETAILS API CALL
+ * @param {scope} globals
+ */
+function submitCustomerDetails(globals) {
+
+  const form = globals.form;
+
+  // ✅ CORRECT PATHS (FROM YOUR UI)
+
+  const firstName =
+    form.customer_details.person_details.full_name_as_per_pan.first_name_as_per_pan?.$value || "";
+
+  const middleName =
+    form.customer_details.person_details.full_name_as_per_pan.middle_name_as_per_pan?.$value || "";
+
+  const lastName =
+    form.customer_details.person_details.full_name_as_per_pan.last_name_as_per_pan?.$value || "";
+
+  const gender =
+    form.customer_details.personal_details.gender?.$value || "";
+
+  const email =
+    form.customer_details.personal_details.email_id?.$value || "";
+
+  const address =
+    form.customer_details.address_details.aadhaar_address?.$value || "";
+
+  const income =
+    form.customer_details.income_details.monthly_net_income?.$value || "";
+
+  console.log("📤 Payload:", {
+    firstName, middleName, lastName, gender, email, address, income
+  });
+
+  // ✅ BASIC VALIDATION
+  if (!firstName || !lastName || !email || !income) {
+
+    globals.functions.setProperty(
+      form.customer_details.personal_details.email_id,
+      { valid: false }
+    );
+
+    return "Validation failed";
+  }
+
+  // ✅ API CALL
+  fetch("https://craftsman-resonant-asparagus.ngrok-free.dev/customer-details", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+      firstName,
+      middleName,
+      lastName,
+      gender,
+      email,
+      address,
+      income
+    })
+  })
+  .then(res => res.json())
+  .then(response => {
+
+    console.log("✅ API Response:", response);
+
+    if (response.status === "success") {
+
+      const data = response.data;
+
+      // ✅ SET LOAN AMOUNT (ADJUST FIELD NAME IF DIFFERENT)
+      globals.functions.setProperty(
+        form.offer_display.loan_amount,
+        {
+          value: data.loanAmount
+        }
+      );
+
+      // ✅ SHOW OFFER PANEL
+      globals.functions.setProperty(
+        form.offer_display,
+        {
+          visible: true
+        }
+      );
+
+      // ✅ HIDE CUSTOMER DETAILS
+      globals.functions.setProperty(
+        form.customer_details,
+        {
+          visible: false
+        }
+      );
+
+    } else {
+
+      globals.functions.setProperty(
+        form.customer_details.personal_details.email_id,
+        {
+          valid: false
+        }
+      );
+
+    }
+
+  })
+  .catch(err => {
+    console.error("❌ Error:", err);
+  });
+
+  return "Customer API triggered";
+}
+
 // eslint-disable-next-line import/prefer-default-export
 export {
   getFullName, days, submitFormArrayToString, maskMobileNumber, handleOtpFlow, updateLoanOffer, calculateEMI, initSalaryBankUI, generateOtp, verifyOtp, startOtpTimer,resendOtp
