@@ -1765,193 +1765,155 @@ main .form .field-loan-upto p::before {
 
 
 
-/* ============================= */
-/* BANK PANEL */
-/* ============================= */
+/* ===================== */
+/* PANEL 1: BANK SELECT */
+/* ===================== */
 
 .field-salary-bank-selection {
-  background: #ffffff !important;
-  border: 1px solid #e2e8f0 !important;
-  border-radius: 16px !important;
-  padding: 0 24px 24px !important;
-  margin-bottom: 24px !important;
-  overflow: hidden !important;
+  background: #fff;
+  border-radius: 16px;
+  border: 1px solid #e6ebf5;
+  padding: 0 20px 20px;
+  margin-bottom: 24px;
 }
 
-/* Header */
+/* HEADER */
 .field-salary-bank-selection > legend.field-label {
-  display: flex !important;
-  align-items: center !important;
-  height: 64px !important;
-  margin: 0 -24px 20px !important;
-  padding: 0 24px !important;
-  background: #eef3ff !important;
-  border-radius: 16px 16px 0 0 !important;
-  font-size: 16px !important;
-  font-weight: 700 !important;
+  background: #dbe5f6;
+  margin: 0 -20px 20px;
+  padding: 16px 20px;
+  border-radius: 16px 16px 0 0;
+  font-weight: 600;
 }
 
-/* Row */
+/* ROW */
 .salary-bank-content-row {
-  display: flex !important;
-  justify-content: space-between !important;
-  align-items: center !important;
-  gap: 24px !important;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
-/* Cards container */
+/* CARD CONTAINER */
 .bank-card-container {
-  display: flex !important;
-  gap: 16px !important;
+  display: flex;
+  gap: 14px;
 }
 
-/* Card */
+/* CARD */
 .bank-card {
-  width: 72px !important;
-  height: 72px !important;
-  border-radius: 14px !important;
-  border: 1px solid #e2e8f0 !important;
-  background: #fff !important;
+  width: 64px;
+  height: 64px;
+  border-radius: 12px;
+  border: 1px solid #dfe5f0;
+  background: #fff;
 
-  display: flex !important;
-  flex-direction: column !important;
-  align-items: center !important;
-  justify-content: center !important;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 
-  cursor: pointer !important;
-  transition: all 0.2s ease;
+  cursor: pointer;
 }
 
-/* Active card */
+/* ACTIVE */
 .bank-card.active {
-  border: 2px solid #3156e8 !important;
-  box-shadow: 0 0 0 3px rgba(49,86,232,0.12);
+  border: 2px solid #2f55e7;
 }
 
-/* Icon */
+/* IMAGE */
 .bank-card img {
-  width: 28px !important;
-  height: 28px !important;
-  object-fit: contain !important;
+  width: 26px;
+  height: 26px;
 }
 
-/* Label */
+/* LABEL */
 .bank-card span {
-  font-size: 11px !important;
-  color: #1f2937 !important;
-  text-align: center !important;
+  font-size: 10px;
 }
 
-/* Dropdown */
-.drop-down-wrapper.field-salary-bank {
-  width: 240px !important;
-}
-
+/* DROPDOWN */
 .drop-down-wrapper.field-salary-bank select {
-  height: 44px !important;
-  border-radius: 10px !important;
-  border: 1px solid #d1d5db !important;
-  padding: 0 12px !important;
+  height: 44px;
+  width: 200px;
+  border-radius: 8px;
 }
 
-/* ============================= */
-/* INCOME VERIFICATION PANEL */
-/* ============================= */
 
-fieldset.field-income-verification-method.panel-wrapper {
-  border-radius: 16px !important;
-  border: 1px solid #e5eaf3 !important;
-  padding: 0 20px 20px !important;
-  background: #fff !important;
+/* ===================== */
+/* PANEL 2 */
+/* ===================== */
+
+.field-income-verification-method {
+  background: #fff;
+  border-radius: 16px;
+  border: 1px solid #e6ebf5;
+  padding: 0 20px 20px;
 }
 
-/* Header */
-fieldset.field-income-verification-method > legend.field-label {
-  background: #eef3ff !important;
-  border-radius: 16px 16px 0 0 !important;
-  margin: 0 -20px 20px !important;
-  padding: 16px 20px !important;
-  font-weight: 700 !important;
+/* HEADER */
+.field-income-verification-method > legend {
+  background: #dbe5f6;
+  margin: 0 -20px 20px;
+  padding: 16px 20px;
+  border-radius: 16px 16px 0 0;
 }
 
-/* Cards row */
-.field-income-verification-option {
+/* CARDS */
+.field-income-verification-method .radio-group-wrapper {
   display: flex !important;
-  gap: 16px !important;
+  gap: 16px;
 }
 
-/* Card */
+/* CARD */
 .field-income-verification-method .radio-wrapper {
   flex: 1;
-  padding: 18px 18px 18px 44px;
-  border-radius: 14px;
-  border: 1px solid #dfe4ec;
-  background: #fff;
+  border: 1px solid #dfe5f0;
+  border-radius: 12px;
+  padding: 16px 16px 16px 40px;
   position: relative;
 }
 
-/* Radio */
-.field-income-verification-method input[type="radio"] {
+/* RADIO */
+.field-income-verification-method input {
   position: absolute;
+  left: 12px;
   top: 18px;
-  left: 18px;
-  accent-color: #3156e8;
 }
 
-/* Selected */
-.field-income-verification-method 
-.radio-wrapper:has(input:checked) {
-  border: 2px solid #3156e8;
+/* SELECTED */
+.field-income-verification-method .radio-wrapper:has(input:checked) {
+  border: 2px solid #2f55e7;
 }
 
-/* Title */
-.field-income-verification-method label {
-  font-size: 15px;
-  font-weight: 700;
-}
-
-/* Description */
-.field-income-verification-method label::after {
+/* DESCRIPTION */
+.radio-wrapper label::after {
   display: block;
   margin-top: 6px;
   font-size: 12px;
   color: #6b7280;
 }
 
-/* Texts */
+/* TEXTS */
 .radio-wrapper:nth-child(1) label::after {
   content: "Instant & secure, processed via RBI-regulated partner.";
 }
-
 .radio-wrapper:nth-child(2) label::after {
   content: "Quick & hassle-free, processed via NetBanking.";
 }
-
 .radio-wrapper:nth-child(3) label::after {
   content: "Processed via uploading bank statement of the last 6 months.";
 }
 
-/* Recommended */
+/* RECOMMENDED */
 .radio-wrapper:first-child:has(input:checked)::after {
   content: "Recommended";
   position: absolute;
   bottom: 0;
   left: 0;
   right: 0;
-  background: #008765;
-  color: #fff;
+  background: green;
+  color: white;
   text-align: center;
-  font-size: 12px;
-  padding: 6px;
+  padding: 4px;
   border-radius: 0 0 12px 12px;
-}
-
-/* Button */
-.field-continue-button button {
-  background: #2b5be3;
-  color: #fff;
-  border-radius: 10px;
-  height: 44px;
-  width: 180px;
-  font-weight: 700;
 }

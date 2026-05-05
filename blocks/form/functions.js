@@ -249,86 +249,74 @@ function calculateEMI(globals) {
     console.error("EMI ERROR:", e);
   }
 }
- function initSalaryBankUI() {
+function initSalaryBankUI() {
   const panel = document.querySelector(".field-salary-bank-selection");
-  const dropdownWrapper = document.querySelector(".drop-down-wrapper.field-salary-bank");
-  const select = document.querySelector("select[name='salary_bank']");
+  const radioGroup = panel?.querySelector(".radio-group-wrapper");
+  const dropdown = document.querySelector(".drop-down-wrapper.field-other-bank select");
 
-  if (!panel || !dropdownWrapper || !select || panel.dataset.ready === "true") return;
-
+  if (!panel || !radioGroup || panel.dataset.ready === "true") return;
   panel.dataset.ready = "true";
 
   const bankLogos = {
     hdfc_bank: "/content/dam/akki/hdfc.png",
     icici_bank: "/content/dam/akki/icici.png",
     axis_bank: "/content/dam/akki/axis.png",
-    kotak: "/content/dam/akki/kotak.png",
+    kotak_bank: "/content/dam/akki/kotak.png",
     sbi: "/content/dam/akki/sbi.png",
     bank_of_baroda: "/content/dam/akki/bob.jpeg",
-    idfc_first: "/content/dam/akki/idfc.png"
+    idfc_first_bank: "/content/dam/akki/idfc.png"
   };
 
-  const banks = [
-    { value: "hdfc_bank", text: "HDFC Bank" },
-    { value: "icici_bank", text: "ICICI Bank" },
-    { value: "axis_bank", text: "Axis Bank" },
-    { value: "kotak", text: "Kotak" },
-    { value: "sbi", text: "SBI" },
-    { value: "bank_of_baroda", text: "Bank of Baroda" },
-    { value: "idfc_first", text: "IDFC First" }
-  ];
+  const container = document.createElement("div");
+  container.className = "salary-bank-content-row";
 
-  const row = document.createElement("div");
-  row.className = "salary-bank-content-row";
+  const cards = document.createElement("div");
+  cards.className = "bank-card-container";
 
-  const cardContainer = document.createElement("div");
-  cardContainer.className = "bank-card-container";
+  container.appendChild(cards);
 
-  row.appendChild(cardContainer);
-  row.appendChild(dropdownWrapper);
+  // ✅ INSERT IN CORRECT POSITION (IMPORTANT FIX)
+  radioGroup.parentNode.insertBefore(container, radioGroup);
 
-  const legend = panel.querySelector("legend");
+  // hide original radios
+  radioGroup.style.display = "none";
 
-  legend.insertAdjacentElement("afterend", row);
+  const radios = radioGroup.querySelectorAll("input[type='radio']");
 
-  function renderCards() {
-    cardContainer.innerHTML = "";
+  radios.forEach((radio) => {
+    const value = radio.value;
+    const labelText = radio.nextElementSibling?.innerText || value;
 
-    banks.forEach((bank) => {
-      const card = document.createElement("div");
-      card.className = "bank-card";
-      card.dataset.value = bank.value;
+    const card = document.createElement("div");
+    card.className = "bank-card";
 
-      card.innerHTML = `
-        <img src="${bankLogos[bank.value]}" />
-        <span>${bank.text}</span>
-      `;
+    card.innerHTML = `
+      <img src="${bankLogos[value] || ""}" />
+      <span>${labelText}</span>
+    `;
 
-      if (select.value === bank.value) {
-        card.classList.add("active");
-      }
+    if (radio.checked) card.classList.add("active");
 
-      card.onclick = () => {
-        select.value = bank.value;
+    card.onclick = () => {
+      radios.forEach(r => r.checked = false);
+      radio.checked = true;
 
-        document.querySelectorAll(".bank-card").forEach(c => c.classList.remove("active"));
-        card.classList.add("active");
-      };
+      document.querySelectorAll(".bank-card").forEach(c => c.classList.remove("active"));
+      card.classList.add("active");
 
-      cardContainer.appendChild(card);
-    });
-  }
+      if (dropdown) dropdown.value = value;
+    };
 
-  select.value = "hdfc_bank";
-  renderCards();
-
-  select.addEventListener("change", renderCards);
+    cards.appendChild(card);
+  });
 }
 
-/* AEM safe triggers */
+/* AEM SAFE LOAD */
 document.addEventListener("DOMContentLoaded", initSalaryBankUI);
 window.addEventListener("load", initSalaryBankUI);
-setTimeout(initSalaryBankUI, 1000);
+setTimeout(initSalaryBankUI, 500);
+setTimeout(initSalaryBankUI, 1500);
+
 // eslint-disable-next-line import/prefer-default-export
 export {
   getFullName, days, submitFormArrayToString, maskMobileNumber, handleOtpFlow, updateLoanOffer, calculateEMI, initSalaryBankUI,
