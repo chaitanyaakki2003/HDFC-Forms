@@ -258,14 +258,14 @@ function initSalaryBankUI() {
   panel.dataset.ready = "true";
 
   const bankLogos = {
-    hdfc_bank: "/content/dam/akki/hdfc.png",
-    icici_bank: "/content/dam/akki/icici.png",
-    axis_bank: "/content/dam/akki/axis.png",
-    kotak_bank: "/content/dam/akki/kotak.png",
-    sbi: "/content/dam/akki/sbi.png",
-    bank_of_baroda: "/content/dam/akki/bob.jpeg",
-    idfc_first_bank: "/content/dam/akki/idfc.png"
-  };
+  "hdfc_bank": "/content/dam/akki/hdfc.png",
+  "icici_bank": "/content/dam/akki/icici.png",
+  "axis_bank": "/content/dam/akki/axis.png",
+  "kotak_bank": "/content/dam/akki/kotak.png",
+  "sbi": "/content/dam/akki/sbi.png",
+  "bank_of_baroda": "/content/dam/akki/bob.jpeg",
+  "idfc_first_bank": "/content/dam/akki/idfc.png"
+};
 
   const container = document.createElement("div");
   container.className = "salary-bank-content-row";
@@ -286,7 +286,7 @@ function initSalaryBankUI() {
   const radios = radioGroup.querySelectorAll("input[type='radio']");
 
   radios.forEach((radio) => {
-    const value = radio.value.trim().toLowerCase();   // ✅ FIX
+    const value = radio.value.trim(); // ✅ FIX
     const labelText = radio.nextElementSibling?.innerText || value;
 
     const card = document.createElement("div");
