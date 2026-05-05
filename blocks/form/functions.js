@@ -278,32 +278,17 @@ function initSalaryBankUI() {
   container.appendChild(cards);
 
   if (dropdownWrapper) {
-  // ❌ DO NOT REMOVE field-wrapper
-  dropdownWrapper.classList.remove("col-4");
-
-  // ✅ override instead of removing
-  dropdownWrapper.style.display = "block";
-  dropdownWrapper.style.position = "static";
+  dropdownWrapper.classList.remove("col-4");   // ❌ remove AEM grid
   dropdownWrapper.style.gridColumn = "unset";
-
+  dropdownWrapper.style.width = "230px";
   dropdownWrapper.style.marginLeft = "auto";
   dropdownWrapper.style.flex = "0 0 230px";
-  dropdownWrapper.style.width = "230px";
 
   container.appendChild(dropdownWrapper);
 }
-  container.appendChild(dropdownWrapper);
-}
 
-  // ✅ insert AFTER legend (safe position)
-const legend = panel.querySelector("legend.field-label");
-
-if (legend) {
-  legend.insertAdjacentElement("afterend", container);
-}
-
-// ✅ keep radioGroup hidden BUT NOT REMOVED FROM FLOW
-radioGroup.style.display = "none";
+  radioGroup.parentNode.insertBefore(container, radioGroup);
+  radioGroup.style.display = "none";
 
   const radios = radioGroup.querySelectorAll("input[type='radio']");
 
@@ -353,7 +338,7 @@ radioGroup.style.display = "none";
     other.textContent = "Other Bank";
     dropdown.appendChild(other);
   }
-
+}
 
 /* AEM SAFE LOAD */
 function waitForAEM() {
