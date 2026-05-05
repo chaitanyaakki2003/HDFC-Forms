@@ -1956,13 +1956,18 @@ main .form .field-loan-upto p::before {
   display: none !important;
 }
 
-/* 🔥 FORCE DROPDOWN TO BE FLEX ITEM (WITHOUT BREAKING AEM) */
-.field-salary-bank-selection .drop-down-wrapper {
-  display: block !important;
-  position: static !important;
-  grid-column: unset !important;
+.field-salary-bank-selection .salary-bank-content-row {
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
 
-  margin-left: auto !important;
-  flex: 0 0 230px !important;
-  width: 230px !important;
+.field-salary-bank-selection .bank-card-container {
+  flex: 1;
+}
+
+.field-salary-bank-selection .drop-down-wrapper {
+  margin-left: auto;
+  width: 230px;
+  flex-shrink: 0;
 }

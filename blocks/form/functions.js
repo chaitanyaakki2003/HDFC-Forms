@@ -251,7 +251,9 @@ function calculateEMI(globals) {
 }
 function initSalaryBankUI() {
   const panel = document.querySelector(".field-salary-bank-selection");
-  const radioGroup = panel?.querySelector(".radio-group-wrapper");
+  const radioGroup = panel?.querySelector(
+  ".radio-group-wrapper.field-salary-bank"
+);
 
   if (!panel || !radioGroup || panel.dataset.ready === "true") return;
   panel.dataset.ready = "true";
@@ -278,11 +280,10 @@ function initSalaryBankUI() {
   container.appendChild(cards);
 
   if (dropdownWrapper) {
-  dropdownWrapper.classList.remove("col-4");   // ❌ remove AEM grid
-  dropdownWrapper.style.gridColumn = "unset";
-  dropdownWrapper.style.width = "230px";
-  dropdownWrapper.style.marginLeft = "auto";
-  dropdownWrapper.style.flex = "0 0 230px";
+  // 🔥 completely detach from AEM layout
+  dropdownWrapper.removeAttribute("class");
+
+  dropdownWrapper.className = "drop-down-wrapper"; // reset clean class
 
   container.appendChild(dropdownWrapper);
 }
