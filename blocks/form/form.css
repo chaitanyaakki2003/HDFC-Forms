@@ -1790,16 +1790,18 @@ main .form .field-loan-upto p::before {
 .salary-bank-content-row {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  gap: 20px;
+  width: 100%;
 }
 
 /* LEFT SIDE: BANK CARDS */
 .bank-card-container {
   display: flex;
   gap: 14px;
-  flex-wrap: nowrap;          /* ✅ FIX: force horizontal */
+  flex-wrap: nowrap;
   align-items: center;
+
+  flex: 1;
+  min-width: 0;
 }
 
 /* CARD */
@@ -1845,9 +1847,9 @@ main .form .field-loan-upto p::before {
 
 /* RIGHT SIDE DROPDOWN */
 .field-salary-bank-selection .drop-down-wrapper {
-  margin-left: auto;
   width: 220px;
-  flex-shrink: 0;   /* ✅ prevents overlap */
+  flex-shrink: 0;
+  margin-left: 20px;
 }
 
 .drop-down-wrapper.field-salary-bank select {
