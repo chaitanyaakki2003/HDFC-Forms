@@ -1034,28 +1034,30 @@ function generateOtpTier1(globals) {
   });
 
 }
-
 /**
  * Verify OTP Tier1
  * @param {scope} globals
  */
 function verifyOtpTier1(globals) {
 
+  const form = globals.form;
+  const otpPanel = form.enter_otp_panel;
+
   const mobile =
-    globals.form.personal_loan_offer.mobile_number?.$value || "";
+    form.personal_loan_offer.mobile_number?.$value || "";
 
   const dob =
-    globals.form.personal_loan_offer.date_of_birth?.$value || "";
+    form.personal_loan_offer.date_of_birth?.$value || "";
 
   const otp =
-    globals.form.enter_otp_panel.otp_code?.$value || "";
+    otpPanel.otp_code?.$value || "";
 
-  // VALIDATION
+  // EMPTY OTP
   if (!otp) {
 
     globals.functions.setProperty(
 
-      globals.form.enter_otp_panel.success_msg,
+      otpPanel.success_msg,
 
       {
         value: "Please enter OTP",
@@ -1064,22 +1066,17 @@ function verifyOtpTier1(globals) {
 
     );
 
-    // FORCE ENABLE BUTTON
-    setTimeout(() => {
+    globals.functions.setProperty(
 
-      globals.functions.setProperty(
+      otpPanel.submit_otp,
 
-        globals.form.enter_otp_panel.submit_otp,
+      {
+        enabled: true
+      }
 
-        {
-          enabled: true
-        }
+    );
 
-      );
-
-    }, 100);
-
-    return;
+    return false;
   }
 
   // API CALL
@@ -1126,7 +1123,7 @@ function verifyOtpTier1(globals) {
 
       globals.functions.setProperty(
 
-        globals.form.enter_otp_panel.success_msg,
+        otpPanel.success_msg,
 
         {
           value: "OTP Verified Successfully",
@@ -1137,14 +1134,14 @@ function verifyOtpTier1(globals) {
 
     }
 
-    // FAILED
+    // INVALID OTP
     else {
 
       window.otpStateTier1.attempts--;
 
       globals.functions.setProperty(
 
-        globals.form.enter_otp_panel.attempts,
+        otpPanel.attempts,
 
         {
           value:
@@ -1156,7 +1153,7 @@ function verifyOtpTier1(globals) {
 
       globals.functions.setProperty(
 
-        globals.form.enter_otp_panel.success_msg,
+        otpPanel.success_msg,
 
         {
           value: "Invalid OTP",
@@ -1167,20 +1164,17 @@ function verifyOtpTier1(globals) {
 
     }
 
-    // FORCE ENABLE BUTTON AFTER API
-    setTimeout(() => {
+    // IMPORTANT
+    // FORCE BUTTON ENABLE
+    globals.functions.setProperty(
 
-      globals.functions.setProperty(
+      otpPanel.submit_otp,
 
-        globals.form.enter_otp_panel.submit_otp,
+      {
+        enabled: true
+      }
 
-        {
-          enabled: true
-        }
-
-      );
-
-    }, 100);
+    );
 
   })
 
@@ -1191,25 +1185,21 @@ function verifyOtpTier1(globals) {
       error
     );
 
-    // FORCE ENABLE BUTTON ON ERROR
-    setTimeout(() => {
+    globals.functions.setProperty(
 
-      globals.functions.setProperty(
+      otpPanel.submit_otp,
 
-        globals.form.enter_otp_panel.submit_otp,
+      {
+        enabled: true
+      }
 
-        {
-          enabled: true
-        }
-
-      );
-
-    }, 100);
+    );
 
   });
 
+  // IMPORTANT
+  return false;
 }
-
 /**
  * OTP TIMER Tier1
  * @param {scope} globals
