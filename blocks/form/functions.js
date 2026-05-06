@@ -745,9 +745,8 @@ function resendOtp(globals) {
 }
 /**
  * Review Details API Call
- * @param {scope} globals - Global scope object
+ * @param {scope} globals
  */
-
 function getReviewDetails(globals) {
 
   const form = globals.form;
@@ -758,10 +757,6 @@ function getReviewDetails(globals) {
 
   const mobile =
     form.personal_loan_offer.mobile_number?.value || "";
-
-  /* =========================
-     VALIDATION
-  ========================= */
 
   if (!mobile) {
 
@@ -800,10 +795,6 @@ function getReviewDetails(globals) {
       response
     );
 
-    /* =========================
-       SUCCESS
-    ========================= */
-
     if (response.status === "success") {
 
       const data = response.reviewDetails;
@@ -814,83 +805,66 @@ function getReviewDetails(globals) {
          LOAN DETAILS
       ========================= */
 
-      if (form.review_details?.loan_details) {
+      form.review_details.loan_details.processing_fee.value =
+        data.processing_fee || "";
 
-        form.review_details.loan_details.processing_fee.value =
-          data.processing_fee || "";
+      form.review_details.loan_details.schedule_of_charges.value =
+        data.schedule_of_charges || "";
 
-        form.review_details.loan_details.schedule_of_charges.value =
-          data.schedule_of_charges || "";
-
-      }
+      form.review_details.loan_details.loan_number.value =
+        data.loan_number || "";
 
       /* =========================
          PERSONAL DETAILS
       ========================= */
 
-      if (form.review_details?.personal_details) {
-
-        form.review_details.personal_details.residence_type.value =
-          data.residence_type || "";
-
-      }
+      form.review_details.personal_details.residence_type.value =
+        data.residence_type || "";
 
       /* =========================
          SALARY ACCOUNT DETAILS
       ========================= */
 
       console.log(
-        "SALARY ACCOUNT DETAILS:",
-        form.review_details?.salary_account_details
+        "salary_account_details",
+        form.review_details.salary_account_details
       );
 
-      if (form.review_details?.salary_account_details) {
+      form.review_details.salary_account_details.salary_ac_number.value =
+        data.salary_ac_number || "";
 
-        form.review_details.salary_account_details.salary_ac_number.value =
-          data.salary_ac_number || "";
+      form.review_details.salary_account_details.ifsc.value =
+        data.ifsc || "";
 
-        form.review_details.salary_account_details.ifsc.value =
-          data.ifsc || "";
-
-        form.review_details.salary_account_details.bank_name.value =
-          data.bank_name || "";
-
-      }
+      form.review_details.salary_account_details.bank_name.value =
+        data.bank_name || "";
 
       /* =========================
          OFFICE ADDRESS
       ========================= */
 
       console.log(
-        "OFFICE ADDRESS:",
-        form.review_details?.office_address
+        "office_address",
+        form.review_details.office_address
       );
 
-      if (form.review_details?.office_address) {
-
-        form.review_details.office_address.current_employer_address.value =
-          data.current_employer_address || "";
-
-      }
+      form.review_details.office_address.current_employer_address.value =
+        data.current_employer_address || "";
 
       /* =========================
          REFERENCE DETAILS
       ========================= */
 
       console.log(
-        "REFERENCE DETAILS:",
-        form.review_details?.reference_details
+        "reference_details",
+        form.review_details.reference_details
       );
 
-      if (form.review_details?.reference_details) {
-
-        form.review_details.reference_details.ref_name.value =
-          data.ref_name || "";
-
-      }
+      form.review_details.reference_details.ref_name.value =
+        data.ref_name || "";
 
       console.log(
-        "Review Details Populated Successfully"
+        "All Review Details Populated Successfully"
       );
 
     }
