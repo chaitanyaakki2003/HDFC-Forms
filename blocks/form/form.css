@@ -2018,7 +2018,7 @@ main .form .field-loan-upto p::before {
 .field-enter-otp-panel .field-resend-otp,
 .field-enter-otp-panel .field-attempts {
   display: inline-block;
-  width: 60%;
+  width: 100%;
   vertical-align: top;
   margin-top: 8px !important;
   margin-bottom: 18px !important;
