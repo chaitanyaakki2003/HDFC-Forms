@@ -746,20 +746,26 @@ function resendOtp(globals) {
 
 /**
  * Review Details API Call
- * @param {scope} globals
+ * @param {scope} globals - Global scope object
  */
 function getReviewDetails(globals) {
 
-  const form = globals.form;
-
-  // MOBILE NUMBER
   const mobile =
-    form.personal_loan_offer.mobile_number?.value || "";
+    globals.form.personal_loan_offer.mobile_number?.$value || "";
 
   // VALIDATION
   if (!mobile) {
 
-    console.log("Mobile number missing");
+    globals.functions.setProperty(
+
+      globals.form.review_details.loan_details.loan_number,
+
+      {
+        value: "Mobile number missing",
+        visible: true
+      }
+
+    );
 
     return;
   }
@@ -796,38 +802,42 @@ function getReviewDetails(globals) {
 
       const data = response.reviewDetails;
 
-      console.log("DATA:", data);
-
       /* =========================
          LOAN DETAILS
       ========================= */
 
       globals.functions.setProperty(
 
-        form.review_details.loan_details.processing_fee,
+        globals.form.review_details.loan_details.loan_number,
 
         {
-          value: data.processing_fee || ""
+          value: data.loan_number || "",
+          visible: true,
+          enabled: true
         }
 
       );
 
       globals.functions.setProperty(
 
-        form.review_details.loan_details.schedule_of_charges,
+        globals.form.review_details.loan_details.processing_fee,
 
         {
-          value: data.schedule_of_charges || ""
+          value: data.processing_fee || "",
+          visible: true,
+          enabled: true
         }
 
       );
 
       globals.functions.setProperty(
 
-        form.review_details.loan_details.loan_number,
+        globals.form.review_details.loan_details.schedule_of_charges,
 
         {
-          value: data.loan_number || ""
+          value: data.schedule_of_charges || "",
+          visible: true,
+          enabled: true
         }
 
       );
@@ -838,10 +848,12 @@ function getReviewDetails(globals) {
 
       globals.functions.setProperty(
 
-        form.review_details.personal_details.residence_type,
+        globals.form.review_details.personal_details.residence_type,
 
         {
-          value: data.residence_type || ""
+          value: data.residence_type || "",
+          visible: true,
+          enabled: true
         }
 
       );
@@ -852,30 +864,36 @@ function getReviewDetails(globals) {
 
       globals.functions.setProperty(
 
-        form.review_details.salary_account_details.salary_ac_number,
+        globals.form.review_details.salary_account_details.salary_ac_number,
 
         {
-          value: data.salary_ac_number || ""
+          value: data.salary_ac_number || "",
+          visible: true,
+          enabled: true
         }
 
       );
 
       globals.functions.setProperty(
 
-        form.review_details.salary_account_details.ifsc,
+        globals.form.review_details.salary_account_details.ifsc,
 
         {
-          value: data.ifsc || ""
+          value: data.ifsc || "",
+          visible: true,
+          enabled: true
         }
 
       );
 
       globals.functions.setProperty(
 
-        form.review_details.salary_account_details.bank_name,
+        globals.form.review_details.salary_account_details.bank_name,
 
         {
-          value: data.bank_name || ""
+          value: data.bank_name || "",
+          visible: true,
+          enabled: true
         }
 
       );
@@ -886,10 +904,12 @@ function getReviewDetails(globals) {
 
       globals.functions.setProperty(
 
-        form.review_details.office_address.current_employer_address,
+        globals.form.review_details.office_address.current_employer_address,
 
         {
-          value: data.current_employer_address || ""
+          value: data.current_employer_address || "",
+          visible: true,
+          enabled: true
         }
 
       );
@@ -900,10 +920,12 @@ function getReviewDetails(globals) {
 
       globals.functions.setProperty(
 
-        form.review_details.reference_details.ref_name,
+        globals.form.review_details.reference_details.ref_name,
 
         {
-          value: data.ref_name || ""
+          value: data.ref_name || "",
+          visible: true,
+          enabled: true
         }
 
       );
@@ -938,7 +960,7 @@ function getReviewDetails(globals) {
 
 // eslint-disable-next-line import/prefer-default-export
 export {
-  getFullName, days, submitFormArrayToString, maskMobileNumber, handleOtpFlow, updateLoanOffer, calculateEMI, initSalaryBankUI, generateOtp, verifyOtp, startOtpTimer,resendOtp, getReviewDetails
+  getFullName, days, submitFormArrayToString, maskMobileNumber, handleOtpFlow, updateLoanOffer, calculateEMI, initSalaryBankUI, generateOtp, verifyOtp, startOtpTimer,resendOtp, 
 };
 
 
