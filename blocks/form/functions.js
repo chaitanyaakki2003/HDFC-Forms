@@ -1052,38 +1052,22 @@ function verifyOtpTier1(globals) {
   const otp =
     otpPanel.otp_code?.$value || "";
 
-  // EMPTY OTP
   if (!otp) {
 
     globals.functions.setProperty(
-
       otpPanel.success_msg,
-
       {
         value: "Please enter OTP",
         visible: true
       }
-
     );
 
-    globals.functions.setProperty(
-
-      otpPanel.submit_otp,
-
-      {
-        enabled: true
-      }
-
-    );
-
-    return false;
+    return;
   }
 
-  // API CALL
   fetch(
     "https://craftsman-resonant-asparagus.ngrok-free.dev/api/validateOtp",
     {
-
       method: "POST",
 
       headers: {
@@ -1091,19 +1075,12 @@ function verifyOtpTier1(globals) {
       },
 
       body: JSON.stringify({
-
         requestString: {
-
           mobileNo: mobile,
-
           identifierValue: dob,
-
           otpValue: otp
-
         }
-
       })
-
     }
   )
 
@@ -1111,95 +1088,77 @@ function verifyOtpTier1(globals) {
 
   .then(response => {
 
-    console.log(
-      "VERIFY OTP RESPONSE:",
-      response
-    );
+    console.log("VERIFY OTP RESPONSE:", response);
 
-    // SUCCESS
     if (
       response.status.responseCode === "0"
     ) {
 
       globals.functions.setProperty(
-
         otpPanel.success_msg,
-
         {
           value: "OTP Verified Successfully",
           visible: true
         }
-
       );
 
-    }
-
-    // INVALID OTP
-    else {
+    } else {
 
       window.otpStateTier1.attempts--;
 
       globals.functions.setProperty(
-
         otpPanel.attempts,
-
         {
           value:
             window.otpStateTier1.attempts +
             "/3 attempts left"
         }
-
       );
 
       globals.functions.setProperty(
-
         otpPanel.success_msg,
-
         {
           value: "Invalid OTP",
           visible: true
         }
-
       );
 
     }
 
-    // IMPORTANT
-    // FORCE BUTTON ENABLE
-    globals.functions.setProperty(
+    // VERY IMPORTANT
+    // FORCE ENABLE AFTER UI CYCLE
+    setTimeout(() => {
 
-      otpPanel.submit_otp,
+      globals.functions.setProperty(
+        otpPanel.submit_otp,
+        {
+          enabled: true
+        }
+      );
 
-      {
-        enabled: true
-      }
-
-    );
+    }, 300);
 
   })
 
   .catch(error => {
 
-    console.error(
-      "Verify OTP Error:",
-      error
-    );
+    console.error("Verify OTP Error:", error);
 
-    globals.functions.setProperty(
+    setTimeout(() => {
 
-      otpPanel.submit_otp,
+      globals.functions.setProperty(
+        otpPanel.submit_otp,
+        {
+          enabled: true
+        }
+      );
 
-      {
-        enabled: true
-      }
-
-    );
+    }, 300);
 
   });
 
-  // IMPORTANT
-  return false;
 }
+
 /**
  * OTP TIMER Tier1
  * @param {scope} globals
