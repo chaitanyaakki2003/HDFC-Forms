@@ -1944,81 +1944,102 @@ main .form .field-loan-upto p::before {
 
 
 
-/* =========================
-   OTP SECTION ONLY STYLING
-   ========================= */
+/* =========================================
+   OTP PANEL STYLING - AEM EDS FORMS ONLY
+   ========================================= */
 
 .field-enter-otp-panel {
   margin-top: 20px;
+  max-width: 760px;   /* same width like reference image */
 }
 
-/* Heading */
+/* =========================================
+   HEADING
+   ========================================= */
+
 .field-enter-otp-panel legend.field-label {
-  font-size: 32px;
+  font-size: 22px;
   font-weight: 700;
   color: #4b5563;
   margin-bottom: 20px;
   border: none !important;
+  padding: 0;
 }
 
-/* OTP success/help text */
+/* =========================================
+   SUCCESS / HELP TEXT
+   ========================================= */
+
 .field-enter-otp-panel .field-otp-help-text {
-  margin-bottom: 18px;
+  margin-bottom: 16px;
 }
 
 .field-enter-otp-panel .field-otp-help-text p {
-  font-size: 18px;
+  font-size: 16px;
   line-height: 1.5;
   color: #4b5563;
   margin: 0;
 }
 
-/* OTP field wrapper */
+/* =========================================
+   OTP FIELD
+   ========================================= */
+
 .field-enter-otp-panel .field-otp-code {
+  width: 100%;
   margin-bottom: 10px !important;
 }
 
-/* Hide label */
+/* hide label */
 .field-enter-otp-panel .field-otp-code .field-label {
   display: none;
 }
 
-/* OTP input */
+/* OTP INPUT */
 .field-enter-otp-panel .field-otp-code input {
-  width: 760px !important;   /* increased width till attempts */
-  max-width: 100%;
+  width: 80% !important;
   height: 58px;
   border: 1px solid #9ca3af;
   border-radius: 4px;
-  font-size: 20px !important;
+  background: #fff;
+  box-sizing: border-box;
+  padding: 0 16px;
+  font-size: 18px !important;
   font-weight: 500;
   letter-spacing: 14px;
-  padding: 0 24px;
-  box-sizing: border-box;
-  outline: none;
   color: #4b5563;
+  outline: none;
 }
 
-/* Remove extra spacing */
-.field-enter-otp-panel .field-wrapper {
-  margin-top: 0 !important;
-  padding-top: 0 !important;
-}
+/* =========================================
+   RESEND + ATTEMPTS ROW
+   ========================================= */
 
-/* Resend + attempts row */
 .field-enter-otp-panel .field-resend-otp,
 .field-enter-otp-panel .field-attempts {
-  margin-top: 12px !important;
+  display: inline-block;
+  width: 49%;
+  vertical-align: top;
+  margin-top: 8px !important;
   margin-bottom: 18px !important;
 }
 
-/* Hide labels */
+/* alignment */
+.field-enter-otp-panel .field-resend-otp {
+  text-align: left;
+}
+
+.field-enter-otp-panel .field-attempts {
+  text-align: right;
+}
+
+/* hide labels */
 .field-enter-otp-panel .field-resend-otp .field-label,
 .field-enter-otp-panel .field-attempts .field-label {
   display: none;
 }
 
-/* Text styling */
+/* text fields */
 .field-enter-otp-panel .field-resend-otp input,
 .field-enter-otp-panel .field-attempts input {
   border: none !important;
@@ -2031,18 +2052,9 @@ main .form .field-loan-upto p::before {
   box-shadow: none !important;
 }
 
-/* Alignment */
-.field-enter-otp-panel .field-resend-otp {
-  text-align: left;
-}
-
-.field-enter-otp-panel .field-attempts {
-  text-align: right;
-}
-
-/* =========================
-   BUTTONS SIDE BY SIDE
-   ========================= */
+/* =========================================
+   BUTTONS ROW
+   ========================================= */
 
 .field-enter-otp-panel .field-resend-otp.field-wrapper,
 .field-enter-otp-panel .field-submit-otp.field-wrapper {
@@ -2051,74 +2063,95 @@ main .form .field-loan-upto p::before {
   margin-top: 8px !important;
 }
 
-/* Less spacing between buttons */
+/* submit button spacing */
 .field-enter-otp-panel .field-submit-otp.field-wrapper {
-  margin-left: 14px;
+  margin-left: 18px;
 }
 
-/* Common button styling */
+/* COMMON BUTTON STYLE */
 .field-enter-otp-panel button {
-  width: 220px;
+  width: 215px;
   height: 64px;
   border: none;
+  border-radius: 0;
   font-size: 18px;
   font-weight: 700;
   cursor: pointer;
 }
 
-/* Resend button */
+/* resend button */
 .field-enter-otp-panel .field-resend-otp button {
   background: #d9d9d6;
   color: #ffffff;
 }
 
-/* Submit button */
+/* submit button */
 .field-enter-otp-panel .field-submit-otp button {
   background: #6488d3;
   color: #ffffff;
-}
-
-/* Remove float */
-.field-enter-otp-panel .field-submit-otp button {
   float: none !important;
 }
 
-/* Disabled resend */
+/* disabled resend */
 .field-enter-otp-panel .field-resend-otp button:disabled {
   background: #d9d9d6 !important;
   color: #ffffff !important;
   cursor: not-allowed;
 }
 
-/* Mobile */
+/* =========================================
+   REMOVE EXTRA AEM SPACING
+   ========================================= */
+
+.field-enter-otp-panel .field-wrapper {
+  margin-top: 0 !important;
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+}
+
+/* =========================================
+   MOBILE
+   ========================================= */
+
 @media (max-width: 768px) {
 
+  .field-enter-otp-panel {
+    max-width: 100%;
+  }
+
   .field-enter-otp-panel legend.field-label {
-    font-size: 24px;
+    font-size: 20px;
   }
 
   .field-enter-otp-panel .field-otp-help-text p {
-    font-size: 16px;
+    font-size: 15px;
   }
 
   .field-enter-otp-panel .field-otp-code input {
-    width: 100% !important;
     height: 52px;
-    font-size: 18px !important;
+    font-size: 16px !important;
     letter-spacing: 10px;
+  }
+
+  .field-enter-otp-panel .field-resend-otp,
+  .field-enter-otp-panel .field-attempts {
+    width: 100%;
+    display: block;
+    text-align: left;
+    margin-bottom: 10px !important;
   }
 
   .field-enter-otp-panel .field-resend-otp.field-wrapper,
   .field-enter-otp-panel .field-submit-otp.field-wrapper {
     display: block;
-    margin-left: 0 !important;
     width: 100%;
+    margin-left: 0 !important;
   }
 
   .field-enter-otp-panel button {
     width: 100%;
     height: 56px;
-    font-size: 18px;
+    font-size: 17px;
     margin-bottom: 10px;
   }
 }
