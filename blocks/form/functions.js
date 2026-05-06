@@ -798,61 +798,119 @@ function getReviewDetails(globals) {
 
       console.log("DATA:", data);
 
-      // WAIT FOR ACCORDION PANELS TO RENDER
-      setTimeout(() => {
+      /* =========================
+         LOAN DETAILS
+      ========================= */
 
-        /* =========================
-           LOAN DETAILS
-        ========================= */
+      globals.functions.setProperty(
 
-        form.review_details.loan_details.processing_fee.value =
-          data.processing_fee || "";
+        form.review_details.loan_details.processing_fee,
 
-        form.review_details.loan_details.schedule_of_charges.value =
-          data.schedule_of_charges || "";
+        {
+          value: data.processing_fee || ""
+        }
 
-        form.review_details.loan_details.loan_number.value =
-          data.loan_number || "";
+      );
 
-        /* =========================
-           PERSONAL DETAILS
-        ========================= */
+      globals.functions.setProperty(
 
-        form.review_details.personal_details.residence_type.value =
-          data.residence_type || "";
+        form.review_details.loan_details.schedule_of_charges,
 
-        /* =========================
-           SALARY ACCOUNT DETAILS
-        ========================= */
+        {
+          value: data.schedule_of_charges || ""
+        }
 
-        form.review_details.salary_account_details.salary_ac_number.value =
-          data.salary_ac_number || "";
+      );
 
-        form.review_details.salary_account_details.ifsc.value =
-          data.ifsc || "";
+      globals.functions.setProperty(
 
-        form.review_details.salary_account_details.bank_name.value =
-          data.bank_name || "";
+        form.review_details.loan_details.loan_number,
 
-        /* =========================
-           OFFICE ADDRESS
-        ========================= */
+        {
+          value: data.loan_number || ""
+        }
 
-        form.review_details.office_address.current_employer_address.value =
-          data.current_employer_address || "";
+      );
 
-        /* =========================
-           REFERENCE DETAILS
-        ========================= */
+      /* =========================
+         PERSONAL DETAILS
+      ========================= */
 
-        form.review_details.reference_details.ref_name.value =
-          data.ref_name || "";
+      globals.functions.setProperty(
 
-        console.log(
-          "ALL REVIEW DETAILS FILLED SUCCESSFULLY"
-        );
+        form.review_details.personal_details.residence_type,
 
-      }, 1500);
+        {
+          value: data.residence_type || ""
+        }
+
+      );
+
+      /* =========================
+         SALARY ACCOUNT DETAILS
+      ========================= */
+
+      globals.functions.setProperty(
+
+        form.review_details.salary_account_details.salary_ac_number,
+
+        {
+          value: data.salary_ac_number || ""
+        }
+
+      );
+
+      globals.functions.setProperty(
+
+        form.review_details.salary_account_details.ifsc,
+
+        {
+          value: data.ifsc || ""
+        }
+
+      );
+
+      globals.functions.setProperty(
+
+        form.review_details.salary_account_details.bank_name,
+
+        {
+          value: data.bank_name || ""
+        }
+
+      );
+
+      /* =========================
+         OFFICE ADDRESS
+      ========================= */
+
+      globals.functions.setProperty(
+
+        form.review_details.office_address.current_employer_address,
+
+        {
+          value: data.current_employer_address || ""
+        }
+
+      );
+
+      /* =========================
+         REFERENCE DETAILS
+      ========================= */
+
+      globals.functions.setProperty(
+
+        form.review_details.reference_details.ref_name,
+
+        {
+          value: data.ref_name || ""
+        }
+
+      );
+
+      console.log(
+        "ALL REVIEW DETAILS FILLED SUCCESSFULLY"
+      );
 
     }
 
