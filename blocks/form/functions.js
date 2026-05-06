@@ -746,31 +746,19 @@ function resendOtp(globals) {
 
 /**
  * Review Details API Call
- * @param {scope} globals - Global scope object
+ * @param {scope} globals
  */
 function getReviewDetails(globals) {
 
   const mobile =
     globals.form.personal_loan_offer.mobile_number?.$value || "";
 
-  // VALIDATION
   if (!mobile) {
 
     console.log("Mobile number missing");
 
     return;
   }
-
-  // SHOW REVIEW DETAILS ACCORDION
-  globals.functions.setProperty(
-
-    globals.form.review_details,
-
-    {
-      visible: true
-    }
-
-  );
 
   // API CALL
   fetch(
@@ -803,9 +791,7 @@ function getReviewDetails(globals) {
 
       const data = response.reviewDetails;
 
-      console.log("DATA:", data);
-
-      // WAIT FOR ACCORDION TO RENDER
+      // WAIT FOR ACCORDION RENDER
       setTimeout(() => {
 
         /* =========================
@@ -814,12 +800,33 @@ function getReviewDetails(globals) {
 
         globals.functions.setProperty(
 
-          globals.form.review_details.loan_details.loan_number,
+          globals.form.review_details.loan_details.personal_loan,
 
           {
-            value: data.loan_number || "",
-            visible: true,
-            enabled: true
+            value:
+              globals.form.range_panel.loan_amount?.$value || ""
+          }
+
+        );
+
+        globals.functions.setProperty(
+
+          globals.form.review_details.loan_details.amount_emi,
+
+          {
+            value:
+              globals.form.range_panel.emi_amount?.$value || ""
+          }
+
+        );
+
+        globals.functions.setProperty(
+
+          globals.form.review_details.loan_details.loan_tenure_months,
+
+          {
+            value:
+              globals.form.range_panel.loan_tenure?.$value || ""
           }
 
         );
@@ -829,9 +836,8 @@ function getReviewDetails(globals) {
           globals.form.review_details.loan_details.processing_fee,
 
           {
-            value: data.processing_fee || "",
-            visible: true,
-            enabled: true
+            value:
+              data.processing_fee || ""
           }
 
         );
@@ -841,9 +847,8 @@ function getReviewDetails(globals) {
           globals.form.review_details.loan_details.schedule_of_charges,
 
           {
-            value: data.schedule_of_charges || "",
-            visible: true,
-            enabled: true
+            value:
+              data.schedule_of_charges || ""
           }
 
         );
@@ -857,9 +862,8 @@ function getReviewDetails(globals) {
           globals.form.review_details.personal_details.residence_type,
 
           {
-            value: data.residence_type || "",
-            visible: true,
-            enabled: true
+            value:
+              data.residence_type || ""
           }
 
         );
@@ -873,9 +877,8 @@ function getReviewDetails(globals) {
           globals.form.review_details.salary_account_details.salary_ac_number,
 
           {
-            value: data.salary_ac_number || "",
-            visible: true,
-            enabled: true
+            value:
+              data.salary_ac_number || ""
           }
 
         );
@@ -885,9 +888,8 @@ function getReviewDetails(globals) {
           globals.form.review_details.salary_account_details.ifsc,
 
           {
-            value: data.ifsc || "",
-            visible: true,
-            enabled: true
+            value:
+              data.ifsc || ""
           }
 
         );
@@ -897,9 +899,8 @@ function getReviewDetails(globals) {
           globals.form.review_details.salary_account_details.bank_name,
 
           {
-            value: data.bank_name || "",
-            visible: true,
-            enabled: true
+            value:
+              data.bank_name || ""
           }
 
         );
@@ -913,9 +914,8 @@ function getReviewDetails(globals) {
           globals.form.review_details.office_address.current_employer_address,
 
           {
-            value: data.current_employer_address || "",
-            visible: true,
-            enabled: true
+            value:
+              data.current_employer_address || ""
           }
 
         );
@@ -929,9 +929,8 @@ function getReviewDetails(globals) {
           globals.form.review_details.reference_details.ref_name,
 
           {
-            value: data.ref_name || "",
-            visible: true,
-            enabled: true
+            value:
+              data.ref_name || ""
           }
 
         );
@@ -945,9 +944,8 @@ function getReviewDetails(globals) {
           globals.form.review_details.verify_email_id.email_id,
 
           {
-            value: "test@gmail.com",
-            visible: true,
-            enabled: true
+            value:
+              "test@gmail.com"
           }
 
         );
@@ -957,14 +955,6 @@ function getReviewDetails(globals) {
         );
 
       }, 2000);
-
-    }
-
-    else {
-
-      console.log(
-        "Failed to fetch review details"
-      );
 
     }
 
