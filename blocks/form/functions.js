@@ -1035,9 +1035,302 @@ function generateOtpTier1(globals) {
 
 }
 
+/**
+ * Verify OTP Tier1
+ * @param {scope} globals
+ */
+function verifyOtpTier1(globals) {
+
+  const mobile =
+    globals.form.personal_loan_offer.mobile_number?.$value || "";
+
+  const dob =
+    globals.form.personal_loan_offer.date_of_birth?.$value || "";
+
+  const otp =
+    globals.form.enter_otp_panel.otp_code?.$value || "";
+
+  if (!otp) {
+
+    globals.functions.setProperty(
+
+      globals.form.enter_otp_panel.success_msg,
+
+      {
+        value: "Please enter OTP",
+        visible: true
+      }
+
+    );
+
+    return;
+  }
+
+  fetch(
+    "https://craftsman-resonant-asparagus.ngrok-free.dev/api/validateOtp",
+    {
+
+      method: "POST",
+
+      headers: {
+        "Content-Type": "application/json"
+      },
+
+      body: JSON.stringify({
+
+        requestString: {
+
+          mobileNo: mobile,
+
+          identifierValue: dob,
+
+          otpValue: otp
+
+        }
+
+      })
+
+    }
+  )
+
+  .then(res => res.json())
+
+  .then(response => {
+
+    console.log("VERIFY OTP RESPONSE:", response);
+
+    if (
+      response.status.responseCode === "0"
+    ) {
+
+      globals.functions.setProperty(
+
+        globals.form.enter_otp_panel.success_msg,
+
+        {
+          value: "OTP Verified Successfully",
+          visible: true
+        }
+
+      );
+
+    }
+
+    else {
+
+      window.otpStateTier1.attempts--;
+
+      globals.functions.setProperty(
+
+        globals.form.enter_otp_panel.attempts,
+
+        {
+          value:
+            window.otpStateTier1.attempts +
+            "/3 attempts left"
+        }
+
+      );
+
+      globals.functions.setProperty(
+
+        globals.form.enter_otp_panel.success_msg,
+
+        {
+          value: "Invalid OTP",
+          visible: true
+        }
+
+      );
+
+    }
+
+  })
+
+  .catch(error => {
+
+    console.error("Verify OTP Error:", error);
+
+  });
+
+}
+
+/**
+ * OTP TIMER Tier1
+ * @param {scope} globals
+ */
+function startOtpTimerTier1(globals) {
+
+  window.otpStateTier1.timeLeft = 5;
+
+  if (window.otpStateTier1.timer) {
+
+    clearInterval(
+      window.otpStateTier1.timer
+    );
+
+  }
+
+  window.otpStateTier1.timer =
+    setInterval(() => {
+
+      window.otpStateTier1.timeLeft--;
+
+      globals.functions.setProperty(
+
+        globals.form.enter_otp_panel.resend_otp,
+
+        {
+          enabled: false,
+          value:
+            "Resend OTP in : " +
+            window.otpStateTier1.timeLeft +
+            " sec"
+        }
+
+      );
+
+      if (
+        window.otpStateTier1.timeLeft <= 0
+      ) {
+
+        clearInterval(
+          window.otpStateTier1.timer
+        );
+
+        globals.functions.setProperty(
+
+          globals.form.enter_otp_panel.resend_otp,
+
+          {
+            enabled: true,
+            value: "Resend OTP"
+          }
+
+        );
+
+      }
+
+    }, 1000);
+}
+
+/**
+ * Resend OTP Tier1
+ * @param {scope} globals
+ */
+function resendOtpTier1(globals) {
+
+  if (
+    window.otpStateTier1.attempts <= 0
+  ) {
+
+    globals.functions.setProperty(
+
+      globals.form.enter_otp_panel.success_msg,
+
+      {
+        value: "No attempts left",
+        visible: true
+      }
+
+    );
+
+    return;
+  }
+
+  // REDUCE ATTEMPTS
+  window.otpStateTier1.attempts--;
+
+  globals.functions.setProperty(
+
+    globals.form.enter_otp_panel.attempts,
+
+    {
+      value:
+        window.otpStateTier1.attempts +
+        "/3 attempts left"
+    }
+
+  );
+
+  const mobile =
+    globals.form.personal_loan_offer.mobile_number?.$value || "";
+
+  const dob =
+    globals.form.personal_loan_offer.date_of_birth?.$value || "";
+
+  fetch(
+    "https://craftsman-resonant-asparagus.ngrok-free.dev/api/initiateCustomerIdentification",
+    {
+
+      method: "POST",
+
+      headers: {
+        "Content-Type": "application/json"
+      },
+
+      body: JSON.stringify({
+
+        requestString: {
+
+          mobileNo: mobile,
+
+          identifierValue: dob
+
+        }
+
+      })
+
+    }
+  )
+
+  .then(res => res.json())
+
+  .then(response => {
+
+    if (
+      response.status.responseCode === "0"
+    ) {
+
+      globals.functions.setProperty(
+
+        globals.form.enter_otp_panel.otp_code,
+
+        {
+          value:
+            response.responseString.otpValue || ""
+        }
+
+      );
+
+      globals.functions.setProperty(
+
+        globals.form.enter_otp_panel.resend_otp,
+
+        {
+          enabled: false,
+          value: "Resend OTP in : 5 sec"
+        }
+
+      );
+
+      startOtpTimerTier1(globals);
+
+    }
+
+  })
+
+  .catch(error => {
+
+    console.error("Resend OTP Error:", error);
+
+  });
+
+}
+
 // eslint-disable-next-line import/prefer-default-export
 export {
-  getFullName, days, submitFormArrayToString, maskMobileNumber, handleOtpFlow, updateLoanOffer, calculateEMI, initSalaryBankUI, generateOtp, verifyOtp, startOtpTimer,resendOtp, generateOtpTier1,
+  getFullName, days, submitFormArrayToString, maskMobileNumber, handleOtpFlow, updateLoanOffer, calculateEMI, initSalaryBankUI, generateOtp, verifyOtp, startOtpTimer,resendOtp, generateOtpTier1, verifyOtpTier1, startOtpTimerTier1, resendOtpTier1
 };
 
 
