@@ -745,103 +745,218 @@ function resendOtp(globals) {
 }
 
 /**
- * Submit Customer Details API
+ * Review Details API Call
  * @param {scope} globals - Global scope object
  */
-function submitCustomerDetails(globals) {
-
-  console.log("🚀 submitCustomerDetails triggered");
+function getReviewDetails(globals) {
 
   const form = globals.form;
 
-  // ✅ USE .value (NOT .$value)
-  const firstName =
-    form.customer_details.person_details.full_name_as_per_pan.first_name_as_per_pan?.value || "";
+  // MOBILE NUMBER
+  const mobile =
+    form.personal_loan_offer.mobile_number?.$value || "";
 
-  const middleName =
-    form.customer_details.person_details.full_name_as_per_pan.middle_name_as_per_pan?.value || "";
+  // VALIDATION
+  if (!mobile) {
 
-  const lastName =
-    form.customer_details.person_details.full_name_as_per_pan.last_name_as_per_pan?.value || "";
+    globals.functions.setProperty(
 
-  const gender =
-    form.customer_details.personal_details.gender?.value || "";
+      form.review_details.loan_details.loan_number,
 
-  const email =
-    form.customer_details.personal_details.email_id?.value || "";
+      {
+        value: "Mobile number missing",
+        visible: true
+      }
 
-  const address =
-    form.customer_details.address_details.aadhaar_address?.value || "";
+    );
 
-  const income =
-    form.customer_details.income_details.monthly_net_income?.value || "";
+    return;
+  }
 
-  console.log("📤 FINAL PAYLOAD:", {
-    firstName,
-    middleName,
-    lastName,
-    gender,
-    email,
-    address,
-    income
-  });
+  // API CALL
+  fetch(
+    "https://craftsman-resonant-asparagus.ngrok-free.dev/review-details",
+    {
 
-  // ✅ DIRECT API CALL (NO VALIDATION)
-  fetch("https://craftsman-resonant-asparagus.ngrok-free.dev/customer-details", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json"
-    },
-    body: JSON.stringify({
-      firstName,
-      middleName,
-      lastName,
-      gender,
-      email,
-      address,
-      income
-    })
-  })
-  .then(res => {
-    console.log("🌐 STATUS:", res.status);
-    return res.json();
-  })
+      method: "POST",
+
+      headers: {
+        "Content-Type": "application/json"
+      },
+
+      body: JSON.stringify({
+        mobile: mobile
+      })
+
+    }
+  )
+
+  .then(res => res.json())
+
   .then(response => {
 
-    console.log("✅ API Response:", response);
+    console.log(
+      "REVIEW DETAILS RESPONSE:",
+      response
+    );
 
+    // SUCCESS
     if (response.status === "success") {
 
-      const data = response.data;
+      const data = response.reviewDetails;
+
+      /* =========================
+         LOAN DETAILS
+      ========================= */
 
       globals.functions.setProperty(
-        globals.form.offer_display.loan_income,
+
+        form.review_details.loan_details.processing_fee,
+
         {
-          value: data.loanAmount
+          value: data.processing_fee,
+          visible: true,
+          enabled: true
         }
+
       );
 
       globals.functions.setProperty(
-        globals.form.offer_display,
-        { visible: true }
+
+        form.review_details.loan_details.schedule_of_charges,
+
+        {
+          value: data.schedule_of_charges,
+          visible: true,
+          enabled: true
+        }
+
       );
 
       globals.functions.setProperty(
-        globals.form.customer_details,
-        { visible: false }
+
+        form.review_details.loan_details.loan_number,
+
+        {
+          value: data.loan_number,
+          visible: true,
+          enabled: true
+        }
+
       );
 
-    } else {
-      console.log("❌ API failed:", response);
+      /* =========================
+         PERSONAL DETAILS
+      ========================= */
+
+      globals.functions.setProperty(
+
+        form.review_details.personal_details.residence_type,
+
+        {
+          value: data.residence_type,
+          visible: true,
+          enabled: true
+        }
+
+      );
+
+      /* =========================
+         SALARY ACCOUNT DETAILS
+      ========================= */
+
+      globals.functions.setProperty(
+
+        form.review_details.salary_account_details.salary_ac_number,
+
+        {
+          value: data.salary_ac_number,
+          visible: true,
+          enabled: true
+        }
+
+      );
+
+      globals.functions.setProperty(
+
+        form.review_details.salary_account_details.ifsc,
+
+        {
+          value: data.ifsc,
+          visible: true,
+          enabled: true
+        }
+
+      );
+
+      globals.functions.setProperty(
+
+        form.review_details.salary_account_details.bank_name,
+
+        {
+          value: data.bank_name,
+          visible: true,
+          enabled: true
+        }
+
+      );
+
+      /* =========================
+         OFFICE ADDRESS
+      ========================= */
+
+      globals.functions.setProperty(
+
+        form.review_details.office_address.current_employer_address,
+
+        {
+          value: data.current_employer_address,
+          visible: true,
+          enabled: true
+        }
+
+      );
+
+      /* =========================
+         REFERENCE DETAILS
+      ========================= */
+
+      globals.functions.setProperty(
+
+        form.review_details.reference_details.ref_name,
+
+        {
+          value: data.ref_name,
+          visible: true,
+          enabled: true
+        }
+
+      );
+
+    }
+
+    // FAILED
+    else {
+
+      console.log(
+        "Failed to fetch review details"
+      );
+
     }
 
   })
-  .catch(err => {
-    console.error("❌ Fetch Error:", err);
+
+  .catch(error => {
+
+    console.error(
+      "Review Details API Error:",
+      error
+    );
+
   });
 
-  return "Customer API triggered";
 }
+
 // eslint-disable-next-line import/prefer-default-export
 export {
   getFullName, days, submitFormArrayToString, maskMobileNumber, handleOtpFlow, updateLoanOffer, calculateEMI, initSalaryBankUI, generateOtp, verifyOtp, startOtpTimer,resendOtp
