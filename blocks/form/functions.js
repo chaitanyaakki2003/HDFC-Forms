@@ -760,7 +760,6 @@ function getReviewDetails(globals) {
     return;
   }
 
-  // API CALL
   fetch(
     "https://craftsman-resonant-asparagus.ngrok-free.dev/review-details",
     {
@@ -782,179 +781,62 @@ function getReviewDetails(globals) {
 
   .then(response => {
 
-    console.log(
-      "REVIEW DETAILS RESPONSE:",
-      response
-    );
+    console.log("API RESPONSE:", response);
 
     if (response.status === "success") {
 
       const data = response.reviewDetails;
 
-      // WAIT FOR ACCORDION RENDER
-      setTimeout(() => {
+      /* =========================
+         LOAN DETAILS
+      ========================= */
 
-        /* =========================
-           LOAN DETAILS
-        ========================= */
+      globals.form.review_details.loan_details.processing_fee.$value =
+        data.processing_fee || "";
 
-        globals.functions.setProperty(
+      globals.form.review_details.loan_details.schedule_of_charges.$value =
+        data.schedule_of_charges || "";
 
-          globals.form.review_details.loan_details.personal_loan,
+      globals.form.review_details.loan_details.loan_number.$value =
+        data.loan_number || "";
 
-          {
-            value:
-              globals.form.range_panel.loan_amount?.$value || ""
-          }
+      /* =========================
+         PERSONAL DETAILS
+      ========================= */
 
-        );
+      globals.form.review_details.personal_details.residence_type.$value =
+        data.residence_type || "";
 
-        globals.functions.setProperty(
+      /* =========================
+         SALARY ACCOUNT DETAILS
+      ========================= */
 
-          globals.form.review_details.loan_details.amount_emi,
+      globals.form.review_details.salary_account_details.salary_ac_number.$value =
+        data.salary_ac_number || "";
 
-          {
-            value:
-              globals.form.range_panel.emi_amount?.$value || ""
-          }
+      globals.form.review_details.salary_account_details.ifsc.$value =
+        data.ifsc || "";
 
-        );
+      globals.form.review_details.salary_account_details.bank_name.$value =
+        data.bank_name || "";
 
-        globals.functions.setProperty(
+      /* =========================
+         OFFICE ADDRESS
+      ========================= */
 
-          globals.form.review_details.loan_details.loan_tenure_months,
+      globals.form.review_details.office_address.current_employer_address.$value =
+        data.current_employer_address || "";
 
-          {
-            value:
-              globals.form.range_panel.loan_tenure?.$value || ""
-          }
+      /* =========================
+         REFERENCE DETAILS
+      ========================= */
 
-        );
+      globals.form.review_details.reference_details.ref_name.$value =
+        data.ref_name || "";
 
-        globals.functions.setProperty(
-
-          globals.form.review_details.loan_details.processing_fee,
-
-          {
-            value:
-              data.processing_fee || ""
-          }
-
-        );
-
-        globals.functions.setProperty(
-
-          globals.form.review_details.loan_details.schedule_of_charges,
-
-          {
-            value:
-              data.schedule_of_charges || ""
-          }
-
-        );
-
-        /* =========================
-           PERSONAL DETAILS
-        ========================= */
-
-        globals.functions.setProperty(
-
-          globals.form.review_details.personal_details.residence_type,
-
-          {
-            value:
-              data.residence_type || ""
-          }
-
-        );
-
-        /* =========================
-           SALARY ACCOUNT DETAILS
-        ========================= */
-
-        globals.functions.setProperty(
-
-          globals.form.review_details.salary_account_details.salary_ac_number,
-
-          {
-            value:
-              data.salary_ac_number || ""
-          }
-
-        );
-
-        globals.functions.setProperty(
-
-          globals.form.review_details.salary_account_details.ifsc,
-
-          {
-            value:
-              data.ifsc || ""
-          }
-
-        );
-
-        globals.functions.setProperty(
-
-          globals.form.review_details.salary_account_details.bank_name,
-
-          {
-            value:
-              data.bank_name || ""
-          }
-
-        );
-
-        /* =========================
-           OFFICE ADDRESS
-        ========================= */
-
-        globals.functions.setProperty(
-
-          globals.form.review_details.office_address.current_employer_address,
-
-          {
-            value:
-              data.current_employer_address || ""
-          }
-
-        );
-
-        /* =========================
-           REFERENCE DETAILS
-        ========================= */
-
-        globals.functions.setProperty(
-
-          globals.form.review_details.reference_details.ref_name,
-
-          {
-            value:
-              data.ref_name || ""
-          }
-
-        );
-
-        /* =========================
-           VERIFY EMAIL ID
-        ========================= */
-
-        globals.functions.setProperty(
-
-          globals.form.review_details.verify_email_id.email_id,
-
-          {
-            value:
-              "test@gmail.com"
-          }
-
-        );
-
-        console.log(
-          "ALL REVIEW DETAILS FILLED SUCCESSFULLY"
-        );
-
-      }, 2000);
+      console.log(
+        "ALL REVIEW DETAILS FILLED SUCCESSFULLY"
+      );
 
     }
 
