@@ -1041,10 +1041,10 @@ function generateOtpTier1(globals) {
  */
 function verifyOtpTier1(globals) {
 
-  // KEEP SUBMIT BUTTON ENABLED
+  // ALWAYS KEEP SUBMIT BUTTON ENABLED
   globals.functions.setProperty(
 
-    globals.form.enter_otp_panel.submit,
+    globals.form.enter_otp_panel.submit_otp,
 
     {
       enabled: true
@@ -1071,6 +1071,17 @@ function verifyOtpTier1(globals) {
       {
         value: "Please enter OTP",
         visible: true
+      }
+
+    );
+
+    // KEEP ENABLED
+    globals.functions.setProperty(
+
+      globals.form.enter_otp_panel.submit_otp,
+
+      {
+        enabled: true
       }
 
     );
@@ -1115,10 +1126,10 @@ function verifyOtpTier1(globals) {
       response
     );
 
-    // KEEP BUTTON ENABLED AGAIN
+    // FORCE ENABLE AGAIN
     globals.functions.setProperty(
 
-      globals.form.enter_otp_panel.submit,
+      globals.form.enter_otp_panel.submit_otp,
 
       {
         enabled: true
@@ -1183,10 +1194,10 @@ function verifyOtpTier1(globals) {
       error
     );
 
-    // KEEP ENABLED EVEN ON ERROR
+    // ENABLE EVEN ON ERROR
     globals.functions.setProperty(
 
-      globals.form.enter_otp_panel.submit,
+      globals.form.enter_otp_panel.submit_otp,
 
       {
         enabled: true
