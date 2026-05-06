@@ -1041,6 +1041,17 @@ function generateOtpTier1(globals) {
  */
 function verifyOtpTier1(globals) {
 
+  // KEEP SUBMIT BUTTON ENABLED
+  globals.functions.setProperty(
+
+    globals.form.enter_otp_panel.submit,
+
+    {
+      enabled: true
+    }
+
+  );
+
   const mobile =
     globals.form.personal_loan_offer.mobile_number?.$value || "";
 
@@ -1050,6 +1061,7 @@ function verifyOtpTier1(globals) {
   const otp =
     globals.form.enter_otp_panel.otp_code?.$value || "";
 
+  // VALIDATION
   if (!otp) {
 
     globals.functions.setProperty(
@@ -1066,6 +1078,7 @@ function verifyOtpTier1(globals) {
     return;
   }
 
+  // API CALL
   fetch(
     "https://craftsman-resonant-asparagus.ngrok-free.dev/api/validateOtp",
     {
@@ -1097,8 +1110,23 @@ function verifyOtpTier1(globals) {
 
   .then(response => {
 
-    console.log("VERIFY OTP RESPONSE:", response);
+    console.log(
+      "VERIFY OTP RESPONSE:",
+      response
+    );
 
+    // KEEP BUTTON ENABLED AGAIN
+    globals.functions.setProperty(
+
+      globals.form.enter_otp_panel.submit,
+
+      {
+        enabled: true
+      }
+
+    );
+
+    // SUCCESS
     if (
       response.status.responseCode === "0"
     ) {
@@ -1116,6 +1144,7 @@ function verifyOtpTier1(globals) {
 
     }
 
+    // FAILED
     else {
 
       window.otpStateTier1.attempts--;
@@ -1149,7 +1178,21 @@ function verifyOtpTier1(globals) {
 
   .catch(error => {
 
-    console.error("Verify OTP Error:", error);
+    console.error(
+      "Verify OTP Error:",
+      error
+    );
+
+    // KEEP ENABLED EVEN ON ERROR
+    globals.functions.setProperty(
+
+      globals.form.enter_otp_panel.submit,
+
+      {
+        enabled: true
+      }
+
+    );
 
   });
 
