@@ -508,13 +508,19 @@ function verifyOtp(globals) {
 
   })
 
-  .then(res => res.json())
+  .then(async (res) => {
 
-  .then(response => {
+    const response = await res.json();
 
     console.log("VERIFY RESPONSE:", response);
 
-    if (response.status === "success") {
+    // =========================
+    // SUCCESS ONLY WHEN:
+    // 1. HTTP STATUS = 200
+    // 2. response.status = success
+    // =========================
+
+    if (res.ok && response.status === "success") {
 
       // SUCCESS MESSAGE
       globals.functions.setProperty(
@@ -525,39 +531,33 @@ function verifyOtp(globals) {
         }
       );
 
-      // =========================
       // FULL NAME
-      // =========================
-
       globals.functions.setProperty(
-
         form.customer_details.full_name,
-
         {
-          value: response.customer.fullName,
+          value: response.customer.fullName || "",
           visible: true,
           enabled: true
         }
-
       );
 
-      // =========================
       // AADHAAR ADDRESS
-      // =========================
-
       globals.functions.setProperty(
-
         form.customer_details.address_details.aadhaar_address,
-
         {
-          value: response.customer.aadhaarAddress,
+          value: response.customer.aadhaarAddress || "",
           visible: true,
           enabled: true
         }
-
       );
 
-    } else {
+    }
+
+    // =========================
+    // INVALID OTP
+    // =========================
+
+    else {
 
       // REDUCE ATTEMPTS
       window.otpState.attempts--;
@@ -570,10 +570,29 @@ function verifyOtp(globals) {
         }
       );
 
+      // INVALID MESSAGE
       globals.functions.setProperty(
         form.enter_otp_panel.success_msg,
         {
           value: "Invalid OTP",
+          visible: true
+        }
+      );
+
+      // CLEAR FULL NAME
+      globals.functions.setProperty(
+        form.customer_details.full_name,
+        {
+          value: "",
+          visible: true
+        }
+      );
+
+      // CLEAR ADDRESS
+      globals.functions.setProperty(
+        form.customer_details.address_details.aadhaar_address,
+        {
+          value: "",
           visible: true
         }
       );
@@ -584,6 +603,22 @@ function verifyOtp(globals) {
   .catch(err => {
 
     console.error("Verify error:", err);
+
+    // CLEAR VALUES ON ERROR ALSO
+
+    globals.functions.setProperty(
+      form.customer_details.full_name,
+      {
+        value: ""
+      }
+    );
+
+    globals.functions.setProperty(
+      form.customer_details.address_details.aadhaar_address,
+      {
+        value: ""
+      }
+    );
 
   });
 
