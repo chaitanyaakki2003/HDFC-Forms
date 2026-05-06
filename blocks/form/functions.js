@@ -756,19 +756,21 @@ function getReviewDetails(globals) {
   // VALIDATION
   if (!mobile) {
 
-    globals.functions.setProperty(
-
-      globals.form.review_details.loan_details.loan_number,
-
-      {
-        value: "Mobile number missing",
-        visible: true
-      }
-
-    );
+    console.log("Mobile number missing");
 
     return;
   }
+
+  // SHOW REVIEW DETAILS ACCORDION
+  globals.functions.setProperty(
+
+    globals.form.review_details,
+
+    {
+      visible: true
+    }
+
+  );
 
   // API CALL
   fetch(
@@ -797,146 +799,167 @@ function getReviewDetails(globals) {
       response
     );
 
-    // SUCCESS
     if (response.status === "success") {
 
       const data = response.reviewDetails;
 
-      /* =========================
-         LOAN DETAILS
-      ========================= */
+      console.log("DATA:", data);
 
-      globals.functions.setProperty(
+      // WAIT FOR ACCORDION TO RENDER
+      setTimeout(() => {
 
-        globals.form.review_details.loan_details.loan_number,
+        /* =========================
+           LOAN DETAILS
+        ========================= */
 
-        {
-          value: data.loan_number || "",
-          visible: true,
-          enabled: true
-        }
+        globals.functions.setProperty(
 
-      );
+          globals.form.review_details.loan_details.loan_number,
 
-      globals.functions.setProperty(
+          {
+            value: data.loan_number || "",
+            visible: true,
+            enabled: true
+          }
 
-        globals.form.review_details.loan_details.processing_fee,
+        );
 
-        {
-          value: data.processing_fee || "",
-          visible: true,
-          enabled: true
-        }
+        globals.functions.setProperty(
 
-      );
+          globals.form.review_details.loan_details.processing_fee,
 
-      globals.functions.setProperty(
+          {
+            value: data.processing_fee || "",
+            visible: true,
+            enabled: true
+          }
 
-        globals.form.review_details.loan_details.schedule_of_charges,
+        );
 
-        {
-          value: data.schedule_of_charges || "",
-          visible: true,
-          enabled: true
-        }
+        globals.functions.setProperty(
 
-      );
+          globals.form.review_details.loan_details.schedule_of_charges,
 
-      /* =========================
-         PERSONAL DETAILS
-      ========================= */
+          {
+            value: data.schedule_of_charges || "",
+            visible: true,
+            enabled: true
+          }
 
-      globals.functions.setProperty(
+        );
 
-        globals.form.review_details.personal_details.residence_type,
+        /* =========================
+           PERSONAL DETAILS
+        ========================= */
 
-        {
-          value: data.residence_type || "",
-          visible: true,
-          enabled: true
-        }
+        globals.functions.setProperty(
 
-      );
+          globals.form.review_details.personal_details.residence_type,
 
-      /* =========================
-         SALARY ACCOUNT DETAILS
-      ========================= */
+          {
+            value: data.residence_type || "",
+            visible: true,
+            enabled: true
+          }
 
-      globals.functions.setProperty(
+        );
 
-        globals.form.review_details.salary_account_details.salary_ac_number,
+        /* =========================
+           SALARY ACCOUNT DETAILS
+        ========================= */
 
-        {
-          value: data.salary_ac_number || "",
-          visible: true,
-          enabled: true
-        }
+        globals.functions.setProperty(
 
-      );
+          globals.form.review_details.salary_account_details.salary_ac_number,
 
-      globals.functions.setProperty(
+          {
+            value: data.salary_ac_number || "",
+            visible: true,
+            enabled: true
+          }
 
-        globals.form.review_details.salary_account_details.ifsc,
+        );
 
-        {
-          value: data.ifsc || "",
-          visible: true,
-          enabled: true
-        }
+        globals.functions.setProperty(
 
-      );
+          globals.form.review_details.salary_account_details.ifsc,
 
-      globals.functions.setProperty(
+          {
+            value: data.ifsc || "",
+            visible: true,
+            enabled: true
+          }
 
-        globals.form.review_details.salary_account_details.bank_name,
+        );
 
-        {
-          value: data.bank_name || "",
-          visible: true,
-          enabled: true
-        }
+        globals.functions.setProperty(
 
-      );
+          globals.form.review_details.salary_account_details.bank_name,
 
-      /* =========================
-         OFFICE ADDRESS
-      ========================= */
+          {
+            value: data.bank_name || "",
+            visible: true,
+            enabled: true
+          }
 
-      globals.functions.setProperty(
+        );
 
-        globals.form.review_details.office_address.current_employer_address,
+        /* =========================
+           OFFICE ADDRESS
+        ========================= */
 
-        {
-          value: data.current_employer_address || "",
-          visible: true,
-          enabled: true
-        }
+        globals.functions.setProperty(
 
-      );
+          globals.form.review_details.office_address.current_employer_address,
 
-      /* =========================
-         REFERENCE DETAILS
-      ========================= */
+          {
+            value: data.current_employer_address || "",
+            visible: true,
+            enabled: true
+          }
 
-      globals.functions.setProperty(
+        );
 
-        globals.form.review_details.reference_details.ref_name,
+        /* =========================
+           REFERENCE DETAILS
+        ========================= */
 
-        {
-          value: data.ref_name || "",
-          visible: true,
-          enabled: true
-        }
+        globals.functions.setProperty(
 
-      );
+          globals.form.review_details.reference_details.ref_name,
 
-      console.log(
-        "ALL REVIEW DETAILS FILLED SUCCESSFULLY"
-      );
+          {
+            value: data.ref_name || "",
+            visible: true,
+            enabled: true
+          }
+
+        );
+
+        /* =========================
+           VERIFY EMAIL ID
+        ========================= */
+
+        globals.functions.setProperty(
+
+          globals.form.review_details.verify_email_id.email_id,
+
+          {
+            value: "test@gmail.com",
+            visible: true,
+            enabled: true
+          }
+
+        );
+
+        console.log(
+          "ALL REVIEW DETAILS FILLED SUCCESSFULLY"
+        );
+
+      }, 2000);
 
     }
 
-    // FAILED
     else {
 
       console.log(
