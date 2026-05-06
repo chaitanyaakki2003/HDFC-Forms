@@ -1932,3 +1932,174 @@ main .form .field-loan-upto p::before {
   flex: 0 0 230px !important;
   width: 230px !important;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+/* =========================
+   OTP SECTION ONLY STYLING
+   ========================= */
+
+/* Main OTP panel */
+.field-enter-otp-panel {
+  margin-top: 20px;
+}
+
+/* Heading */
+.field-enter-otp-panel legend.field-label {
+  font-size: 32px;
+  font-weight: 700;
+  color: #4b5563;
+  margin-bottom: 20px;
+  border: none !important;
+}
+
+/* OTP help text */
+.field-enter-otp-panel .field-otp-help-text {
+  margin-bottom: 24px;
+}
+
+.field-enter-otp-panel .field-otp-help-text p {
+  font-size: 18px;
+  line-height: 1.5;
+  color: #4b5563;
+  margin: 0;
+}
+
+/* OTP input wrapper */
+.field-enter-otp-panel .field-otp-code {
+  margin-bottom: 15px !important;
+}
+
+/* OTP label */
+.field-enter-otp-panel .field-otp-code .field-label {
+  font-size: 18px;
+  font-weight: 500;
+  color: #4b5563;
+  margin-bottom: 10px;
+  display: block;
+}
+
+/* OTP Input */
+.field-enter-otp-panel .field-otp-code input {
+  width: 100%;
+  max-width: 100%;
+  height: 58px;
+  border: 1px solid #9ca3af;
+  border-radius: 4px;
+  font-size: 32px;
+  letter-spacing: 18px;
+  padding: 0 16px;
+  box-sizing: border-box;
+  outline: none;
+}
+
+/* Resend + attempts row */
+.field-enter-otp-panel .field-resend-otp,
+.field-enter-otp-panel .field-attempts {
+  margin-top: 8px !important;
+  margin-bottom: 30px !important;
+}
+
+/* Hide labels */
+.field-enter-otp-panel .field-resend-otp .field-label,
+.field-enter-otp-panel .field-attempts .field-label {
+  display: none;
+}
+
+/* Plain text inputs */
+.field-enter-otp-panel .field-resend-otp input,
+.field-enter-otp-panel .field-attempts input {
+  border: none !important;
+  background: transparent !important;
+  padding: 0 !important;
+  height: auto !important;
+  font-size: 16px;
+  color: #4b5563;
+  font-weight: 500;
+  box-shadow: none !important;
+}
+
+/* Left align resend */
+.field-enter-otp-panel .field-resend-otp {
+  text-align: left;
+}
+
+/* Right align attempts */
+.field-enter-otp-panel .field-attempts {
+  text-align: right;
+}
+
+/* Button wrappers */
+.field-enter-otp-panel .field-resend-otp.field-wrapper,
+.field-enter-otp-panel .field-submit-otp.field-wrapper {
+  margin-top: 10px;
+}
+
+/* Buttons common */
+.field-enter-otp-panel button {
+  min-width: 240px;
+  height: 72px;
+  border: none;
+  border-radius: 0;
+  font-size: 20px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+/* Resend button */
+.field-enter-otp-panel .field-resend-otp button {
+  background: #5f88d3;
+  color: #fff;
+}
+
+/* Submit button */
+.field-enter-otp-panel .field-submit-otp button {
+  background: #5f88d3;
+  color: #fff;
+  float: right;
+}
+
+/* Disabled resend button */
+.field-enter-otp-panel .field-resend-otp button:disabled {
+  background: #d9d9d6 !important;
+  color: #ffffff !important;
+  cursor: not-allowed;
+}
+
+/* Mobile responsive */
+@media (max-width: 768px) {
+
+  .field-enter-otp-panel legend.field-label {
+    font-size: 24px;
+  }
+
+  .field-enter-otp-panel .field-otp-help-text p {
+    font-size: 16px;
+  }
+
+  .field-enter-otp-panel .field-otp-code input {
+    height: 52px;
+    font-size: 24px;
+    letter-spacing: 12px;
+  }
+
+  .field-enter-otp-panel button {
+    width: 100%;
+    min-width: unset;
+    height: 58px;
+    font-size: 18px;
+  }
+
+  .field-enter-otp-panel .field-submit-otp button {
+    float: none;
+  }
+}
