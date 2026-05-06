@@ -466,60 +466,129 @@ function verifyOtp(globals) {
   const form = globals.form;
   const otpPanel = form.enter_otp_panel;
 
-  const mobile = form.personal_loan_offer.mobile_number?.$value || "";
-  const otp = otpPanel.otp_code?.$value || "";
-  const dob = form.personal_loan_offer.date_of_birth?.$value || null;
-  const pan = form.personal_loan_offer.pan?.$value || null;
+  const mobile =
+    form.personal_loan_offer.mobile_number?.$value || "";
+
+  const otp =
+    otpPanel.otp_code?.$value || "";
+
+  const dob =
+    form.personal_loan_offer.date_of_birth?.$value || null;
+
+  const pan =
+    form.personal_loan_offer.pan?.$value || null;
 
   if (!mobile || !otp) {
+
     globals.functions.setProperty(
-      globals.form.enter_otp_panel.otp_help_text,
-      { value: "Enter OTP", visible: true }
+      form.enter_otp_panel.otp_help_text,
+      {
+        value: "Enter OTP",
+        visible: true
+      }
     );
+
     return;
   }
 
   fetch("https://craftsman-resonant-asparagus.ngrok-free.dev/verify-otp", {
+
     method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ mobile, otp, dob, pan })
+
+    headers: {
+      "Content-Type": "application/json"
+    },
+
+    body: JSON.stringify({
+      mobile,
+      otp,
+      dob,
+      pan
+    })
+
   })
+
   .then(res => res.json())
+
   .then(response => {
+
+    console.log("VERIFY RESPONSE:", response);
 
     if (response.status === "success") {
 
+      // SUCCESS MESSAGE
       globals.functions.setProperty(
-        globals.form.enter_otp_panel.success_msg,
-        { value: "OTP Verified", visible: true }
+        form.enter_otp_panel.success_msg,
+        {
+          value: "OTP Verified",
+          visible: true
+        }
+      );
+
+      // =========================
+      // FULL NAME
+      // =========================
+
+      globals.functions.setProperty(
+
+        form.customer_details.full_name,
+
+        {
+          value: response.customer.fullName,
+          visible: true,
+          enabled: true
+        }
+
+      );
+
+      // =========================
+      // AADHAAR ADDRESS
+      // =========================
+
+      globals.functions.setProperty(
+
+        form.customer_details.address_details.aadhaar_address,
+
+        {
+          value: response.customer.aadhaarAddress,
+          visible: true,
+          enabled: true
+        }
+
       );
 
     } else {
 
-      // ❌ REDUCE ATTEMPTS
+      // REDUCE ATTEMPTS
       window.otpState.attempts--;
 
       globals.functions.setProperty(
-        globals.form.enter_otp_panel.attempts,
+        form.enter_otp_panel.attempts,
         {
-          value: window.otpState.attempts + "/3 attempts left"
+          value:
+            window.otpState.attempts + "/3 attempts left"
         }
       );
 
       globals.functions.setProperty(
-        globals.form.enter_otp_panel.success_msg,
-        { value: "Invalid OTP", visible: true }
+        form.enter_otp_panel.success_msg,
+        {
+          value: "Invalid OTP",
+          visible: true
+        }
       );
     }
 
   })
+
   .catch(err => {
+
     console.error("Verify error:", err);
+
   });
 
   return "OTP verification triggered";
 }
-
 
 /**
  * OTP TIMER
