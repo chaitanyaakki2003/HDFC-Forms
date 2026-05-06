@@ -1041,17 +1041,6 @@ function generateOtpTier1(globals) {
  */
 function verifyOtpTier1(globals) {
 
-  // ALWAYS KEEP SUBMIT BUTTON ENABLED
-  globals.functions.setProperty(
-
-    globals.form.enter_otp_panel.submit_otp,
-
-    {
-      enabled: true
-    }
-
-  );
-
   const mobile =
     globals.form.personal_loan_offer.mobile_number?.$value || "";
 
@@ -1075,16 +1064,20 @@ function verifyOtpTier1(globals) {
 
     );
 
-    // KEEP ENABLED
-    globals.functions.setProperty(
+    // FORCE ENABLE BUTTON
+    setTimeout(() => {
 
-      globals.form.enter_otp_panel.submit_otp,
+      globals.functions.setProperty(
 
-      {
-        enabled: true
-      }
+        globals.form.enter_otp_panel.submit_otp,
 
-    );
+        {
+          enabled: true
+        }
+
+      );
+
+    }, 100);
 
     return;
   }
@@ -1124,17 +1117,6 @@ function verifyOtpTier1(globals) {
     console.log(
       "VERIFY OTP RESPONSE:",
       response
-    );
-
-    // FORCE ENABLE AGAIN
-    globals.functions.setProperty(
-
-      globals.form.enter_otp_panel.submit_otp,
-
-      {
-        enabled: true
-      }
-
     );
 
     // SUCCESS
@@ -1185,6 +1167,21 @@ function verifyOtpTier1(globals) {
 
     }
 
+    // FORCE ENABLE BUTTON AFTER API
+    setTimeout(() => {
+
+      globals.functions.setProperty(
+
+        globals.form.enter_otp_panel.submit_otp,
+
+        {
+          enabled: true
+        }
+
+      );
+
+    }, 100);
+
   })
 
   .catch(error => {
@@ -1194,16 +1191,20 @@ function verifyOtpTier1(globals) {
       error
     );
 
-    // ENABLE EVEN ON ERROR
-    globals.functions.setProperty(
+    // FORCE ENABLE BUTTON ON ERROR
+    setTimeout(() => {
 
-      globals.form.enter_otp_panel.submit_otp,
+      globals.functions.setProperty(
 
-      {
-        enabled: true
-      }
+        globals.form.enter_otp_panel.submit_otp,
 
-    );
+        {
+          enabled: true
+        }
+
+      );
+
+    }, 100);
 
   });
 
