@@ -1950,7 +1950,7 @@ main .form .field-loan-upto p::before {
 
 .field-enter-otp-panel {
   margin-top: 20px;
-  max-width: 760px;
+  max-width: 720px; /* reduced overall width */
 }
 
 /* =========================================
@@ -1967,7 +1967,7 @@ main .form .field-loan-upto p::before {
 }
 
 /* =========================================
-   HELP / SUCCESS TEXT
+   SUCCESS / HELP TEXT
    ========================================= */
 
 .field-enter-otp-panel .field-otp-help-text {
@@ -1987,7 +1987,7 @@ main .form .field-loan-upto p::before {
 
 .field-enter-otp-panel .field-otp-code {
   width: 100%;
-  margin-bottom: 12px !important;
+  margin-bottom: 10px !important;
 }
 
 /* hide label */
@@ -1995,9 +1995,10 @@ main .form .field-loan-upto p::before {
   display: none;
 }
 
-/* OTP input */
+/* OTP INPUT */
 .field-enter-otp-panel .field-otp-code input {
-  width: 100% !important;
+  width: 680px !important; /* reduced width */
+  max-width: 100%;
   height: 58px;
   border: 1px solid #9ca3af;
   border-radius: 4px;
@@ -2020,20 +2021,20 @@ main .form .field-loan-upto p::before {
   display: inline-block;
   vertical-align: top;
   margin-top: 8px !important;
-  margin-bottom: 20px !important;
+  margin-bottom: 18px !important;
 }
 
-/* resend text left */
+/* resend left */
 .field-enter-otp-panel .field-resend-otp {
-  width: 48%;
+  width: 42%;
   text-align: left;
 }
 
-/* attempts pushed fully right */
+/* attempts moved slightly right */
 .field-enter-otp-panel .field-attempts {
-  width: 48%;
+  width: 52%;
   text-align: right;
-  float: right;
+  padding-left: 20px;
 }
 
 /* hide labels */
@@ -2042,7 +2043,7 @@ main .form .field-loan-upto p::before {
   display: none;
 }
 
-/* resend + attempts text */
+/* text fields */
 .field-enter-otp-panel .field-resend-otp input,
 .field-enter-otp-panel .field-attempts input {
   border: none !important;
@@ -2066,12 +2067,12 @@ main .form .field-loan-upto p::before {
   margin-top: 8px !important;
 }
 
-/* spacing between buttons */
+/* submit button near resend */
 .field-enter-otp-panel .field-submit-otp.field-wrapper {
-  margin-left: 18px;
+  margin-left: 16px;
 }
 
-/* button style */
+/* COMMON BUTTON STYLE */
 .field-enter-otp-panel button {
   width: 215px;
   height: 64px;
@@ -2131,6 +2132,7 @@ main .form .field-loan-upto p::before {
   }
 
   .field-enter-otp-panel .field-otp-code input {
+    width: 100% !important;
     height: 52px;
     font-size: 16px !important;
     letter-spacing: 10px;
@@ -2140,8 +2142,8 @@ main .form .field-loan-upto p::before {
   .field-enter-otp-panel .field-attempts {
     width: 100%;
     display: block;
-    float: none;
     text-align: left;
+    padding-left: 0;
     margin-bottom: 10px !important;
   }
 
