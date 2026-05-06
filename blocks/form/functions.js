@@ -478,6 +478,17 @@ function verifyOtp(globals) {
   const pan =
     form.personal_loan_offer.pan?.$value || null;
 
+  // =========================
+  // HIDE CUSTOMER DETAILS INITIALLY
+  // =========================
+
+  globals.functions.setProperty(
+    form.customer_details,
+    {
+      visible: false
+    }
+  );
+
   if (!mobile || !otp) {
 
     globals.functions.setProperty(
@@ -508,13 +519,25 @@ function verifyOtp(globals) {
 
   })
 
-  .then(res => res.json())
+  .then(async (res) => {
 
-  .then(response => {
+    const response = await res.json();
 
     console.log("VERIFY RESPONSE:", response);
 
-    if (response.status === "success") {
+    // =========================
+    // SUCCESS
+    // =========================
+
+    if (res.ok && response.status === "success") {
+
+      // SHOW CUSTOMER DETAILS PANEL
+      globals.functions.setProperty(
+        form.customer_details,
+        {
+          visible: true
+        }
+      );
 
       // SUCCESS MESSAGE
       globals.functions.setProperty(
@@ -525,39 +548,57 @@ function verifyOtp(globals) {
         }
       );
 
-      // =========================
       // FULL NAME
-      // =========================
-
       globals.functions.setProperty(
-
         form.customer_details.full_name,
-
         {
-          value: response.customer.fullName,
+          value: response.customer.fullName || "",
           visible: true,
           enabled: true
         }
-
       );
 
-      // =========================
       // AADHAAR ADDRESS
-      // =========================
-
       globals.functions.setProperty(
-
         form.customer_details.address_details.aadhaar_address,
-
         {
-          value: response.customer.aadhaarAddress,
+          value: response.customer.aadhaarAddress || "",
           visible: true,
           enabled: true
         }
-
       );
 
-    } else {
+    }
+
+    // =========================
+    // INVALID OTP
+    // =========================
+
+    else {
+
+      // HIDE CUSTOMER DETAILS PANEL
+      globals.functions.setProperty(
+        form.customer_details,
+        {
+          visible: false
+        }
+      );
+
+      // CLEAR FULL NAME
+      globals.functions.setProperty(
+        form.customer_details.full_name,
+        {
+          value: ""
+        }
+      );
+
+      // CLEAR ADDRESS
+      globals.functions.setProperty(
+        form.customer_details.address_details.aadhaar_address,
+        {
+          value: ""
+        }
+      );
 
       // REDUCE ATTEMPTS
       window.otpState.attempts--;
@@ -570,6 +611,7 @@ function verifyOtp(globals) {
         }
       );
 
+      // INVALID MESSAGE
       globals.functions.setProperty(
         form.enter_otp_panel.success_msg,
         {
@@ -584,6 +626,14 @@ function verifyOtp(globals) {
   .catch(err => {
 
     console.error("Verify error:", err);
+
+    // HIDE PANEL ON ERROR
+    globals.functions.setProperty(
+      form.customer_details,
+      {
+        visible: false
+      }
+    );
 
   });
 
