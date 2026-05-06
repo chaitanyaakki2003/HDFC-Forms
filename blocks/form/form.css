@@ -1944,106 +1944,81 @@ main .form .field-loan-upto p::before {
 
 
 
-/* =========================================
-   OTP PANEL STYLING - AEM EDS FORMS ONLY
-   ========================================= */
+/* =========================
+   OTP SECTION ONLY STYLING
+   ========================= */
 
 .field-enter-otp-panel {
   margin-top: 20px;
-  max-width: 720px; /* reduced overall width */
 }
 
-/* =========================================
-   HEADING
-   ========================================= */
-
+/* Heading */
 .field-enter-otp-panel legend.field-label {
-  font-size: 22px;
+  font-size: 32px;
   font-weight: 700;
   color: #4b5563;
   margin-bottom: 20px;
   border: none !important;
-  padding: 0;
 }
 
-/* =========================================
-   SUCCESS / HELP TEXT
-   ========================================= */
-
+/* OTP success/help text */
 .field-enter-otp-panel .field-otp-help-text {
-  margin-bottom: 16px;
+  margin-bottom: 18px;
 }
 
 .field-enter-otp-panel .field-otp-help-text p {
-  font-size: 16px;
+  font-size: 18px;
   line-height: 1.5;
   color: #4b5563;
   margin: 0;
 }
 
-/* =========================================
-   OTP FIELD
-   ========================================= */
-
+/* OTP field wrapper */
 .field-enter-otp-panel .field-otp-code {
-  width: 100%;
   margin-bottom: 10px !important;
 }
 
-/* hide label */
+/* Hide label */
 .field-enter-otp-panel .field-otp-code .field-label {
   display: none;
 }
 
-/* OTP INPUT */
+/* OTP input */
 .field-enter-otp-panel .field-otp-code input {
-  width: 680px !important; /* reduced width */
+  width: 760px !important;   /* increased width till attempts */
   max-width: 100%;
   height: 58px;
   border: 1px solid #9ca3af;
   border-radius: 4px;
-  background: #fff;
-  box-sizing: border-box;
-  padding: 0 16px;
-  font-size: 18px !important;
+  font-size: 20px !important;
   font-weight: 500;
   letter-spacing: 14px;
-  color: #4b5563;
+  padding: 0 24px;
+  box-sizing: border-box;
   outline: none;
+  color: #4b5563;
 }
 
-/* =========================================
-   RESEND + ATTEMPTS ROW
-   ========================================= */
+/* Remove extra spacing */
+.field-enter-otp-panel .field-wrapper {
+  margin-top: 0 !important;
+  padding-top: 0 !important;
+}
 
+/* Resend + attempts row */
 .field-enter-otp-panel .field-resend-otp,
 .field-enter-otp-panel .field-attempts {
-  display: inline-block;
-  vertical-align: top;
-  margin-top: 8px !important;
+  margin-top: 12px !important;
   margin-bottom: 18px !important;
 }
 
-/* resend left */
-.field-enter-otp-panel .field-resend-otp {
-  width: 42%;
-  text-align: left;
-}
-
-/* attempts moved slightly right */
-.field-enter-otp-panel .field-attempts {
-  width: 52%;
-  text-align: right;
-  padding-left: 20px;
-}
-
-/* hide labels */
+/* Hide labels */
 .field-enter-otp-panel .field-resend-otp .field-label,
 .field-enter-otp-panel .field-attempts .field-label {
   display: none;
 }
 
-/* text fields */
+/* Text styling */
 .field-enter-otp-panel .field-resend-otp input,
 .field-enter-otp-panel .field-attempts input {
   border: none !important;
@@ -2056,9 +2031,18 @@ main .form .field-loan-upto p::before {
   box-shadow: none !important;
 }
 
-/* =========================================
-   BUTTONS ROW
-   ========================================= */
+/* Alignment */
+.field-enter-otp-panel .field-resend-otp {
+  text-align: left;
+}
+
+.field-enter-otp-panel .field-attempts {
+  text-align: right;
+}
+
+/* =========================
+   BUTTONS SIDE BY SIDE
+   ========================= */
 
 .field-enter-otp-panel .field-resend-otp.field-wrapper,
 .field-enter-otp-panel .field-submit-otp.field-wrapper {
@@ -2067,97 +2051,74 @@ main .form .field-loan-upto p::before {
   margin-top: 8px !important;
 }
 
-/* submit button near resend */
+/* Less spacing between buttons */
 .field-enter-otp-panel .field-submit-otp.field-wrapper {
-  margin-left: 16px;
+  margin-left: 14px;
 }
 
-/* COMMON BUTTON STYLE */
+/* Common button styling */
 .field-enter-otp-panel button {
-  width: 215px;
+  width: 220px;
   height: 64px;
   border: none;
-  border-radius: 0;
   font-size: 18px;
   font-weight: 700;
   cursor: pointer;
 }
 
-/* resend button */
+/* Resend button */
 .field-enter-otp-panel .field-resend-otp button {
   background: #d9d9d6;
   color: #ffffff;
 }
 
-/* submit button */
+/* Submit button */
 .field-enter-otp-panel .field-submit-otp button {
   background: #6488d3;
   color: #ffffff;
+}
+
+/* Remove float */
+.field-enter-otp-panel .field-submit-otp button {
   float: none !important;
 }
 
-/* disabled resend */
+/* Disabled resend */
 .field-enter-otp-panel .field-resend-otp button:disabled {
   background: #d9d9d6 !important;
   color: #ffffff !important;
   cursor: not-allowed;
 }
 
-/* =========================================
-   REMOVE EXTRA AEM SPACING
-   ========================================= */
-
-.field-enter-otp-panel .field-wrapper {
-  margin-top: 0 !important;
-  padding-top: 0 !important;
-  padding-bottom: 0 !important;
-}
-
-/* =========================================
-   MOBILE
-   ========================================= */
-
+/* Mobile */
 @media (max-width: 768px) {
 
-  .field-enter-otp-panel {
-    max-width: 100%;
-  }
-
   .field-enter-otp-panel legend.field-label {
-    font-size: 20px;
+    font-size: 24px;
   }
 
   .field-enter-otp-panel .field-otp-help-text p {
-    font-size: 15px;
+    font-size: 16px;
   }
 
   .field-enter-otp-panel .field-otp-code input {
     width: 100% !important;
     height: 52px;
-    font-size: 16px !important;
+    font-size: 18px !important;
     letter-spacing: 10px;
-  }
-
-  .field-enter-otp-panel .field-resend-otp,
-  .field-enter-otp-panel .field-attempts {
-    width: 100%;
-    display: block;
-    text-align: left;
-    padding-left: 0;
-    margin-bottom: 10px !important;
   }
 
   .field-enter-otp-panel .field-resend-otp.field-wrapper,
   .field-enter-otp-panel .field-submit-otp.field-wrapper {
     display: block;
-    width: 100%;
     margin-left: 0 !important;
+    width: 100%;
   }
 
   .field-enter-otp-panel button {
     width: 100%;
     height: 56px;
-    font-size: 17px;
+    font-size: 18px;
     margin-bottom: 10px;
   }
 }
