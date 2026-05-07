@@ -256,17 +256,30 @@ function calculateEMI(globals) {
     console.error("EMI ERROR:", e);
   }
 }
-function initSalaryBankUI() {
-  const panel = document.querySelector(".field-salary-bank-selection");
-  const radioGroup = panel?.querySelector(
-  ".radio-group-wrapper.field-salary-bank"
-);
+/**
+ * @param {scope} globals - Global scope object
+ */
 
-  if (!panel || !radioGroup || panel.dataset.ready === "true") return;
-  panel.dataset.ready = "true";
+function initSalaryBankUI(globals) {
+
+  const panel = document.querySelector(".field-salary-bank-selection");
+
+  const radioGroup = panel?.querySelector(
+    ".radio-group-wrapper.field-salary-bank"
+  );
+
+  if (!panel || !radioGroup || panel.dataset.initialized === "true") {
+    return;
+  }
+
+  panel.dataset.initialized = "true";
 
   const dropdownWrapper = panel.querySelector(".drop-down-wrapper");
   const dropdown = dropdownWrapper?.querySelector("select");
+
+  /* ==========================================
+     BANK LOGOS
+  ========================================== */
 
   const bankLogos = {
     hdfc_bank: "/content/dam/akki/hdfc.png",
@@ -278,84 +291,192 @@ function initSalaryBankUI() {
     idfc_first_bank: "/content/dam/akki/idfc.png"
   };
 
+  /* ==========================================
+     MAIN CONTAINER
+  ========================================== */
+
   const container = document.createElement("div");
   container.className = "salary-bank-content-row";
 
-  const cards = document.createElement("div");
-  cards.className = "bank-card-container";
+  const cardsContainer = document.createElement("div");
+  cardsContainer.className = "bank-card-container";
 
-  container.appendChild(cards);
+  container.appendChild(cardsContainer);
+
+  /* ==========================================
+     DROPDOWN
+  ========================================== */
 
   if (dropdownWrapper) {
-  // 🔥 completely detach from AEM layout
-  dropdownWrapper.removeAttribute("class");
 
-  dropdownWrapper.className = "drop-down-wrapper"; // reset clean class
+    dropdownWrapper.className = "drop-down-wrapper";
 
-  container.appendChild(dropdownWrapper);
-}
+    container.appendChild(dropdownWrapper);
+  }
 
   radioGroup.parentNode.insertBefore(container, radioGroup);
+
   radioGroup.style.display = "none";
 
   const radios = radioGroup.querySelectorAll("input[type='radio']");
 
-  if (dropdown) dropdown.innerHTML = "";
+  /* ==========================================
+     CREATE BANK CARDS
+  ========================================== */
 
   radios.forEach((radio) => {
-    const value = radio.value.trim();
-    const labelText = radio.nextElementSibling?.innerText || value;
 
-    const imgSrc = bankLogos[value];
+    const value = radio.value?.trim();
+
+    const label =
+      radio.nextElementSibling?.innerText?.trim() || value;
+
+    const logo = bankLogos[value];
 
     const card = document.createElement("div");
     card.className = "bank-card";
 
     card.innerHTML = `
-      ${imgSrc ? `<img src="${imgSrc}" />` : ""}
-      <span>${labelText}</span>
+      ${logo ? `<img src="${logo}" alt="${label}" />` : ""}
+      <span>${label}</span>
     `;
 
-    if (radio.checked) card.classList.add("active");
+    if (radio.checked) {
+      card.classList.add("active");
+    }
 
-    card.onclick = () => {
-      radios.forEach(r => r.checked = false);
+    /* ==============================
+       CARD CLICK
+    ============================== */
+
+    card.addEventListener("click", () => {
+
+      radios.forEach((r) => {
+        r.checked = false;
+      });
+
       radio.checked = true;
 
       document.querySelectorAll(".bank-card")
-        .forEach(c => c.classList.remove("active"));
+        .forEach((c) => {
+          c.classList.remove("active");
+        });
 
       card.classList.add("active");
 
-      if (dropdown) dropdown.value = value;
-    };
+      if (dropdown) {
+        dropdown.value = value;
+      }
 
-    cards.appendChild(card);
+      /* ===================================
+         AEM VALUE SET
+      =================================== */
+
+      globals.functions.setProperty(
+        globals.form.salary_bank,
+        {
+          value: value
+        }
+      );
+    });
+
+    cardsContainer.appendChild(card);
+
+    /* ==============================
+       DROPDOWN OPTION
+    ============================== */
 
     if (dropdown) {
+
       const option = document.createElement("option");
+
       option.value = value;
-      option.textContent = labelText;
+      option.textContent = label;
+
       dropdown.appendChild(option);
     }
   });
 
+  /* ==========================================
+     OTHER BANK OPTION
+  ========================================== */
+
   if (dropdown) {
-    const other = document.createElement("option");
-    other.value = "other_bank";
-    other.textContent = "Other Bank";
-    dropdown.appendChild(other);
+
+    const otherOption = document.createElement("option");
+
+    otherOption.value = "other_bank";
+    otherOption.textContent = "Other Bank";
+
+    dropdown.appendChild(otherOption);
+
+    /* ==============================
+       DROPDOWN CHANGE
+    ============================== */
+
+    dropdown.addEventListener("change", (e) => {
+
+      const selectedValue = e.target.value;
+
+      document.querySelectorAll(".bank-card")
+        .forEach((card) => {
+          card.classList.remove("active");
+        });
+
+      radios.forEach((radio) => {
+
+        if (radio.value === selectedValue) {
+
+          radio.checked = true;
+
+          const activeCard = cardsContainer.querySelector(
+            `.bank-card:nth-child(${Array.from(radios).indexOf(radio) + 1})`
+          );
+
+          if (activeCard) {
+            activeCard.classList.add("active");
+          }
+
+          globals.functions.setProperty(
+            globals.form.salary_bank,
+            {
+              value: selectedValue
+            }
+          );
+        }
+      });
+    });
   }
 }
 
-/* AEM SAFE LOAD */
-function waitForAEM() {
-  const panel = document.querySelector(".field-salary-bank-selection");
-  if (!panel) return setTimeout(waitForAEM, 300);
-  initSalaryBankUI();
+/* =====================================================
+   WAIT FOR AEM
+===================================================== */
+
+function waitForSalaryBank(globals) {
+
+  const panel = document.querySelector(
+    ".field-salary-bank-selection"
+  );
+
+  if (!panel) {
+    setTimeout(() => {
+      waitForSalaryBank(globals);
+    }, 300);
+
+    return;
+  }
+
+  initSalaryBankUI(globals);
 }
 
-waitForAEM();
+/* =====================================================
+   EXPORT
+===================================================== */
+
+export default function decorate(globals) {
+  waitForSalaryBank(globals);
+}
 
 // ✅ GLOBAL STATE (MANDATORY)
 window.otpState = {
