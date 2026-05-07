@@ -1526,9 +1526,111 @@ function loadReviewDetails(globals) {
 
   return "Review Details Loaded";
 }
+
+/**
+ * Proceed API Call
+ * @param {scope} globals
+ */
+function proceedApplication(globals) {
+
+  /* =========================
+     GET MOBILE NUMBER
+  ========================= */
+
+  const phone =
+    globals.form.personal_loan_offer.mobile_number?.$value || "";
+
+  console.log("PHONE:", phone);
+
+  if (!phone) {
+
+    console.log("Phone missing");
+
+    return;
+
+  }
+
+  /* =========================
+     PROCEED API
+  ========================= */
+
+  fetch(
+    "https://craftsman-resonant-asparagus.ngrok-free.dev/proceed",
+    {
+
+      method: "POST",
+
+      headers: {
+        "Content-Type": "application/json"
+      },
+
+      body: JSON.stringify({
+
+        phone: phone
+
+      })
+
+    }
+  )
+
+  .then(res => res.json())
+
+  .then(response => {
+
+    console.log(
+      "PROCEED API RESPONSE:",
+      response
+    );
+
+    if (!response.success) {
+
+      console.log("Proceed API failed");
+
+      return;
+
+    }
+
+    const data = response.data;
+
+    /* =========================
+       LOAN APPLICATION NUMBER
+    ========================= */
+
+    globals.functions.setProperty(
+
+      globals.form.thank_you.loan_application_number,
+
+      {
+
+        value:
+          data.loanApplicationNumber || ""
+
+      }
+
+    );
+
+    console.log(
+      "LOAN APPLICATION NUMBER SET SUCCESSFULLY"
+    );
+
+  })
+
+  .catch(error => {
+
+    console.error(
+      "Proceed API Error:",
+      error
+    );
+
+  });
+
+  return "Proceed API Called";
+
+}
+
 // eslint-disable-next-line import/prefer-default-export
 export {
-  getFullName, days, submitFormArrayToString, maskMobileNumber, handleOtpFlow, updateLoanOffer, calculateEMI, initSalaryBankUI, generateOtp, verifyOtp, startOtpTimer,resendOtp, generateOtpTier1, verifyOtpTier1, startOtpTimerTier1, resendOtpTier1, loadReviewDetails, getReviewDetails,
+  getFullName, days, submitFormArrayToString, maskMobileNumber, handleOtpFlow, updateLoanOffer, calculateEMI, initSalaryBankUI, generateOtp, verifyOtp, startOtpTimer,resendOtp, generateOtpTier1, verifyOtpTier1, startOtpTimerTier1, resendOtpTier1, loadReviewDetails, getReviewDetails, proceedApplication
 };
 
 
