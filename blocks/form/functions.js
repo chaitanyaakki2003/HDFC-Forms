@@ -1412,38 +1412,50 @@ function resendOtpTier1(globals) {
 
 }
 
-/*Review Details API Function*/
+ /*Review Details API Function*/
 /**
  * Fetch Review Details
  * @param {scope} globals
  */
 function fetchReviewDetailsAPI(globals) {
 
+  /* GET MOBILE NUMBER FROM FORM FIELD */
+
   const phone =
-    document.querySelector('input[name="mobile"]')?.value || "";
+    globals.form.mobile?.value || "";
 
-  fetch("https://craftsman-resonant-asparagus.ngrok-free.dev/review-details", {
+  console.log("PHONE:", phone);
 
-    method: "POST",
+  /* VALIDATION */
 
-    headers: {
-      "Content-Type": "application/json"
-    },
+  if (!phone) {
+    console.log("Phone number missing");
+    return "Phone missing";
+  }
 
-    body: JSON.stringify({
-      phone: phone
-    })
+  fetch(
+    "https://craftsman-resonant-asparagus.ngrok-free.dev/review-details",
+    {
+      method: "POST",
 
-  })
+      headers: {
+        "Content-Type": "application/json"
+      },
+
+      body: JSON.stringify({
+        phone: phone
+      })
+    }
+  )
 
   .then((res) => res.json())
 
   .then((response) => {
 
-    console.log("Review API Response:", response);
+    console.log("API RESPONSE:", response);
 
     if (!response.success) {
-      console.log("API failed");
+      console.log("API FAILED");
       return;
     }
 
@@ -1458,7 +1470,7 @@ function fetchReviewDetailsAPI(globals) {
       globals.form.review.form_fragment.form_accordion1776858819829.loan_details.loan_amount,
 
       {
-        value: data.loanAmount || ""
+        value: data.loanAmount
       }
 
     );
@@ -1468,7 +1480,7 @@ function fetchReviewDetailsAPI(globals) {
       globals.form.review.form_fragment.form_accordion1776858819829.loan_details.emi_amount,
 
       {
-        value: data.emiAmount || ""
+        value: data.emiAmount
       }
 
     );
@@ -1478,7 +1490,7 @@ function fetchReviewDetailsAPI(globals) {
       globals.form.review.form_fragment.form_accordion1776858819829.loan_details.tenure,
 
       {
-        value: data.tenure || ""
+        value: data.tenure
       }
 
     );
@@ -1488,7 +1500,7 @@ function fetchReviewDetailsAPI(globals) {
       globals.form.review.form_fragment.form_accordion1776858819829.loan_details.processing_fee,
 
       {
-        value: data.processingFees || ""
+        value: data.processingFees
       }
 
     );
@@ -1498,7 +1510,7 @@ function fetchReviewDetailsAPI(globals) {
       globals.form.review.form_fragment.form_accordion1776858819829.loan_details.rate_of_interest,
 
       {
-        value: data.rateOfInterest || ""
+        value: data.rateOfInterest
       }
 
     );
@@ -1508,7 +1520,7 @@ function fetchReviewDetailsAPI(globals) {
       globals.form.review.form_fragment.form_accordion1776858819829.loan_details.employer_name,
 
       {
-        value: data.employerName || ""
+        value: data.employerName
       }
 
     );
@@ -1518,7 +1530,7 @@ function fetchReviewDetailsAPI(globals) {
       globals.form.review.form_fragment.form_accordion1776858819829.loan_details.schedule_of_charges,
 
       {
-        value: data.scheduleOfCharges || ""
+        value: data.scheduleOfCharges
       }
 
     );
@@ -1528,7 +1540,7 @@ function fetchReviewDetailsAPI(globals) {
       globals.form.review.form_fragment.form_accordion1776858819829.loan_details.type_of_loan,
 
       {
-        value: data.typeOfLoan || ""
+        value: data.typeOfLoan
       }
 
     );
@@ -1542,7 +1554,7 @@ function fetchReviewDetailsAPI(globals) {
       globals.form.review.form_fragment.form_accordion1776858819829.personal_details.full_name,
 
       {
-        value: data.name || ""
+        value: data.name
       }
 
     );
@@ -1552,7 +1564,7 @@ function fetchReviewDetailsAPI(globals) {
       globals.form.review.form_fragment.form_accordion1776858819829.personal_details.mobile_number,
 
       {
-        value: data.mobileNumber || ""
+        value: data.mobileNumber
       }
 
     );
@@ -1562,7 +1574,7 @@ function fetchReviewDetailsAPI(globals) {
       globals.form.review.form_fragment.form_accordion1776858819829.personal_details.date_of_birth,
 
       {
-        value: data.dob || ""
+        value: data.dob
       }
 
     );
@@ -1572,7 +1584,7 @@ function fetchReviewDetailsAPI(globals) {
       globals.form.review.form_fragment.form_accordion1776858819829.personal_details.pan,
 
       {
-        value: data.pan || ""
+        value: data.pan
       }
 
     );
@@ -1582,7 +1594,7 @@ function fetchReviewDetailsAPI(globals) {
       globals.form.review.form_fragment.form_accordion1776858819829.personal_details.current_address,
 
       {
-        value: data.currentAddress || ""
+        value: data.currentAddress
       }
 
     );
@@ -1592,18 +1604,18 @@ function fetchReviewDetailsAPI(globals) {
       globals.form.review.form_fragment.form_accordion1776858819829.personal_details.residence_type,
 
       {
-        value: data.residenceType || ""
+        value: data.residenceType
       }
 
     );
 
-    console.log("Review Details Populated Successfully");
+    console.log("ALL VALUES POPULATED SUCCESSFULLY");
 
   })
 
   .catch((err) => {
 
-    console.error("Review Details Error:", err);
+    console.error("FETCH ERROR:", err);
 
   });
 
