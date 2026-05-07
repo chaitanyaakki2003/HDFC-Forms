@@ -219,17 +219,36 @@ export function addTicks(wrapper) {
   }
 
   // ✅ TENURE
-  else {
+else {
 
-    const values = [
-      12, 24, 36, 48, 60, 72, 84
-    ];
+  const values = [
+    12, 24, 36, 48, 60, 72, 84
+  ];
 
-    slider.dataset.actualValue = values[index];
+  // ✅ SAVE EXACT VALUE
+  slider.dataset.actualValue = values[index];
 
+  // ✅ FIX POSITION
+  const segmentSize =
+    100 / (values.length - 1);
+
+  // ✅ LAST VALUE FIX
+  if (index === values.length - 1) {
+    slider.value = 100;
+  } else {
     slider.value =
-      (index / (values.length - 1)) * 100;
+      index * segmentSize;
   }
+
+  // ✅ UPDATE BUBBLE
+  const bubble =
+    wrapper.querySelector('.range-bubble');
+
+  if (bubble) {
+    bubble.innerText =
+      `${values[index]} months`;
+  }
+}
 
   // ✅ UPDATE
   slider.dispatchEvent(
