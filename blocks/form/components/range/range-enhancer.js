@@ -212,10 +212,16 @@ slider.dataset.actualValue = values[index];
 slider.value =
   (index / (values.length - 1)) * 100;
 
-// ✅ NOW FIRE EVENT
-slider.dispatchEvent(
-  new Event('input', { bubbles: true })
-);
+// ✅ WAIT THEN FIRE EVENT
+setTimeout(() => {
+
+  slider.dispatchEvent(
+    new Event('input', {
+      bubbles: true
+    })
+  );
+
+}, 0);
 
     // ✅ FORCE BUBBLE VALUE
     const bubble =
@@ -260,10 +266,15 @@ else {
 }
 
   // ✅ UPDATE
+  setTimeout(() => {
+
   slider.dispatchEvent(
-    new Event('input', { bubbles: true })
+    new Event('input', {
+      bubbles: true
+    })
   );
-});
+
+}, 0);
 
     ticks.appendChild(span);
   });
