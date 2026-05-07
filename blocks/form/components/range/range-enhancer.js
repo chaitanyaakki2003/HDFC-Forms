@@ -35,9 +35,9 @@ export function formatValue(input, value) {
       values.map((_, i) => i * segmentSize);
 
     const isExact =
-      exactPositions.some(
-        pos => Math.abs(pos - value) < 0.01
-      );
+  exactPositions.some(
+    pos => Math.abs(pos - value) < 0.5
+  );
 
     // ✅ RETURN EXACT VALUE
     if (isExact) {
