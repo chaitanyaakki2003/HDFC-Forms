@@ -2,7 +2,119 @@ import {
   formatValue,
   addTicks
 } from './range-enhancer.js';
+function updateLoanDetails() {
 
+  // =========================
+  // GET SLIDERS
+  // =========================
+
+  const loanSlider =
+    document.querySelector(
+      'input[name="loan_amount_inr"]'
+    );
+
+  const tenureSlider =
+    document.querySelector(
+      'input[name="loan_tenure_months"]'
+    );
+
+  if (!loanSlider || !tenureSlider) return;
+
+  // =========================
+  // GET EXACT VALUES
+  // =========================
+
+  const principal =
+    Number(loanSlider.dataset.actualValue) || 50000;
+
+  const tenure =
+    Number(tenureSlider.dataset.actualValue) || 12;
+
+  // =========================
+  // EMI FORMULA
+  // =========================
+
+  const annualRate = 10.09;
+
+  const monthlyRate =
+    annualRate / 12 / 100;
+
+  const emi =
+    (
+      principal *
+      monthlyRate *
+      Math.pow(
+        1 + monthlyRate,
+        tenure
+      )
+    ) /
+    (
+      Math.pow(
+        1 + monthlyRate,
+        tenure
+      ) - 1
+    );
+
+  // =========================
+  // FIND RIGHT CARD VALUES
+  // =========================
+
+  const headings =
+    document.querySelectorAll('h2, h3, p, div');
+
+  let amountEl = null;
+  let emiEl = null;
+
+  headings.forEach((el) => {
+
+    const text =
+      el.textContent.trim();
+
+    // Loan amount field
+    if (
+      text.includes('₹') &&
+      !amountEl
+    ) {
+      amountEl = el;
+    }
+
+    // EMI field
+    if (
+      text.includes('2518') ||
+      text.includes('₹')
+    ) {
+
+      const parentText =
+        el.parentElement?.textContent || '';
+
+      if (
+        parentText.includes('EMI Amount')
+      ) {
+        emiEl = el;
+      }
+    }
+  });
+
+  // =========================
+  // UPDATE AMOUNT
+  // =========================
+
+  if (amountEl) {
+
+    amountEl.innerText =
+      `₹${principal.toLocaleString('en-IN')}`;
+  }
+
+  // =========================
+  // UPDATE EMI
+  // =========================
+
+  if (emiEl) {
+
+    emiEl.innerText =
+      `₹${Math.round(emi).toLocaleString('en-IN')}`;
+  }
+}
 function updateBubble(input, element) {
 
   const step = Number(input.step) || 1;
@@ -252,6 +364,7 @@ if (loanAmount && tenure) {
   }
 }
     updateBubble(e.target, div);
+    updateLoanDetails();
   });
 
   /* =========================
@@ -259,6 +372,7 @@ if (loanAmount && tenure) {
   ========================= */
 
   updateBubble(input, div);
+  updateLoanDetails();
 
   return fieldDiv;
 }
