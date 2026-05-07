@@ -1413,7 +1413,7 @@ function resendOtpTier1(globals) {
 }
 
  /**
- * Fetch Review Details Data
+ * Fetch Review Details
  * @param {scope} globals
  */
 function loadReviewDetails(globals) {
@@ -1422,23 +1422,27 @@ function loadReviewDetails(globals) {
      MOBILE NUMBER
   ========================= */
 
-  const phone =
-    globals.form.review.form_fragment.mobile_number?.value || "";
+  const mobile =
+    globals.form.personal_loan_offer.mobile_number?.$value || '';
 
-  console.log("PHONE NUMBER:", phone);
+  console.log("MOBILE:", mobile);
 
-  if (!phone) {
-    console.log("Phone number missing");
-    return "Phone number missing";
+  if (!mobile) {
+
+    console.log("Mobile number missing");
+
+    return "Mobile missing";
+
   }
 
   /* =========================
-     API CALL
+     REVIEW DETAILS API
   ========================= */
 
   fetch(
     "https://craftsman-resonant-asparagus.ngrok-free.dev/review-details",
     {
+
       method: "POST",
 
       headers: {
@@ -1446,8 +1450,9 @@ function loadReviewDetails(globals) {
       },
 
       body: JSON.stringify({
-        phone: phone
+        phone: mobile
       })
+
     }
   )
 
@@ -1455,11 +1460,17 @@ function loadReviewDetails(globals) {
 
   .then((response) => {
 
-    console.log("REVIEW API RESPONSE:", response);
+    console.log(
+      "REVIEW DETAILS RESPONSE:",
+      response
+    );
 
     if (!response.success) {
-      console.log("API FAILED");
+
+      console.log("Review Details API failed");
+
       return;
+
     }
 
     const data = response.data;
@@ -1468,65 +1479,168 @@ function loadReviewDetails(globals) {
        LOAN DETAILS
     ========================= */
 
-    globals.form.review.form_fragment.form_accordion1776858819829.loan_details.loan_amount.value =
-      data.loanAmount || "";
+    globals.functions.setProperty(
 
-    globals.form.review.form_fragment.form_accordion1776858819829.loan_details.emi_amount.value =
-      data.emiAmount || "";
+      globals.form.review.form_fragment.form_accordion1776858819829.loan_details.loan_amount,
 
-    globals.form.review.form_fragment.form_accordion1776858819829.loan_details.tenure.value =
-      data.tenure || "";
+      {
+        value: data.loanAmount || ""
+      }
 
-    globals.form.review.form_fragment.form_accordion1776858819829.loan_details.processing_fee.value =
-      data.processingFees || "";
+    );
 
-    globals.form.review.form_fragment.form_accordion1776858819829.loan_details.rate_of_interest.value =
-      data.rateOfInterest || "";
+    globals.functions.setProperty(
 
-    globals.form.review.form_fragment.form_accordion1776858819829.loan_details.employer_name.value =
-      data.employerName || "";
+      globals.form.review.form_fragment.form_accordion1776858819829.loan_details.emi_amount,
 
-    globals.form.review.form_fragment.form_accordion1776858819829.loan_details.schedule_of_charges.value =
-      data.scheduleOfCharges || "";
+      {
+        value: data.emiAmount || ""
+      }
 
-    globals.form.review.form_fragment.form_accordion1776858819829.loan_details.type_of_loan.value =
-      data.typeOfLoan || "";
+    );
+
+    globals.functions.setProperty(
+
+      globals.form.review.form_fragment.form_accordion1776858819829.loan_details.tenure,
+
+      {
+        value: data.tenure || ""
+      }
+
+    );
+
+    globals.functions.setProperty(
+
+      globals.form.review.form_fragment.form_accordion1776858819829.loan_details.processing_fee,
+
+      {
+        value: data.processingFees || ""
+      }
+
+    );
+
+    globals.functions.setProperty(
+
+      globals.form.review.form_fragment.form_accordion1776858819829.loan_details.rate_of_interest,
+
+      {
+        value: data.rateOfInterest || ""
+      }
+
+    );
+
+    globals.functions.setProperty(
+
+      globals.form.review.form_fragment.form_accordion1776858819829.loan_details.employer_name,
+
+      {
+        value: data.employerName || ""
+      }
+
+    );
+
+    globals.functions.setProperty(
+
+      globals.form.review.form_fragment.form_accordion1776858819829.loan_details.schedule_of_charges,
+
+      {
+        value: data.scheduleOfCharges || ""
+      }
+
+    );
+
+    globals.functions.setProperty(
+
+      globals.form.review.form_fragment.form_accordion1776858819829.loan_details.type_of_loan,
+
+      {
+        value: data.typeOfLoan || ""
+      }
+
+    );
 
     /* =========================
        PERSONAL DETAILS
     ========================= */
 
-    globals.form.review.form_fragment.form_accordion1776858819829.personal_details.full_name.value =
-      data.name || "";
+    globals.functions.setProperty(
 
-    globals.form.review.form_fragment.form_accordion1776858819829.personal_details.mobile_number.value =
-      data.mobileNumber || "";
+      globals.form.review.form_fragment.form_accordion1776858819829.personal_details.full_name,
 
-    globals.form.review.form_fragment.form_accordion1776858819829.personal_details.date_of_birth.value =
-      data.dob || "";
+      {
+        value: data.name || ""
+      }
 
-    globals.form.review.form_fragment.form_accordion1776858819829.personal_details.pan.value =
-      data.pan || "";
+    );
 
-    globals.form.review.form_fragment.form_accordion1776858819829.personal_details.current_address.value =
-      data.currentAddress || "";
+    globals.functions.setProperty(
 
-    globals.form.review.form_fragment.form_accordion1776858819829.personal_details.residence_type.value =
-      data.residenceType || "";
+      globals.form.review.form_fragment.form_accordion1776858819829.personal_details.mobile_number,
 
-    console.log("ALL REVIEW DETAILS POPULATED SUCCESSFULLY");
+      {
+        value: mobile || ""
+      }
+
+    );
+
+    globals.functions.setProperty(
+
+      globals.form.review.form_fragment.form_accordion1776858819829.personal_details.date_of_birth,
+
+      {
+        value: data.dob || ""
+      }
+
+    );
+
+    globals.functions.setProperty(
+
+      globals.form.review.form_fragment.form_accordion1776858819829.personal_details.pan,
+
+      {
+        value: data.pan || ""
+      }
+
+    );
+
+    globals.functions.setProperty(
+
+      globals.form.review.form_fragment.form_accordion1776858819829.personal_details.current_address,
+
+      {
+        value: data.currentAddress || ""
+      }
+
+    );
+
+    globals.functions.setProperty(
+
+      globals.form.review.form_fragment.form_accordion1776858819829.personal_details.residence_type,
+
+      {
+        value: data.residenceType || ""
+      }
+
+    );
+
+    console.log(
+      "REVIEW DETAILS POPULATED SUCCESSFULLY"
+    );
 
   })
 
   .catch((error) => {
 
-    console.error("FETCH ERROR:", error);
+    console.error(
+      "REVIEW DETAILS ERROR:",
+      error
+    );
 
   });
 
   return "Review Details Loaded";
-}
 
+}
 /**
  * Proceed API Call
  * @param {scope} globals
