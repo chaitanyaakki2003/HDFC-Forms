@@ -777,129 +777,132 @@ function getReviewDetails(globals) {
     }
   )
 
-  .then(res => res.json())
+  .then((res) => res.json())
 
-  .then(response => {
+  .then((response) => {
 
-    console.log("API RESPONSE:", response);
+    console.log(
+      "REVIEW DETAILS RESPONSE",
+      response
+    );
 
-    if (response.status === "success") {
-
-      const data = response.reviewDetails;
-
-      /* =========================
-         LOAN DETAILS
-      ========================= */
-
-      globals.functions.setProperty(
-
-        globals.form.review_details.loan_details.processing_fee,
-
-        {
-          value: data.processing_fee || ""
-        }
-
-      );
-
-      globals.functions.setProperty(
-
-        globals.form.review_details.loan_details.schedule_of_charges,
-
-        {
-          value: data.schedule_of_charges || ""
-        }
-
-      );
-
-      /* =========================
-         PERSONAL DETAILS
-      ========================= */
-
-      globals.functions.setProperty(
-
-        globals.form.review_details.personal_details.residence_type,
-
-        {
-          value: data.residence_type || ""
-        }
-
-      );
-
-      /* =========================
-         SALARY ACCOUNT DETAILS
-      ========================= */
-
-      globals.functions.setProperty(
-
-        globals.form.review_details.salary_account_details.salary_ac_number,
-
-        {
-          value: data.salary_ac_number || ""
-        }
-
-      );
-
-      globals.functions.setProperty(
-
-        globals.form.review_details.salary_account_details.ifsc,
-
-        {
-          value: data.ifsc || ""
-        }
-
-      );
-
-      globals.functions.setProperty(
-
-        globals.form.review_details.salary_account_details.bank_name,
-
-        {
-          value: data.bank_name || ""
-        }
-
-      );
-
-      /* =========================
-         OFFICE ADDRESS
-      ========================= */
-
-      globals.functions.setProperty(
-
-        globals.form.review_details.office_address.current_employer_address,
-
-        {
-          value: data.current_employer_address || ""
-        }
-
-      );
-
-      /* =========================
-         REFERENCE DETAILS
-      ========================= */
-
-      globals.functions.setProperty(
-
-        globals.form.review_details.reference_details.ref_name,
-
-        {
-          value: data.ref_name || ""
-        }
-
-      );
-
-      console.log(
-        "ALL REVIEW DETAILS FILLED SUCCESSFULLY"
-      );
-
+    if (response.status !== "success") {
+      return;
     }
+
+    const data = response.reviewDetails;
+
+    /* =========================
+       LOAN DETAILS
+    ========================= */
+
+    globals.functions.setProperty(
+
+      globals.form.review_details.loan_details.processing_fee,
+
+      {
+        value: data.processing_fee || ""
+      }
+
+    );
+
+    globals.functions.setProperty(
+
+      globals.form.review_details.loan_details.schedule_of_charges,
+
+      {
+        value: data.schedule_of_charges || ""
+      }
+
+    );
+
+    /* =========================
+       PERSONAL DETAILS
+    ========================= */
+
+    globals.functions.setProperty(
+
+      globals.form.review_details.personal_details.residence_type,
+
+      {
+        value: data.residence_type || ""
+      }
+
+    );
+
+    /* =========================
+       SALARY ACCOUNT DETAILS
+    ========================= */
+
+    globals.functions.setProperty(
+
+      globals.form.review_details.salary_account_details.salary_ac_number,
+
+      {
+        value: data.salary_ac_number || ""
+      }
+
+    );
+
+    globals.functions.setProperty(
+
+      globals.form.review_details.salary_account_details.ifsc,
+
+      {
+        value: data.ifsc || ""
+      }
+
+    );
+
+    globals.functions.setProperty(
+
+      globals.form.review_details.salary_account_details.bank_name,
+
+      {
+        value: data.bank_name || ""
+      }
+
+    );
+
+    /* =========================
+       OFFICE ADDRESS
+    ========================= */
+
+    globals.functions.setProperty(
+
+      globals.form.review_details.office_address.current_employer_address,
+
+      {
+        value: data.current_employer_address || ""
+      }
+
+    );
+
+    /* =========================
+       REFERENCE DETAILS
+    ========================= */
+
+    globals.functions.setProperty(
+
+      globals.form.review_details.reference_details.ref_name,
+
+      {
+        value: data.ref_name || ""
+      }
+
+    );
+
+    console.log(
+      "REVIEW DETAILS FILLED SUCCESSFULLY"
+    );
 
   })
 
-  .catch(error => {
+  .catch((err) => {
 
     console.error(
-      "Review Details API Error:",
-      error
+      "REVIEW DETAILS ERROR",
+      err
     );
 
   });
