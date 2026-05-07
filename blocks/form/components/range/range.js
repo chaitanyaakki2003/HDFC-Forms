@@ -3,6 +3,137 @@ import {
   addTicks
 } from './range-enhancer.js';
 
+/* =========================
+   UPDATE LOAN DETAILS
+========================= */
+
+function updateLoanDetails() {
+
+  // =========================
+  // GET EXACT VALUES
+  // =========================
+
+  const loanAmount =
+    Number(
+      document.querySelector(
+        '[name="loan_amount_inr"]'
+      )?.dataset?.actualValue
+    ) || 0;
+
+  const tenure =
+    Number(
+      document.querySelector(
+        '[name="loan_tenure_months"]'
+      )?.dataset?.actualValue
+    ) || 0;
+
+  // =========================
+  // EMI CALCULATION
+  // =========================
+
+  const annualRate = 10.09;
+
+  const monthlyRate =
+    annualRate / (12 * 100);
+
+  let emi = 0;
+
+  if (loanAmount && tenure) {
+
+    emi =
+      (
+        loanAmount *
+        monthlyRate *
+        Math.pow(
+          1 + monthlyRate,
+          tenure
+        )
+      ) /
+      (
+        Math.pow(
+          1 + monthlyRate,
+          tenure
+        ) - 1
+      );
+  }
+
+  // =========================
+  // FIND CARD VALUES
+  // =========================
+
+  const allDivs =
+    document.querySelectorAll('div');
+
+  let amountField = null;
+  let emiField = null;
+
+  allDivs.forEach((el) => {
+
+    const text =
+      el.innerText?.trim();
+
+    // LOAN OFFER AMOUNT
+    if (
+      text === '₹15,00,000' ||
+      text.includes('₹')
+    ) {
+
+      const parentText =
+        el.parentElement?.innerText || '';
+
+      if (
+        parentText.includes(
+          'Avail XPRESS Personal Loan'
+        )
+      ) {
+
+        amountField = el;
+      }
+    }
+
+    // EMI FIELD
+    if (
+      text.includes('2518') ||
+      text.includes('₹')
+    ) {
+
+      const parentText =
+        el.parentElement?.innerText || '';
+
+      if (
+        parentText.includes('EMI Amount')
+      ) {
+
+        emiField = el;
+      }
+    }
+  });
+
+  // =========================
+  // UPDATE LOAN AMOUNT
+  // =========================
+
+  if (amountField) {
+
+    amountField.innerText =
+      `₹${loanAmount.toLocaleString('en-IN')}`;
+  }
+
+  // =========================
+  // UPDATE EMI
+  // =========================
+
+  if (emiField) {
+
+    emiField.innerText =
+      `₹${Math.round(emi).toLocaleString('en-IN')}`;
+  }
+}
+
+/* =========================
+   UPDATE BUBBLE
+========================= */
+
 function updateBubble(input, element) {
 
   const step = Number(input.step) || 1;
@@ -19,23 +150,17 @@ function updateBubble(input, element) {
   const bubble =
     element.querySelector('.range-bubble');
 
-  // during initial render width becomes 0
   const bubbleWidth =
     bubble.getBoundingClientRect().width || 31;
 
   const left =
     `${(current / total) * 100}% - ${(current / total) * bubbleWidth}px`;
 
-  /* =========================
-     IMPORTANT
-     VALUE COMES FROM
-     range-enhancer.js
-  ========================= */
-
   bubble.innerText =
     formatValue(input, value);
 
   const steps = {
+
     '--total-steps':
       Math.ceil((max - min) / step),
 
@@ -55,6 +180,10 @@ function updateBubble(input, element) {
   element.setAttribute('style', style);
 }
 
+/* =========================
+   MAIN DECORATE
+========================= */
+
 export default async function decorate(
   fieldDiv,
   fieldJson
@@ -63,7 +192,6 @@ export default async function decorate(
   const input =
     fieldDiv.querySelector('input');
 
-  // ✅ RANGE TYPE
   input.type = 'range';
 
   /* =========================
@@ -74,11 +202,8 @@ export default async function decorate(
 
     input.min = 0;
     input.max = 100;
-
-    // smooth movement
     input.step = 1;
 
-    // initial position
     if (!input.value) {
       input.value = 50;
     }
@@ -92,9 +217,7 @@ export default async function decorate(
 
     input.min = 0;
     input.max = 100;
-
-    // ✅ allow exact snapping
-input.step = 1;
+    input.step = 1;
 
     if (!input.value) {
       input.value = 50;
@@ -135,7 +258,6 @@ input.step = 1;
 
   div.appendChild(hover);
 
-  // move slider into wrapper
   div.appendChild(input);
 
   div.appendChild(rangeMinEl);
@@ -154,7 +276,10 @@ input.step = 1;
 
   input.addEventListener('input', (e) => {
 
-    // ✅ tenure exact snap
+    // =========================
+    // TENURE SNAP FIX
+    // =========================
+
     if (
       input.name === "loan_tenure_months"
     ) {
@@ -166,13 +291,26 @@ input.step = 1;
       const segment =
         100 / (values.length - 1);
 
-      e.target.value =
+      let snapped =
         Math.round(
           e.target.value / segment
         ) * segment;
+
+      // LAST VALUE FIX
+      if (snapped > 99) {
+        snapped = 100;
+      }
+
+      e.target.value = snapped;
     }
 
+    // =========================
+    // UPDATE UI
+    // =========================
+
     updateBubble(e.target, div);
+
+    updateLoanDetails();
   });
 
   /* =========================
@@ -180,6 +318,8 @@ input.step = 1;
   ========================= */
 
   updateBubble(input, div);
+
+  updateLoanDetails();
 
   return fieldDiv;
 }
