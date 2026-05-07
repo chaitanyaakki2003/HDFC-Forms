@@ -256,44 +256,17 @@ function calculateEMI(globals) {
     console.error("EMI ERROR:", e);
   }
 }
-/**
- * @param {scope} globals - Global scope object
- */
-
-function initSalaryBankUI(globals) {
-
-  /* =====================================================
-     PANEL
-  ===================================================== */
-
-  const panel = document.querySelector(
-    ".field-salary-bank-selection"
-  );
-
+function initSalaryBankUI() {
+  const panel = document.querySelector(".field-salary-bank-selection");
   const radioGroup = panel?.querySelector(
-    ".radio-group-wrapper.field-salary-bank"
-  );
+  ".radio-group-wrapper.field-salary-bank"
+);
 
-  if (!panel || !radioGroup || panel.dataset.initialized === "true") {
-    return;
-  }
+  if (!panel || !radioGroup || panel.dataset.ready === "true") return;
+  panel.dataset.ready = "true";
 
-  panel.dataset.initialized = "true";
-
-  /* =====================================================
-     DROPDOWN
-  ===================================================== */
-
-  const dropdownWrapper = panel.querySelector(
-    ".drop-down-wrapper"
-  );
-
+  const dropdownWrapper = panel.querySelector(".drop-down-wrapper");
   const dropdown = dropdownWrapper?.querySelector("select");
-
-  /* =====================================================
-     BANK LOGOS
-     🔥 CHANGE PATHS IF NEEDED
-  ===================================================== */
 
   const bankLogos = {
     hdfc_bank: "/content/dam/akki/hdfc.png",
@@ -305,273 +278,84 @@ function initSalaryBankUI(globals) {
     idfc_first_bank: "/content/dam/akki/idfc.png"
   };
 
-  /* =====================================================
-     MAIN CONTAINER
-  ===================================================== */
-
   const container = document.createElement("div");
-
   container.className = "salary-bank-content-row";
 
-  /* =====================================================
-     CARD CONTAINER
-  ===================================================== */
+  const cards = document.createElement("div");
+  cards.className = "bank-card-container";
 
-  const cardsContainer = document.createElement("div");
-
-  cardsContainer.className = "bank-card-container";
-
-  container.appendChild(cardsContainer);
-
-  /* =====================================================
-     DROPDOWN WRAPPER
-  ===================================================== */
+  container.appendChild(cards);
 
   if (dropdownWrapper) {
+  // 🔥 completely detach from AEM layout
+  dropdownWrapper.removeAttribute("class");
 
-    dropdownWrapper.className = "drop-down-wrapper";
+  dropdownWrapper.className = "drop-down-wrapper"; // reset clean class
 
-    container.appendChild(dropdownWrapper);
-  }
+  container.appendChild(dropdownWrapper);
+}
 
-  /* =====================================================
-     INSERT UI
-  ===================================================== */
-
-  radioGroup.parentNode.insertBefore(
-    container,
-    radioGroup
-  );
-
-  /* =====================================================
-     HIDE ORIGINAL RADIO GROUP
-  ===================================================== */
-
+  radioGroup.parentNode.insertBefore(container, radioGroup);
   radioGroup.style.display = "none";
 
-  /* =====================================================
-     GET RADIOS
-  ===================================================== */
+  const radios = radioGroup.querySelectorAll("input[type='radio']");
 
-  const radios = radioGroup.querySelectorAll(
-    "input[type='radio']"
-  );
-
-  /* =====================================================
-     CLEAR DROPDOWN
-  ===================================================== */
-
-  if (dropdown) {
-    dropdown.innerHTML = "";
-  }
-
-  /* =====================================================
-     CREATE BANK CARDS
-  ===================================================== */
+  if (dropdown) dropdown.innerHTML = "";
 
   radios.forEach((radio) => {
+    const value = radio.value.trim();
+    const labelText = radio.nextElementSibling?.innerText || value;
 
-    const value = radio.value?.trim();
-
-    const label =
-      radio.parentElement
-        .querySelector("label")
-        ?.innerText?.trim() || value;
-
-    const logo = bankLogos[value];
-
-    console.log("BANK VALUE :", value);
-    console.log("BANK LOGO :", logo);
-
-    /* ==========================================
-       CARD
-    ========================================== */
+    const imgSrc = bankLogos[value];
 
     const card = document.createElement("div");
-
     card.className = "bank-card";
 
     card.innerHTML = `
-      <img src="${logo}" alt="${label}" />
-      <span>${label}</span>
+      ${imgSrc ? `<img src="${imgSrc}" />` : ""}
+      <span>${labelText}</span>
     `;
 
-    /* ==========================================
-       ACTIVE CARD
-    ========================================== */
+    if (radio.checked) card.classList.add("active");
 
-    if (radio.checked) {
-      card.classList.add("active");
-    }
-
-    /* ==========================================
-       CLICK EVENT
-    ========================================== */
-
-    card.addEventListener("click", () => {
-
-      radios.forEach((r) => {
-        r.checked = false;
-      });
-
+    card.onclick = () => {
+      radios.forEach(r => r.checked = false);
       radio.checked = true;
 
-      document
-        .querySelectorAll(".bank-card")
-        .forEach((c) => {
-          c.classList.remove("active");
-        });
+      document.querySelectorAll(".bank-card")
+        .forEach(c => c.classList.remove("active"));
 
       card.classList.add("active");
 
-      /* ======================================
-         UPDATE DROPDOWN
-      ====================================== */
+      if (dropdown) dropdown.value = value;
+    };
 
-      if (dropdown) {
-        dropdown.value = value;
-      }
-
-      /* ======================================
-         AEM VALUE SET
-      ====================================== */
-
-      if (
-        globals &&
-        globals.functions &&
-        globals.functions.setProperty &&
-        globals.form &&
-        globals.form.salary_bank
-      ) {
-
-        globals.functions.setProperty(
-          globals.form.salary_bank,
-          {
-            value: value
-          }
-        );
-      }
-    });
-
-    /* ==========================================
-       APPEND CARD
-    ========================================== */
-
-    cardsContainer.appendChild(card);
-
-    /* ==========================================
-       CREATE DROPDOWN OPTIONS
-    ========================================== */
+    cards.appendChild(card);
 
     if (dropdown) {
-
       const option = document.createElement("option");
-
       option.value = value;
-
-      option.textContent = label;
-
+      option.textContent = labelText;
       dropdown.appendChild(option);
     }
   });
 
-  /* =====================================================
-     OTHER BANK OPTION
-  ===================================================== */
-
   if (dropdown) {
-
-    const otherOption = document.createElement("option");
-
-    otherOption.value = "other_bank";
-
-    otherOption.textContent = "Other Bank";
-
-    dropdown.appendChild(otherOption);
-
-    /* =================================================
-       DROPDOWN CHANGE
-    ================================================= */
-
-    dropdown.addEventListener("change", (e) => {
-
-      const selectedValue = e.target.value;
-
-      document
-        .querySelectorAll(".bank-card")
-        .forEach((card) => {
-          card.classList.remove("active");
-        });
-
-      radios.forEach((radio, index) => {
-
-        if (radio.value === selectedValue) {
-
-          radio.checked = true;
-
-          const activeCard =
-            cardsContainer.querySelectorAll(".bank-card")[index];
-
-          if (activeCard) {
-            activeCard.classList.add("active");
-          }
-
-          /* ===================================
-             AEM VALUE SET
-          =================================== */
-
-          if (
-            globals &&
-            globals.functions &&
-            globals.functions.setProperty &&
-            globals.form &&
-            globals.form.salary_bank
-          ) {
-
-            globals.functions.setProperty(
-              globals.form.salary_bank,
-              {
-                value: selectedValue
-              }
-            );
-          }
-        }
-      });
-    });
+    const other = document.createElement("option");
+    other.value = "other_bank";
+    other.textContent = "Other Bank";
+    dropdown.appendChild(other);
   }
 }
 
-/* =====================================================
-   WAIT FOR AEM
-===================================================== */
-
-function waitForSalaryBank(globals) {
-
-  const panel = document.querySelector(
-    ".field-salary-bank-selection"
-  );
-
-  if (!panel) {
-
-    setTimeout(() => {
-      waitForSalaryBank(globals);
-    }, 300);
-
-    return;
-  }
-
-  initSalaryBankUI(globals);
+/* AEM SAFE LOAD */
+function waitForAEM() {
+  const panel = document.querySelector(".field-salary-bank-selection");
+  if (!panel) return setTimeout(waitForAEM, 300);
+  initSalaryBankUI();
 }
 
-/* =====================================================
-   EXPORT DEFAULT
-===================================================== */
-
-export default function decorate(globals) {
-
-  waitForSalaryBank(globals);
-}
-
+waitForAEM();
 
 // ✅ GLOBAL STATE (MANDATORY)
 window.otpState = {

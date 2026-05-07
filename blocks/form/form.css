@@ -1765,183 +1765,174 @@ main .form .field-loan-upto p::before {
 
 
 
-/* =====================================================
-   SALARY BANK PANEL
-===================================================== */
+/* ===================== */
+/* PANEL 1: BANK SELECT */
+/* ===================== */
 
 .field-salary-bank-selection {
   position: relative;
-  background: #ffffff;
-  border: 1px solid #dfe5f0;
-  border-radius: 16px;
-  padding: 0 20px 20px;
-  margin-bottom: 28px;
+  background: #fff;
+  border: 1px solid #cfd8ff;
+  border-radius: 12px;
+  padding: 0 28px 34px;
+  margin-bottom: 36px;
   overflow: hidden;
 }
 
-/* =====================================================
-   HEADER
-===================================================== */
-
+/* HEADER */
 .field-salary-bank-selection > legend.field-label {
+  width: calc(100% + 56px);
+  height: 64px;
+  margin: 0 -28px 28px;
+  padding: 0 24px;
+  background: #e9efff;
+  border-radius: 10px 10px 0 0;
+  display: flex;
+  align-items: center;
+  font-size: 16px;
+  font-weight: 700;
+}
+
+/* RIGHT SIDE DROPDOWN — FIXED */
+.field-salary-bank-selection .salary-bank-content-row {
+  display: flex !important;
+  align-items: center !important;
+  width: 100% !important;
+}
+
+.field-salary-bank-selection .bank-card-container {
+  display: flex !important;
+  gap: 16px !important;
+  flex: 1 1 auto !important;
+}
+
+/* 🔥 THIS IS THE ONLY IMPORTANT PART */
+.field-salary-bank-selection .drop-down-wrapper {
+  margin-left: auto !important;   /* pushes to right */
+  flex: 0 0 230px !important;
+  width: 230px !important;
+
+  display: block !important;
+  position: static !important;
+  grid-column: unset !important;
+}
+
+/* DROPDOWN */
+.field-salary-bank-selection select {
+  width: 100%;
+  height: 48px;
+  border-radius: 8px;
+  border: 1px solid #dfe5f0;
+  padding: 0 12px;
+  background: #fff;
+}
+
+/* HIDE ORIGINAL RADIO */
+.field-salary-bank-selection .radio-group-wrapper {
+  display: none !important;
+}
+
+
+/* ===================== */
+/* PANEL 2 */
+/* ===================== */
+
+.field-income-verification-method {
+  background: #fff;
+  border-radius: 16px;
+  border: 1px solid #e6ebf5;
+  padding: 0 20px 20px;
+}
+
+.field-income-verification-method > legend {
   background: #eef3ff;
   margin: 0 -20px 20px;
   padding: 18px 20px;
   border-radius: 16px 16px 0 0;
   font-weight: 700;
-  font-size: 18px;
-  color: #1f2937;
 }
 
-/* =====================================================
-   CONTENT ROW
-===================================================== */
-
-.salary-bank-content-row {
-  display: flex;
-  align-items: center;
-  gap: 20px;
-  width: 100%;
+/* CARD ROW */
+.field-income-verification-method .radio-group-wrapper {
+  display: flex !important;
+  gap: 16px;
 }
 
-/* =====================================================
-   LEFT CARDS
-===================================================== */
-
-.bank-card-container {
-  display: flex;
-  gap: 14px;
-  overflow-x: auto;
+/* CARD */
+.field-income-verification-method .radio-wrapper {
   flex: 1;
-  padding-bottom: 6px;
+  border: 1px solid #dfe5f0;
+  border-radius: 12px;
+  padding: 16px 16px 16px 40px;
+  position: relative;
 }
 
-/* =====================================================
-   SCROLLBAR
-===================================================== */
-
-.bank-card-container::-webkit-scrollbar {
-  height: 6px;
+/* RADIO */
+.field-income-verification-method input {
+  position: absolute;
+  left: 12px;
+  top: 18px;
 }
 
-.bank-card-container::-webkit-scrollbar-thumb {
-  background: #d1d5db;
-  border-radius: 20px;
+/* SELECTED */
+.field-income-verification-method 
+.radio-wrapper:has(input:checked) {
+  border: 2px solid #2563ff;
 }
 
-/* =====================================================
-   BANK CARD
-===================================================== */
-
-.bank-card {
-  min-width: 84px;
-  height: 84px;
-  background: #ffffff;
-  border: 2px solid #e5e7eb;
-  border-radius: 14px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  transition: all 0.2s ease;
-  flex-shrink: 0;
-  padding: 10px;
+/* DESCRIPTION */
+.field-income-verification-method .radio-wrapper label::after {
+  display: block;
+  margin-top: 6px;
+  font-size: 12px;
+  color: #6b7280;
 }
 
-/* =====================================================
-   IMAGE
-===================================================== */
-
-.bank-card img {
-  width: 34px;
-  height: 34px;
-  object-fit: contain;
-  margin-bottom: 8px;
+/* TEXT */
+.field-income-verification-method 
+.radio-wrapper:nth-child(1) label::after {
+  content: "Instant & secure, processed via RBI-regulated partner.";
+}
+.field-income-verification-method 
+.radio-wrapper:nth-child(2) label::after {
+  content: "Quick & hassle-free, processed via NetBanking.";
+}
+.field-income-verification-method 
+.radio-wrapper:nth-child(3) label::after {
+  content: "Processed via uploading bank statement of the last 6 months.";
 }
 
-/* =====================================================
-   TEXT
-===================================================== */
-
-.bank-card span {
-  font-size: 11px;
-  line-height: 15px;
+/* RECOMMENDED */
+.field-income-verification-method 
+.radio-wrapper:first-child:has(input:checked)::after {
+  content: "Recommended";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: #008765;
+  color: white;
   text-align: center;
-  color: #374151;
-  font-weight: 500;
+  padding: 4px;
+  border-radius: 0 0 12px 12px;
 }
 
-/* =====================================================
-   HOVER
-===================================================== */
-
-.bank-card:hover {
-  border-color: #93c5fd;
-}
-
-/* =====================================================
-   ACTIVE
-===================================================== */
-
-.bank-card.active {
-  border: 2px solid #2563eb;
-  background: #eff6ff;
-  box-shadow: 0 0 0 2px #dbeafe;
-}
-
-/* =====================================================
-   DROPDOWN
-===================================================== */
-
-.drop-down-wrapper {
-  margin-left: auto;
-  flex: 0 0 220px;
-  width: 220px;
-}
-
-.drop-down-wrapper select {
-  width: 100%;
-  height: 48px;
-  border-radius: 10px;
-  border: 1px solid #d1d5db;
-  background: #ffffff;
-  padding: 0 14px;
-  font-size: 14px;
-  outline: none;
-}
-
-/* =====================================================
-   HIDE ORIGINAL RADIOS
-===================================================== */
-
-.field-salary-bank-selection
-.radio-group-wrapper.field-salary-bank {
+/* 🔥 REMOVE EXTRA TEXT ONLY IN PANEL 2 */
+.field-income-verification-method > .plain-text-wrapper {
   display: none !important;
 }
 
-/* =====================================================
-   MOBILE
-===================================================== */
+/* 🔥 FORCE DROPDOWN TO BE FLEX ITEM (WITHOUT BREAKING AEM) */
+.field-salary-bank-selection .drop-down-wrapper {
+  display: block !important;
+  position: static !important;
+  grid-column: unset !important;
 
-@media (max-width: 768px) {
-
-  .salary-bank-content-row {
-    flex-direction: column;
-    align-items: stretch;
-  }
-
-  .drop-down-wrapper {
-    width: 100%;
-    flex: unset;
-    margin-left: 0;
-  }
-
-  .bank-card {
-    min-width: 76px;
-    height: 80px;
-  }
+  margin-left: auto !important;
+  flex: 0 0 230px !important;
+  width: 230px !important;
 }
+
 
 
 
