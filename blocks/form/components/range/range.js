@@ -93,8 +93,8 @@ export default async function decorate(
     input.min = 0;
     input.max = 100;
 
-    // fixed snapping
-    input.step = 16.6666667;
+    // ✅ allow exact snapping
+input.step = 1;
 
     if (!input.value) {
       input.value = 50;
@@ -155,22 +155,30 @@ export default async function decorate(
   input.addEventListener('input', (e) => {
 
     // ✅ tenure exact snap
-    if (
-      input.name === "loan_tenure_months"
-    ) {
+    // ✅ tenure exact snap
+if (
+  input.name === "loan_tenure_months"
+) {
 
-      const values = [
-        12, 24, 36, 48, 60, 72, 84
-      ];
+  const values = [
+    12, 24, 36, 48, 60, 72, 84
+  ];
 
-      const segment =
-        100 / (values.length - 1);
+  const segment =
+    100 / (values.length - 1);
 
-      e.target.value =
-        Math.round(
-          e.target.value / segment
-        ) * segment;
-    }
+  let snapped =
+    Math.round(
+      e.target.value / segment
+    ) * segment;
+
+  // ✅ FIX LAST VALUE
+  if (snapped > 99) {
+    snapped = 100;
+  }
+
+  e.target.value = snapped;
+}
 
     updateBubble(e.target, div);
   });
