@@ -47,47 +47,31 @@ export function formatValue(input, value) {
 
   // ✅ SMOOTH INTERPOLATION
   const values = [
-    50000,
-    200000,
-    400000,
-    600000,
-    800000,
-    1000000,
-    1500000
-  ];
+  50000,
+  200000,
+  400000,
+  600000,
+  800000,
+  1000000,
+  1500000
+];
 
-  const segmentSize =
-    100 / (values.length - 1);
+const segmentSize =
+  100 / (values.length - 1);
 
-  let segment =
-    Math.floor(value / segmentSize);
+let index =
+  Math.round(value / segmentSize);
 
-  if (segment >= values.length - 1) {
-    segment = values.length - 2;
-  }
+if (index >= values.length) {
+  index = values.length - 1;
+}
 
-  const segmentStart =
-    segment * segmentSize;
+const actualValue =
+  values[index];
 
-  const segmentEnd =
-    (segment + 1) * segmentSize;
-
-  const ratio =
-    (value - segmentStart) /
-    (segmentEnd - segmentStart);
-
-  const startValue =
-    values[segment];
-
-  const endValue =
-    values[segment + 1];
-
-  let actualValue =
-    startValue +
-    ratio * (endValue - startValue);
-
-  actualValue =
-    Math.round(actualValue / 1000) * 1000;
+// ✅ FORCE EXACT POSITION
+input.value =
+  index * segmentSize;
 
   input.dataset.actualValue =
     actualValue;
