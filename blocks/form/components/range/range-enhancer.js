@@ -45,7 +45,7 @@ export function formatValue(input, value) {
     }
   }
 
-    // ✅ FIXED VALUES ONLY
+  // ✅ SMOOTH INTERPOLATION
   const values = [
     50000,
     200000,
@@ -59,34 +59,41 @@ export function formatValue(input, value) {
   const segmentSize =
     100 / (values.length - 1);
 
-  // FIND EXACT INDEX
-  let index =
-    Math.round(value / segmentSize);
+  let segment =
+    Math.floor(value / segmentSize);
 
-  // FIX LAST VALUE
-  if (index >= values.length) {
-    index = values.length - 1;
+  if (segment >= values.length - 1) {
+    segment = values.length - 2;
   }
 
-  const actualValue =
-    values[index];
+  const segmentStart =
+    segment * segmentSize;
 
-  // SAVE EXACT VALUE
+  const segmentEnd =
+    (segment + 1) * segmentSize;
+
+  const ratio =
+    (value - segmentStart) /
+    (segmentEnd - segmentStart);
+
+  const startValue =
+    values[segment];
+
+  const endValue =
+    values[segment + 1];
+
+  let actualValue =
+    startValue +
+    ratio * (endValue - startValue);
+
+  actualValue =
+    Math.round(actualValue / 1000) * 1000;
+
   input.dataset.actualValue =
     actualValue;
 
-  // FORCE EXACT POSITION
-  if (index === values.length - 1) {
-
-    input.value = 100;
-
-  } else {
-
-    input.value =
-      index * segmentSize;
-  }
-
   return `₹${actualValue.toLocaleString('en-IN')}`;
+}
 
   // ✅ TENURE FIXED VALUES ONLY
 if (fieldName === "loan_tenure_months") {
@@ -325,15 +332,11 @@ export function addTicks(wrapper) {
       // FIRE INPUT EVENT
       // =========================
 
-      setTimeout(() => {
-
-        slider.dispatchEvent(
-          new Event('input', {
-            bubbles: true
-          })
-        );
-
-      }, 0);
+      slider.dispatchEvent(
+  new Event('input', {
+    bubbles: true
+  })
+);
 
     });
 
