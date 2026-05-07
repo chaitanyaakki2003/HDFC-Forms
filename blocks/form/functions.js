@@ -797,9 +797,7 @@ function getReviewDetails(globals) {
       globals.form.review_details.loan_details.schedule_of_charges.$value =
         data.schedule_of_charges || "";
 
-      globals.form.review_details.loan_details.loan_number.$value =
-        data.loan_number || "";
-
+      
       /* =========================
          PERSONAL DETAILS
       ========================= */
