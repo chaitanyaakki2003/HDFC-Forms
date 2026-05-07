@@ -121,12 +121,46 @@ export function addTicks(wrapper) {
     }
 
     // 🔥 CLICK FIX (IMPORTANT)
-    span.addEventListener('click', () => {
-      const percent = (index / (values.length - 1)) * 100;
-      slider.value = percent;
+  span.addEventListener('click', () => {
 
-      slider.dispatchEvent(new Event('input', { bubbles: true }));
-    });
+  // ✅ LOAN AMOUNT
+  if (fieldName === "loan_amount_inr") {
+
+    const values = [
+      50000,
+      200000,
+      400000,
+      600000,
+      800000,
+      1000000,
+      1500000
+    ];
+
+    const segmentSize =
+      100 / (values.length - 1);
+
+    // exact slider position
+    slider.value = index * segmentSize;
+  }
+
+  // ✅ TENURE
+  else {
+
+    const values = [
+      12, 24, 36, 48, 60, 72, 84
+    ];
+
+    const segmentSize =
+      100 / (values.length - 1);
+
+    slider.value = index * segmentSize;
+  }
+
+  // ✅ TRIGGER UPDATE
+  slider.dispatchEvent(
+    new Event('input', { bubbles: true })
+  );
+});
 
     ticks.appendChild(span);
   });
