@@ -754,6 +754,7 @@ function getReviewDetails(globals) {
     globals.form.personal_loan_offer.mobile_number?.$value || "";
 
   if (!mobile) {
+
     console.log("Mobile missing");
     return;
   }
@@ -761,6 +762,7 @@ function getReviewDetails(globals) {
   fetch(
     "https://craftsman-resonant-asparagus.ngrok-free.dev/review-details",
     {
+
       method: "POST",
 
       headers: {
@@ -770,6 +772,7 @@ function getReviewDetails(globals) {
       body: JSON.stringify({
         mobile: mobile
       })
+
     }
   )
 
@@ -780,11 +783,23 @@ function getReviewDetails(globals) {
     console.log("API RESPONSE:", response);
 
     if (response.status !== "success") {
+
       console.log("API failed");
       return;
     }
 
     const data = response.reviewDetails;
+
+    /* =========================
+       LOAN APPLICATION NUMBER
+    ========================= */
+
+    globals.functions.setProperty(
+      globals.form.thank_you.loan_application_number,
+      {
+        value: data.loan_number || ""
+      }
+    );
 
     /* =========================
        LOAN DETAILS
@@ -862,7 +877,9 @@ function getReviewDetails(globals) {
       }
     );
 
-    console.log("REVIEW DETAILS FILLED SUCCESSFULLY");
+    console.log(
+      "REVIEW DETAILS FILLED SUCCESSFULLY"
+    );
 
   })
 
@@ -877,7 +894,6 @@ function getReviewDetails(globals) {
 
   return "Review details fetched";
 }
-
 /**
  * Generate OTP Tier1
  * @param {scope} globals
