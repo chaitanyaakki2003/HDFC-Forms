@@ -95,7 +95,36 @@ export function formatValue(input, value) {
   return `₹${actualValue.toLocaleString('en-IN')}`;
 }
 
-  return value;
+  // ✅ TENURE FIXED VALUES ONLY
+if (fieldName === "loan_tenure_months") {
+
+  const tenureValues = [
+    12, 24, 36, 48, 60, 72, 84
+  ];
+
+  const segmentSize =
+    100 / (tenureValues.length - 1);
+
+  // ✅ SNAP TO EXACT VALUE
+  const index = Math.round(
+    value / segmentSize
+  );
+
+  const actualValue =
+    tenureValues[index];
+
+  // ✅ FORCE SLIDER POSITION
+  input.value =
+    index * segmentSize;
+
+  // ✅ SAVE EXACT VALUE
+  input.dataset.actualValue =
+    actualValue;
+
+  return `${actualValue} months`;
+}
+
+return value;
 }
 
 /* =========================
