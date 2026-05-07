@@ -118,8 +118,12 @@ if (index >= tenureValues.length) {
     tenureValues[index];
 
   // ✅ FORCE SLIDER POSITION
+if (index === tenureValues.length - 1) {
+  input.value = 100;
+} else {
   input.value =
     index * segmentSize;
+}
 
   // ✅ SAVE EXACT VALUE
   input.dataset.actualValue =
