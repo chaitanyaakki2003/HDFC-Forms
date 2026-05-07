@@ -1418,31 +1418,29 @@ function resendOtpTier1(globals) {
  */
 function loadReviewDetails(globals) {
 
+  const form = globals.form;
+
   /* =========================
-     MOBILE NUMBER
+     GET MOBILE NUMBER
   ========================= */
 
   const mobile =
-    globals.form.personal_loan_offer.mobile_number?.$value || '';
+    form.personal_loan_offer.mobile_number?.$value || '';
 
   console.log("MOBILE:", mobile);
 
   if (!mobile) {
-
     console.log("Mobile number missing");
-
-    return "Mobile missing";
-
+    return;
   }
 
   /* =========================
-     REVIEW DETAILS API
+     API CALL
   ========================= */
 
   fetch(
     "https://craftsman-resonant-asparagus.ngrok-free.dev/review-details",
     {
-
       method: "POST",
 
       headers: {
@@ -1452,7 +1450,6 @@ function loadReviewDetails(globals) {
       body: JSON.stringify({
         phone: mobile
       })
-
     }
   )
 
@@ -1460,172 +1457,87 @@ function loadReviewDetails(globals) {
 
   .then((response) => {
 
-    console.log(
-      "REVIEW DETAILS RESPONSE:",
-      response
-    );
+    console.log("REVIEW DETAILS RESPONSE:", response);
 
     if (!response.success) {
-
-      console.log("Review Details API failed");
-
+      console.log("API FAILED");
       return;
-
     }
 
     const data = response.data;
 
-    /* =========================
+    /* =========================================
        LOAN DETAILS
-    ========================= */
+    ========================================= */
 
     globals.functions.setProperty(
-
-      globals.form.review.form_fragment.form_accordion1776858819829.loan_details.loan_amount,
-
-      {
-        value: data.loanAmount || ""
-      }
-
-    );
-
-    globals.functions.setProperty(
-
-      globals.form.review.form_fragment.form_accordion1776858819829.loan_details.emi_amount,
-
-      {
-        value: data.emiAmount || ""
-      }
-
-    );
-
-    globals.functions.setProperty(
-
-      globals.form.review.form_fragment.form_accordion1776858819829.loan_details.tenure,
-
-      {
-        value: data.tenure || ""
-      }
-
-    );
-
-    globals.functions.setProperty(
-
-      globals.form.review.form_fragment.form_accordion1776858819829.loan_details.processing_fee,
-
+      form.review.form_fragment.form_accordion1776858819829.loan_details.processing_fee,
       {
         value: data.processingFees || ""
       }
-
     );
 
     globals.functions.setProperty(
-
-      globals.form.review.form_fragment.form_accordion1776858819829.loan_details.rate_of_interest,
-
-      {
-        value: data.rateOfInterest || ""
-      }
-
-    );
-
-    globals.functions.setProperty(
-
-      globals.form.review.form_fragment.form_accordion1776858819829.loan_details.employer_name,
-
+      form.review.form_fragment.form_accordion1776858819829.loan_details.employer_name,
       {
         value: data.employerName || ""
       }
-
     );
 
     globals.functions.setProperty(
-
-      globals.form.review.form_fragment.form_accordion1776858819829.loan_details.schedule_of_charges,
-
+      form.review.form_fragment.form_accordion1776858819829.loan_details.schedule_of_charges,
       {
         value: data.scheduleOfCharges || ""
       }
-
     );
 
     globals.functions.setProperty(
-
-      globals.form.review.form_fragment.form_accordion1776858819829.loan_details.type_of_loan,
-
+      form.review.form_fragment.form_accordion1776858819829.loan_details.type_of_loan,
       {
         value: data.typeOfLoan || ""
       }
-
     );
 
-    /* =========================
+    /* =========================================
        PERSONAL DETAILS
-    ========================= */
+    ========================================= */
 
     globals.functions.setProperty(
-
-      globals.form.review.form_fragment.form_accordion1776858819829.personal_details.full_name,
-
+      form.review.form_fragment.form_accordion1776858819829.personal_details.full_name,
       {
         value: data.name || ""
       }
-
     );
 
     globals.functions.setProperty(
-
-      globals.form.review.form_fragment.form_accordion1776858819829.personal_details.mobile_number,
-
+      form.review.form_fragment.form_accordion1776858819829.personal_details.mobile_number,
       {
         value: mobile || ""
       }
-
     );
 
     globals.functions.setProperty(
-
-      globals.form.review.form_fragment.form_accordion1776858819829.personal_details.date_of_birth,
-
-      {
-        value: data.dob || ""
-      }
-
-    );
-
-    globals.functions.setProperty(
-
-      globals.form.review.form_fragment.form_accordion1776858819829.personal_details.pan,
-
+      form.review.form_fragment.form_accordion1776858819829.personal_details.pan,
       {
         value: data.pan || ""
       }
-
     );
 
     globals.functions.setProperty(
-
-      globals.form.review.form_fragment.form_accordion1776858819829.personal_details.current_address,
-
+      form.review.form_fragment.form_accordion1776858819829.personal_details.current_address,
       {
         value: data.currentAddress || ""
       }
-
     );
 
     globals.functions.setProperty(
-
-      globals.form.review.form_fragment.form_accordion1776858819829.personal_details.residence_type,
-
+      form.review.form_fragment.form_accordion1776858819829.personal_details.residence_type,
       {
         value: data.residenceType || ""
       }
-
     );
 
-    console.log(
-      "REVIEW DETAILS POPULATED SUCCESSFULLY"
-    );
+    console.log("REVIEW DETAILS POPULATED SUCCESSFULLY");
 
   })
 
@@ -1639,112 +1551,12 @@ function loadReviewDetails(globals) {
   });
 
   return "Review Details Loaded";
-
 }
-/**
- * Proceed API Call
- * @param {scope} globals
- */
-function proceedApplication(globals) {
 
-  /* =========================
-     GET MOBILE NUMBER
-  ========================= */
-
-  const phone =
-    globals.form.personal_loan_offer.mobile_number?.$value || "";
-
-  console.log("PHONE:", phone);
-
-  if (!phone) {
-
-    console.log("Phone missing");
-
-    return;
-
-  }
-
-  /* =========================
-     PROCEED API
-  ========================= */
-
-  fetch(
-    "https://craftsman-resonant-asparagus.ngrok-free.dev/proceed",
-    {
-
-      method: "POST",
-
-      headers: {
-        "Content-Type": "application/json"
-      },
-
-      body: JSON.stringify({
-
-        phone: phone
-
-      })
-
-    }
-  )
-
-  .then(res => res.json())
-
-  .then(response => {
-
-    console.log(
-      "PROCEED API RESPONSE:",
-      response
-    );
-
-    if (!response.success) {
-
-      console.log("Proceed API failed");
-
-      return;
-
-    }
-
-    const data = response.data;
-
-    /* =========================
-       LOAN APPLICATION NUMBER
-    ========================= */
-
-    globals.functions.setProperty(
-
-      globals.form.thank_you.loan_application_number,
-
-      {
-
-        value:
-          data.loanApplicationNumber || ""
-
-      }
-
-    );
-
-    console.log(
-      "LOAN APPLICATION NUMBER SET SUCCESSFULLY"
-    );
-
-  })
-
-  .catch(error => {
-
-    console.error(
-      "Proceed API Error:",
-      error
-    );
-
-  });
-
-  return "Proceed API Called";
-
-}
 
 // eslint-disable-next-line import/prefer-default-export
 export {
-  getFullName, days, submitFormArrayToString, maskMobileNumber, handleOtpFlow, updateLoanOffer, calculateEMI, initSalaryBankUI, generateOtp, verifyOtp, startOtpTimer,resendOtp, generateOtpTier1, verifyOtpTier1, startOtpTimerTier1, resendOtpTier1, loadReviewDetails, getReviewDetails, proceedApplication
+  getFullName, days, submitFormArrayToString, maskMobileNumber, handleOtpFlow, updateLoanOffer, calculateEMI, initSalaryBankUI, generateOtp, verifyOtp, startOtpTimer,resendOtp, generateOtpTier1, verifyOtpTier1, startOtpTimerTier1, resendOtpTier1, loadReviewDetails, getReviewDetails, 
 };
 
 
