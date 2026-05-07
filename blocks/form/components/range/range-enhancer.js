@@ -7,32 +7,59 @@ export function formatValue(input, value) {
 
   value = Number(value);
 
-  // ✅ LOAN = SMOOTH VALUES
+  // ✅ LOAN AMOUNT
   if (fieldName === "loan_amount_inr") {
 
-    const MIN_AMOUNT = 50000;
-    const MAX_AMOUNT = 1500000;
+    const values = [
+      50000,
+      200000,
+      400000,
+      600000,
+      800000,
+      1000000,
+      1500000
+    ];
 
-    const ratio = value / 100;
+    const segmentSize = 100 / (values.length - 1);
+
+    let segment = Math.floor(value / segmentSize);
+
+    if (segment >= values.length - 1) {
+      segment = values.length - 2;
+    }
+
+    const segmentStart = segment * segmentSize;
+    const segmentEnd = (segment + 1) * segmentSize;
+
+    const ratio =
+      (value - segmentStart) /
+      (segmentEnd - segmentStart);
+
+    const startValue = values[segment];
+    const endValue = values[segment + 1];
 
     let actualValue =
-      MIN_AMOUNT + ratio * (MAX_AMOUNT - MIN_AMOUNT);
+      startValue + ratio * (endValue - startValue);
 
     actualValue = Math.round(actualValue / 1000) * 1000;
+
+    input.dataset.actualValue = actualValue;
 
     return `₹${actualValue.toLocaleString('en-IN')}`;
   }
 
-  // ✅ TENURE = FIXED
+  // ✅ TENURE FIXED VALUES ONLY
   if (fieldName === "loan_tenure_months") {
 
     const tenureValues = [12, 24, 36, 48, 60, 72, 84];
 
-    const index = Math.round(
-      (value / 100) * (tenureValues.length - 1)
-    );
+    const segmentSize = 100 / (tenureValues.length - 1);
+
+    const index = Math.round(value / segmentSize);
 
     const actualValue = tenureValues[index];
+
+    input.dataset.actualValue = actualValue;
 
     return `${actualValue} months`;
   }
