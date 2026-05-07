@@ -155,102 +155,23 @@ input.step = 1;
   input.addEventListener('input', (e) => {
 
     // ✅ tenure exact snap
-    // ✅ tenure exact snap
-if (
-  input.name === "loan_tenure_months"
-) {
+    if (
+      input.name === "loan_tenure_months"
+    ) {
 
-  const values = [
-    12, 24, 36, 48, 60, 72, 84
-  ];
+      const values = [
+        12, 24, 36, 48, 60, 72, 84
+      ];
 
-  const segment =
-    100 / (values.length - 1);
+      const segment =
+        100 / (values.length - 1);
 
-  let snapped =
-    Math.round(
-      e.target.value / segment
-    ) * segment;
+      e.target.value =
+        Math.round(
+          e.target.value / segment
+        ) * segment;
+    }
 
-  // ✅ FIX LAST VALUE
-  if (snapped > 99) {
-    snapped = 100;
-  }
-
-  e.target.value = snapped;
-}
-// =========================
-// GET EXACT VALUES
-// =========================
-
-const loanAmount =
-  Number(
-    document.querySelector('[name="loan_amount_inr"]')
-      ?.dataset?.actualValue
-  ) || 0;
-
-const tenure =
-  Number(
-    document.querySelector('[name="loan_tenure_months"]')
-      ?.dataset?.actualValue
-  ) || 0;
-
-// =========================
-// UPDATE LOAN OFFER
-// =========================
-
-const loanOffer =
-  document.querySelector('.loan-offer-amount');
-
-if (loanOffer) {
-
-  loanOffer.innerText =
-    `₹${loanAmount.toLocaleString('en-IN')}`;
-}
-
-// =========================
-// EMI CALCULATION
-// =========================
-
-if (loanAmount && tenure) {
-
-  const annualRate = 10.09;
-
-  const monthlyRate =
-    annualRate / (12 * 100);
-
-  const emi =
-    (
-      loanAmount *
-      monthlyRate *
-      Math.pow(
-        1 + monthlyRate,
-        tenure
-      )
-    ) /
-    (
-      Math.pow(
-        1 + monthlyRate,
-        tenure
-      ) - 1
-    );
-
-  const emiRounded =
-    Math.round(emi);
-
-  // =========================
-  // UPDATE EMI
-  // =========================
-
-  const emiField =
-    document.querySelector('.emi-amount');
-
-  if (emiField) {
-
-    emiField.innerText =
-      `₹${emiRounded.toLocaleString('en-IN')}`;
-  }
-}
     updateBubble(e.target, div);
   });
 
