@@ -204,15 +204,18 @@ export function addTicks(wrapper) {
       1500000
     ];
 
-    // ✅ SAVE EXACT VALUE
-    slider.dataset.actualValue = values[index];
-    slider.dispatchEvent(
+// ✅ SAVE EXACT VALUE
+slider.dataset.actualValue = values[index];
+
+// ✅ IMPORTANT
+// exact slider position
+slider.value =
+  (index / (values.length - 1)) * 100;
+
+// ✅ NOW FIRE EVENT
+slider.dispatchEvent(
   new Event('input', { bubbles: true })
 );
-    // ✅ IMPORTANT
-    // exact slider position
-    slider.value =
-      (index / (values.length - 1)) * 100;
 
     // ✅ FORCE BUBBLE VALUE
     const bubble =
