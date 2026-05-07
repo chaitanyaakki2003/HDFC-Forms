@@ -262,7 +262,13 @@ function calculateEMI(globals) {
 
 function initSalaryBankUI(globals) {
 
-  const panel = document.querySelector(".field-salary-bank-selection");
+  /* =====================================================
+     PANEL
+  ===================================================== */
+
+  const panel = document.querySelector(
+    ".field-salary-bank-selection"
+  );
 
   const radioGroup = panel?.querySelector(
     ".radio-group-wrapper.field-salary-bank"
@@ -274,12 +280,20 @@ function initSalaryBankUI(globals) {
 
   panel.dataset.initialized = "true";
 
-  const dropdownWrapper = panel.querySelector(".drop-down-wrapper");
+  /* =====================================================
+     DROPDOWN
+  ===================================================== */
+
+  const dropdownWrapper = panel.querySelector(
+    ".drop-down-wrapper"
+  );
+
   const dropdown = dropdownWrapper?.querySelector("select");
 
-  /* ==========================================
+  /* =====================================================
      BANK LOGOS
-  ========================================== */
+     🔥 CHANGE PATHS IF NEEDED
+  ===================================================== */
 
   const bankLogos = {
     hdfc_bank: "/content/dam/akki/hdfc.png",
@@ -291,21 +305,27 @@ function initSalaryBankUI(globals) {
     idfc_first_bank: "/content/dam/akki/idfc.png"
   };
 
-  /* ==========================================
+  /* =====================================================
      MAIN CONTAINER
-  ========================================== */
+  ===================================================== */
 
   const container = document.createElement("div");
+
   container.className = "salary-bank-content-row";
 
+  /* =====================================================
+     CARD CONTAINER
+  ===================================================== */
+
   const cardsContainer = document.createElement("div");
+
   cardsContainer.className = "bank-card-container";
 
   container.appendChild(cardsContainer);
 
-  /* ==========================================
-     DROPDOWN
-  ========================================== */
+  /* =====================================================
+     DROPDOWN WRAPPER
+  ===================================================== */
 
   if (dropdownWrapper) {
 
@@ -314,40 +334,79 @@ function initSalaryBankUI(globals) {
     container.appendChild(dropdownWrapper);
   }
 
-  radioGroup.parentNode.insertBefore(container, radioGroup);
+  /* =====================================================
+     INSERT UI
+  ===================================================== */
+
+  radioGroup.parentNode.insertBefore(
+    container,
+    radioGroup
+  );
+
+  /* =====================================================
+     HIDE ORIGINAL RADIO GROUP
+  ===================================================== */
 
   radioGroup.style.display = "none";
 
-  const radios = radioGroup.querySelectorAll("input[type='radio']");
+  /* =====================================================
+     GET RADIOS
+  ===================================================== */
 
-  /* ==========================================
+  const radios = radioGroup.querySelectorAll(
+    "input[type='radio']"
+  );
+
+  /* =====================================================
+     CLEAR DROPDOWN
+  ===================================================== */
+
+  if (dropdown) {
+    dropdown.innerHTML = "";
+  }
+
+  /* =====================================================
      CREATE BANK CARDS
-  ========================================== */
+  ===================================================== */
 
   radios.forEach((radio) => {
 
     const value = radio.value?.trim();
 
     const label =
-      radio.nextElementSibling?.innerText?.trim() || value;
+      radio.parentElement
+        .querySelector("label")
+        ?.innerText?.trim() || value;
 
     const logo = bankLogos[value];
 
+    console.log("BANK VALUE :", value);
+    console.log("BANK LOGO :", logo);
+
+    /* ==========================================
+       CARD
+    ========================================== */
+
     const card = document.createElement("div");
+
     card.className = "bank-card";
 
     card.innerHTML = `
-      ${logo ? `<img src="${logo}" alt="${label}" />` : ""}
+      <img src="${logo}" alt="${label}" />
       <span>${label}</span>
     `;
+
+    /* ==========================================
+       ACTIVE CARD
+    ========================================== */
 
     if (radio.checked) {
       card.classList.add("active");
     }
 
-    /* ==============================
-       CARD CLICK
-    ============================== */
+    /* ==========================================
+       CLICK EVENT
+    ========================================== */
 
     card.addEventListener("click", () => {
 
@@ -357,92 +416,125 @@ function initSalaryBankUI(globals) {
 
       radio.checked = true;
 
-      document.querySelectorAll(".bank-card")
+      document
+        .querySelectorAll(".bank-card")
         .forEach((c) => {
           c.classList.remove("active");
         });
 
       card.classList.add("active");
 
+      /* ======================================
+         UPDATE DROPDOWN
+      ====================================== */
+
       if (dropdown) {
         dropdown.value = value;
       }
 
-      /* ===================================
+      /* ======================================
          AEM VALUE SET
-      =================================== */
+      ====================================== */
 
-      globals.functions.setProperty(
-        globals.form.salary_bank,
-        {
-          value: value
-        }
-      );
+      if (
+        globals &&
+        globals.functions &&
+        globals.functions.setProperty &&
+        globals.form &&
+        globals.form.salary_bank
+      ) {
+
+        globals.functions.setProperty(
+          globals.form.salary_bank,
+          {
+            value: value
+          }
+        );
+      }
     });
+
+    /* ==========================================
+       APPEND CARD
+    ========================================== */
 
     cardsContainer.appendChild(card);
 
-    /* ==============================
-       DROPDOWN OPTION
-    ============================== */
+    /* ==========================================
+       CREATE DROPDOWN OPTIONS
+    ========================================== */
 
     if (dropdown) {
 
       const option = document.createElement("option");
 
       option.value = value;
+
       option.textContent = label;
 
       dropdown.appendChild(option);
     }
   });
 
-  /* ==========================================
+  /* =====================================================
      OTHER BANK OPTION
-  ========================================== */
+  ===================================================== */
 
   if (dropdown) {
 
     const otherOption = document.createElement("option");
 
     otherOption.value = "other_bank";
+
     otherOption.textContent = "Other Bank";
 
     dropdown.appendChild(otherOption);
 
-    /* ==============================
+    /* =================================================
        DROPDOWN CHANGE
-    ============================== */
+    ================================================= */
 
     dropdown.addEventListener("change", (e) => {
 
       const selectedValue = e.target.value;
 
-      document.querySelectorAll(".bank-card")
+      document
+        .querySelectorAll(".bank-card")
         .forEach((card) => {
           card.classList.remove("active");
         });
 
-      radios.forEach((radio) => {
+      radios.forEach((radio, index) => {
 
         if (radio.value === selectedValue) {
 
           radio.checked = true;
 
-          const activeCard = cardsContainer.querySelector(
-            `.bank-card:nth-child(${Array.from(radios).indexOf(radio) + 1})`
-          );
+          const activeCard =
+            cardsContainer.querySelectorAll(".bank-card")[index];
 
           if (activeCard) {
             activeCard.classList.add("active");
           }
 
-          globals.functions.setProperty(
-            globals.form.salary_bank,
-            {
-              value: selectedValue
-            }
-          );
+          /* ===================================
+             AEM VALUE SET
+          =================================== */
+
+          if (
+            globals &&
+            globals.functions &&
+            globals.functions.setProperty &&
+            globals.form &&
+            globals.form.salary_bank
+          ) {
+
+            globals.functions.setProperty(
+              globals.form.salary_bank,
+              {
+                value: selectedValue
+              }
+            );
+          }
         }
       });
     });
@@ -460,6 +552,7 @@ function waitForSalaryBank(globals) {
   );
 
   if (!panel) {
+
     setTimeout(() => {
       waitForSalaryBank(globals);
     }, 300);
@@ -471,12 +564,14 @@ function waitForSalaryBank(globals) {
 }
 
 /* =====================================================
-   EXPORT
+   EXPORT DEFAULT
 ===================================================== */
 
 export default function decorate(globals) {
+
   waitForSalaryBank(globals);
 }
+
 
 // ✅ GLOBAL STATE (MANDATORY)
 window.otpState = {

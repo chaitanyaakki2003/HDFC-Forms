@@ -1766,7 +1766,7 @@ main .form .field-loan-upto p::before {
 
 
 /* =====================================================
-   PANEL 1 : SALARY BANK SELECTION
+   SALARY BANK PANEL
 ===================================================== */
 
 .field-salary-bank-selection {
@@ -1779,7 +1779,9 @@ main .form .field-loan-upto p::before {
   overflow: hidden;
 }
 
-/* ===== HEADER ===== */
+/* =====================================================
+   HEADER
+===================================================== */
 
 .field-salary-bank-selection > legend.field-label {
   background: #eef3ff;
@@ -1791,7 +1793,9 @@ main .form .field-loan-upto p::before {
   color: #1f2937;
 }
 
-/* ===== MAIN ROW ===== */
+/* =====================================================
+   CONTENT ROW
+===================================================== */
 
 .salary-bank-content-row {
   display: flex;
@@ -1800,7 +1804,9 @@ main .form .field-loan-upto p::before {
   width: 100%;
 }
 
-/* ===== LEFT SECTION ===== */
+/* =====================================================
+   LEFT CARDS
+===================================================== */
 
 .bank-card-container {
   display: flex;
@@ -1810,7 +1816,9 @@ main .form .field-loan-upto p::before {
   padding-bottom: 6px;
 }
 
-/* ===== SCROLL ===== */
+/* =====================================================
+   SCROLLBAR
+===================================================== */
 
 .bank-card-container::-webkit-scrollbar {
   height: 6px;
@@ -1821,7 +1829,9 @@ main .form .field-loan-upto p::before {
   border-radius: 20px;
 }
 
-/* ===== BANK CARD ===== */
+/* =====================================================
+   BANK CARD
+===================================================== */
 
 .bank-card {
   min-width: 84px;
@@ -1839,7 +1849,9 @@ main .form .field-loan-upto p::before {
   padding: 10px;
 }
 
-/* ===== ICON ===== */
+/* =====================================================
+   IMAGE
+===================================================== */
 
 .bank-card img {
   width: 34px;
@@ -1848,23 +1860,29 @@ main .form .field-loan-upto p::before {
   margin-bottom: 8px;
 }
 
-/* ===== TEXT ===== */
+/* =====================================================
+   TEXT
+===================================================== */
 
 .bank-card span {
   font-size: 11px;
-  text-align: center;
   line-height: 15px;
+  text-align: center;
   color: #374151;
   font-weight: 500;
 }
 
-/* ===== HOVER ===== */
+/* =====================================================
+   HOVER
+===================================================== */
 
 .bank-card:hover {
   border-color: #93c5fd;
 }
 
-/* ===== ACTIVE ===== */
+/* =====================================================
+   ACTIVE
+===================================================== */
 
 .bank-card.active {
   border: 2px solid #2563eb;
@@ -1872,15 +1890,15 @@ main .form .field-loan-upto p::before {
   box-shadow: 0 0 0 2px #dbeafe;
 }
 
-/* ===== DROPDOWN RIGHT ===== */
+/* =====================================================
+   DROPDOWN
+===================================================== */
 
 .drop-down-wrapper {
   margin-left: auto;
   flex: 0 0 220px;
   width: 220px;
 }
-
-/* ===== DROPDOWN ===== */
 
 .drop-down-wrapper select {
   width: 100%;
@@ -1893,138 +1911,12 @@ main .form .field-loan-upto p::before {
   outline: none;
 }
 
-/* ===== HIDE ORIGINAL RADIO ===== */
+/* =====================================================
+   HIDE ORIGINAL RADIOS
+===================================================== */
 
 .field-salary-bank-selection
 .radio-group-wrapper.field-salary-bank {
-  display: none !important;
-}
-
-/* =====================================================
-   PANEL 2 : INCOME VERIFICATION METHOD
-===================================================== */
-
-.field-income-verification-method {
-  background: #ffffff;
-  border-radius: 16px;
-  border: 1px solid #e6ebf5;
-  padding: 0 20px 20px;
-}
-
-/* ===== HEADER ===== */
-
-.field-income-verification-method > legend {
-  background: #eef3ff;
-  margin: 0 -20px 20px;
-  padding: 18px 20px;
-  border-radius: 16px 16px 0 0;
-  font-weight: 700;
-  font-size: 18px;
-}
-
-/* ===== CARD ROW ===== */
-
-.field-income-verification-method
-.radio-group-wrapper {
-  display: flex !important;
-  gap: 16px;
-}
-
-/* ===== CARD ===== */
-
-.field-income-verification-method
-.radio-wrapper {
-  position: relative;
-  flex: 1;
-  border: 1px solid #dfe5f0;
-  border-radius: 14px;
-  padding: 18px 18px 18px 42px;
-  background: #ffffff;
-  transition: 0.2s;
-  min-height: 110px;
-}
-
-/* ===== RADIO ===== */
-
-.field-income-verification-method
-.radio-wrapper input {
-  position: absolute;
-  left: 14px;
-  top: 22px;
-}
-
-/* ===== LABEL ===== */
-
-.field-income-verification-method
-.radio-wrapper label {
-  display: block;
-  font-size: 16px;
-  font-weight: 600;
-  color: #1f2937;
-}
-
-/* ===== DESCRIPTION ===== */
-
-.field-income-verification-method
-.radio-wrapper label::after {
-  display: block;
-  margin-top: 8px;
-  font-size: 13px;
-  line-height: 18px;
-  color: #6b7280;
-  font-weight: 400;
-}
-
-/* ===== DESCRIPTION TEXT ===== */
-
-.field-income-verification-method
-.radio-wrapper:nth-child(1)
-label::after {
-  content: "Instant & secure, processed via RBI-regulated partner.";
-}
-
-.field-income-verification-method
-.radio-wrapper:nth-child(2)
-label::after {
-  content: "Quick & hassle-free, processed via NetBanking.";
-}
-
-.field-income-verification-method
-.radio-wrapper:nth-child(3)
-label::after {
-  content: "Processed via uploading bank statement of the last 6 months.";
-}
-
-/* ===== ACTIVE ===== */
-
-.field-income-verification-method
-.radio-wrapper:has(input:checked) {
-  border: 2px solid #2563eb;
-  background: #f8fbff;
-}
-
-/* ===== RECOMMENDED BAR ===== */
-
-.field-income-verification-method
-.radio-wrapper:first-child:has(input:checked)::after {
-  content: "Recommended";
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: #008765;
-  color: #ffffff;
-  text-align: center;
-  padding: 5px;
-  border-radius: 0 0 12px 12px;
-  font-size: 12px;
-  font-weight: 500;
-}
-
-/* ===== REMOVE EXTRA TEXT ===== */
-
-.field-income-verification-method
-> .plain-text-wrapper {
   display: none !important;
 }
 
@@ -2045,17 +1937,11 @@ label::after {
     margin-left: 0;
   }
 
-  .field-income-verification-method
-  .radio-group-wrapper {
-    flex-direction: column;
-  }
-
   .bank-card {
     min-width: 76px;
     height: 80px;
   }
 }
-
 
 
 
