@@ -2,20 +2,36 @@
    FORMAT VALUE
 ========================= */
 export function formatValue(input, value) {
+
   const fieldName = input.name;
 
-  const amountValues = [50000, 200000, 400000, 600000, 800000, 1000000, 1500000];
-  const tenureValues = [12, 24, 36, 48, 60, 72, 84];
+  value = Number(value);
 
+  // ✅ LOAN = SMOOTH VALUES
   if (fieldName === "loan_amount_inr") {
-    const index = Math.round((value / 100) * (amountValues.length - 1));
-    const actualValue = amountValues[index];
+
+    const MIN_AMOUNT = 50000;
+    const MAX_AMOUNT = 1500000;
+
+    const ratio = value / 100;
+
+    let actualValue =
+      MIN_AMOUNT + ratio * (MAX_AMOUNT - MIN_AMOUNT);
+
+    actualValue = Math.round(actualValue / 1000) * 1000;
 
     return `₹${actualValue.toLocaleString('en-IN')}`;
   }
 
+  // ✅ TENURE = FIXED
   if (fieldName === "loan_tenure_months") {
-    const index = Math.round((value / 100) * (tenureValues.length - 1));
+
+    const tenureValues = [12, 24, 36, 48, 60, 72, 84];
+
+    const index = Math.round(
+      (value / 100) * (tenureValues.length - 1)
+    );
+
     const actualValue = tenureValues[index];
 
     return `${actualValue} months`;
@@ -23,7 +39,6 @@ export function formatValue(input, value) {
 
   return value;
 }
-
 
 /* =========================
    SET STEP

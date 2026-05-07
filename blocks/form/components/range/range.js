@@ -1,44 +1,71 @@
 import { formatValue, addTicks } from './range-enhancer.js';
 function updateBubble(input, element) {
   const step = input.step || 1;
-  const max = input.max || 0;
-  const min = input.min || 1;
-  const value = input.value || 1;
+  const max = Number(input.max) || 100;
+  const min = Number(input.min) || 0;
+  const value = Number(input.value) || 0;
+
   const current = Math.ceil((value - min) / step);
   const total = Math.ceil((max - min) / step);
+
   const bubble = element.querySelector('.range-bubble');
-  // during initial render the width is 0. Hence using a default here.
+
   const bubbleWidth = bubble.getBoundingClientRect().width || 31;
+
   const left = `${(current / total) * 100}% - ${(current / total) * bubbleWidth}px`;
- 
+
   const fieldName = input.name;
 
-const amountValues = [50000, 200000, 400000, 600000, 800000, 1000000, 1500000];
-const tenureValues = [12, 24, 36, 48, 60, 72, 84];
+  let actualValue = value;
 
-let actualValue = value;
+  // ✅ LOAN AMOUNT = SMOOTH
+  if (fieldName === "loan_amount_inr") {
 
-if (fieldName === "loan_amount_inr") {
-  const index = Math.round((value / 100) * (amountValues.length - 1));
-  actualValue = amountValues[index];
-}
+    const MIN_AMOUNT = 50000;
+    const MAX_AMOUNT = 1500000;
 
-if (fieldName === "loan_tenure_months") {
-  const index = Math.round((value / 100) * (tenureValues.length - 1));
-  actualValue = tenureValues[index];
-}
+    const ratio = (value - min) / (max - min);
 
-// ✅ IMPORTANT: update actual value in form
-input.dataset.actualValue = actualValue;
+    actualValue =
+      MIN_AMOUNT + ratio * (MAX_AMOUNT - MIN_AMOUNT);
 
-// UI display
-bubble.innerText = formatValue(input, value);
+    // ✅ ROUND TO 1000
+    actualValue = Math.round(actualValue / 1000) * 1000;
+
+    bubble.innerText =
+      `₹${actualValue.toLocaleString('en-IN')}`;
+  }
+
+  // ✅ TENURE = FIXED
+  else if (fieldName === "loan_tenure_months") {
+
+    const tenureValues = [12, 24, 36, 48, 60, 72, 84];
+
+    const index = Math.round(
+      (value / 100) * (tenureValues.length - 1)
+    );
+
+    actualValue = tenureValues[index];
+
+    bubble.innerText = `${actualValue} months`;
+  }
+
+  // ✅ SAVE REAL VALUE
+  input.dataset.actualValue = actualValue;
+
   const steps = {
     '--total-steps': Math.ceil((max - min) / step),
     '--current-steps': Math.ceil((value - min) / step),
   };
-  const style = Object.entries(steps).map(([varName, varValue]) => `${varName}:${varValue}`).join(';');
+
+  const style = Object.entries(steps)
+    .map(([varName, varValue]) =>
+      `${varName}:${varValue}`
+    )
+    .join(';');
+
   bubble.style.left = `calc(${left})`;
+
   element.setAttribute('style', style);
 }
 export default async function decorate(fieldDiv, fieldJson) {
