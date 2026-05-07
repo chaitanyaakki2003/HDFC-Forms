@@ -306,3 +306,4 @@ export function initRangeSliders(container = document) {
     });
   });
 }
+}
