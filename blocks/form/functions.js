@@ -787,15 +787,16 @@ function getReviewDetails(globals) {
     const data = response.reviewDetails;
 
     /* =========================
-        LOAN APPLICATION NUMBER
-     ========================= */
+   LOAN APPLICATION NUMBER
+========================= */
 
-    globals.functions.setProperty(
-   globals.form.thank_you.loan_application_number,
+globals.functions.setProperty(
+  globals.form.thank_you.loan_application_number,
   {
-    value: data.loan_number || ""
+    value: data.loan_number
   }
 );
+
 
     /* =========================
        LOAN DETAILS
