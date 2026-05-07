@@ -153,48 +153,41 @@ export function setupSliderSteps(slider) {
    ADD TICKS (FIXED VALUES)
 ========================= */
 export function addTicks(wrapper) {
-  const slider = wrapper.querySelector('input[type="range"]');
+
+  const slider =
+    wrapper.querySelector('input[type="range"]');
+
   if (!slider) return;
 
-  // 🔥 detect by field name instead of max
+  // =========================
+  // FIELD NAME
+  // =========================
+
   const fieldName = slider.name;
 
-  let existing = wrapper.querySelector('.range-ticks');
-  if (existing) existing.remove();
+  // REMOVE OLD TICKS
+  let existing =
+    wrapper.querySelector('.range-ticks');
 
-  const ticks = document.createElement('div');
+  if (existing) {
+    existing.remove();
+  }
+
+  // CREATE TICKS WRAPPER
+  const ticks =
+    document.createElement('div');
+
   ticks.className = 'range-ticks';
+
+  // =========================
+  // VALUES
+  // =========================
 
   let values = [];
 
-  // ✅ CORRECT LOGIC
-  if (fieldName === "loan_amount_inr") {
-    values = [50000, 200000, 400000, 600000, 800000, 1000000, 1500000];
-  } else {
-    values = [12, 24, 36, 48, 60, 72, 84];
-  }
-
-  values.forEach((val, index) => {
-    const span = document.createElement('span');
-
-    // ✅ LABEL FORMAT
-    if (fieldName === "loan_amount_inr") {
-      if (val >= 100000) {
-        span.textContent = val / 100000 + 'L';
-      } else {
-        span.textContent = val / 1000 + 'K';
-      }
-    } else {
-      span.textContent = val + 'm';
-    }
-
-    // 🔥 CLICK FIX (IMPORTANT)
-  span.addEventListener('click', () => {
-
-  // ✅ LOAN AMOUNT
   if (fieldName === "loan_amount_inr") {
 
-    const values = [
+    values = [
       50000,
       200000,
       400000,
@@ -204,89 +197,169 @@ export function addTicks(wrapper) {
       1500000
     ];
 
-// ✅ SAVE EXACT VALUE
-slider.dataset.actualValue = values[index];
-
-// ✅ IMPORTANT
-// exact slider position
-slider.value =
-  (index / (values.length - 1)) * 100;
-
-// ✅ WAIT THEN FIRE EVENT
-setTimeout(() => {
-
-  slider.dispatchEvent(
-    new Event('input', {
-      bubbles: true
-    })
-  );
-
-}, 0);
-
-    // ✅ FORCE BUBBLE VALUE
-    const bubble =
-      wrapper.querySelector('.range-bubble');
-
-    if (bubble) {
-      bubble.innerText =
-        `₹${values[index].toLocaleString('en-IN')}`;
-    }
-  }
-
-  // ✅ TENURE
-else {
-
-  const values = [
-    12, 24, 36, 48, 60, 72, 84
-  ];
-
-  // ✅ SAVE EXACT VALUE
-  slider.dataset.actualValue = values[index];
-
-  // ✅ FIX POSITION
-  const segmentSize =
-    100 / (values.length - 1);
-
-  // ✅ LAST VALUE FIX
-  if (index === values.length - 1) {
-    slider.value = 100;
   } else {
-    slider.value =
-      index * segmentSize;
+
+    values = [
+      12,
+      24,
+      36,
+      48,
+      60,
+      72,
+      84
+    ];
   }
 
-  // ✅ UPDATE BUBBLE
-  const bubble =
-    wrapper.querySelector('.range-bubble');
+  // =========================
+  // CREATE LABELS
+  // =========================
 
-  if (bubble) {
-    bubble.innerText =
-      `${values[index]} months`;
-  }
-}
+  values.forEach((val, index) => {
 
-  // ✅ UPDATE
-  setTimeout(() => {
+    const span =
+      document.createElement('span');
 
-  slider.dispatchEvent(
-    new Event('input', {
-      bubbles: true
-    })
-  );
+    // =========================
+    // LABEL TEXT
+    // =========================
 
-}, 0);
+    if (fieldName === "loan_amount_inr") {
 
+      if (val >= 100000) {
+
+        span.textContent =
+          (val / 100000) + 'L';
+
+      } else {
+
+        span.textContent =
+          (val / 1000) + 'K';
+      }
+
+    } else {
+
+      span.textContent =
+        val + 'm';
+    }
+
+    // =========================
+    // CLICK EVENT
+    // =========================
+
+    span.addEventListener('click', () => {
+
+      // =========================
+      // LOAN AMOUNT
+      // =========================
+
+      if (fieldName === "loan_amount_inr") {
+
+        const amountValues = [
+          50000,
+          200000,
+          400000,
+          600000,
+          800000,
+          1000000,
+          1500000
+        ];
+
+        // SAVE EXACT VALUE
+        slider.dataset.actualValue =
+          amountValues[index];
+
+        // EXACT POSITION
+        slider.value =
+          (index / (amountValues.length - 1)) * 100;
+
+        // UPDATE BUBBLE
+        const bubble =
+          wrapper.querySelector('.range-bubble');
+
+        if (bubble) {
+
+          bubble.innerText =
+            `₹${amountValues[index].toLocaleString('en-IN')}`;
+        }
+      }
+
+      // =========================
+      // TENURE
+      // =========================
+
+      else {
+
+        const tenureValues = [
+          12,
+          24,
+          36,
+          48,
+          60,
+          72,
+          84
+        ];
+
+        slider.dataset.actualValue =
+          tenureValues[index];
+
+        const segmentSize =
+          100 / (tenureValues.length - 1);
+
+        // FIX LAST VALUE
+        if (index === tenureValues.length - 1) {
+
+          slider.value = 100;
+
+        } else {
+
+          slider.value =
+            index * segmentSize;
+        }
+
+        // UPDATE BUBBLE
+        const bubble =
+          wrapper.querySelector('.range-bubble');
+
+        if (bubble) {
+
+          bubble.innerText =
+            `${tenureValues[index]} months`;
+        }
+      }
+
+      // =========================
+      // IMPORTANT
+      // FIRE INPUT EVENT
+      // =========================
+
+      setTimeout(() => {
+
+        slider.dispatchEvent(
+          new Event('input', {
+            bubbles: true
+          })
+        );
+
+      }, 0);
+
+    });
+
+    // APPEND LABEL
     ticks.appendChild(span);
+
   });
+
+  // =========================
+  // APPEND TICKS
+  // =========================
 
   wrapper.appendChild(ticks);
 }
 
-
 /* =========================
    INIT
 ========================= */
-export function initRangeSliders(container = document) {
+ export function initRangeSliders(container = document) {
   const wrappers = container.querySelectorAll('.field-wrapper');
 
   wrappers.forEach((wrapper) => {
@@ -306,4 +379,4 @@ export function initRangeSliders(container = document) {
     });
   });
 }
-}
+
