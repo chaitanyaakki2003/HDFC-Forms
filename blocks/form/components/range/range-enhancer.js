@@ -105,10 +105,14 @@ if (fieldName === "loan_tenure_months") {
   const segmentSize =
     100 / (tenureValues.length - 1);
 
-  // ✅ SNAP TO EXACT VALUE
-  const index = Math.round(
-    value / segmentSize
-  );
+  let index = Math.round(
+  value / segmentSize
+);
+
+// ✅ FIX LAST VALUE (84m)
+if (index >= tenureValues.length) {
+  index = tenureValues.length - 1;
+}
 
   const actualValue =
     tenureValues[index];
