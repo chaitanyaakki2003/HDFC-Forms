@@ -1422,7 +1422,7 @@ function fetchReviewDetailsAPI(globals) {
   /* GET MOBILE NUMBER FROM FORM FIELD */
 
   const phone =
-    globals.form.mobile?.value || "";
+  globals.form.review.form_fragment.mobile_number?.value || "";
 
   console.log("PHONE:", phone);
 
