@@ -8,70 +8,82 @@ export function formatValue(input, value) {
   value = Number(value);
 
   // ✅ LOAN AMOUNT
-  if (fieldName === "loan_amount_inr") {
+  // ✅ LOAN AMOUNT
+if (fieldName === "loan_amount_inr") {
 
-  // ✅ IF EXACT VALUE EXISTS
-  // RETURN IT DIRECTLY
-  if (input.dataset.actualValue) {
+  const values = [
+    50000,
+    200000,
+    400000,
+    600000,
+    800000,
+    1000000,
+    1500000
+  ];
+
+  const segmentSize =
+    100 / (values.length - 1);
+
+  // =========================
+  // EXACT TICK POSITION
+  // =========================
+
+  const exactPositions =
+    values.map((_, i) => i * segmentSize);
+
+  const matchedIndex =
+    exactPositions.findIndex(
+      pos => Math.abs(pos - value) < 0.5
+    );
+
+  // =========================
+  // RETURN EXACT VALUE
+  // =========================
+
+  if (matchedIndex !== -1) {
 
     const exactValue =
-      Number(input.dataset.actualValue);
+      values[matchedIndex];
 
-    // ✅ CHECK IF SLIDER IS ON FIXED POINT
-    const values = [
-      50000,
-      200000,
-      400000,
-      600000,
-      800000,
-      1000000,
-      1500000
-    ];
+    input.dataset.actualValue =
+      exactValue;
 
-    const segmentSize =
-      100 / (values.length - 1);
-
-    const exactPositions =
-      values.map((_, i) => i * segmentSize);
-
-    const isExact =
-  exactPositions.some(
-    pos => Math.abs(pos - value) < 0.5
-  );
-
-    // ✅ RETURN EXACT VALUE
-    if (isExact) {
-      return `₹${exactValue.toLocaleString('en-IN')}`;
-    }
+    return `₹${exactValue.toLocaleString('en-IN')}`;
   }
 
-  // ✅ SMOOTH INTERPOLATION
-  const values = [
-  50000,
-  200000,
-  400000,
-  600000,
-  800000,
-  1000000,
-  1500000
-];
+  // =========================
+  // SMOOTH INTERPOLATION
+  // =========================
 
-const segmentSize =
-  100 / (values.length - 1);
+  let segment =
+    Math.floor(value / segmentSize);
 
-let index =
-  Math.round(value / segmentSize);
+  if (segment >= values.length - 1) {
+    segment = values.length - 2;
+  }
 
-if (index >= values.length) {
-  index = values.length - 1;
-}
+  const segmentStart =
+    segment * segmentSize;
 
-const actualValue =
-  values[index];
+  const segmentEnd =
+    (segment + 1) * segmentSize;
 
-// ✅ FORCE EXACT POSITION
-input.value =
-  index * segmentSize;
+  const ratio =
+    (value - segmentStart) /
+    (segmentEnd - segmentStart);
+
+  const startValue =
+    values[segment];
+
+  const endValue =
+    values[segment + 1];
+
+  let actualValue =
+    startValue +
+    ratio * (endValue - startValue);
+
+  actualValue =
+    Math.round(actualValue / 1000) * 1000;
 
   input.dataset.actualValue =
     actualValue;
