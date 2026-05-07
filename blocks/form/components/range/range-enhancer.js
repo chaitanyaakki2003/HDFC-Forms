@@ -206,7 +206,9 @@ export function addTicks(wrapper) {
 
     // ✅ SAVE EXACT VALUE
     slider.dataset.actualValue = values[index];
-
+    slider.dispatchEvent(
+  new Event('input', { bubbles: true })
+);
     // ✅ IMPORTANT
     // exact slider position
     slider.value =
