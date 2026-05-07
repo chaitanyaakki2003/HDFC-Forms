@@ -81,14 +81,24 @@ function updateLoanDetails() {
         el.innerText?.trim();
 
       // LOAN AMOUNT
-      if (
-        text &&
-        text.includes('₹') &&
-        !amountField
-      ) {
+// LOAN AMOUNT FIELD
+if (
+  text &&
+  text.match(/^₹[\d,]+$/)
+) {
 
-        amountField = el;
-      }
+  // BIGGEST ₹ VALUE IN CARD
+  const fontSize =
+    window.getComputedStyle(el)
+      .fontSize;
+
+  if (
+    parseFloat(fontSize) > 30
+  ) {
+
+    amountField = el;
+  }
+}
 
       // EMI
       if (
