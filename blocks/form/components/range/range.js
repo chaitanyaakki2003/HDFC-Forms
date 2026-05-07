@@ -4,7 +4,7 @@ import {
 } from './range-enhancer.js';
 
 /* =========================
-   UPDATE LOAN DETAILS
+   EMI + CARD UPDATE
 ========================= */
 
 function updateLoanDetails() {
@@ -58,59 +58,88 @@ function updateLoanDetails() {
   }
 
   // =========================
-  // FIND CARD VALUES
+  // SAFE ELEMENT SELECTION
   // =========================
 
-  const allDivs =
-    document.querySelectorAll('div');
+  const cards =
+    document.querySelectorAll(
+      '.right-side-card, .loan-card, .card'
+    );
 
   let amountField = null;
   let emiField = null;
 
-  allDivs.forEach((el) => {
+  cards.forEach((card) => {
 
-    const text =
-      el.innerText?.trim();
+    // FIND ₹ VALUE
+    const rupeeEls =
+      card.querySelectorAll('*');
 
-    // LOAN OFFER AMOUNT
-    if (
-      text === '₹15,00,000' ||
-      text.includes('₹')
-    ) {
+    rupeeEls.forEach((el) => {
 
-      const parentText =
-        el.parentElement?.innerText || '';
+      const text =
+        el.innerText?.trim();
 
+      // LOAN AMOUNT
       if (
-        parentText.includes(
-          'Avail XPRESS Personal Loan'
-        )
+        text &&
+        text.includes('₹') &&
+        !amountField
       ) {
 
         amountField = el;
       }
-    }
 
-    // EMI FIELD
-    if (
-      text.includes('2518') ||
-      text.includes('₹')
-    ) {
-
-      const parentText =
-        el.parentElement?.innerText || '';
-
+      // EMI
       if (
-        parentText.includes('EMI Amount')
+        card.innerText.includes('EMI Amount')
       ) {
 
-        emiField = el;
+        const all =
+          card.querySelectorAll('*');
+
+        all.forEach((item) => {
+
+          const val =
+            item.innerText?.trim();
+
+          if (
+            val &&
+            (
+              val.includes('₹') ||
+              !isNaN(val.replace(/,/g, ''))
+            )
+          ) {
+
+            emiField = item;
+          }
+        });
       }
-    }
+    });
   });
 
   // =========================
-  // UPDATE LOAN AMOUNT
+  // FALLBACK SAFE QUERY
+  // =========================
+
+  if (!amountField) {
+
+    amountField =
+      document.querySelector(
+        '.eligibility-amount'
+      );
+  }
+
+  if (!emiField) {
+
+    emiField =
+      document.querySelector(
+        '.emi-value'
+      );
+  }
+
+  // =========================
+  // UPDATE VALUES
   // =========================
 
   if (amountField) {
@@ -118,10 +147,6 @@ function updateLoanDetails() {
     amountField.innerText =
       `₹${loanAmount.toLocaleString('en-IN')}`;
   }
-
-  // =========================
-  // UPDATE EMI
-  // =========================
 
   if (emiField) {
 
@@ -265,7 +290,7 @@ export default async function decorate(
   div.appendChild(rangeMaxEl);
 
   /* =========================
-     ADD FIXED LABELS
+     FIXED LABELS
   ========================= */
 
   addTicks(div);
@@ -296,7 +321,7 @@ export default async function decorate(
           e.target.value / segment
         ) * segment;
 
-      // LAST VALUE FIX
+      // FIX 84
       if (snapped > 99) {
         snapped = 100;
       }
@@ -319,7 +344,9 @@ export default async function decorate(
 
   updateBubble(input, div);
 
-  updateLoanDetails();
+  setTimeout(() => {
+    updateLoanDetails();
+  }, 300);
 
   return fieldDiv;
 }
