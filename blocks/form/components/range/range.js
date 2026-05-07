@@ -1,3 +1,8 @@
+import {
+  formatValue,
+  addTicks
+} from './range-enhancer.js';
+
 function updateBubble(input, element) {
 
   const step = Number(input.step) || 1;
@@ -14,66 +19,21 @@ function updateBubble(input, element) {
   const bubble =
     element.querySelector('.range-bubble');
 
+  // during initial render width becomes 0
   const bubbleWidth =
     bubble.getBoundingClientRect().width || 31;
 
   const left =
     `${(current / total) * 100}% - ${(current / total) * bubbleWidth}px`;
 
-  const fieldName = input.name;
-
-  let actualValue = value;
-
   /* =========================
-     LOAN AMOUNT
+     IMPORTANT
+     VALUE COMES FROM
+     range-enhancer.js
   ========================= */
 
-  if (fieldName === "loan_amount_inr") {
-
-    // ✅ DIRECT VALUE
-    actualValue = value;
-
-    // ✅ SAVE
-    input.dataset.actualValue = actualValue;
-
-    // ✅ DISPLAY
-    bubble.innerText =
-      `₹${actualValue.toLocaleString('en-IN')}`;
-  }
-
-  /* =========================
-     TENURE
-  ========================= */
-
-  else if (fieldName === "loan_tenure_months") {
-
-    const tenureValues = [
-      12, 24, 36, 48, 60, 72, 84
-    ];
-
-    // ✅ FIND NEAREST
-    let nearest =
-      tenureValues.reduce((prev, curr) => {
-        return (
-          Math.abs(curr - value) <
-          Math.abs(prev - value)
-            ? curr
-            : prev
-        );
-      });
-
-    actualValue = nearest;
-
-    // ✅ SNAP
-    input.value = nearest;
-
-    // ✅ SAVE
-    input.dataset.actualValue = actualValue;
-
-    // ✅ DISPLAY
-    bubble.innerText =
-      `${actualValue} months`;
-  }
+  bubble.innerText =
+    formatValue(input, value);
 
   const steps = {
     '--total-steps':
@@ -103,6 +63,7 @@ export default async function decorate(
   const input =
     fieldDiv.querySelector('input');
 
+  // ✅ RANGE TYPE
   input.type = 'range';
 
   /* =========================
@@ -111,15 +72,15 @@ export default async function decorate(
 
   if (input.name === "loan_amount_inr") {
 
-    input.min = 50000;
-    input.max = 1500000;
+    input.min = 0;
+    input.max = 100;
 
-    // ✅ SMOOTH
-    input.step = 1000;
+    // smooth movement
+    input.step = 1;
 
-    // ✅ INITIAL
+    // initial position
     if (!input.value) {
-      input.value = 500000;
+      input.value = 50;
     }
   }
 
@@ -129,16 +90,20 @@ export default async function decorate(
 
   if (input.name === "loan_tenure_months") {
 
-    input.min = 12;
-    input.max = 84;
+    input.min = 0;
+    input.max = 100;
 
-    // ✅ SNAP ONLY
-    input.step = 12;
+    // fixed snapping
+    input.step = 16.6666667;
 
     if (!input.value) {
-      input.value = 48;
+      input.value = 50;
     }
   }
+
+  /* =========================
+     CREATE WRAPPER
+  ========================= */
 
   const div = document.createElement('div');
 
@@ -163,22 +128,56 @@ export default async function decorate(
   rangeMaxEl.className = 'range-max';
 
   rangeMinEl.innerText =
-    `${input.min}`;
+    `${input.min || 0}`;
 
   rangeMaxEl.innerText =
-    `${input.max}`;
+    `${input.max || 100}`;
 
   div.appendChild(hover);
 
+  // move slider into wrapper
   div.appendChild(input);
 
   div.appendChild(rangeMinEl);
 
   div.appendChild(rangeMaxEl);
 
+  /* =========================
+     ADD FIXED LABELS
+  ========================= */
+
+  addTicks(div);
+
+  /* =========================
+     INPUT EVENT
+  ========================= */
+
   input.addEventListener('input', (e) => {
+
+    // ✅ tenure exact snap
+    if (
+      input.name === "loan_tenure_months"
+    ) {
+
+      const values = [
+        12, 24, 36, 48, 60, 72, 84
+      ];
+
+      const segment =
+        100 / (values.length - 1);
+
+      e.target.value =
+        Math.round(
+          e.target.value / segment
+        ) * segment;
+    }
+
     updateBubble(e.target, div);
   });
+
+  /* =========================
+     INITIAL RENDER
+  ========================= */
 
   updateBubble(input, div);
 
