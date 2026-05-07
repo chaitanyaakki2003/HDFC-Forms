@@ -1765,174 +1765,331 @@ main .form .field-loan-upto p::before {
 
 
 
-/* ===================== */
-/* PANEL 1: BANK SELECT */
-/* ===================== */
+/* =========================================================
+   REMOVE AEM DEFAULT
+========================================================= */
+
+.field-salary-bank-selection *,
+.field-income-verification-method * {
+  box-sizing: border-box;
+}
+
+/* =========================================================
+   PANEL
+========================================================= */
 
 .field-salary-bank-selection {
-  position: relative;
   background: #fff;
-  border: 1px solid #cfd8ff;
-  border-radius: 12px;
-  padding: 0 28px 34px;
-  margin-bottom: 36px;
+  border: 1px solid #dfe5f0;
+  border-radius: 16px;
+  padding: 20px;
   overflow: hidden;
 }
 
-/* HEADER */
-.field-salary-bank-selection > legend.field-label {
-  width: calc(100% + 56px);
-  height: 64px;
-  margin: 0 -28px 28px;
-  padding: 0 24px;
-  background: #e9efff;
-  border-radius: 10px 10px 0 0;
+/* =========================================================
+   HEADER
+========================================================= */
+
+.field-salary-bank-selection > legend {
+  font-size: 18px;
+  font-weight: 700;
+  margin-bottom: 20px;
+}
+
+/* =========================================================
+   TITLE STRIP
+========================================================= */
+
+.field-salary-bank-selection .field-label {
+  background: #eef2ff;
+  padding: 16px;
+  border-radius: 12px;
+  display: block;
+  width: 100%;
+  margin-bottom: 20px;
+  font-weight: 700;
+  font-size: 16px;
+}
+
+/* =========================================================
+   MAIN ROW
+========================================================= */
+
+.salary-bank-content-row {
   display: flex;
   align-items: center;
-  font-size: 16px;
-  font-weight: 700;
+  gap: 20px;
+  width: 100%;
 }
 
-/* RIGHT SIDE DROPDOWN — FIXED */
-.field-salary-bank-selection .salary-bank-content-row {
+/* =========================================================
+   CARD ROW
+========================================================= */
+
+.bank-card-container {
   display: flex !important;
-  align-items: center !important;
-  width: 100% !important;
+  flex-wrap: nowrap !important;
+  overflow-x: auto;
+  gap: 14px;
+  flex: 1;
+  padding-bottom: 10px;
 }
 
-.field-salary-bank-selection .bank-card-container {
+/* =========================================================
+   SCROLLBAR
+========================================================= */
+
+.bank-card-container::-webkit-scrollbar {
+  height: 5px;
+}
+
+.bank-card-container::-webkit-scrollbar-thumb {
+  background: #d1d5db;
+  border-radius: 20px;
+}
+
+/* =========================================================
+   CARD
+========================================================= */
+
+.bank-card {
+  min-width: 84px;
+  height: 84px;
+  border: 2px solid #e5e7eb;
+  border-radius: 14px;
+  background: #fff;
+  flex-shrink: 0;
+
   display: flex !important;
-  gap: 16px !important;
-  flex: 1 1 auto !important;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  padding: 10px;
+  cursor: pointer;
+  transition: all 0.2s ease;
 }
 
-/* 🔥 THIS IS THE ONLY IMPORTANT PART */
-.field-salary-bank-selection .drop-down-wrapper {
-  margin-left: auto !important;   /* pushes to right */
-  flex: 0 0 230px !important;
-  width: 230px !important;
+/* =========================================================
+   IMAGE
+========================================================= */
 
-  display: block !important;
-  position: static !important;
-  grid-column: unset !important;
+.bank-card img {
+  width: 34px !important;
+  height: 34px !important;
+  object-fit: contain;
+  margin-bottom: 6px;
 }
 
-/* DROPDOWN */
-.field-salary-bank-selection select {
+/* =========================================================
+   TEXT
+========================================================= */
+
+.bank-card span {
+  font-size: 11px !important;
+  line-height: 14px;
+  text-align: center;
+  font-weight: 500;
+  color: #374151;
+}
+
+/* =========================================================
+   ACTIVE
+========================================================= */
+
+.bank-card.active {
+  border: 2px solid #2563eb;
+  background: #eff6ff;
+  box-shadow: 0 0 0 2px #dbeafe;
+}
+
+/* =========================================================
+   DROPDOWN
+========================================================= */
+
+.drop-down-wrapper {
+  width: 220px;
+  flex-shrink: 0;
+}
+
+.drop-down-wrapper select {
   width: 100%;
   height: 48px;
-  border-radius: 8px;
-  border: 1px solid #dfe5f0;
-  padding: 0 12px;
+  border-radius: 10px;
+  border: 1px solid #d1d5db;
+  padding: 0 14px;
   background: #fff;
 }
 
-/* HIDE ORIGINAL RADIO */
-.field-salary-bank-selection .radio-group-wrapper {
+/* =========================================================
+   HIDE ORIGINAL RADIO GROUP
+========================================================= */
+
+.radio-group-wrapper.field-salary-bank {
   display: none !important;
 }
 
-
-/* ===================== */
-/* PANEL 2 */
-/* ===================== */
+/* =========================================================
+   SECOND PANEL
+========================================================= */
 
 .field-income-verification-method {
-  background: #fff;
-  border-radius: 16px;
-  border: 1px solid #e6ebf5;
-  padding: 0 20px 20px;
+  margin-top: 30px;
 }
+
+/* =========================================================
+   SECOND TITLE
+========================================================= */
 
 .field-income-verification-method > legend {
-  background: #eef3ff;
-  margin: 0 -20px 20px;
-  padding: 18px 20px;
-  border-radius: 16px 16px 0 0;
+  font-size: 18px;
   font-weight: 700;
+  margin-bottom: 20px;
 }
 
-/* CARD ROW */
-.field-income-verification-method .radio-group-wrapper {
+/* =========================================================
+   CARD ROW
+========================================================= */
+
+.field-income-verification-method
+.radio-group-wrapper {
   display: flex !important;
   gap: 16px;
+  align-items: stretch;
 }
 
-/* CARD */
-.field-income-verification-method .radio-wrapper {
+/* =========================================================
+   METHOD CARD
+========================================================= */
+
+.field-income-verification-method
+.radio-wrapper {
   flex: 1;
   border: 1px solid #dfe5f0;
-  border-radius: 12px;
-  padding: 16px 16px 16px 40px;
+  border-radius: 14px;
+  padding: 18px 18px 18px 42px;
   position: relative;
+  background: #fff;
+  min-height: 120px;
 }
 
-/* RADIO */
-.field-income-verification-method input {
+/* =========================================================
+   RADIO
+========================================================= */
+
+.field-income-verification-method
+.radio-wrapper input {
   position: absolute;
-  left: 12px;
-  top: 18px;
+  left: 16px;
+  top: 22px;
 }
 
-/* SELECTED */
-.field-income-verification-method 
-.radio-wrapper:has(input:checked) {
-  border: 2px solid #2563ff;
-}
+/* =========================================================
+   LABEL
+========================================================= */
 
-/* DESCRIPTION */
-.field-income-verification-method .radio-wrapper label::after {
+.field-income-verification-method
+.radio-wrapper label {
+  font-size: 16px;
+  font-weight: 600;
+  color: #111827;
   display: block;
-  margin-top: 6px;
-  font-size: 12px;
-  color: #6b7280;
 }
 
-/* TEXT */
-.field-income-verification-method 
-.radio-wrapper:nth-child(1) label::after {
+/* =========================================================
+   DESCRIPTION
+========================================================= */
+
+.field-income-verification-method
+.radio-wrapper label::after {
+  display: block;
+  margin-top: 8px;
+  font-size: 13px;
+  line-height: 18px;
+  color: #6b7280;
+  font-weight: 400;
+}
+
+/* =========================================================
+   TEXTS
+========================================================= */
+
+.field-income-verification-method
+.radio-wrapper:nth-child(1)
+label::after {
   content: "Instant & secure, processed via RBI-regulated partner.";
 }
-.field-income-verification-method 
-.radio-wrapper:nth-child(2) label::after {
+
+.field-income-verification-method
+.radio-wrapper:nth-child(2)
+label::after {
   content: "Quick & hassle-free, processed via NetBanking.";
 }
-.field-income-verification-method 
-.radio-wrapper:nth-child(3) label::after {
+
+.field-income-verification-method
+.radio-wrapper:nth-child(3)
+label::after {
   content: "Processed via uploading bank statement of the last 6 months.";
 }
 
-/* RECOMMENDED */
-.field-income-verification-method 
+/* =========================================================
+   ACTIVE
+========================================================= */
+
+.field-income-verification-method
+.radio-wrapper:has(input:checked) {
+  border: 2px solid #2563eb;
+  background: #f8fbff;
+}
+
+/* =========================================================
+   RECOMMENDED
+========================================================= */
+
+.field-income-verification-method
 .radio-wrapper:first-child:has(input:checked)::after {
   content: "Recommended";
   position: absolute;
-  bottom: 0;
   left: 0;
   right: 0;
-  background: #008765;
-  color: white;
+  bottom: 0;
+  background: #059669;
+  color: #fff;
   text-align: center;
-  padding: 4px;
+  padding: 5px;
   border-radius: 0 0 12px 12px;
+  font-size: 12px;
 }
 
-/* 🔥 REMOVE EXTRA TEXT ONLY IN PANEL 2 */
-.field-income-verification-method > .plain-text-wrapper {
+/* =========================================================
+   HIDE AEM PARAGRAPHS
+========================================================= */
+
+.field-income-verification-method p,
+.field-income-verification-method .plain-text-wrapper {
   display: none !important;
 }
 
-/* 🔥 FORCE DROPDOWN TO BE FLEX ITEM (WITHOUT BREAKING AEM) */
-.field-salary-bank-selection .drop-down-wrapper {
-  display: block !important;
-  position: static !important;
-  grid-column: unset !important;
+/* =========================================================
+   MOBILE
+========================================================= */
 
-  margin-left: auto !important;
-  flex: 0 0 230px !important;
-  width: 230px !important;
+@media (max-width: 768px) {
+
+  .salary-bank-content-row {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .drop-down-wrapper {
+    width: 100%;
+  }
+
+  .field-income-verification-method
+  .radio-group-wrapper {
+    flex-direction: column;
+  }
 }
-
 
 
 
