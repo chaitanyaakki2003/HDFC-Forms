@@ -179,7 +179,78 @@ if (
 
   e.target.value = snapped;
 }
+// =========================
+// GET EXACT VALUES
+// =========================
 
+const loanAmount =
+  Number(
+    document.querySelector('[name="loan_amount_inr"]')
+      ?.dataset?.actualValue
+  ) || 0;
+
+const tenure =
+  Number(
+    document.querySelector('[name="loan_tenure_months"]')
+      ?.dataset?.actualValue
+  ) || 0;
+
+// =========================
+// UPDATE LOAN OFFER
+// =========================
+
+const loanOffer =
+  document.querySelector('.loan-offer-amount');
+
+if (loanOffer) {
+
+  loanOffer.innerText =
+    `₹${loanAmount.toLocaleString('en-IN')}`;
+}
+
+// =========================
+// EMI CALCULATION
+// =========================
+
+if (loanAmount && tenure) {
+
+  const annualRate = 10.09;
+
+  const monthlyRate =
+    annualRate / (12 * 100);
+
+  const emi =
+    (
+      loanAmount *
+      monthlyRate *
+      Math.pow(
+        1 + monthlyRate,
+        tenure
+      )
+    ) /
+    (
+      Math.pow(
+        1 + monthlyRate,
+        tenure
+      ) - 1
+    );
+
+  const emiRounded =
+    Math.round(emi);
+
+  // =========================
+  // UPDATE EMI
+  // =========================
+
+  const emiField =
+    document.querySelector('.emi-amount');
+
+  if (emiField) {
+
+    emiField.innerText =
+      `₹${emiRounded.toLocaleString('en-IN')}`;
+  }
+}
     updateBubble(e.target, div);
   });
 
