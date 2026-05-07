@@ -376,6 +376,7 @@ window.otpState = {
  * @param {scope} globals
  */
 function generateOtp(globals) {
+  debugger;
 
   const mobile =
     globals.form.personal_loan_offer.mobile_number?.$value || "";
