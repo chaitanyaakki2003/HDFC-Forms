@@ -1553,10 +1553,68 @@ function loadReviewDetails(globals) {
   return "Review Details Loaded";
 }
 
+/**
+ * Generate Loan Application Number
+ * @param {scope} globals
+ */
+function generateLoanApplicationNumber(globals) {
+
+  try {
+
+    /* =====================================
+       GENERATE LOAN APPLICATION NUMBER
+    ===================================== */
+
+    const loanApplicationNumber =
+      Math.floor(10000000 + Math.random() * 90000000);
+
+    /* =====================================
+       SET LOAN APPLICATION NUMBER
+    ===================================== */
+
+    if (
+      globals.form
+        ?.thank_you
+        ?.loan_application_number
+    ) {
+
+      globals.functions.setProperty(
+
+        globals.form.thank_you.loan_application_number,
+
+        {
+          value: String(loanApplicationNumber)
+        }
+
+      );
+
+    }
+
+    console.log(
+      "LOAN APPLICATION NUMBER GENERATED:",
+      loanApplicationNumber
+    );
+
+    return '';
+
+  }
+
+  catch (error) {
+
+    console.error(
+      'Error in generateLoanApplicationNumber:',
+      error
+    );
+
+    return '';
+
+  }
+
+}
 
 // eslint-disable-next-line import/prefer-default-export
 export {
-  getFullName, days, submitFormArrayToString, maskMobileNumber, handleOtpFlow, updateLoanOffer, calculateEMI, initSalaryBankUI, generateOtp, verifyOtp, startOtpTimer,resendOtp, generateOtpTier1, verifyOtpTier1, startOtpTimerTier1, resendOtpTier1, loadReviewDetails, getReviewDetails, 
+  getFullName, days, submitFormArrayToString, maskMobileNumber, handleOtpFlow, updateLoanOffer, calculateEMI, initSalaryBankUI, generateOtp, verifyOtp, startOtpTimer,resendOtp, generateOtpTier1, verifyOtpTier1, startOtpTimerTier1, resendOtpTier1, loadReviewDetails, getReviewDetails, generateLoanApplicationNumber, 
 };
 
 
