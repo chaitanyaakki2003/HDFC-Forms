@@ -136,11 +136,22 @@ export function addTicks(wrapper) {
       1500000
     ];
 
-    const segmentSize =
-      100 / (values.length - 1);
+    // ✅ SAVE EXACT VALUE
+    slider.dataset.actualValue = values[index];
 
+    // ✅ IMPORTANT
     // exact slider position
-    slider.value = index * segmentSize;
+    slider.value =
+      (index / (values.length - 1)) * 100;
+
+    // ✅ FORCE BUBBLE VALUE
+    const bubble =
+      wrapper.querySelector('.range-bubble');
+
+    if (bubble) {
+      bubble.innerText =
+        `₹${values[index].toLocaleString('en-IN')}`;
+    }
   }
 
   // ✅ TENURE
@@ -150,13 +161,13 @@ export function addTicks(wrapper) {
       12, 24, 36, 48, 60, 72, 84
     ];
 
-    const segmentSize =
-      100 / (values.length - 1);
+    slider.dataset.actualValue = values[index];
 
-    slider.value = index * segmentSize;
+    slider.value =
+      (index / (values.length - 1)) * 100;
   }
 
-  // ✅ TRIGGER UPDATE
+  // ✅ UPDATE
   slider.dispatchEvent(
     new Event('input', { bubbles: true })
   );
