@@ -10,6 +10,14 @@ export function formatValue(input, value) {
   // ✅ LOAN AMOUNT
   if (fieldName === "loan_amount_inr") {
 
+  // ✅ IF EXACT VALUE EXISTS
+  // RETURN IT DIRECTLY
+  if (input.dataset.actualValue) {
+
+    const exactValue =
+      Number(input.dataset.actualValue);
+
+    // ✅ CHECK IF SLIDER IS ON FIXED POINT
     const values = [
       50000,
       200000,
@@ -20,49 +28,72 @@ export function formatValue(input, value) {
       1500000
     ];
 
-    const segmentSize = 100 / (values.length - 1);
+    const segmentSize =
+      100 / (values.length - 1);
 
-    let segment = Math.floor(value / segmentSize);
+    const exactPositions =
+      values.map((_, i) => i * segmentSize);
 
-    if (segment >= values.length - 1) {
-      segment = values.length - 2;
+    const isExact =
+      exactPositions.some(
+        pos => Math.abs(pos - value) < 0.01
+      );
+
+    // ✅ RETURN EXACT VALUE
+    if (isExact) {
+      return `₹${exactValue.toLocaleString('en-IN')}`;
     }
-
-    const segmentStart = segment * segmentSize;
-    const segmentEnd = (segment + 1) * segmentSize;
-
-    const ratio =
-      (value - segmentStart) /
-      (segmentEnd - segmentStart);
-
-    const startValue = values[segment];
-    const endValue = values[segment + 1];
-
-    let actualValue =
-      startValue + ratio * (endValue - startValue);
-
-    actualValue = Math.round(actualValue / 1000) * 1000;
-
-    input.dataset.actualValue = actualValue;
-
-    return `₹${actualValue.toLocaleString('en-IN')}`;
   }
 
-  // ✅ TENURE FIXED VALUES ONLY
-  if (fieldName === "loan_tenure_months") {
+  // ✅ SMOOTH INTERPOLATION
+  const values = [
+    50000,
+    200000,
+    400000,
+    600000,
+    800000,
+    1000000,
+    1500000
+  ];
 
-    const tenureValues = [12, 24, 36, 48, 60, 72, 84];
+  const segmentSize =
+    100 / (values.length - 1);
 
-    const segmentSize = 100 / (tenureValues.length - 1);
+  let segment =
+    Math.floor(value / segmentSize);
 
-    const index = Math.round(value / segmentSize);
-
-    const actualValue = tenureValues[index];
-
-    input.dataset.actualValue = actualValue;
-
-    return `${actualValue} months`;
+  if (segment >= values.length - 1) {
+    segment = values.length - 2;
   }
+
+  const segmentStart =
+    segment * segmentSize;
+
+  const segmentEnd =
+    (segment + 1) * segmentSize;
+
+  const ratio =
+    (value - segmentStart) /
+    (segmentEnd - segmentStart);
+
+  const startValue =
+    values[segment];
+
+  const endValue =
+    values[segment + 1];
+
+  let actualValue =
+    startValue +
+    ratio * (endValue - startValue);
+
+  actualValue =
+    Math.round(actualValue / 1000) * 1000;
+
+  input.dataset.actualValue =
+    actualValue;
+
+  return `₹${actualValue.toLocaleString('en-IN')}`;
+}
 
   return value;
 }
