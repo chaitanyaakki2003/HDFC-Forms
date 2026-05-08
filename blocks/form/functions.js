@@ -1544,14 +1544,14 @@ function initSalaryBankUI() {
     hdfc_bank: "/content/dam/akki/hdfc.png",
     icici_bank: "/content/dam/akki/icici.png",
     axis_bank: "/content/dam/akki/axis.png",
-    kotak_bank: "/content/dam/akki/kotak.png",
+    kotak: "/content/dam/akki/kotak.png",
     sbi: "/content/dam/akki/sbi.png",
     bank_of_baroda: "/content/dam/akki/bob.jpeg",
-    idfc_first_bank: "/content/dam/akki/idfc.png"
+    idfc_first: "/content/dam/akki/idfc.png"
   };
 
   /* =========================
-     CREATE MAIN WRAPPER
+     MAIN WRAPPER
   ========================= */
 
   const wrapper = document.createElement("div");
@@ -1563,20 +1563,37 @@ function initSalaryBankUI() {
   wrapper.appendChild(icons);
 
   /* =========================
-     BUILD CARDS FROM DROPDOWN
+     REMOVE OTHER BANK
   ========================= */
 
-  const options = dropdown.querySelectorAll("option");
+  const allOptions = Array.from(
+    dropdown.querySelectorAll("option")
+  );
 
-  options.forEach((option, index) => {
+  const validOptions = allOptions.filter(option => {
+
+    const value = option.value;
+
+    return (
+      value &&
+      value !== "other_bank" &&
+      bankLogos[value]
+    );
+  });
+
+  /* =========================
+     BUILD BANK CARDS
+  ========================= */
+
+  validOptions.forEach((option, index) => {
 
     const value = option.value;
     const text = option.textContent;
 
-    if (!value) return;
-
     const item = document.createElement("div");
+
     item.className = "custom-bank-item";
+
     item.dataset.value = value;
 
     item.innerHTML = `
@@ -1588,6 +1605,7 @@ function initSalaryBankUI() {
 
     if (index === 0) {
       item.classList.add("active");
+      dropdown.value = value;
     }
 
     item.addEventListener("click", () => {
@@ -1601,11 +1619,47 @@ function initSalaryBankUI() {
       dropdown.value = value;
 
       dropdown.dispatchEvent(
-        new Event("change", { bubbles: true })
+        new Event("change", { bubbles:true })
       );
     });
 
     icons.appendChild(item);
+  });
+
+  /* =========================
+     CLEAN DROPDOWN
+  ========================= */
+
+  dropdown.innerHTML = "";
+
+  validOptions.forEach(option => {
+
+    const opt = document.createElement("option");
+
+    opt.value = option.value;
+    opt.textContent = option.textContent;
+
+    dropdown.appendChild(opt);
+  });
+
+  /* =========================
+     DROPDOWN CHANGE
+  ========================= */
+
+  dropdown.addEventListener("change", () => {
+
+    const selected = dropdown.value;
+
+    document
+      .querySelectorAll(".custom-bank-item")
+      .forEach(item => {
+
+        item.classList.remove("active");
+
+        if (item.dataset.value === selected) {
+          item.classList.add("active");
+        }
+      });
   });
 
   /* =========================
@@ -1617,7 +1671,7 @@ function initSalaryBankUI() {
   wrapper.appendChild(dropdown);
 
   /* =========================
-     HIDE OLD WRAPPER
+     HIDE ORIGINAL WRAPPER
   ========================= */
 
   dropdownWrapper.style.display = "none";
@@ -1626,7 +1680,7 @@ function initSalaryBankUI() {
 }
 
 /* =========================
-   AEM SAFE LOAD
+   SAFE LOAD
 ========================= */
 
 function waitForAEM() {
@@ -1635,7 +1689,9 @@ function waitForAEM() {
     document.querySelector(".field-select-salary-bank");
 
   if (!panel) {
+
     setTimeout(waitForAEM, 500);
+
     return;
   }
 
