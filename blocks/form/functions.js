@@ -1085,54 +1085,64 @@ function verifyOtpTier1(globals) {
     }
   )
 
-  .then(res => res.json())
-
   .then(response => {
 
-    console.log("VERIFY RESPONSE:", response);
+  console.log("VERIFY RESPONSE:", response);
 
-    // SUCCESS
-    if (
-      response.status.responseCode === "0"
-    ) {
+  // SUCCESS
+  if (
+    response.status.responseCode === "0"
+  ) {
 
-      globals.functions.setProperty(
-        form.enter_otp_panel.success_msg,
-        {
-          value: "OTP Verified Successfully",
-          visible: true
-        }
-      );
-
-    }
-
-    // INVALID
-    else {
-
-      globals.functions.setProperty(
-        form.enter_otp_panel.success_msg,
-        {
-          value: "Invalid OTP",
-          visible: true
-        }
-      );
-
-    }
-
-  })
-
-  .catch(error => {
-
-    console.error(
-      "Verify OTP Error:",
-      error
+    globals.functions.setProperty(
+      form.enter_otp_panel.success_msg,
+      {
+        value: "OTP Verified Successfully",
+        visible: true
+      }
     );
 
-  });
+  }
 
-  return false;
+  // INVALID
+  else {
 
-}
+    globals.functions.setProperty(
+      form.enter_otp_panel.success_msg,
+      {
+        value: "Invalid OTP",
+        visible: true
+      }
+    );
+
+  }
+
+  // IMPORTANT FIX
+  // KEEP SUBMIT ENABLED ALWAYS
+  globals.functions.setProperty(
+    form.enter_otp_panel.submit_otp,
+    {
+      enabled: true
+    }
+  );
+
+})
+.catch(error => {
+
+  console.error(
+    "Verify OTP Error:",
+    error
+  );
+
+  // IMPORTANT FIX
+  globals.functions.setProperty(
+    form.enter_otp_panel.submit_otp,
+    {
+      enabled: true
+    }
+  );
+
+});
 
 /**
  * OTP TIMER Tier1
@@ -1142,6 +1152,7 @@ function startOtpTimerTier1(globals) {
 
   const form = globals.form;
 
+  // RESET TIMER
   window.otpStateTier1.timeLeft = 5;
 
   // CLEAR OLD TIMER
@@ -1153,16 +1164,28 @@ function startOtpTimerTier1(globals) {
 
   }
 
-  // START NEW TIMER
+  // DISABLE INITIALLY
+  globals.functions.setProperty(
+    form.enter_otp_panel.resend_otp,
+    {
+      enabled: false,
+      visible: true,
+      value: "Resend OTP in : 5 sec"
+    }
+  );
+
+  // START TIMER
   window.otpStateTier1.timer =
     setInterval(() => {
 
       window.otpStateTier1.timeLeft--;
 
+      // UPDATE TIMER TEXT
       globals.functions.setProperty(
         form.enter_otp_panel.resend_otp,
         {
           enabled: false,
+          visible: true,
           value:
             "Resend OTP in : " +
             window.otpStateTier1.timeLeft +
@@ -1170,7 +1193,7 @@ function startOtpTimerTier1(globals) {
         }
       );
 
-      // TIMER COMPLETE
+      // TIMER COMPLETED
       if (
         window.otpStateTier1.timeLeft <= 0
       ) {
@@ -1179,13 +1202,19 @@ function startOtpTimerTier1(globals) {
           window.otpStateTier1.timer
         );
 
-        globals.functions.setProperty(
-          form.enter_otp_panel.resend_otp,
-          {
-            enabled: true,
-            value: "Resend OTP"
-          }
-        );
+        // IMPORTANT FIX
+        setTimeout(() => {
+
+          globals.functions.setProperty(
+            form.enter_otp_panel.resend_otp,
+            {
+              enabled: true,
+              visible: true,
+              value: "Resend OTP"
+            }
+          );
+
+        }, 200);
 
       }
 
@@ -1314,6 +1343,13 @@ function resendOtpTier1(globals) {
 
       // RESTART TIMER
       startOtpTimerTier1(globals);
+      // ENABLE SUBMIT AGAIN
+globals.functions.setProperty(
+  form.enter_otp_panel.submit_otp,
+  {
+    enabled: true
+  }
+);
 
     }
 
