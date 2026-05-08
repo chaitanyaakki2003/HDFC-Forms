@@ -2081,6 +2081,51 @@ main .form .field-loan-upto p::before {
     border-radius: 10px;
 }
 
+
+
+
+/* ===== DISPLAY BOX LIKE REFERENCE DESIGN ===== */
+.field-select-bank-panel {
+
+    display: flex !important;
+    flex-direction: column;
+
+    background: #ffffff;
+    border: 1px solid #dbe3ff !important;
+    border-radius: 16px !important;
+
+    padding: 0 !important;
+    overflow: hidden;
+}
+
+/* ===== HEADER BOX ===== */
+.field-select-bank-panel > legend.field-label {
+
+    width: 100%;
+    box-sizing: border-box;
+
+    background: #eef2ff;
+
+    padding: 18px 24px !important;
+
+    margin: 0 !important;
+
+    border-radius: 16px 16px 0 0;
+
+    position: relative;
+    bottom: 0;
+}
+
+/* ===== CONTENT AREA ===== */
+.field-select-bank-panel .bank-container {
+
+    padding: 26px 24px 24px 24px;
+
+    margin-top: 0;
+
+    align-items: center;
+}
+
 /*---------------------------------e-verify panel-------------------------------------------*/
 
 /* ===== PANEL ===== */
