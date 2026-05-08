@@ -1951,170 +1951,168 @@ main .form .field-loan-upto p::before {
 
 
 /* =====================================================
-   BANK SECTION - EXACT UI LIKE DESIGN
-   ONLY FOR THIS SECTION
+   EXACT UI LIKE DESIGN IMAGE
 ===================================================== */
 
-/* MAIN WRAPPER */
 .custom-bank-wrapper{
-  display:flex !important;
-  flex-direction:row !important;
-  align-items:center !important;
-  justify-content:space-between !important;
-  width:100% !important;
-  background:#eef2ff !important;
-  padding:24px !important;
-  border-radius:20px !important;
-  gap:24px !important;
-  box-sizing:border-box !important;
-  margin-top:20px !important;
+  width:100%;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:30px;
+
+  background:#eef2ff;
+  border-radius:22px;
+
+  padding:28px 34px;
+  margin-top:20px;
+
+  box-sizing:border-box;
 }
 
-/* LEFT ICON AREA */
+/* LEFT SIDE */
 .custom-bank-icons{
-  display:flex !important;
-  flex-direction:row !important;
-  align-items:flex-start !important;
-  gap:18px !important;
-  flex:1 !important;
-  overflow-x:auto !important;
-  overflow-y:hidden !important;
-  white-space:nowrap !important;
-  scrollbar-width:thin !important;
+  display:flex;
+  align-items:center;
+  gap:18px;
+
+  flex-wrap:nowrap;
+  overflow-x:auto;
+  overflow-y:hidden;
+
+  flex:1;
 }
 
-/* SINGLE CARD */
+/* SINGLE ITEM */
 .custom-bank-item{
-  display:flex !important;
-  flex-direction:column !important;
-  align-items:center !important;
-  justify-content:flex-start !important;
-  min-width:84px !important;
-  flex-shrink:0 !important;
-  position:relative !important;
-  cursor:pointer !important;
+  min-width:74px;
+  max-width:74px;
+
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+
+  cursor:pointer;
+  position:relative;
+
+  flex-shrink:0;
 }
 
 /* ICON BOX */
 .custom-bank-icon{
-  width:72px !important;
-  height:72px !important;
-  min-width:72px !important;
-  min-height:72px !important;
-  background:#ffffff !important;
-  border:1px solid #d8dce7 !important;
-  border-radius:14px !important;
-  display:flex !important;
-  align-items:center !important;
-  justify-content:center !important;
-  transition:all .25s ease !important;
-  box-sizing:border-box !important;
+  width:58px;
+  height:58px;
+
+  border:1px solid #d9dce7;
+  border-radius:12px;
+
+  background:#ffffff;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  transition:all .25s ease;
+
+  overflow:hidden;
 }
 
 /* IMAGE */
 .custom-bank-icon img{
-  width:38px !important;
-  height:38px !important;
-  object-fit:contain !important;
-  display:block !important;
+  width:34px;
+  height:34px;
+  object-fit:contain;
+
+  display:block;
 }
 
 /* TEXT */
 .custom-bank-item span{
-  display:block !important;
-  margin-top:10px !important;
-  font-size:13px !important;
-  line-height:16px !important;
-  color:#1f2937 !important;
-  text-align:center !important;
-  font-weight:500 !important;
-  white-space:normal !important;
+  margin-top:8px;
+
+  font-size:12px;
+  line-height:15px;
+
+  color:#1f2937;
+
+  text-align:center;
+
+  white-space:nowrap;
+
+  overflow:hidden;
+  text-overflow:ellipsis;
+
+  width:100%;
 }
 
-/* ACTIVE CARD */
+/* ACTIVE */
 .custom-bank-item.active .custom-bank-icon{
-  border:2px solid #3558e6 !important;
-  background:#ffffff !important;
-  box-shadow:0 0 0 3px rgba(53,88,230,.10) !important;
+  border:2px solid #3558e6;
+  box-shadow:0 0 0 2px rgba(53,88,230,.08);
 }
 
-/* ACTIVE BLUE DOT */
+/* BLUE DOT */
 .custom-bank-item.active::after{
-  content:'' !important;
-  width:12px !important;
-  height:12px !important;
-  background:#3558e6 !important;
-  border-radius:50% !important;
-  position:absolute !important;
-  bottom:-18px !important;
-  left:50% !important;
-  transform:translateX(-50%) !important;
-}
+  content:'';
 
-/* HOVER */
-.custom-bank-icon:hover{
-  border-color:#3558e6 !important;
+  width:10px;
+  height:10px;
+
+  background:#3558e6;
+
+  border-radius:50%;
+
+  position:absolute;
+
+  bottom:-16px;
+  left:50%;
+
+  transform:translateX(-50%);
 }
 
 /* DROPDOWN */
 .custom-bank-dropdown{
-  width:340px !important;
-  min-width:340px !important;
-  height:58px !important;
-  border:1px solid #d6d9e4 !important;
-  border-radius:14px !important;
-  background:#ffffff !important;
-  padding:0 18px !important;
-  font-size:18px !important;
-  color:#6b7280 !important;
-  outline:none !important;
-  cursor:pointer !important;
-  appearance:auto !important;
+  width:340px;
+  min-width:340px;
+
+  height:50px;
+
+  border:1px solid #d9dce7;
+  border-radius:12px;
+
+  background:#ffffff;
+
+  padding:0 18px;
+
+  font-size:16px;
+  color:#6b7280;
+
+  outline:none;
+
+  cursor:pointer;
 }
 
 /* SCROLLBAR */
 .custom-bank-icons::-webkit-scrollbar{
-  height:6px !important;
+  height:6px;
 }
 
 .custom-bank-icons::-webkit-scrollbar-thumb{
-  background:#cfd4df !important;
-  border-radius:20px !important;
+  background:#cfd4df;
+  border-radius:20px;
 }
 
 /* MOBILE */
-@media (max-width:768px){
+@media(max-width:768px){
 
   .custom-bank-wrapper{
-    flex-direction:column !important;
-    align-items:flex-start !important;
+    flex-direction:column;
+    align-items:flex-start;
   }
 
   .custom-bank-dropdown{
-    width:100% !important;
-    min-width:100% !important;
+    width:100%;
+    min-width:100%;
   }
 
-  .custom-bank-icons{
-    width:100% !important;
-  }
-}
-
-/* FORCE IMAGE VISIBILITY */
-.custom-bank-icon img{
-  width:38px !important;
-  height:38px !important;
-  min-width:38px !important;
-  min-height:38px !important;
-  max-width:38px !important;
-  max-height:38px !important;
-  object-fit:contain !important;
-  display:block !important;
-  opacity:1 !important;
-  visibility:visible !important;
-}
-
-/* FIX ICON CONTAINER */
-.custom-bank-icon{
-  overflow:hidden !important;
 }
