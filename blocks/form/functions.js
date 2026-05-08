@@ -1521,17 +1521,18 @@ function generateLoanApplicationNumber(globals) {
 }
 
 /* ============================= */
-/* SALARY BANK UI */
-/* EXACT UI LIKE DESIGN */
+/* BANK SELECTION JS */
 /* ============================= */
 
 function initSalaryBankUI() {
 
-  const panel = document.querySelector(".field-salary-bank-selection");
+  /* SELECTORS */
+  const panel = document.querySelector(".field-select-salary-bank");
   const dropdownWrapper = document.querySelector(".drop-down-wrapper.field-salary-bank");
   const select = document.querySelector("select[name='salary_bank']");
 
-  if (!panel || !dropdownWrapper || !select || panel.dataset.salaryBankReady === "true") {
+  /* STOP IF NOT FOUND */
+  if (!panel || !select || panel.dataset.salaryBankReady === "true") {
     return;
   }
 
@@ -1566,46 +1567,43 @@ function initSalaryBankUI() {
   ];
 
   /* ============================= */
-  /* CREATE MAIN WRAPPER */
+  /* HIDE ORIGINAL DROPDOWN */
+  /* ============================= */
+
+  if (dropdownWrapper) {
+    dropdownWrapper.style.display = "none";
+  }
+
+  select.style.display = "none";
+
+  /* ============================= */
+  /* MAIN WRAPPER */
   /* ============================= */
 
   const wrapper = document.createElement("div");
-  wrapper.className = "salary-bank-main-wrapper";
+  wrapper.className = "custom-bank-wrapper";
 
   /* ============================= */
-  /* LEFT ICON SECTION */
+  /* ICON CONTAINER */
   /* ============================= */
 
-  const cardContainer = document.createElement("div");
-  cardContainer.className = "salary-bank-card-container";
+  const iconContainer = document.createElement("div");
+  iconContainer.className = "custom-bank-icons";
 
   /* ============================= */
-  /* DROPDOWN SECTION */
+  /* DROPDOWN */
   /* ============================= */
-
-  const dropdownContainer = document.createElement("div");
-  dropdownContainer.className = "salary-bank-dropdown-container";
 
   const customDropdown = document.createElement("select");
-  customDropdown.className = "salary-bank-dropdown";
+  customDropdown.className = "custom-bank-dropdown";
 
-  /* DEFAULT OPTION */
-  const defaultOption = document.createElement("option");
-  defaultOption.value = "hdfc_bank";
-  defaultOption.text = "HDFC Bank";
+  customDropdown.innerHTML = `
+    <option value="hdfc_bank">HDFC Bank</option>
+    <option value="other_bank">Other Bank</option>
+  `;
 
-  /* OTHER OPTION */
-  const otherOption = document.createElement("option");
-  otherOption.value = "other_bank";
-  otherOption.text = "Other Bank";
-
-  customDropdown.appendChild(defaultOption);
-  customDropdown.appendChild(otherOption);
-
-  dropdownContainer.appendChild(customDropdown);
-
-  wrapper.appendChild(cardContainer);
-  wrapper.appendChild(dropdownContainer);
+  wrapper.appendChild(iconContainer);
+  wrapper.appendChild(customDropdown);
 
   /* ============================= */
   /* INSERT AFTER LEGEND */
@@ -1613,35 +1611,35 @@ function initSalaryBankUI() {
 
   const legend = panel.querySelector("legend.field-label");
 
-  if (legend && legend.nextSibling) {
-    panel.insertBefore(wrapper, legend.nextSibling);
+  if (legend) {
+    legend.insertAdjacentElement("afterend", wrapper);
   } else {
     panel.prepend(wrapper);
   }
 
-  /* HIDE ORIGINAL DROPDOWN */
-  dropdownWrapper.style.display = "none";
-
   /* ============================= */
-  /* CREATE CARD */
+  /* CREATE BANK CARD */
   /* ============================= */
 
-  function createCard(bank) {
+  function createBankCard(bank) {
 
     const card = document.createElement("div");
-    card.className = "salary-bank-card";
+
+    card.className = "custom-bank-item";
+
     card.dataset.value = bank.value;
 
     card.innerHTML = `
-      <div class="salary-bank-icon-box">
+      <div class="custom-bank-icon">
         <img src="${bankLogos[bank.value]}" alt="${bank.text}">
       </div>
       <span>${bank.text}</span>
     `;
 
+    /* CLICK */
     card.addEventListener("click", function () {
 
-      document.querySelectorAll(".salary-bank-card").forEach((item) => {
+      document.querySelectorAll(".custom-bank-item").forEach((item) => {
         item.classList.remove("active");
       });
 
@@ -1649,9 +1647,7 @@ function initSalaryBankUI() {
 
       select.value = bank.value;
 
-      if (customDropdown.querySelector(`option[value="${bank.value}"]`)) {
-        customDropdown.value = bank.value;
-      }
+      customDropdown.value = bank.value;
 
       select.dispatchEvent(new Event("change"));
     });
@@ -1660,24 +1656,29 @@ function initSalaryBankUI() {
   }
 
   /* ============================= */
-  /* RENDER BANKS */
+  /* RENDER CARDS */
   /* ============================= */
 
-  function renderBanks(type) {
+  function renderCards(type) {
 
-    cardContainer.innerHTML = "";
+    iconContainer.innerHTML = "";
 
     let bankList = [];
 
+    /* ONLY HDFC */
     if (type === "hdfc_bank") {
 
       bankList = banks.filter((bank) => bank.value === "hdfc_bank");
 
+      customDropdown.innerHTML = `
+        <option value="hdfc_bank">HDFC Bank</option>
+        <option value="other_bank">Other Bank</option>
+      `;
+
     } else {
 
+      /* SHOW ALL */
       bankList = banks;
-
-      /* UPDATE DROPDOWN WITH ALL BANKS */
 
       customDropdown.innerHTML = "";
 
@@ -1692,25 +1693,26 @@ function initSalaryBankUI() {
       });
     }
 
+    /* CREATE UI */
     bankList.forEach((bank) => {
 
-      const card = createCard(bank);
+      const card = createBankCard(bank);
 
       if (bank.value === select.value) {
         card.classList.add("active");
       }
 
-      cardContainer.appendChild(card);
+      iconContainer.appendChild(card);
     });
   }
 
   /* ============================= */
-  /* INITIAL STATE */
+  /* INITIAL */
   /* ============================= */
 
   select.value = "hdfc_bank";
 
-  renderBanks("hdfc_bank");
+  renderCards("hdfc_bank");
 
   /* ============================= */
   /* DROPDOWN CHANGE */
@@ -1718,16 +1720,18 @@ function initSalaryBankUI() {
 
   customDropdown.addEventListener("change", function () {
 
+    /* OTHER BANK */
     if (customDropdown.value === "other_bank") {
 
-      renderBanks("other_bank");
+      renderCards("other_bank");
 
       return;
     }
 
+    /* NORMAL */
     select.value = customDropdown.value;
 
-    document.querySelectorAll(".salary-bank-card").forEach((card) => {
+    document.querySelectorAll(".custom-bank-item").forEach((card) => {
 
       card.classList.remove("active");
 
@@ -1738,139 +1742,6 @@ function initSalaryBankUI() {
 
     select.dispatchEvent(new Event("change"));
   });
-
-  /* ============================= */
-  /* CSS */
-  /* ============================= */
-
-  const style = document.createElement("style");
-
-  style.innerHTML = `
-
-    .salary-bank-main-wrapper{
-      display:flex;
-      align-items:center;
-      gap:24px;
-      background:#eef2ff;
-      border-radius:20px;
-      padding:26px 24px;
-      margin-top:18px;
-      width:100%;
-      box-sizing:border-box;
-    }
-
-    .salary-bank-card-container{
-      display:flex;
-      align-items:flex-start;
-      gap:18px;
-      flex:1;
-      overflow-x:auto;
-    }
-
-    .salary-bank-card{
-      min-width:84px;
-      display:flex;
-      flex-direction:column;
-      align-items:center;
-      cursor:pointer;
-      position:relative;
-      flex-shrink:0;
-    }
-
-    .salary-bank-icon-box{
-      width:72px;
-      height:72px;
-      background:#fff;
-      border:1px solid #d9deea;
-      border-radius:14px;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      transition:all .25s ease;
-    }
-
-    .salary-bank-icon-box img{
-      width:38px;
-      height:38px;
-      object-fit:contain;
-    }
-
-    .salary-bank-card span{
-      margin-top:10px;
-      font-size:13px;
-      line-height:16px;
-      color:#1f2937;
-      font-weight:500;
-      text-align:center;
-    }
-
-    .salary-bank-card.active .salary-bank-icon-box{
-      border:2px solid #3558e6;
-      box-shadow:0 0 0 3px rgba(53,88,230,.10);
-    }
-
-    .salary-bank-card.active::after{
-      content:'';
-      width:12px;
-      height:12px;
-      border-radius:50%;
-      background:#3558e6;
-      position:absolute;
-      bottom:-18px;
-      left:50%;
-      transform:translateX(-50%);
-    }
-
-    .salary-bank-dropdown-container{
-      width:340px;
-      flex-shrink:0;
-    }
-
-    .salary-bank-dropdown{
-      width:100%;
-      height:58px;
-      border:1px solid #d6d9e4;
-      border-radius:14px;
-      background:#fff;
-      padding:0 18px;
-      font-size:18px;
-      color:#6b7280;
-      outline:none;
-      cursor:pointer;
-    }
-
-    .salary-bank-icon-box:hover{
-      border-color:#3558e6;
-    }
-
-    .salary-bank-card-container::-webkit-scrollbar{
-      height:6px;
-    }
-
-    .salary-bank-card-container::-webkit-scrollbar-thumb{
-      background:#cfd4df;
-      border-radius:20px;
-    }
-
-    @media(max-width:768px){
-
-      .salary-bank-main-wrapper{
-        flex-direction:column;
-        align-items:flex-start;
-      }
-
-      .salary-bank-dropdown-container{
-        width:100%;
-      }
-
-      .salary-bank-card-container{
-        width:100%;
-      }
-    }
-
-  `;
-
-  document.head.appendChild(style);
 }
 
 /* ============================= */
@@ -1896,6 +1767,8 @@ if (typeof window !== "undefined") {
   setTimeout(initSalaryBankUI, 1500);
   setTimeout(initSalaryBankUI, 3000);
 }
+
+
 
 
 
