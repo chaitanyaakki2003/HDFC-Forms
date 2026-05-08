@@ -1953,179 +1953,226 @@ main .form .field-loan-upto p::before {
 
 /* =========================================================
    E-VERIFY INCOME PANEL ONLY
-   This styling affects ONLY this specific section
+   THIS CSS AFFECTS ONLY THIS PANEL
 ========================================================= */
 
 [data-id="panelcontainer-622cc0f526"] {
-    padding: 20px 30px;
-    background: #fff;
+    padding: 24px;
+    background: #ffffff;
+    border-radius: 24px;
+    font-family: Inter, sans-serif;
 }
 
-/* Main Heading */
+/* =========================================================
+   MAIN TITLE
+========================================================= */
+
 [data-id="panelcontainer-622cc0f526"] > legend.field-label {
     font-size: 42px;
     font-weight: 700;
-    color: #1e2432;
+    color: #1f2937;
     margin-bottom: 30px;
 }
 
 /* =========================================================
-   BANK SELECTION SECTION
+   BANK SECTION
 ========================================================= */
 
-.field-salary-bank-selection {
+[data-id="panelcontainer-622cc0f526"] .field-salary-bank-selection {
     background: #eef2ff;
     border-radius: 28px;
     padding: 28px;
+    border: 1px solid #dfe6ff;
     margin-bottom: 35px;
-    border: 1px solid #e3e8ff;
 }
 
-/* Section Heading */
+/* BANK SECTION TITLE */
+
+[data-id="panelcontainer-622cc0f526"] 
 .field-salary-bank-selection > legend.field-label {
-    font-size: 26px;
+    font-size: 28px;
     font-weight: 700;
     color: #1f2937;
-    margin-bottom: 24px;
+    margin-bottom: 26px;
     display: flex;
     align-items: center;
     gap: 12px;
 }
 
-/* Icon before heading */
+/* ICON */
+
+[data-id="panelcontainer-622cc0f526"] 
 .field-salary-bank-selection > legend.field-label::before {
     content: "";
-    width: 34px;
-    height: 34px;
-    background: url("/content/dam/akki/bank-icon.png") no-repeat center;
-    background-size: contain;
+    width: 28px;
+    height: 28px;
     display: inline-block;
+    background: url("/content/dam/akki/bank-icon.png") center center no-repeat;
+    background-size: contain;
 }
 
-/* Hide actual select */
-.field-salary-bank-selection select {
-    display: none;
+/* HIDE ORIGINAL SELECT */
+
+[data-id="panelcontainer-622cc0f526"] 
+select[name="salary_bank"] {
+    display: none !important;
 }
 
 /* =========================================================
-   CUSTOM BANK LOGO BUTTONS
+   CUSTOM BANK WRAPPER
 ========================================================= */
 
-.field-salary-bank-selection .drop-down-wrapper {
+[data-id="panelcontainer-622cc0f526"] 
+.custom-bank-wrapper {
     display: flex;
     align-items: center;
     gap: 18px;
     flex-wrap: wrap;
 }
 
-/* Common Logo Card */
-.field-salary-bank-selection .bank-option {
-    width: 105px;
-    height: 110px;
-    background: #fff;
-    border: 2px solid #d8deea;
+/* =========================================================
+   BANK CARD
+========================================================= */
+
+[data-id="panelcontainer-622cc0f526"] 
+.bank-card {
+    width: 96px;
+    height: 96px;
+    background: #ffffff;
+    border: 2px solid #dbe3f0;
     border-radius: 18px;
-    position: relative;
     cursor: pointer;
-    transition: all 0.25s ease;
+    position: relative;
+    transition: all .25s ease;
     display: flex;
-    flex-direction: column;
-    justify-content: center;
     align-items: center;
-    font-size: 14px;
-    font-weight: 600;
-    color: #4b5563;
+    justify-content: center;
 }
 
-/* Hover */
-.field-salary-bank-selection .bank-option:hover {
+/* HOVER */
+
+[data-id="panelcontainer-622cc0f526"] 
+.bank-card:hover {
     border-color: #3454f5;
     transform: translateY(-2px);
 }
 
-/* Selected */
-.field-salary-bank-selection .bank-option.active {
+/* ACTIVE */
+
+[data-id="panelcontainer-622cc0f526"] 
+.bank-card.active {
     border-color: #3454f5;
-    box-shadow: 0 0 0 4px rgba(52, 84, 245, 0.08);
+    box-shadow: 0 0 0 4px rgba(52,84,245,.08);
 }
 
-/* Tick */
-.field-salary-bank-selection .bank-option.active::after {
-    content: "✓";
+/* ACTIVE DOT */
+
+[data-id="panelcontainer-622cc0f526"] 
+.bank-card.active::after {
+    content: "";
     position: absolute;
-    bottom: -10px;
-    width: 24px;
-    height: 24px;
+    bottom: -9px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 18px;
+    height: 18px;
     border-radius: 50%;
     background: #3454f5;
-    color: #fff;
-    font-size: 13px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    border: 3px solid #ffffff;
+}
+
+/* =========================================================
+   LOGO IMAGE COMMON
+========================================================= */
+
+[data-id="panelcontainer-622cc0f526"] 
+.bank-card::before {
+    content: "";
+    width: 52px;
+    height: 52px;
+    display: block;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
 }
 
 /* =========================================================
    BANK LOGOS
 ========================================================= */
 
-.bank-option::before {
-    content: "";
-    width: 48px;
-    height: 48px;
-    margin-bottom: 10px;
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: contain;
-}
-
 /* HDFC */
-.bank-option.hdfc_bank::before {
+
+[data-id="panelcontainer-622cc0f526"] 
+.bank-card.hdfc_bank::before {
     background-image: url("/content/dam/akki/hdfc.png");
 }
 
 /* ICICI */
-.bank-option.icici_bank::before {
+
+[data-id="panelcontainer-622cc0f526"] 
+.bank-card.icici_bank::before {
     background-image: url("/content/dam/akki/icici.png");
 }
 
 /* AXIS */
-.bank-option.axis_bank::before {
+
+[data-id="panelcontainer-622cc0f526"] 
+.bank-card.axis_bank::before {
     background-image: url("/content/dam/akki/axis.png");
 }
 
 /* KOTAK */
-.bank-option.kotak_bank::before {
+
+[data-id="panelcontainer-622cc0f526"] 
+.bank-card.kotak_bank::before {
     background-image: url("/content/dam/akki/kotak.png");
 }
 
 /* SBI */
-.bank-option.sbi::before {
+
+[data-id="panelcontainer-622cc0f526"] 
+.bank-card.sbi::before {
     background-image: url("/content/dam/akki/sbi.png");
 }
 
-/* BOB */
-.bank-option.bank_of_baroda::before {
+/* BANK OF BARODA */
+
+[data-id="panelcontainer-622cc0f526"] 
+.bank-card.bank_of_baroda::before {
     background-image: url("/content/dam/akki/bob.jpeg");
 }
 
 /* IDFC */
-.bank-option.idfc_first_bank::before {
+
+[data-id="panelcontainer-622cc0f526"] 
+.bank-card.idfc_first_bank::before {
     background-image: url("/content/dam/akki/idfc.png");
 }
 
 /* =========================================================
-   VERIFICATION METHODS SECTION
+   OTHER BANK DROPDOWN CARD
 ========================================================= */
 
+[data-id="panelcontainer-622cc0f526"] 
+.bank-card.other_bank::before {
+    background-image: url("/content/dam/akki/bank-default.png");
+}
+
+/* =========================================================
+   VERIFICATION METHOD SECTION
+========================================================= */
+
+[data-id="panelcontainer-622cc0f526"] 
 .field-income-verification-method {
     background: #eef2ff;
     border-radius: 28px;
     padding: 30px;
-    border: 1px solid #e3e8ff;
+    border: 1px solid #dfe6ff;
 }
 
-/* Heading */
+/* TITLE */
+
+[data-id="panelcontainer-622cc0f526"] 
 .field-income-verification-method > legend.field-label {
     font-size: 28px;
     font-weight: 700;
@@ -2136,55 +2183,68 @@ main .form .field-loan-upto p::before {
     gap: 12px;
 }
 
-/* Icon */
+/* ICON */
+
+[data-id="panelcontainer-622cc0f526"] 
 .field-income-verification-method > legend.field-label::before {
     content: "";
-    width: 34px;
-    height: 34px;
-    background: url("/content/dam/akki/verify-icon.png") no-repeat center;
+    width: 28px;
+    height: 28px;
+    display: inline-block;
+    background: url("/content/dam/akki/verify-icon.png") center center no-repeat;
     background-size: contain;
 }
 
-/* Radio group layout */
+/* RADIO GROUP */
+
+[data-id="panelcontainer-622cc0f526"] 
 .field-income-verification-method-choice {
     display: flex;
-    gap: 24px;
+    gap: 22px;
     flex-wrap: wrap;
 }
 
-/* Each card */
+/* EACH CARD */
+
+[data-id="panelcontainer-622cc0f526"] 
 .field-income-verification-method-choice .radio-wrapper {
     flex: 1;
     min-width: 280px;
-    background: #fff;
-    border: 2px solid #dbe1ee;
+    background: #ffffff;
+    border: 2px solid #dbe3f0;
     border-radius: 24px;
     padding: 28px;
     position: relative;
-    transition: 0.25s ease;
+    transition: all .25s ease;
     cursor: pointer;
 }
 
-/* Hide native radio */
+/* HIDE RADIO */
+
+[data-id="panelcontainer-622cc0f526"] 
 .field-income-verification-method-choice input[type="radio"] {
     display: none;
 }
 
-/* Active Card */
+/* ACTIVE CARD */
+
+[data-id="panelcontainer-622cc0f526"] 
 .field-income-verification-method-choice .radio-wrapper.active {
     border-color: #3454f5;
-    box-shadow: 0 6px 18px rgba(52, 84, 245, 0.08);
+    box-shadow: 0 0 0 4px rgba(52,84,245,.08);
 }
 
-/* Green recommended strip */
+/* RECOMMENDED STRIP */
+
+[data-id="panelcontainer-622cc0f526"] 
 .field-income-verification-method-choice .radio-wrapper.recommended::after {
     content: "Recommended";
     position: absolute;
     left: 0;
     right: 0;
     bottom: 0;
-    background: #009966;
-    color: #fff;
+    background: #019267;
+    color: #ffffff;
     text-align: center;
     font-size: 15px;
     font-weight: 600;
@@ -2193,18 +2253,21 @@ main .form .field-loan-upto p::before {
     border-bottom-right-radius: 20px;
 }
 
-/* Radio Title */
-.field-income-verification-method-choice .radio-wrapper label {
-    font-size: 32px;
+/* LABEL */
+
+[data-id="panelcontainer-622cc0f526"] 
+.field-income-verification-method-choice label {
+    font-size: 18px;
     font-weight: 700;
     color: #111827;
     display: block;
-    margin-bottom: 10px;
-    line-height: 1.3;
+    line-height: 1.4;
 }
 
-/* Description */
-.field-income-verification-method-help p {
+/* REMOVE OLD HELP TEXT */
+
+[data-id="panelcontainer-622cc0f526"] 
+.field-income-verification-method-help {
     display: none;
 }
 
@@ -2212,25 +2275,32 @@ main .form .field-loan-upto p::before {
    CONTINUE BUTTON
 ========================================================= */
 
+[data-id="panelcontainer-622cc0f526"] 
 .submit-wrapper {
-    margin-top: 35px;
+    margin-top: 34px;
 }
 
+[data-id="panelcontainer-622cc0f526"] 
 .submit-wrapper button,
+[data-id="panelcontainer-622cc0f526"] 
 .submit-wrapper input[type="submit"] {
-    width: 240px;
-    height: 72px;
-    border-radius: 18px;
+    width: 220px;
+    height: 64px;
     border: none;
+    border-radius: 18px;
     background: #3454f5;
-    color: #fff;
-    font-size: 26px;
+    color: #ffffff;
+    font-size: 22px;
     font-weight: 700;
     cursor: pointer;
-    transition: 0.25s ease;
+    transition: all .25s ease;
 }
 
+/* HOVER */
+
+[data-id="panelcontainer-622cc0f526"] 
 .submit-wrapper button:hover,
+[data-id="panelcontainer-622cc0f526"] 
 .submit-wrapper input[type="submit"]:hover {
     background: #2643d9;
 }
