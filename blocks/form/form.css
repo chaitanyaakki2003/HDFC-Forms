@@ -1951,27 +1951,27 @@ main .form .field-loan-upto p::before {
 
 
 /* =====================================================
-   BANK SECTION EXACT FINAL UI
+   BANK SECTION FINAL UI
 ===================================================== */
 
 .custom-bank-wrapper{
-  width:100% !important;
+    width:100% !important;
 
-  display:flex !important;
-  align-items:center !important;
-  justify-content:space-between !important;
+    display:flex !important;
+    align-items:center !important;
+    justify-content:space-between !important;
 
-  gap:30px !important;
+    gap:32px !important;
 
-  background:#eef2ff !important;
+    background:#eef2ff !important;
 
-  border-radius:22px !important;
+    border-radius:22px !important;
 
-  padding:26px 30px !important;
+    padding:28px 34px !important;
 
-  margin-top:20px !important;
+    margin-top:20px !important;
 
-  box-sizing:border-box !important;
+    box-sizing:border-box !important;
 }
 
 /* =====================================================
@@ -1979,20 +1979,18 @@ main .form .field-loan-upto p::before {
 ===================================================== */
 
 .custom-bank-icons{
-  display:flex !important;
+    display:flex !important;
 
-  align-items:flex-start !important;
+    align-items:flex-start !important;
 
-  gap:18px !important;
+    gap:18px !important;
 
-  flex:1 !important;
+    flex-wrap:nowrap !important;
 
-  min-width:0 !important;
+    overflow-x:auto !important;
+    overflow-y:hidden !important;
 
-  overflow-x:auto !important;
-  overflow-y:hidden !important;
-
-  white-space:nowrap !important;
+    width:calc(100% - 360px) !important;
 }
 
 /* =====================================================
@@ -2000,19 +1998,17 @@ main .form .field-loan-upto p::before {
 ===================================================== */
 
 .custom-bank-item{
-  width:76px !important;
+    width:78px !important;
 
-  display:flex !important;
-  flex-direction:column !important;
-  align-items:center !important;
+    display:flex !important;
+    flex-direction:column !important;
+    align-items:center !important;
 
-  position:relative !important;
+    position:relative !important;
 
-  cursor:pointer !important;
+    cursor:pointer !important;
 
-  flex-shrink:0 !important;
-
-  overflow:visible !important;
+    flex-shrink:0 !important;
 }
 
 /* =====================================================
@@ -2020,53 +2016,38 @@ main .form .field-loan-upto p::before {
 ===================================================== */
 
 .custom-bank-icon{
-  width:58px !important;
-  height:58px !important;
+    width:58px !important;
+    height:58px !important;
 
-  min-width:58px !important;
-  min-height:58px !important;
+    border:1px solid #d9dce7 !important;
 
-  border:1px solid #d9dce7 !important;
+    border-radius:14px !important;
 
-  border-radius:14px !important;
+    background:#ffffff !important;
 
-  background:#ffffff !important;
+    display:flex !important;
+    align-items:center !important;
+    justify-content:center !important;
 
-  display:flex !important;
-  align-items:center !important;
-  justify-content:center !important;
+    transition:all .25s ease !important;
 
-  overflow:visible !important;
-
-  position:relative !important;
-
-  transition:all .25s ease !important;
+    overflow:hidden !important;
 }
 
 /* =====================================================
-   IMAGE FIX
+   IMAGE
 ===================================================== */
 
 .custom-bank-icon img{
-  width:34px !important;
-  height:34px !important;
+    width:34px !important;
+    height:34px !important;
 
-  min-width:34px !important;
-  min-height:34px !important;
+    object-fit:contain !important;
 
-  max-width:none !important;
-  max-height:none !important;
+    display:block !important;
 
-  object-fit:contain !important;
-
-  display:block !important;
-
-  visibility:visible !important;
-  opacity:1 !important;
-
-  position:relative !important;
-
-  z-index:99 !important;
+    opacity:1 !important;
+    visibility:visible !important;
 }
 
 /* =====================================================
@@ -2074,16 +2055,16 @@ main .form .field-loan-upto p::before {
 ===================================================== */
 
 .custom-bank-item span{
-  margin-top:8px !important;
+    margin-top:8px !important;
 
-  font-size:12px !important;
-  line-height:15px !important;
+    font-size:12px !important;
+    line-height:15px !important;
 
-  color:#1f2937 !important;
+    color:#1f2937 !important;
 
-  text-align:center !important;
+    text-align:center !important;
 
-  white-space:nowrap !important;
+    white-space:nowrap !important;
 }
 
 /* =====================================================
@@ -2091,60 +2072,62 @@ main .form .field-loan-upto p::before {
 ===================================================== */
 
 .custom-bank-item.active .custom-bank-icon{
-  border:2px solid #3558e6 !important;
+    border:2px solid #3558e6 !important;
 
-  box-shadow:0 0 0 2px rgba(53,88,230,.08) !important;
+    box-shadow:0 0 0 2px rgba(53,88,230,.08) !important;
 }
 
 /* =====================================================
-   ACTIVE BLUE DOT
+   BLUE DOT
 ===================================================== */
 
 .custom-bank-item.active::after{
-  content:'' !important;
+    content:'' !important;
 
-  width:10px !important;
-  height:10px !important;
+    width:10px !important;
+    height:10px !important;
 
-  background:#3558e6 !important;
+    background:#3558e6 !important;
 
-  border-radius:50% !important;
+    border-radius:50% !important;
 
-  position:absolute !important;
+    position:absolute !important;
 
-  bottom:-15px !important;
-  left:50% !important;
+    bottom:-15px !important;
+    left:50% !important;
 
-  transform:translateX(-50%) !important;
+    transform:translateX(-50%) !important;
 }
 
 /* =====================================================
-   DROPDOWN
+   DROPDOWN RIGHT SIDE
 ===================================================== */
 
 .custom-bank-dropdown{
-  width:340px !important;
-  min-width:340px !important;
+    width:340px !important;
+    min-width:340px !important;
 
-  height:52px !important;
+    height:52px !important;
 
-  border:1px solid #d9dce7 !important;
+    border:1px solid #d9dce7 !important;
 
-  border-radius:14px !important;
+    border-radius:14px !important;
 
-  background:#ffffff !important;
+    background:#ffffff !important;
 
-  padding:0 18px !important;
+    padding:0 18px !important;
 
-  font-size:16px !important;
+    font-size:16px !important;
 
-  color:#6b7280 !important;
+    color:#6b7280 !important;
 
-  outline:none !important;
+    outline:none !important;
 
-  cursor:pointer !important;
+    cursor:pointer !important;
 
-  flex-shrink:0 !important;
+    margin-left:auto !important;
+
+    flex-shrink:0 !important;
 }
 
 /* =====================================================
@@ -2152,13 +2135,34 @@ main .form .field-loan-upto p::before {
 ===================================================== */
 
 .custom-bank-icons::-webkit-scrollbar{
-  height:6px !important;
+    height:6px !important;
 }
 
 .custom-bank-icons::-webkit-scrollbar-thumb{
-  background:#cfd4df !important;
+    background:#cfd4df !important;
 
-  border-radius:20px !important;
+    border-radius:20px !important;
+}
+
+/* =====================================================
+   FORCE AEM FIXES
+===================================================== */
+
+.field-select-salary-bank{
+    width:100% !important;
+}
+
+.field-select-salary-bank .custom-bank-wrapper,
+.field-select-salary-bank .custom-bank-icons,
+.field-select-salary-bank .custom-bank-item,
+.field-select-salary-bank .custom-bank-icon{
+    overflow:visible !important;
+}
+
+.field-select-salary-bank .custom-bank-icons{
+    display:flex !important;
+    flex-direction:row !important;
+    align-items:flex-start !important;
 }
 
 /* =====================================================
@@ -2167,57 +2171,19 @@ main .form .field-loan-upto p::before {
 
 @media(max-width:768px){
 
-  .custom-bank-wrapper{
-    flex-direction:column !important;
+    .custom-bank-wrapper{
+        flex-direction:column !important;
 
-    align-items:flex-start !important;
-  }
+        align-items:flex-start !important;
+    }
 
-  .custom-bank-icons{
-    width:100% !important;
-  }
+    .custom-bank-icons{
+        width:100% !important;
+    }
 
-  .custom-bank-dropdown{
-    width:100% !important;
+    .custom-bank-dropdown{
+        width:100% !important;
 
-    min-width:100% !important;
-  }
-}
-
-
-/* FORCE ICONS VISIBLE */
-
-.field-select-salary-bank,
-.field-select-salary-bank .custom-bank-wrapper,
-.field-select-salary-bank .custom-bank-icons,
-.field-select-salary-bank .custom-bank-item,
-.field-select-salary-bank .custom-bank-icon{
-    overflow: visible !important;
-}
-
-/* FORCE HORIZONTAL LAYOUT */
-
-.field-select-salary-bank .custom-bank-icons{
-    display:flex !important;
-    flex-direction:row !important;
-    align-items:center !important;
-    gap:18px !important;
-    width:auto !important;
-}
-
-/* FORCE IMAGE RENDER */
-
-.field-select-salary-bank .custom-bank-icon img{
-    display:block !important;
-    width:34px !important;
-    height:34px !important;
-    object-fit:contain !important;
-    opacity:1 !important;
-    visibility:visible !important;
-}
-
-/* PREVENT GRID COLLAPSE */
-
-.field-select-salary-bank{
-    width:100% !important;
+        min-width:100% !important;
+    }
 }
