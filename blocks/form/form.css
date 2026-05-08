@@ -1950,272 +1950,287 @@ main .form .field-loan-upto p::before {
 
 
 
-/* =====================================================
-   BANK SECTION FINAL UI
-===================================================== */
 
-.custom-bank-wrapper{
-    width:100% !important;
+/* =========================================================
+   E-VERIFY INCOME PANEL ONLY
+   This styling affects ONLY this specific section
+========================================================= */
 
-    display:flex !important;
-    align-items:center !important;
-    justify-content:space-between !important;
-
-    gap:32px !important;
-
-    background:#eef2ff !important;
-
-    border-radius:22px !important;
-
-    padding:28px 34px !important;
-
-    margin-top:20px !important;
-
-    box-sizing:border-box !important;
+[data-id="panelcontainer-622cc0f526"] {
+    padding: 20px 30px;
+    background: #fff;
 }
 
-/* =====================================================
-   LEFT ICON AREA
-===================================================== */
-
-.custom-bank-icons{
-    display:flex !important;
-
-    align-items:flex-start !important;
-
-    gap:18px !important;
-
-    flex-wrap:nowrap !important;
-
-    overflow-x:auto !important;
-    overflow-y:hidden !important;
-
-    width:calc(100% - 360px) !important;
+/* Main Heading */
+[data-id="panelcontainer-622cc0f526"] > legend.field-label {
+    font-size: 42px;
+    font-weight: 700;
+    color: #1e2432;
+    margin-bottom: 30px;
 }
 
-/* =====================================================
-   SINGLE CARD
-===================================================== */
+/* =========================================================
+   BANK SELECTION SECTION
+========================================================= */
 
-.custom-bank-item{
-    width:78px !important;
-
-    display:flex !important;
-    flex-direction:column !important;
-    align-items:center !important;
-
-    position:relative !important;
-
-    cursor:pointer !important;
-
-    flex-shrink:0 !important;
+.field-salary-bank-selection {
+    background: #eef2ff;
+    border-radius: 28px;
+    padding: 28px;
+    margin-bottom: 35px;
+    border: 1px solid #e3e8ff;
 }
 
-/* =====================================================
-   ICON BOX
-===================================================== */
-
-.custom-bank-icon{
-    width:58px !important;
-    height:58px !important;
-
-    border:1px solid #d9dce7 !important;
-
-    border-radius:14px !important;
-
-    background:#ffffff !important;
-
-    display:flex !important;
-    align-items:center !important;
-    justify-content:center !important;
-
-    transition:all .25s ease !important;
-
-    overflow:hidden !important;
+/* Section Heading */
+.field-salary-bank-selection > legend.field-label {
+    font-size: 26px;
+    font-weight: 700;
+    color: #1f2937;
+    margin-bottom: 24px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
 }
 
-/* =====================================================
-   IMAGE
-===================================================== */
-
-.custom-bank-icon img{
-    width:34px !important;
-    height:34px !important;
-
-    object-fit:contain !important;
-
-    display:block !important;
-
-    opacity:1 !important;
-    visibility:visible !important;
+/* Icon before heading */
+.field-salary-bank-selection > legend.field-label::before {
+    content: "";
+    width: 34px;
+    height: 34px;
+    background: url("/content/dam/akki/bank-icon.png") no-repeat center;
+    background-size: contain;
+    display: inline-block;
 }
 
-/* =====================================================
-   TEXT
-===================================================== */
-
-.custom-bank-item span{
-    margin-top:8px !important;
-
-    font-size:12px !important;
-    line-height:15px !important;
-
-    color:#1f2937 !important;
-
-    text-align:center !important;
-
-    white-space:nowrap !important;
+/* Hide actual select */
+.field-salary-bank-selection select {
+    display: none;
 }
 
-/* =====================================================
-   ACTIVE STATE
-===================================================== */
+/* =========================================================
+   CUSTOM BANK LOGO BUTTONS
+========================================================= */
 
-.custom-bank-item.active .custom-bank-icon{
-    border:2px solid #3558e6 !important;
-
-    box-shadow:0 0 0 2px rgba(53,88,230,.08) !important;
+.field-salary-bank-selection .drop-down-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    flex-wrap: wrap;
 }
 
-/* =====================================================
-   BLUE DOT
-===================================================== */
-
-.custom-bank-item.active::after{
-    content:'' !important;
-
-    width:10px !important;
-    height:10px !important;
-
-    background:#3558e6 !important;
-
-    border-radius:50% !important;
-
-    position:absolute !important;
-
-    bottom:-15px !important;
-    left:50% !important;
-
-    transform:translateX(-50%) !important;
+/* Common Logo Card */
+.field-salary-bank-selection .bank-option {
+    width: 105px;
+    height: 110px;
+    background: #fff;
+    border: 2px solid #d8deea;
+    border-radius: 18px;
+    position: relative;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-size: 14px;
+    font-weight: 600;
+    color: #4b5563;
 }
 
-/* =====================================================
-   DROPDOWN RIGHT SIDE
-===================================================== */
-
-.custom-bank-dropdown{
-    width:340px !important;
-    min-width:340px !important;
-
-    height:52px !important;
-
-    border:1px solid #d9dce7 !important;
-
-    border-radius:14px !important;
-
-    background:#ffffff !important;
-
-    padding:0 18px !important;
-
-    font-size:16px !important;
-
-    color:#6b7280 !important;
-
-    outline:none !important;
-
-    cursor:pointer !important;
-
-    margin-left:auto !important;
-
-    flex-shrink:0 !important;
+/* Hover */
+.field-salary-bank-selection .bank-option:hover {
+    border-color: #3454f5;
+    transform: translateY(-2px);
 }
 
-/* =====================================================
-   SCROLLBAR
-===================================================== */
-
-.custom-bank-icons::-webkit-scrollbar{
-    height:6px !important;
+/* Selected */
+.field-salary-bank-selection .bank-option.active {
+    border-color: #3454f5;
+    box-shadow: 0 0 0 4px rgba(52, 84, 245, 0.08);
 }
 
-.custom-bank-icons::-webkit-scrollbar-thumb{
-    background:#cfd4df !important;
-
-    border-radius:20px !important;
+/* Tick */
+.field-salary-bank-selection .bank-option.active::after {
+    content: "✓";
+    position: absolute;
+    bottom: -10px;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: #3454f5;
+    color: #fff;
+    font-size: 13px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-/* =====================================================
-   FORCE AEM FIXES
-===================================================== */
+/* =========================================================
+   BANK LOGOS
+========================================================= */
 
-.field-select-salary-bank{
-    width:100% !important;
+.bank-option::before {
+    content: "";
+    width: 48px;
+    height: 48px;
+    margin-bottom: 10px;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
 }
 
-.field-select-salary-bank .custom-bank-wrapper,
-.field-select-salary-bank .custom-bank-icons,
-.field-select-salary-bank .custom-bank-item,
-.field-select-salary-bank .custom-bank-icon{
-    overflow:visible !important;
+/* HDFC */
+.bank-option.hdfc_bank::before {
+    background-image: url("/content/dam/akki/hdfc.png");
 }
 
-.field-select-salary-bank .custom-bank-icons{
-    display:flex !important;
-    flex-direction:row !important;
-    align-items:flex-start !important;
+/* ICICI */
+.bank-option.icici_bank::before {
+    background-image: url("/content/dam/akki/icici.png");
 }
 
-/* =====================================================
-   MOBILE
-===================================================== */
-
-@media(max-width:768px){
-
-    .custom-bank-wrapper{
-        flex-direction:column !important;
-
-        align-items:flex-start !important;
-    }
-
-    .custom-bank-icons{
-        width:100% !important;
-    }
-
-    .custom-bank-dropdown{
-        width:100% !important;
-
-        min-width:100% !important;
-    }
-}
-/* =====================================================
-   FINAL RIGHT ALIGN FIX
-===================================================== */
-
-.field-select-salary-bank .custom-bank-wrapper{
-    display:flex !important;
-    align-items:center !important;
-    justify-content:space-between !important;
-    width:100% !important;
-    gap:30px !important;
+/* AXIS */
+.bank-option.axis_bank::before {
+    background-image: url("/content/dam/akki/axis.png");
 }
 
-.field-select-salary-bank .custom-bank-icons{
-    display:flex !important;
-    flex-direction:row !important;
-    align-items:flex-start !important;
-    flex:1 !important;
-    width:auto !important;
-    overflow-x:auto !important;
+/* KOTAK */
+.bank-option.kotak_bank::before {
+    background-image: url("/content/dam/akki/kotak.png");
 }
 
-.field-select-salary-bank .custom-bank-dropdown{
-    width:340px !important;
-    min-width:340px !important;
+/* SBI */
+.bank-option.sbi::before {
+    background-image: url("/content/dam/akki/sbi.png");
+}
 
-    margin-left:auto !important;
+/* BOB */
+.bank-option.bank_of_baroda::before {
+    background-image: url("/content/dam/akki/bob.jpeg");
+}
 
-    flex-shrink:0 !important;
+/* IDFC */
+.bank-option.idfc_first_bank::before {
+    background-image: url("/content/dam/akki/idfc.png");
+}
 
-    position:relative !important;
-    right:0 !important;
+/* =========================================================
+   VERIFICATION METHODS SECTION
+========================================================= */
+
+.field-income-verification-method {
+    background: #eef2ff;
+    border-radius: 28px;
+    padding: 30px;
+    border: 1px solid #e3e8ff;
+}
+
+/* Heading */
+.field-income-verification-method > legend.field-label {
+    font-size: 28px;
+    font-weight: 700;
+    color: #1f2937;
+    margin-bottom: 26px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+/* Icon */
+.field-income-verification-method > legend.field-label::before {
+    content: "";
+    width: 34px;
+    height: 34px;
+    background: url("/content/dam/akki/verify-icon.png") no-repeat center;
+    background-size: contain;
+}
+
+/* Radio group layout */
+.field-income-verification-method-choice {
+    display: flex;
+    gap: 24px;
+    flex-wrap: wrap;
+}
+
+/* Each card */
+.field-income-verification-method-choice .radio-wrapper {
+    flex: 1;
+    min-width: 280px;
+    background: #fff;
+    border: 2px solid #dbe1ee;
+    border-radius: 24px;
+    padding: 28px;
+    position: relative;
+    transition: 0.25s ease;
+    cursor: pointer;
+}
+
+/* Hide native radio */
+.field-income-verification-method-choice input[type="radio"] {
+    display: none;
+}
+
+/* Active Card */
+.field-income-verification-method-choice .radio-wrapper.active {
+    border-color: #3454f5;
+    box-shadow: 0 6px 18px rgba(52, 84, 245, 0.08);
+}
+
+/* Green recommended strip */
+.field-income-verification-method-choice .radio-wrapper.recommended::after {
+    content: "Recommended";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: #009966;
+    color: #fff;
+    text-align: center;
+    font-size: 15px;
+    font-weight: 600;
+    padding: 10px;
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+}
+
+/* Radio Title */
+.field-income-verification-method-choice .radio-wrapper label {
+    font-size: 32px;
+    font-weight: 700;
+    color: #111827;
+    display: block;
+    margin-bottom: 10px;
+    line-height: 1.3;
+}
+
+/* Description */
+.field-income-verification-method-help p {
+    display: none;
+}
+
+/* =========================================================
+   CONTINUE BUTTON
+========================================================= */
+
+.submit-wrapper {
+    margin-top: 35px;
+}
+
+.submit-wrapper button,
+.submit-wrapper input[type="submit"] {
+    width: 240px;
+    height: 72px;
+    border-radius: 18px;
+    border: none;
+    background: #3454f5;
+    color: #fff;
+    font-size: 26px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: 0.25s ease;
+}
+
+.submit-wrapper button:hover,
+.submit-wrapper input[type="submit"]:hover {
+    background: #2643d9;
 }
