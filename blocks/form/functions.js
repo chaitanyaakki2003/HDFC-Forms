@@ -1021,26 +1021,27 @@ function generateOtpTier1(globals) {
  */
 function verifyOtpTier1(globals) {
 
-  const form = globals.form;
-
   const mobile =
-    form.personal_loan_offer.mobile_number?.$value || "";
+    globals.form.personal_loan_offer.mobile_number?.$value || "";
 
   const dob =
-    form.personal_loan_offer.date_of_birth?.$value || "";
+    globals.form.personal_loan_offer.date_of_birth?.$value || "";
 
   const otp =
-    form.enter_otp_panel.otp_code?.$value || "";
+    globals.form.enter_otp_panel.otp_code?.$value || "";
 
   // VALIDATION
   if (!otp) {
 
     globals.functions.setProperty(
-      form.enter_otp_panel.success_msg,
+
+      globals.form.enter_otp_panel.success_msg,
+
       {
         value: "Please Enter OTP",
         visible: true
       }
+
     );
 
     return false;
@@ -1074,24 +1075,31 @@ function verifyOtpTier1(globals) {
     }
   )
 
-  // IMPORTANT FIX
-  .then(async (res) => {
+  .then(function(res) {
 
-    const response = await res.json();
+    return res.json();
+
+  })
+
+  .then(function(response) {
 
     console.log("VERIFY RESPONSE:", response);
 
     // SUCCESS
     if (
+      response.status &&
       response.status.responseCode === "0"
     ) {
 
       globals.functions.setProperty(
-        form.enter_otp_panel.success_msg,
+
+        globals.form.enter_otp_panel.success_msg,
+
         {
           value: "OTP Verified Successfully",
           visible: true
         }
+
       );
 
     }
@@ -1100,38 +1108,48 @@ function verifyOtpTier1(globals) {
     else {
 
       globals.functions.setProperty(
-        form.enter_otp_panel.success_msg,
+
+        globals.form.enter_otp_panel.success_msg,
+
         {
           value: "Invalid OTP",
           visible: true
         }
+
       );
 
     }
 
     // KEEP SUBMIT BUTTON ENABLED
     globals.functions.setProperty(
-      form.enter_otp_panel.submit_otp,
+
+      globals.form.enter_otp_panel.submit_otp,
+
       {
-        enabled: true
+        enabled: true,
+        visible: true
       }
+
     );
 
   })
 
-  .catch(error => {
+  .catch(function(error) {
 
     console.error(
       "Verify OTP Error:",
       error
     );
 
-    // KEEP BUTTON ENABLED EVEN ON ERROR
     globals.functions.setProperty(
-      form.enter_otp_panel.submit_otp,
+
+      globals.form.enter_otp_panel.submit_otp,
+
       {
-        enabled: true
+        enabled: true,
+        visible: true
       }
+
     );
 
   });
