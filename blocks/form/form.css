@@ -1960,37 +1960,35 @@ main .form .field-loan-upto p::before {
   align-items:center;
   justify-content:space-between;
 
-  gap:28px;
+  gap:30px;
 
   background:#eef2ff;
   border-radius:22px;
 
-  padding:28px 30px;
-  margin-top:18px;
+  padding:26px 30px;
+  margin-top:20px;
 
   box-sizing:border-box;
-
-  overflow:hidden;
 }
 
 /* =====================================================
-   LEFT ICON AREA
+   ICON SECTION
 ===================================================== */
 
 .custom-bank-icons{
   display:flex;
   align-items:flex-start;
 
-  gap:20px;
+  gap:18px;
+
+  flex:1;
+
+  min-width:0;
 
   overflow-x:auto;
   overflow-y:hidden;
 
   white-space:nowrap;
-
-  width:calc(100% - 360px);
-
-  flex-shrink:0;
 }
 
 /* =====================================================
@@ -1998,15 +1996,15 @@ main .form .field-loan-upto p::before {
 ===================================================== */
 
 .custom-bank-item{
-  width:78px;
+  width:76px;
 
   display:flex;
   flex-direction:column;
   align-items:center;
 
-  cursor:pointer;
-
   position:relative;
+
+  cursor:pointer;
 
   flex-shrink:0;
 }
@@ -2027,8 +2025,6 @@ main .form .field-loan-upto p::before {
   display:flex;
   align-items:center;
   justify-content:center;
-
-  overflow:hidden;
 
   transition:all .25s ease;
 }
@@ -2070,11 +2066,11 @@ main .form .field-loan-upto p::before {
 .custom-bank-item.active .custom-bank-icon{
   border:2px solid #3558e6;
 
-  box-shadow:0 0 0 2px rgba(53,88,230,.10);
+  box-shadow:0 0 0 2px rgba(53,88,230,.08);
 }
 
 /* =====================================================
-   BLUE DOT
+   ACTIVE DOT
 ===================================================== */
 
 .custom-bank-item.active::after{
@@ -2089,7 +2085,7 @@ main .form .field-loan-upto p::before {
 
   position:absolute;
 
-  bottom:-16px;
+  bottom:-15px;
   left:50%;
 
   transform:translateX(-50%);
@@ -2146,12 +2142,12 @@ main .form .field-loan-upto p::before {
     align-items:flex-start;
   }
 
-  .custom-bank-icons{
-    width:100%;
-  }
-
   .custom-bank-dropdown{
     width:100%;
     min-width:100%;
+  }
+
+  .custom-bank-icons{
+    width:100%;
   }
 }
