@@ -261,106 +261,7 @@ function calculateEMI(globals) {
     console.error("EMI ERROR:", e);
   }
 }
-function initSalaryBankUI() {
-  const panel = document.querySelector(".field-salary-bank-selection");
-  const radioGroup = panel?.querySelector(
-  ".radio-group-wrapper.field-salary-bank"
-);
 
-  if (!panel || !radioGroup || panel.dataset.ready === "true") return;
-  panel.dataset.ready = "true";
-
-  const dropdownWrapper = panel.querySelector(".drop-down-wrapper");
-  const dropdown = dropdownWrapper?.querySelector("select");
-
-  const bankLogos = {
-    hdfc_bank: "/content/dam/akki/hdfc.png",
-    icici_bank: "/content/dam/akki/icici.png",
-    axis_bank: "/content/dam/akki/axis.png",
-    kotak_bank: "/content/dam/akki/kotak.png",
-    sbi: "/content/dam/akki/sbi.png",
-    bank_of_baroda: "/content/dam/akki/bob.jpeg",
-    idfc_first_bank: "/content/dam/akki/idfc.png"
-  };
-
-  const container = document.createElement("div");
-  container.className = "salary-bank-content-row";
-
-  const cards = document.createElement("div");
-  cards.className = "bank-card-container";
-
-  container.appendChild(cards);
-
-  if (dropdownWrapper) {
-  // 🔥 completely detach from AEM layout
-  dropdownWrapper.removeAttribute("class");
-
-  dropdownWrapper.className = "drop-down-wrapper"; // reset clean class
-
-  container.appendChild(dropdownWrapper);
-}
-
-  radioGroup.parentNode.insertBefore(container, radioGroup);
-  radioGroup.style.display = "none";
-
-  const radios = radioGroup.querySelectorAll("input[type='radio']");
-
-  if (dropdown) dropdown.innerHTML = "";
-
-  radios.forEach((radio) => {
-    const value = radio.value.trim();
-    const labelText = radio.nextElementSibling?.innerText || value;
-
-    const imgSrc = bankLogos[value];
-
-    const card = document.createElement("div");
-    card.className = "bank-card";
-
-    card.innerHTML = `
-      ${imgSrc ? `<img src="${imgSrc}" />` : ""}
-      <span>${labelText}</span>
-    `;
-
-    if (radio.checked) card.classList.add("active");
-
-    card.onclick = () => {
-      radios.forEach(r => r.checked = false);
-      radio.checked = true;
-
-      document.querySelectorAll(".bank-card")
-        .forEach(c => c.classList.remove("active"));
-
-      card.classList.add("active");
-
-      if (dropdown) dropdown.value = value;
-    };
-
-    cards.appendChild(card);
-
-    if (dropdown) {
-      const option = document.createElement("option");
-      option.value = value;
-      option.textContent = labelText;
-      dropdown.appendChild(option);
-    }
-  });
-
-  if (dropdown) {
-    const other = document.createElement("option");
-    other.value = "other_bank";
-    other.textContent = "Other Bank";
-    dropdown.appendChild(other);
-  }
-}
-
-/* AEM SAFE LOAD */
-function waitForAEM() {
-  const panel = document.querySelector(".field-salary-bank-selection");
-  if (!panel) return setTimeout(waitForAEM, 300);
-  initSalaryBankUI();
-}
-
-waitForAEM();
 
 
 /**
@@ -1621,7 +1522,7 @@ function generateLoanApplicationNumber(globals) {
 
 // eslint-disable-next-line import/prefer-default-export
 export {
-  getFullName, days, submitFormArrayToString, maskMobileNumber, handleOtpFlow, updateLoanOffer, calculateEMI, initSalaryBankUI, generateOtp, verifyOtp, startOtpTimer,resendOtp, generateOtpTier1, verifyOtpTier1, startOtpTimerTier1, resendOtpTier1, loadReviewDetails, getReviewDetails, generateLoanApplicationNumber, 
+  getFullName, days, submitFormArrayToString, maskMobileNumber, handleOtpFlow, updateLoanOffer, calculateEMI, generateOtp, verifyOtp, startOtpTimer,resendOtp, generateOtpTier1, verifyOtpTier1, startOtpTimerTier1, resendOtpTier1, loadReviewDetails, getReviewDetails, generateLoanApplicationNumber, 
 };
 
 
