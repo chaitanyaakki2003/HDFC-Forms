@@ -1521,12 +1521,192 @@ function generateLoanApplicationNumber(globals) {
 }
 
 
+/* ---------------------------------bureaupage----------------------------------------------*/
 
+/**
+ * Returns bank logo based on value
+ */
+function getBankLogo(bank) {
+    const logos = {
+        hdfc_bank: '/content/dam/s_hdfc_capstone/hdfc.png',
+        icici_bank: '/content/dam/s_hdfc_capstone/icici.png',
+        axis_bank: '/content/dam/s_hdfc_capstone/axis.png',
+        kotak: '/content/dam/s_hdfc_capstone/kotak.png',
+        sbi: '/content/dam/s_hdfc_capstone/sbi.png',
+        bank_of_baroda: '/content/dam/s_hdfc_capstone/bob.jpeg',
+        idfc_first: '/content/dam/s_hdfc_capstone/idfc.png'
+    };
+
+    return logos[bank] || '';
+}
+
+/**
+ * Create bank card
+ */
+function createBankItem(option, select) {
+
+    const item = document.createElement('div');
+    item.className = 'bank-item';
+    item.dataset.value = option.value;
+
+    item.innerHTML = `
+        <img src="${getBankLogo(option.value)}" alt="${option.text}">
+        <span>${option.text}</span>
+    `;
+
+    item.addEventListener('click', () => {
+        updateActiveBank(item, select);
+    });
+
+    return item;
+}
+
+/**
+ * Active selection
+ */
+function updateActiveBank(selectedItem, select) {
+
+    document.querySelectorAll('.bank-item').forEach((el) => {
+        el.classList.remove('active');
+    });
+
+    selectedItem.classList.add('active');
+
+    select.value = selectedItem.dataset.value;
+
+    select.dispatchEvent(new Event('change'));
+}
+
+/**
+ * Initialize UI
+ */
+function initBankSelection() {
+
+    const select = document.querySelector("select[name='salary_bank']");
+
+    if (!select || select.dataset.initialized) return;
+
+    select.dataset.initialized = 'true';
+
+    /* hide original dropdown */
+    select.style.display = 'none';
+
+    const container = document.createElement('div');
+    container.className = 'bank-container';
+
+    const left = document.createElement('div');
+    left.className = 'bank-left';
+
+    const row = document.createElement('div');
+    row.className = 'bank-row';
+
+    const defaultValue = select.value || 'hdfc_bank';
+
+    const defaultOption = Array.from(select.options)
+        .find((o) => o.value === defaultValue);
+
+    /* show default icon */
+    const defaultItem = createBankItem(defaultOption, select);
+
+    defaultItem.classList.add('active');
+
+    row.appendChild(defaultItem);
+
+    left.appendChild(row);
+
+    /* dropdown */
+    const dropdown = document.createElement('select');
+
+    dropdown.className = 'bank-other-dropdown';
+
+    const hdfcOpt = document.createElement('option');
+    hdfcOpt.value = defaultOption.value;
+    hdfcOpt.text = defaultOption.text;
+
+    dropdown.appendChild(hdfcOpt);
+
+    const otherOpt = document.createElement('option');
+    otherOpt.value = 'other_bank';
+    otherOpt.text = 'Other Bank';
+
+    dropdown.appendChild(otherOpt);
+
+    const right = document.createElement('div');
+    right.className = 'bank-right';
+
+    right.appendChild(dropdown);
+
+    container.appendChild(left);
+    container.appendChild(right);
+
+    select.parentNode.appendChild(container);
+
+    /* dropdown change */
+    dropdown.addEventListener('change', () => {
+
+        if (dropdown.value === 'other_bank') {
+
+            row.innerHTML = '';
+
+            Array.from(select.options).forEach((opt) => {
+
+                if (!opt.value || opt.value === 'other_bank') return;
+
+                const item = createBankItem(opt, select);
+
+                row.appendChild(item);
+            });
+
+            dropdown.innerHTML = '';
+
+            Array.from(select.options).forEach((opt) => {
+
+                if (!opt.value || opt.value === 'other_bank') return;
+
+                const option = document.createElement('option');
+
+                option.value = opt.value;
+                option.text = opt.text;
+
+                dropdown.appendChild(option);
+            });
+
+        } else {
+
+            select.value = dropdown.value;
+        }
+    });
+}
+
+/**
+ * AEM render safe
+ */
+function observeBankField() {
+
+    const observer = new MutationObserver(() => {
+
+        if (document.querySelector("select[name='salary_bank']")) {
+            initBankSelection();
+        }
+    });
+
+    observer.observe(document.body, {
+        childList: true,
+        subtree: true
+    });
+}
+
+observeBankField();
 
 
 // eslint-disable-next-line import/prefer-default-export
 export {
-  getFullName, days, submitFormArrayToString, maskMobileNumber, handleOtpFlow, updateLoanOffer, calculateEMI, generateOtp, verifyOtp, startOtpTimer,resendOtp, generateOtpTier1, verifyOtpTier1, startOtpTimerTier1, resendOtpTier1, loadReviewDetails, getReviewDetails, generateLoanApplicationNumber, 
+  getFullName, days, submitFormArrayToString, 
+  maskMobileNumber, handleOtpFlow, updateLoanOffer, calculateEMI, 
+  generateOtp, verifyOtp, startOtpTimer,resendOtp, generateOtpTier1,
+   verifyOtpTier1, startOtpTimerTier1, resendOtpTier1, loadReviewDetails,
+    getReviewDetails, generateLoanApplicationNumber, getBankLogo, 
+    observeBankField, updateActiveBank, createBankItem, initBankSelection,
 };
 
 
