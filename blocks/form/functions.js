@@ -1015,20 +1015,18 @@ function generateOtpTier1(globals) {
   });
 
 }
-/**
- * Verify OTP Tier1
- * @param {scope} globals
- */
 function verifyOtpTier1(globals) {
 
+  const form = globals.form;
+
   const mobile =
-    globals.form.personal_loan_offer.mobile_number?.$value || "";
+    form.personal_loan_offer.mobile_number?.$value || "";
 
   const dob =
-    globals.form.personal_loan_offer.date_of_birth?.$value || "";
+    form.personal_loan_offer.date_of_birth?.$value || "";
 
   const otp =
-    globals.form.enter_otp_panel.otp_code?.$value || "";
+    form.enter_otp_panel.otp_code?.$value || "";
 
   // VALIDATION
   if (!otp) {
@@ -1044,10 +1042,32 @@ function verifyOtpTier1(globals) {
 
     );
 
+    globals.functions.setProperty(
+
+      globals.form.enter_otp_panel.submit_otp,
+
+      {
+        enabled: true,
+        visible: true
+      }
+
+    );
+
     return false;
   }
 
-  // API CALL
+  // DISABLE DURING API CALL
+  globals.functions.setProperty(
+
+    globals.form.enter_otp_panel.submit_otp,
+
+    {
+      enabled: false,
+      visible: true
+    }
+
+  );
+
   fetch(
     "https://craftsman-resonant-asparagus.ngrok-free.dev/api/validateOtp",
     {
@@ -1104,7 +1124,7 @@ function verifyOtpTier1(globals) {
 
     }
 
-    // INVALID OTP
+    // INVALID
     else {
 
       globals.functions.setProperty(
@@ -1120,17 +1140,22 @@ function verifyOtpTier1(globals) {
 
     }
 
-    // KEEP SUBMIT BUTTON ENABLED
-    globals.functions.setProperty(
+    // VERY IMPORTANT
+    // FORCE ENABLE AGAIN
+    setTimeout(function() {
 
-      globals.form.enter_otp_panel.submit_otp,
+      globals.functions.setProperty(
 
-      {
-        enabled: true,
-        visible: true
-      }
+        globals.form.enter_otp_panel.submit_otp,
 
-    );
+        {
+          enabled: true,
+          visible: true
+        }
+
+      );
+
+    }, 300);
 
   })
 
@@ -1143,20 +1168,35 @@ function verifyOtpTier1(globals) {
 
     globals.functions.setProperty(
 
-      globals.form.enter_otp_panel.submit_otp,
+      globals.form.enter_otp_panel.success_msg,
 
       {
-        enabled: true,
+        value: "Server Error",
         visible: true
       }
 
     );
 
+    // FORCE ENABLE AGAIN
+    setTimeout(function() {
+
+      globals.functions.setProperty(
+
+        globals.form.enter_otp_panel.submit_otp,
+
+        {
+          enabled: true,
+          visible: true
+        }
+
+      );
+
+    }, 300);
+
   });
 
   return false;
 }
-
 /**
  * OTP TIMER Tier1
  * @param {scope} globals
