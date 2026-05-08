@@ -1951,7 +1951,7 @@ main .form .field-loan-upto p::before {
 
 
 /* =====================================================
-   EXACT UI LIKE DESIGN IMAGE
+   BANK SECTION EXACT UI
 ===================================================== */
 
 .custom-bank-wrapper{
@@ -1959,52 +1959,68 @@ main .form .field-loan-upto p::before {
   display:flex;
   align-items:center;
   justify-content:space-between;
-  gap:30px;
+
+  gap:28px;
 
   background:#eef2ff;
   border-radius:22px;
 
-  padding:28px 34px;
-  margin-top:20px;
+  padding:28px 30px;
+  margin-top:18px;
 
   box-sizing:border-box;
+
+  overflow:hidden;
 }
 
-/* LEFT SIDE */
+/* =====================================================
+   LEFT ICON AREA
+===================================================== */
+
 .custom-bank-icons{
   display:flex;
-  align-items:center;
-  gap:18px;
+  align-items:flex-start;
 
-  flex-wrap:nowrap;
+  gap:20px;
+
   overflow-x:auto;
   overflow-y:hidden;
 
-  flex:1;
+  white-space:nowrap;
+
+  width:calc(100% - 360px);
+
+  flex-shrink:0;
 }
 
-/* SINGLE ITEM */
+/* =====================================================
+   SINGLE CARD
+===================================================== */
+
 .custom-bank-item{
-  min-width:74px;
-  max-width:74px;
+  width:78px;
 
   display:flex;
   flex-direction:column;
   align-items:center;
 
   cursor:pointer;
+
   position:relative;
 
   flex-shrink:0;
 }
 
-/* ICON BOX */
+/* =====================================================
+   ICON BOX
+===================================================== */
+
 .custom-bank-icon{
   width:58px;
   height:58px;
 
   border:1px solid #d9dce7;
-  border-radius:12px;
+  border-radius:14px;
 
   background:#ffffff;
 
@@ -2012,21 +2028,28 @@ main .form .field-loan-upto p::before {
   align-items:center;
   justify-content:center;
 
-  transition:all .25s ease;
-
   overflow:hidden;
+
+  transition:all .25s ease;
 }
 
-/* IMAGE */
+/* =====================================================
+   IMAGE
+===================================================== */
+
 .custom-bank-icon img{
   width:34px;
   height:34px;
+
   object-fit:contain;
 
   display:block;
 }
 
-/* TEXT */
+/* =====================================================
+   TEXT
+===================================================== */
+
 .custom-bank-item span{
   margin-top:8px;
 
@@ -2038,20 +2061,22 @@ main .form .field-loan-upto p::before {
   text-align:center;
 
   white-space:nowrap;
-
-  overflow:hidden;
-  text-overflow:ellipsis;
-
-  width:100%;
 }
 
-/* ACTIVE */
+/* =====================================================
+   ACTIVE
+===================================================== */
+
 .custom-bank-item.active .custom-bank-icon{
   border:2px solid #3558e6;
-  box-shadow:0 0 0 2px rgba(53,88,230,.08);
+
+  box-shadow:0 0 0 2px rgba(53,88,230,.10);
 }
 
-/* BLUE DOT */
+/* =====================================================
+   BLUE DOT
+===================================================== */
+
 .custom-bank-item.active::after{
   content:'';
 
@@ -2070,15 +2095,18 @@ main .form .field-loan-upto p::before {
   transform:translateX(-50%);
 }
 
-/* DROPDOWN */
+/* =====================================================
+   DROPDOWN
+===================================================== */
+
 .custom-bank-dropdown{
   width:340px;
   min-width:340px;
 
-  height:50px;
+  height:52px;
 
   border:1px solid #d9dce7;
-  border-radius:12px;
+  border-radius:14px;
 
   background:#ffffff;
 
@@ -2090,9 +2118,14 @@ main .form .field-loan-upto p::before {
   outline:none;
 
   cursor:pointer;
+
+  flex-shrink:0;
 }
 
-/* SCROLLBAR */
+/* =====================================================
+   SCROLLBAR
+===================================================== */
+
 .custom-bank-icons::-webkit-scrollbar{
   height:6px;
 }
@@ -2102,7 +2135,10 @@ main .form .field-loan-upto p::before {
   border-radius:20px;
 }
 
-/* MOBILE */
+/* =====================================================
+   MOBILE
+===================================================== */
+
 @media(max-width:768px){
 
   .custom-bank-wrapper{
@@ -2110,9 +2146,12 @@ main .form .field-loan-upto p::before {
     align-items:flex-start;
   }
 
+  .custom-bank-icons{
+    width:100%;
+  }
+
   .custom-bank-dropdown{
     width:100%;
     min-width:100%;
   }
-
 }
