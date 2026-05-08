@@ -1949,6 +1949,7 @@ main .form .field-loan-upto p::before {
 
 
 
+
 /* =====================================================
    BANK SECTION FINAL UI
 ===================================================== */
@@ -1957,10 +1958,10 @@ main .form .field-loan-upto p::before {
     width:100% !important;
 
     display:flex !important;
-    align-items:flex-start !important;
+    align-items:center !important;
     justify-content:space-between !important;
 
-    gap:30px !important;
+    gap:32px !important;
 
     background:#eef2ff !important;
 
@@ -1974,7 +1975,7 @@ main .form .field-loan-upto p::before {
 }
 
 /* =====================================================
-   LEFT SIDE ICONS
+   LEFT ICON AREA
 ===================================================== */
 
 .custom-bank-icons{
@@ -1982,20 +1983,18 @@ main .form .field-loan-upto p::before {
 
     align-items:flex-start !important;
 
-    gap:20px !important;
+    gap:18px !important;
 
     flex-wrap:nowrap !important;
 
     overflow-x:auto !important;
     overflow-y:hidden !important;
 
-    width:auto !important;
-
-    flex:1 1 auto !important;
+    width:calc(100% - 360px) !important;
 }
 
 /* =====================================================
-   SINGLE ITEM
+   SINGLE CARD
 ===================================================== */
 
 .custom-bank-item{
@@ -2030,9 +2029,9 @@ main .form .field-loan-upto p::before {
     align-items:center !important;
     justify-content:center !important;
 
-    overflow:hidden !important;
-
     transition:all .25s ease !important;
+
+    overflow:hidden !important;
 }
 
 /* =====================================================
@@ -2046,6 +2045,9 @@ main .form .field-loan-upto p::before {
     object-fit:contain !important;
 
     display:block !important;
+
+    opacity:1 !important;
+    visibility:visible !important;
 }
 
 /* =====================================================
@@ -2076,7 +2078,7 @@ main .form .field-loan-upto p::before {
 }
 
 /* =====================================================
-   ACTIVE DOT
+   BLUE DOT
 ===================================================== */
 
 .custom-bank-item.active::after{
@@ -2103,7 +2105,6 @@ main .form .field-loan-upto p::before {
 
 .custom-bank-dropdown{
     width:340px !important;
-
     min-width:340px !important;
 
     height:52px !important;
@@ -2130,6 +2131,20 @@ main .form .field-loan-upto p::before {
 }
 
 /* =====================================================
+   SCROLLBAR
+===================================================== */
+
+.custom-bank-icons::-webkit-scrollbar{
+    height:6px !important;
+}
+
+.custom-bank-icons::-webkit-scrollbar-thumb{
+    background:#cfd4df !important;
+
+    border-radius:20px !important;
+}
+
+/* =====================================================
    FORCE AEM FIXES
 ===================================================== */
 
@@ -2137,15 +2152,17 @@ main .form .field-loan-upto p::before {
     width:100% !important;
 }
 
-.field-select-salary-bank .custom-bank-wrapper{
-    display:flex !important;
-    flex-direction:row !important;
-    align-items:flex-start !important;
+.field-select-salary-bank .custom-bank-wrapper,
+.field-select-salary-bank .custom-bank-icons,
+.field-select-salary-bank .custom-bank-item,
+.field-select-salary-bank .custom-bank-icon{
+    overflow:visible !important;
 }
 
 .field-select-salary-bank .custom-bank-icons{
     display:flex !important;
     flex-direction:row !important;
+    align-items:flex-start !important;
 }
 
 /* =====================================================
@@ -2168,7 +2185,37 @@ main .form .field-loan-upto p::before {
         width:100% !important;
 
         min-width:100% !important;
-
-        margin-left:0 !important;
     }
+}
+/* =====================================================
+   FINAL RIGHT ALIGN FIX
+===================================================== */
+
+.field-select-salary-bank .custom-bank-wrapper{
+    display:flex !important;
+    align-items:center !important;
+    justify-content:space-between !important;
+    width:100% !important;
+    gap:30px !important;
+}
+
+.field-select-salary-bank .custom-bank-icons{
+    display:flex !important;
+    flex-direction:row !important;
+    align-items:flex-start !important;
+    flex:1 !important;
+    width:auto !important;
+    overflow-x:auto !important;
+}
+
+.field-select-salary-bank .custom-bank-dropdown{
+    width:340px !important;
+    min-width:340px !important;
+
+    margin-left:auto !important;
+
+    flex-shrink:0 !important;
+
+    position:relative !important;
+    right:0 !important;
 }
