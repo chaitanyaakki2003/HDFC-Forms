@@ -2183,3 +2183,41 @@ main .form .field-loan-upto p::before {
     min-width:100% !important;
   }
 }
+
+
+/* FORCE ICONS VISIBLE */
+
+.field-select-salary-bank,
+.field-select-salary-bank .custom-bank-wrapper,
+.field-select-salary-bank .custom-bank-icons,
+.field-select-salary-bank .custom-bank-item,
+.field-select-salary-bank .custom-bank-icon{
+    overflow: visible !important;
+}
+
+/* FORCE HORIZONTAL LAYOUT */
+
+.field-select-salary-bank .custom-bank-icons{
+    display:flex !important;
+    flex-direction:row !important;
+    align-items:center !important;
+    gap:18px !important;
+    width:auto !important;
+}
+
+/* FORCE IMAGE RENDER */
+
+.field-select-salary-bank .custom-bank-icon img{
+    display:block !important;
+    width:34px !important;
+    height:34px !important;
+    object-fit:contain !important;
+    opacity:1 !important;
+    visibility:visible !important;
+}
+
+/* PREVENT GRID COLLAPSE */
+
+.field-select-salary-bank{
+    width:100% !important;
+}
