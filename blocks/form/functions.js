@@ -362,19 +362,6 @@ function waitForAEM() {
 
 waitForAEM();
 
-// ✅ GLOBAL STATE (MANDATORY)
-window.otpState = {
-  attempts: 3,
-  timer: null,
-  timeLeft: 30
-};
-
-// ✅ GLOBAL STATE (MANDATORY)
-window.otpState = {
-  attempts: 3,
-  timer: null,
-  timeLeft: 30
-};
 
 /**
  * Generate OTP
@@ -1045,6 +1032,7 @@ function verifyOtpTier1(globals) {
   const otp =
     form.enter_otp_panel.otp_code?.$value || "";
 
+  // VALIDATION
   if (!otp) {
 
     globals.functions.setProperty(
@@ -1058,6 +1046,7 @@ function verifyOtpTier1(globals) {
     return false;
   }
 
+  // API CALL
   fetch(
     "https://craftsman-resonant-asparagus.ngrok-free.dev/api/validateOtp",
     {
@@ -1085,67 +1074,69 @@ function verifyOtpTier1(globals) {
     }
   )
 
-  .then(response => {
+  // IMPORTANT FIX
+  .then(async (res) => {
 
-  console.log("VERIFY RESPONSE:", response);
+    const response = await res.json();
 
-  // SUCCESS
-  if (
-    response.status.responseCode === "0"
-  ) {
+    console.log("VERIFY RESPONSE:", response);
 
+    // SUCCESS
+    if (
+      response.status.responseCode === "0"
+    ) {
+
+      globals.functions.setProperty(
+        form.enter_otp_panel.success_msg,
+        {
+          value: "OTP Verified Successfully",
+          visible: true
+        }
+      );
+
+    }
+
+    // INVALID OTP
+    else {
+
+      globals.functions.setProperty(
+        form.enter_otp_panel.success_msg,
+        {
+          value: "Invalid OTP",
+          visible: true
+        }
+      );
+
+    }
+
+    // KEEP SUBMIT BUTTON ENABLED
     globals.functions.setProperty(
-      form.enter_otp_panel.success_msg,
+      form.enter_otp_panel.submit_otp,
       {
-        value: "OTP Verified Successfully",
-        visible: true
+        enabled: true
       }
     );
 
-  }
+  })
 
-  // INVALID
-  else {
+  .catch(error => {
 
+    console.error(
+      "Verify OTP Error:",
+      error
+    );
+
+    // KEEP BUTTON ENABLED EVEN ON ERROR
     globals.functions.setProperty(
-      form.enter_otp_panel.success_msg,
+      form.enter_otp_panel.submit_otp,
       {
-        value: "Invalid OTP",
-        visible: true
+        enabled: true
       }
     );
 
-  }
+  });
 
-  // IMPORTANT FIX
-  // KEEP SUBMIT ENABLED ALWAYS
-  globals.functions.setProperty(
-    form.enter_otp_panel.submit_otp,
-    {
-      enabled: true
-    }
-  );
-
-})
-.catch(error => {
-
-  console.error(
-    "Verify OTP Error:",
-    error
-  );
-
-  // IMPORTANT FIX
-  globals.functions.setProperty(
-    form.enter_otp_panel.submit_otp,
-    {
-      enabled: true
-    }
-  );
-  
-
-});
-return false;
-
+  return false;
 }
 
 /**
