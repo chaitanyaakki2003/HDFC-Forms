@@ -1540,15 +1540,28 @@ function initSalaryBankUI() {
      BANK IMAGES
   ========================= */
 
-  const bankLogos = {
-    hdfc_bank: "/content/dam/akki/hdfc.png",
-    icici_bank: "/content/dam/akki/icici.png",
-    axis_bank: "/content/dam/akki/axis.png",
-    kotak: "/content/dam/akki/kotak.png",
-    sbi: "/content/dam/akki/sbi.png",
-    bank_of_baroda: "/content/dam/akki/bob.jpeg",
-    idfc_first: "/content/dam/akki/idfc.png"
-  };
+ const bankLogos = {
+  hdfc_bank:
+    "/content/dam/akki/hdfc.png/_jcr_content/renditions/original.image_file.png",
+
+  icici_bank:
+    "/content/dam/akki/icici.png/_jcr_content/renditions/original.image_file.png",
+
+  axis_bank:
+    "/content/dam/akki/axis.png/_jcr_content/renditions/original.image_file.png",
+
+  kotak:
+    "/content/dam/akki/kotak.png/_jcr_content/renditions/original.image_file.png",
+
+  sbi:
+    "/content/dam/akki/sbi.png/_jcr_content/renditions/original.image_file.png",
+
+  bank_of_baroda:
+    "/content/dam/akki/bob.jpeg/_jcr_content/renditions/original.image_file.jpeg",
+
+  idfc_first:
+    "/content/dam/akki/idfc.png/_jcr_content/renditions/original.image_file.png"
+};
 
   /* =========================
      MAIN WRAPPER
