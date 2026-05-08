@@ -1949,7 +1949,6 @@ main .form .field-loan-upto p::before {
 
 
 
-
 /* =====================================================
    BANK SECTION FINAL UI
 ===================================================== */
@@ -1958,10 +1957,10 @@ main .form .field-loan-upto p::before {
     width:100% !important;
 
     display:flex !important;
-    align-items:center !important;
+    align-items:flex-start !important;
     justify-content:space-between !important;
 
-    gap:32px !important;
+    gap:30px !important;
 
     background:#eef2ff !important;
 
@@ -1975,7 +1974,7 @@ main .form .field-loan-upto p::before {
 }
 
 /* =====================================================
-   LEFT ICON AREA
+   LEFT SIDE ICONS
 ===================================================== */
 
 .custom-bank-icons{
@@ -1983,18 +1982,20 @@ main .form .field-loan-upto p::before {
 
     align-items:flex-start !important;
 
-    gap:18px !important;
+    gap:20px !important;
 
     flex-wrap:nowrap !important;
 
     overflow-x:auto !important;
     overflow-y:hidden !important;
 
-    width:calc(100% - 360px) !important;
+    width:auto !important;
+
+    flex:1 1 auto !important;
 }
 
 /* =====================================================
-   SINGLE CARD
+   SINGLE ITEM
 ===================================================== */
 
 .custom-bank-item{
@@ -2029,9 +2030,9 @@ main .form .field-loan-upto p::before {
     align-items:center !important;
     justify-content:center !important;
 
-    transition:all .25s ease !important;
-
     overflow:hidden !important;
+
+    transition:all .25s ease !important;
 }
 
 /* =====================================================
@@ -2045,9 +2046,6 @@ main .form .field-loan-upto p::before {
     object-fit:contain !important;
 
     display:block !important;
-
-    opacity:1 !important;
-    visibility:visible !important;
 }
 
 /* =====================================================
@@ -2078,7 +2076,7 @@ main .form .field-loan-upto p::before {
 }
 
 /* =====================================================
-   BLUE DOT
+   ACTIVE DOT
 ===================================================== */
 
 .custom-bank-item.active::after{
@@ -2105,6 +2103,7 @@ main .form .field-loan-upto p::before {
 
 .custom-bank-dropdown{
     width:340px !important;
+
     min-width:340px !important;
 
     height:52px !important;
@@ -2131,20 +2130,6 @@ main .form .field-loan-upto p::before {
 }
 
 /* =====================================================
-   SCROLLBAR
-===================================================== */
-
-.custom-bank-icons::-webkit-scrollbar{
-    height:6px !important;
-}
-
-.custom-bank-icons::-webkit-scrollbar-thumb{
-    background:#cfd4df !important;
-
-    border-radius:20px !important;
-}
-
-/* =====================================================
    FORCE AEM FIXES
 ===================================================== */
 
@@ -2152,17 +2137,15 @@ main .form .field-loan-upto p::before {
     width:100% !important;
 }
 
-.field-select-salary-bank .custom-bank-wrapper,
-.field-select-salary-bank .custom-bank-icons,
-.field-select-salary-bank .custom-bank-item,
-.field-select-salary-bank .custom-bank-icon{
-    overflow:visible !important;
+.field-select-salary-bank .custom-bank-wrapper{
+    display:flex !important;
+    flex-direction:row !important;
+    align-items:flex-start !important;
 }
 
 .field-select-salary-bank .custom-bank-icons{
     display:flex !important;
     flex-direction:row !important;
-    align-items:flex-start !important;
 }
 
 /* =====================================================
@@ -2185,5 +2168,7 @@ main .form .field-loan-upto p::before {
         width:100% !important;
 
         min-width:100% !important;
+
+        margin-left:0 !important;
     }
 }
