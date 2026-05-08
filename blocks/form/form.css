@@ -2232,4 +2232,7 @@ main .form .field-loan-upto p::before {
     padding-top: 60px !important;
 }
 
+.field-income-verification-method-panel {
+    margin-top: 40px !important;
+}
 
