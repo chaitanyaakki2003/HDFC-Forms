@@ -1521,17 +1521,25 @@ function generateLoanApplicationNumber(globals) {
 }
 
 function initSalaryBankUI() {
-  const panel = document.querySelector(".field-salary-bank-selection");
-  const radioGroup = panel?.querySelector(
-  ".radio-group-wrapper.field-salary-bank"
-);
- 
-  if (!panel || !radioGroup || panel.dataset.ready === "true") return;
+
+  const panel = document.querySelector(".field-select-salary-bank");
+
+  if (!panel || panel.dataset.ready === "true") return;
+
   panel.dataset.ready = "true";
- 
-  const dropdownWrapper = panel.querySelector(".drop-down-wrapper");
-  const dropdown = dropdownWrapper?.querySelector("select");
- 
+
+  const dropdownWrapper =
+    panel.querySelector(".drop-down-wrapper");
+
+  const dropdown =
+    dropdownWrapper?.querySelector("select");
+
+  if (!dropdown) return;
+
+  /* =========================
+     BANK IMAGES
+  ========================= */
+
   const bankLogos = {
     hdfc_bank: "/content/dam/akki/hdfc.png",
     icici_bank: "/content/dam/akki/icici.png",
@@ -1541,86 +1549,100 @@ function initSalaryBankUI() {
     bank_of_baroda: "/content/dam/akki/bob.jpeg",
     idfc_first_bank: "/content/dam/akki/idfc.png"
   };
- 
-  const container = document.createElement("div");
-  container.className = "salary-bank-content-row";
- 
-  const cards = document.createElement("div");
-  cards.className = "bank-card-container";
- 
-  container.appendChild(cards);
- 
-  if (dropdownWrapper) {
-  // 🔥 completely detach from AEM layout
-  dropdownWrapper.removeAttribute("class");
- 
-  dropdownWrapper.className = "drop-down-wrapper"; // reset clean class
- 
-  container.appendChild(dropdownWrapper);
-}
- 
-  radioGroup.parentNode.insertBefore(container, radioGroup);
-  radioGroup.style.display = "none";
- 
-  const radios = radioGroup.querySelectorAll("input[type='radio']");
- 
-  if (dropdown) dropdown.innerHTML = "";
- 
-  radios.forEach((radio) => {
-    const value = radio.value.trim();
-    const labelText = radio.nextElementSibling?.innerText || value;
- 
-    const imgSrc = bankLogos[value];
- 
-    const card = document.createElement("div");
-    card.className = "bank-card";
- 
-    card.innerHTML = `
-      ${imgSrc ? `<img src="${imgSrc}" />` : ""}
-      <span>${labelText}</span>
+
+  /* =========================
+     CREATE MAIN WRAPPER
+  ========================= */
+
+  const wrapper = document.createElement("div");
+  wrapper.className = "custom-bank-wrapper";
+
+  const icons = document.createElement("div");
+  icons.className = "custom-bank-icons";
+
+  wrapper.appendChild(icons);
+
+  /* =========================
+     BUILD CARDS FROM DROPDOWN
+  ========================= */
+
+  const options = dropdown.querySelectorAll("option");
+
+  options.forEach((option, index) => {
+
+    const value = option.value;
+    const text = option.textContent;
+
+    if (!value) return;
+
+    const item = document.createElement("div");
+    item.className = "custom-bank-item";
+    item.dataset.value = value;
+
+    item.innerHTML = `
+      <div class="custom-bank-icon">
+        <img src="${bankLogos[value]}" alt="${text}">
+      </div>
+      <span>${text}</span>
     `;
- 
-    if (radio.checked) card.classList.add("active");
- 
-    card.onclick = () => {
-      radios.forEach(r => r.checked = false);
-      radio.checked = true;
- 
-      document.querySelectorAll(".bank-card")
-        .forEach(c => c.classList.remove("active"));
- 
-      card.classList.add("active");
- 
-      if (dropdown) dropdown.value = value;
-    };
- 
-    cards.appendChild(card);
- 
-    if (dropdown) {
-      const option = document.createElement("option");
-      option.value = value;
-      option.textContent = labelText;
-      dropdown.appendChild(option);
+
+    if (index === 0) {
+      item.classList.add("active");
     }
+
+    item.addEventListener("click", () => {
+
+      document
+        .querySelectorAll(".custom-bank-item")
+        .forEach(el => el.classList.remove("active"));
+
+      item.classList.add("active");
+
+      dropdown.value = value;
+
+      dropdown.dispatchEvent(
+        new Event("change", { bubbles: true })
+      );
+    });
+
+    icons.appendChild(item);
   });
- 
-  if (dropdown) {
-    const other = document.createElement("option");
-    other.value = "other_bank";
-    other.textContent = "Other Bank";
-    dropdown.appendChild(other);
-  }
+
+  /* =========================
+     DROPDOWN STYLE
+  ========================= */
+
+  dropdown.classList.add("custom-bank-dropdown");
+
+  wrapper.appendChild(dropdown);
+
+  /* =========================
+     HIDE OLD WRAPPER
+  ========================= */
+
+  dropdownWrapper.style.display = "none";
+
+  panel.appendChild(wrapper);
 }
- 
-/* AEM SAFE LOAD */
+
+/* =========================
+   AEM SAFE LOAD
+========================= */
+
 function waitForAEM() {
-  const panel = document.querySelector(".field-salary-bank-selection");
-  if (!panel) return setTimeout(waitForAEM, 300);
+
+  const panel =
+    document.querySelector(".field-select-salary-bank");
+
+  if (!panel) {
+    setTimeout(waitForAEM, 500);
+    return;
+  }
+
   initSalaryBankUI();
 }
- 
+
 waitForAEM();
- 
 
 
 
