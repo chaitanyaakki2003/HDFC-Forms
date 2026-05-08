@@ -2103,7 +2103,7 @@ main .form .field-loan-upto p::before {
     display: flex !important;
     align-items: center;
     gap: 10px;
-    bottom: -25px;
+    
     margin-bottom: 16px !important;
 }
 
@@ -2231,6 +2231,5 @@ main .form .field-loan-upto p::before {
 .field-income-verification-method-panel {
     padding-top: 60px !important;
 }
-
 
 
