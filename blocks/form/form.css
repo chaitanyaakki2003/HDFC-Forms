@@ -2227,8 +2227,9 @@ main .form .field-loan-upto p::before {
     padding: 6px;
     border-radius: 0 0 12px 12px;
 }
-.field-income-verification-method-panel .radio-group-wrapper {
-    margin-top: 35px !important;
+
+.field-income-verification-method-panel {
+    padding-top: 60px !important;
 }
 
 
