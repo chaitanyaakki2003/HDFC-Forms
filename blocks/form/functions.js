@@ -1141,8 +1141,12 @@ function verifyOtpTier1(globals) {
       enabled: true
     }
   );
+  
 
 });
+return false;
+
+}
 
 /**
  * OTP TIMER Tier1
