@@ -358,7 +358,7 @@ main .form fieldset.accordion {
 .field-personal-fragment .email-verify-btn {
   position: absolute;
   right: 25px;
-  top: 40px;
+  top: 45px;
   transform: translateY(-50%);
 
   background: transparent !important;
