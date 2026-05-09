@@ -542,26 +542,43 @@ function startOtpTimer(globals) {
 
   window.otpState.timeLeft = 5;
 
+  // CLEAR OLD TIMER
   if (window.otpState.timer) {
     clearInterval(window.otpState.timer);
   }
 
+  // DISABLE BUTTON INITIALLY
+  globals.functions.setProperty(
+    globals.form.enter_otp_panel.resend_otp,
+    {
+      value: "Resend OTP in : 5 sec",
+      enabled: false
+    }
+  );
+
+  // START TIMER
   window.otpState.timer = setInterval(() => {
 
     window.otpState.timeLeft--;
 
+    // UPDATE TIMER TEXT
     globals.functions.setProperty(
       globals.form.enter_otp_panel.resend_otp,
       {
-        value: "Resend OTP in : " + window.otpState.timeLeft + " sec",
+        value:
+          "Resend OTP in : " +
+          window.otpState.timeLeft +
+          " sec",
         enabled: false
       }
     );
 
+    // TIMER COMPLETED
     if (window.otpState.timeLeft <= 0) {
 
       clearInterval(window.otpState.timer);
 
+      // ENABLE BUTTON
       globals.functions.setProperty(
         globals.form.enter_otp_panel.resend_otp,
         {
@@ -569,6 +586,33 @@ function startOtpTimer(globals) {
           value: "Resend OTP"
         }
       );
+
+      // FORCE BLUE COLOR
+      setTimeout(() => {
+
+        const resendBtn =
+          document.querySelector(
+            '[data-cmp-visible="true"] button'
+          );
+
+        if (resendBtn) {
+
+          resendBtn.style.background =
+            "#5B7FDB";
+
+          resendBtn.style.color =
+            "#FFFFFF";
+
+          resendBtn.style.opacity =
+            "1";
+
+          resendBtn.style.cursor =
+            "pointer";
+
+          resendBtn.disabled = false;
+        }
+
+      }, 200);
     }
 
   }, 1000);
