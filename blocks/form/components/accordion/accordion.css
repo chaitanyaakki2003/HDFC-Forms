@@ -351,7 +351,107 @@ main .form fieldset.panel-wrapper.field-full-name-as-per-pan input:focus {
 }
 
 
+/*============== personal_fragment ===========================================*/
 
+/* ===== Accordion outer container ===== */
+.field-personal-fragment {
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid #e6e9f5;
+}
+
+/* ===== Accordion header ===== */
+.field-personal-fragment > legend {
+  border-top-left-radius: 12px;
+  border-top-right-radius: 12px;
+}
+
+/* ===== Inner spacing ===== */
+.field-personal-fragment > *:not(legend) {
+  padding: 15px;
+}
+
+/* ===== ONLY Personal Fragment panel ===== */
+.field-personal-fragment .field-wrapper.col-6 {
+  width: 95%;
+  display: inline-block;
+  vertical-align: top;
+  margin-bottom: 16px;
+}
+
+/* ===== Inputs ===== */
+.field-personal-fragment input,
+.field-personal-fragment select {
+  width: 100% !important;
+  height: 40px;
+  border-radius: 8px;
+  border: 1px solid #d6d9e6;
+  padding: 0 12px;
+  font-size: 14px;
+  background: #fff;
+  box-sizing: border-box;
+}
+
+/* ===== Email field ===== */
+.field-personal-fragment .field-user-email-id {
+  position: relative;
+}
+
+/* ===== Email input ===== */
+.field-personal-fragment .field-user-email-id input {
+  width: 100% !important;
+  height: 40px;
+  padding-right: 80px;
+  box-sizing: border-box;
+}
+
+/* ===== Verify button ===== */
+.field-personal-fragment .email-verify-btn {
+  position: absolute;
+  right: 25px;
+  top: 60px;
+  transform: translateY(-50%);
+
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+
+  color: #5a78ff;
+  font-size: 18px;
+  font-weight: 600;
+
+  cursor: pointer;
+  padding: 0;
+}
+
+/* ===== Remove hover bg ===== */
+.field-personal-fragment .email-verify-btn:hover,
+.field-personal-fragment .email-verify-btn:focus,
+.field-personal-fragment .email-verify-btn:active {
+  background: transparent !important;
+  box-shadow: none !important;
+  outline: none;
+}
+
+/* ===== Suggestions ===== */
+.field-personal-fragment .email-suggestions-js {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+  flex-wrap: wrap;
+}
+
+/* ===== Suggestion chips ===== */
+.field-personal-fragment .email-suggestions-js span {
+  padding: 6px 14px;
+  border-radius: 18px;
+  background: #f3f6ff;
+  color: #5a78ff;
+  font-size: 12px;
+  border: 1px solid #dbe2ff;
+  cursor: pointer;
+  white-space: nowrap;
+}
 
 
 
