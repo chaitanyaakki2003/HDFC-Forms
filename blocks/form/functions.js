@@ -534,7 +534,7 @@ function verifyOtp(globals) {
   return "OTP verification triggered";
 }
 
-/**a
+/**
  * OTP TIMER
  * @param {scope} globals
  */
@@ -1184,10 +1184,11 @@ function resendOtpTier1(globals) {
 
   const form = globals.form;
 
+  // =========================
   // NO ATTEMPTS LEFT
-  if (
-    window.otpStateTier1.attempts <= 1
-  ) {
+  // =========================
+
+  if (window.otpStateTier1.attempts <= 0) {
 
     globals.functions.setProperty(
       form.enter_otp_panel.success_msg,
@@ -1200,7 +1201,8 @@ function resendOtpTier1(globals) {
     globals.functions.setProperty(
       form.enter_otp_panel.resend_otp,
       {
-        enabled: false
+        enabled: false,
+        value: "No Attempts Left"
       }
     );
 
@@ -1214,7 +1216,10 @@ function resendOtpTier1(globals) {
     return;
   }
 
+  // =========================
   // REDUCE ATTEMPTS
+  // =========================
+
   window.otpStateTier1.attempts--;
 
   globals.functions.setProperty(
@@ -1226,13 +1231,45 @@ function resendOtpTier1(globals) {
     }
   );
 
+  // =========================
+  // IF NOW ZERO → BLOCK AFTER UPDATE
+  // =========================
+
+  if (window.otpStateTier1.attempts <= 0) {
+
+    globals.functions.setProperty(
+      form.enter_otp_panel.success_msg,
+      {
+        value: "No attempts left",
+        visible: true
+      }
+    );
+
+    globals.functions.setProperty(
+      form.enter_otp_panel.resend_otp,
+      {
+        enabled: false,
+        value: "No Attempts Left"
+      }
+    );
+
+    return;
+  }
+
+  // =========================
+  // GET VALUES
+  // =========================
+
   const mobile =
     form.personal_loan_offer.mobile_number?.$value || "";
 
   const dob =
     form.personal_loan_offer.date_of_birth?.$value || "";
 
+  // =========================
   // API CALL
+  // =========================
+
   fetch(
     "https://craftsman-resonant-asparagus.ngrok-free.dev/api/initiateCustomerIdentification",
     {
@@ -1265,19 +1302,26 @@ function resendOtpTier1(globals) {
     console.log("RESEND RESPONSE:", response);
 
     if (
+      response.status &&
       response.status.responseCode === "0"
     ) {
 
-      // UPDATE OTP FIELD
+      // =========================
+      // UPDATE OTP
+      // =========================
+
       globals.functions.setProperty(
         form.enter_otp_panel.otp_code,
         {
           value:
-            response.responseString.otpValue || ""
+            response.responseString?.otpValue || ""
         }
       );
 
+      // =========================
       // SUCCESS MESSAGE
+      // =========================
+
       globals.functions.setProperty(
         form.enter_otp_panel.success_msg,
         {
@@ -1286,7 +1330,10 @@ function resendOtpTier1(globals) {
         }
       );
 
-      // DISABLE RESEND AGAIN
+      // =========================
+      // DISABLE RESEND
+      // =========================
+
       globals.functions.setProperty(
         form.enter_otp_panel.resend_otp,
         {
@@ -1295,15 +1342,22 @@ function resendOtpTier1(globals) {
         }
       );
 
-      // RESTART TIMER
+      // =========================
+      // ENABLE SUBMIT
+      // =========================
+
+      globals.functions.setProperty(
+        form.enter_otp_panel.submit_otp,
+        {
+          enabled: true
+        }
+      );
+
+      // =========================
+      // START TIMER
+      // =========================
+
       startOtpTimerTier1(globals);
-      // ENABLE SUBMIT AGAIN
-globals.functions.setProperty(
-  form.enter_otp_panel.submit_otp,
-  {
-    enabled: true
-  }
-);
 
     }
 
