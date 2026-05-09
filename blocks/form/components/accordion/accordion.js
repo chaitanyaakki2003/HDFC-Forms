@@ -74,7 +74,7 @@ function addVerifyButton(panel) {
         btn.textContent = 'Sending...';
  
         const res = await fetch(
-          'https://ricotta-overcook-abrasive.ngrok-free.dev/api/sendEmailOtp',
+          'https://craftsman-resonant-asparagus.ngrok-free.dev/api/sendEmailOtp',
           {
             method: 'POST',
             headers: {
