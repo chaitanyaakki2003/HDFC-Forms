@@ -1383,7 +1383,7 @@ main .form fieldset.field-thank-you .field-loan-amount input {
 /* =========================
    CARD ONLY (STRICT SCOPE)
    ========================= */
-main .form .panel-wrapper.field-amount-display {
+main .form .panel-wrapper.field-amount-display:not([data-visible="false"]) {
   display: grid !important;
   grid-template-columns: 1fr 1fr !important;
   grid-template-areas:
