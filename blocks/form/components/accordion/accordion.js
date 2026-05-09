@@ -80,11 +80,7 @@ function addVerifyButton(panel) {
             headers: {
               'Content-Type': 'application/json'
             },
-            body: JSON.stringify({
-  requestString: {
-    email: email
-  }
-})
+            body: JSON.stringify({ email })
           }
         );
  
@@ -202,12 +198,10 @@ function showOtpField(emailField, input, serverOtp = '') {
           headers: {
             'Content-Type': 'application/json'
           },
-         body: JSON.stringify({
-  requestString: {
-    email: email,
-    otpValue: otp
-  }
-})
+          body: JSON.stringify({
+            email,
+            otpValue: otp
+          })
         }
       );
  
