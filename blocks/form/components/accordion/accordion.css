@@ -275,80 +275,29 @@ main .form fieldset.accordion {
 
 
 
-/* ===== ONLY Full Name (As per PAN) Accordion ===== */
-main .form fieldset.panel-wrapper.field-full-name-as-per-pan {
-  background: #ffffff;
-  border-radius: 16px;
-  border: 1px solid #e6e8ef;
-  overflow: hidden;
-  margin-bottom: 20px;
+/*============= Full Name (As per PAN) ================================*/
+ 
+/* ===== Full Name Accordion Card ===== */
+.field-full-name-as-per-pan {
+  border-radius: 12px;
+  overflow: hidden; /* 🔥 important */
+  border: 1px solid #e6e9f5;
+  background: #fff;
 }
-
-/* ===== HEADER (LIGHT BLUE BAR) ===== */
-main .form fieldset.panel-wrapper.field-full-name-as-per-pan > legend {
-  background: #dfe6f4;
-  padding: 16px 20px;
-  font-size: 16px;
-  font-weight: 600;
-  color: #2c3e50;
-  border-radius: 16px 16px 0 0;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+ 
+/* ===== Header (top rounded only) ===== */
+.field-full-name-as-per-pan > legend {
+  border-top-left-radius: 12px;
+  border-top-right-radius: 12px;
 }
-
-/* ===== CONTENT AREA ===== */
-main .form fieldset.panel-wrapper.field-full-name-as-per-pan > div {
-  padding: 20px;
-  background: #ffffff;
+ 
+/* ===== Bottom corners rounding ===== */
+.field-full-name-as-per-pan > *:last-child {
+  border-bottom-left-radius: 12px;
+  border-bottom-right-radius: 12px;
 }
-
-/* ===== GRID FIX ===== */
-main .form fieldset.panel-wrapper.field-full-name-as-per-pan .field-wrapper.col-6 {
-  width: 48%;
-  display: inline-block;
-  vertical-align: top;
-  margin-right: 2%;
-}
-
-/* remove extra margin on last */
-main .form fieldset.panel-wrapper.field-full-name-as-per-pan .field-wrapper.col-6:nth-child(2n) {
-  margin-right: 0;
-}
-
-/* ===== INPUT BOX STYLE ===== */
-main .form fieldset.panel-wrapper.field-full-name-as-per-pan input {
-  width: 100%;
-  height: 44px;
-  border: 1px solid #d6d9e3;
-  border-radius: 10px;
-  padding: 10px 12px;
-  font-size: 14px;
-  background: #ffffff;
-  color: #111;
-}
-
-/* ===== LABEL ===== */
-main .form fieldset.panel-wrapper.field-full-name-as-per-pan .field-label {
-  font-size: 13px;
-  color: #6b7280;
-  margin-bottom: 6px;
-  display: block;
-}
-
-/* ===== HELPER TEXT ===== */
-main .form fieldset.panel-wrapper.field-full-name-as-per-pan .field-description {
-  font-size: 12px;
-  color: #9ca3af;
-  margin-top: 6px;
-}
-
-/* ===== FOCUS ===== */
-main .form fieldset.panel-wrapper.field-full-name-as-per-pan input:focus {
-  border-color: #4f46e5;
-  outline: none;
-  box-shadow: 0 0 0 2px rgba(79, 70, 229, 0.1);
-}
+ 
+ 
 
 
 /*============== personal_fragment ===========================================*/
@@ -462,402 +411,152 @@ main .form fieldset.panel-wrapper.field-full-name-as-per-pan input:focus {
 
 
 
-
-
-
-/* ================= EMPLOYER DETAILS CARD ================= */
-main .form fieldset.panel-wrapper.field-employer-details {
-  max-width: 890px;
-  margin: 18px auto;
- padding: 0 16px 18px !important;
-
-  background: #ffffff;
-  border: 1px solid #e7ebf3;
+/*=========================== emp details ============================================================*/
+/*==============1st================*/
+.field-emp-details > fieldset.panel-wrapper {
+  margin-bottom: 16px !important;
+}
+/* ===== EMP DETAILS ACCORDION CARD STYLE ===== */
+ 
+/* 🔥 Each accordion becomes a card */
+.field-emp-details > fieldset.panel-wrapper {
+  margin-bottom: 16px;
   border-radius: 14px;
-
-  display: grid !important;
-grid-template-columns: repeat(12, 1fr) !important;
-column-gap: 18px !important;
-row-gap: 14px !important;
+  overflow: hidden;
+  border: 1px solid #e6e9f5;
+  background: #fff;
 }
-/* 2 column layout */
-main .form fieldset.panel-wrapper.field-employer-details 
-.field-wrapper.col-6 {
-  width: calc(50% - 9px) !important;
+ 
+/* ===== Header (top part) ===== */
+.field-emp-details > fieldset.panel-wrapper > legend {
+  background: #eef2ff;
+  padding: 18px 24px;
+  border-top-left-radius: 14px;
+  border-top-right-radius: 14px;
 }
-
-/* full width */
-main .form fieldset.panel-wrapper.field-employer-details 
-.field-wrapper.col-12 {
+ 
+/* ===== Body (content area) ===== */
+.field-emp-details > fieldset.panel-wrapper > *:not(legend) {
+  padding: 18px 24px;
+  background: #fff;
+}
+ 
+/* ===== Remove border when collapsed (optional clean look) ===== */
+.field-emp-details > fieldset.accordion-collapse {
+  background: transparent;
+}
+ 
+/* ===== Optional: subtle shadow like design ===== */
+.field-emp-details > fieldset.panel-wrapper {
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.03);
+}
+/* ===== GRID ===== */
+.field-employer-details-panel {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px 20px;
+}
+ 
+/* ===== NORMAL FIELDS ===== */
+.field-employer-details-panel .field-wrapper.col-6 {
+  width: 100%;
+}
+ 
+/* ✅ Fix Industry field width properly */
+.field-employer-details-panel .field-industry-type.field-wrapper {
+  grid-column: span 1 !important;
   width: 100% !important;
 }
-
-/* ================= HEADER ================= */
-main .form fieldset.panel-wrapper.field-employer-details > legend.field-label {
-  grid-column: 1 / -1 !important;
-
-  width: calc(100% + 32px) !important;
-  margin: 0 0 14px -16px !important;
-  padding: 14px 18px !important;
-
-  display: flex !important;
-  align-items: center !important;
-  justify-content: space-between !important;
-
-  background: #dce8fb !important;
-  border-radius: 14px 14px 0 0 !important;
-
-  font-size: 14px !important;
-  font-weight: 700 !important;
-  color: #17213b !important;
-}
-
-/* ARROW */
-main .form fieldset.panel-wrapper.field-employer-details > legend.field-label::after {
-  content: "";
-  width: 12px;
-  height: 12px;
-  border-right: 2px solid #2f63e5;
-  border-bottom: 2px solid #2f63e5;
-  transform: rotate(45deg);
-  transition: 0.2s;
-}
-
-/* OPEN STATE */
-main .form fieldset.panel-wrapper.field-employer-details[data-index="0"]
-> legend.field-label::after {
-  transform: rotate(225deg);
-}
-
-/* REMOVE ICON */
-main .form fieldset.panel-wrapper.field-employer-details > legend.field-label i,
-main .form fieldset.panel-wrapper.field-employer-details > legend.field-label svg {
-  display: none !important;
-}
-
-/* ================= GRID FIX USING YOUR CLASSES ================= */
-
-/* FIRST ROW (2 fields) */
-main .form fieldset.panel-wrapper.field-employer-details
-.drop-down-wrapper.field-wrapper.col-6 {
-  grid-column: span 6 !important;
-}
-
-main .form fieldset.panel-wrapper.field-employer-details
-.text-wrapper.field-wrapper.col-6 {
-  grid-column: span 6 !important;
-}
-
-/* HELP TEXT FULL WIDTH */
-main .form fieldset.panel-wrapper.field-employer-details
-.plain-text-wrapper.field-wrapper.col-12 {
-  grid-column: 1 / -1 !important;
-}
-
-/* INDUSTRY FIELD */
-main .form fieldset.panel-wrapper.field-employer-details
-.drop-down-wrapper.field-wrapper.col-6:nth-of-type(3) {
-  grid-column: span 6 !important;
-}
-
-/* ================= LABEL ================= */
-main .form fieldset.panel-wrapper.field-employer-details label.field-label {
-  font-size: 11.5px !important;
-  font-weight: 500 !important;
-  color: #7a8494 !important;
-  margin-bottom: 4px !important;
-}
-
-/* ================= INPUT ================= */
-main .form fieldset.panel-wrapper.field-employer-details input,
-main .form fieldset.panel-wrapper.field-employer-details select {
+ 
+/* ✅ Fix input inside it */
+.field-employer-details-panel .field-industry-type input {
   width: 100% !important;
-  height: 42px !important;
-
-  border: 1px solid #dfe5ef !important;
-  border-radius: 8px !important;
-
-  padding: 8px 12px !important;
-  font-size: 13px !important;
-  font-weight: 600 !important;
-  color: #202636 !important;
-
-  background: #ffffff !important;
+  min-width: 530px; /* 🔥 prevents tiny collapse */
 }
-
-/* ================= HELP TEXT ================= */
-main .form fieldset.panel-wrapper.field-employer-details
-.plain-text-wrapper p {
-  font-size: 12px !important;
-  font-weight: 400 !important;
-  color: #6f7a8a !important;
-  margin: 4px 0 !important;
+ 
+/* ===== HELP TEXT ===== */
+.field-employer-details-panel .field-employer-legal-name-help {
+  grid-column: span 2;
 }
-
-/* ================= MOBILE ================= */
-@media (max-width: 640px) {
-  main .form fieldset.panel-wrapper.field-employer-details {
-    grid-template-columns: 1fr !important;
-  }
-
-  main .form fieldset.panel-wrapper.field-employer-details
-  .field-wrapper {
-    grid-column: 1 / -1 !important;
-  }
+ 
+.field-employer-details-panel .field-industry-type-help {
+  grid-column: span 2;
 }
-
-/* =========================================
-   🔥 FINAL FIX — FORCE DISCLAIMER INSIDE GRID
-========================================= */
-main .form 
-fieldset.panel-wrapper.field-employer-details 
-.plain-text-wrapper.field-selected-industry-disclaimer {
-
-  grid-column: 1 / -1 !important;   /* FULL WIDTH */
-  display: block !important;
-
-  margin-top: 6px !important;
-}
-
-/* =========================================
-   🔥 FINAL FIX — EXPAND PANEL HEIGHT
-========================================= */
-main .form fieldset.panel-wrapper.field-employer-details {
-  overflow: visible !important;
-  height: auto !important;
-}
-
-
-/* ===================================================== */
-/* APPLY SAME CARD STYLE TO OTHER PANELS (SCOPED ONLY) */
-/* ===================================================== */
-
-main .form fieldset.panel-wrapper.field-income-details,
-main .form fieldset.panel-wrapper.field-work-email-id-panel,
-main .form fieldset.panel-wrapper.field-type-of-loan-panel {
-
-  max-width: 890px;
-  margin: 18px auto;
-  padding: 0 16px 18px;
-
-  background: #ffffff;
-  border: 1px solid #e7ebf3;
-  border-radius: 14px;
-
-  display: grid !important;
-  grid-template-columns: repeat(12, 1fr) !important;
-  column-gap: 18px !important;
-  row-gap: 14px !important;
-}
-
-/* ================= HEADER ================= */
-main .form fieldset.panel-wrapper.field-income-details > legend.field-label,
-main .form fieldset.panel-wrapper.field-work-email-id-panel > legend.field-label,
-main .form fieldset.panel-wrapper.field-type-of-loan-panel > legend.field-label {
-
-  grid-column: 1 / -1 !important;
-
-  width: calc(100% + 32px) !important;
-  margin: 0 0 14px -16px !important;
-  padding: 14px 18px !important;
-
-  display: flex !important;
-  align-items: center !important;
-  justify-content: space-between !important;
-
-  background: #dce8fb !important;
-  border-radius: 14px 14px 0 0 !important;
-
-  font-size: 14px !important;
-  font-weight: 700 !important;
-  color: #17213b !important;
-}
-
-/* ================= ARROW ================= */
-main .form fieldset.panel-wrapper.field-income-details > legend.field-label::after,
-main .form fieldset.panel-wrapper.field-work-email-id-panel > legend.field-label::after,
-main .form fieldset.panel-wrapper.field-type-of-loan-panel > legend.field-label::after {
-
-  content: "";
-  width: 12px;
-  height: 12px;
-  border-right: 2px solid #2f63e5;
-  border-bottom: 2px solid #2f63e5;
-  transform: rotate(45deg);
-  transition: 0.2s;
-}
-
-/* OPEN STATE */
-main .form fieldset.panel-wrapper.field-income-details[data-index] > legend.field-label::after,
-main .form fieldset.panel-wrapper.field-work-email-id-panel[data-index] > legend.field-label::after,
-main .form fieldset.panel-wrapper.field-type-of-loan-panel[data-index] > legend.field-label::after {
-  transform: rotate(225deg);
-}
-
-/* REMOVE ICON */
-main .form fieldset.panel-wrapper.field-income-details > legend.field-label i,
-main .form fieldset.panel-wrapper.field-work-email-id-panel > legend.field-label i,
-main .form fieldset.panel-wrapper.field-type-of-loan-panel > legend.field-label i {
-  display: none !important;
-}
-
-/* ================= GRID ================= */
-
-/* col-6 fields */
-main .form fieldset.panel-wrapper.field-income-details .field-wrapper.col-6,
-main .form fieldset.panel-wrapper.field-work-email-id-panel .field-wrapper.col-6,
-main .form fieldset.panel-wrapper.field-type-of-loan-panel .field-wrapper.col-6 {
-  grid-column: span 6 !important;
-}
-
-/* col-12 full width */
-main .form fieldset.panel-wrapper.field-income-details .field-wrapper.col-12,
-main .form fieldset.panel-wrapper.field-work-email-id-panel .field-wrapper.col-12,
-main .form fieldset.panel-wrapper.field-type-of-loan-panel .field-wrapper.col-12 {
-  grid-column: 1 / -1 !important;
-}
-
-/* ================= LABEL ================= */
-main .form fieldset.panel-wrapper.field-income-details label.field-label,
-main .form fieldset.panel-wrapper.field-work-email-id-panel label.field-label,
-main .form fieldset.panel-wrapper.field-type-of-loan-panel label.field-label {
-
-  font-size: 11.5px !important;
-  font-weight: 500 !important;
-  color: #7a8494 !important;
-  margin-bottom: 4px !important;
-}
-
-/* ================= INPUT ================= */
-main .form fieldset.panel-wrapper.field-income-details input,
-main .form fieldset.panel-wrapper.field-income-details select,
-main .form fieldset.panel-wrapper.field-work-email-id-panel input,
-main .form fieldset.panel-wrapper.field-type-of-loan-panel select {
-
+ 
+/* ===== INPUT ===== */
+.field-employer-details-panel input,
+.field-employer-details-panel select {
   width: 100% !important;
-  height: 42px !important;
-
-  border: 1px solid #dfe5ef !important;
-  border-radius: 8px !important;
-
-  padding: 8px 12px !important;
-  font-size: 13px !important;
-  font-weight: 600 !important;
-  color: #202636 !important;
-
-  background: #ffffff !important;
+  height: 42px;
+  border-radius: 10px;
+  border: 1px solid #d6d9e6;
+  padding: 0 12px;
+  font-size: 14px;
+  background: #fff;
+  box-sizing: border-box;
 }
-
-/* ================= HELP TEXT ================= */
-main .form fieldset.panel-wrapper.field-income-details .plain-text-wrapper p,
-main .form fieldset.panel-wrapper.field-work-email-id-panel .plain-text-wrapper p {
-
-  font-size: 12px !important;
-  color: #6f7a8a !important;
-  margin: 4px 0 !important;
+ 
+/* ===== LABEL ===== */
+.field-employer-details-panel label {
+  display: block;
+  white-space: nowrap;
+  font-size: 13px;
+  margin-bottom: 6px;
 }
-
-/* ================= FIX DISCLAIMER (INSIDE ONLY) ================= */
-main .form fieldset.panel-wrapper.field-employer-details
-.plain-text-wrapper.field-selected-industry-disclaimer {
-  grid-column: 1 / -1 !important;
-  position: relative !important;
-  display: block !important;
-
-  background: #f3f6ff !important;
-  color: #315fdb !important;
-
-  padding: 9px 12px !important;
-  border-radius: 6px !important;
-
-  margin-top: 4px !important;
+ 
+/*=========2nd======*/
+/* ===== Fix Work Email Wrapper ===== */
+.field-work-email-id {
+  position: relative;
+  width: 100%;
+  max-width: 520px; /* 🔥 same as personal email */
 }
-
-/* ================= PREVENT OVERFLOW ISSUE ================= */
-main .form fieldset.panel-wrapper.field-income-details,
-main .form fieldset.panel-wrapper.field-work-email-id-panel,
-main .form fieldset.panel-wrapper.field-type-of-loan-panel {
-  overflow: hidden !important;
-}
-
-/* ================= MOBILE ================= */
-@media (max-width: 640px) {
-  main .form fieldset.panel-wrapper.field-income-details,
-  main .form fieldset.panel-wrapper.field-work-email-id-panel,
-  main .form fieldset.panel-wrapper.field-type-of-loan-panel {
-    grid-template-columns: 1fr !important;
-  }
-
-  main .form fieldset.panel-wrapper.field-income-details .field-wrapper,
-  main .form fieldset.panel-wrapper.field-work-email-id-panel .field-wrapper,
-  main .form fieldset.panel-wrapper.field-type-of-loan-panel .field-wrapper {
-    grid-column: 1 / -1 !important;
-  }
-}
-
-/* 🔥 FORCE SAME GAP BETWEEN EMPLOYER → INCOME ONLY */
-main .form 
-fieldset.panel-wrapper.field-employer-details + fieldset.panel-wrapper.field-income-details {
-  margin-top: 18px !important;
-}
-
-/* 🔥 REMOVE EXTRA AEM SPACING */
-main .form fieldset.panel-wrapper + fieldset.panel-wrapper {
-  margin-top: 18px !important;
-}
-
-
-/* 🔥 EXTEND ALL ACCORDION PANELS TO FULL WIDTH (MATCH ADDRESS PANEL) */
-main .form fieldset.panel-wrapper.field-employer-details,
-main .form fieldset.panel-wrapper.field-income-details,
-main .form fieldset.panel-wrapper.field-work-email-id-panel,
-main .form fieldset.panel-wrapper.field-type-of-loan-panel {
-
+ 
+/* Input */
+.field-work-email-id input {
   width: 100% !important;
-  max-width: 100% !important;
-
-  margin-left: 0 !important;
-  margin-right: 0 !important;
+  height: 40px;
+  padding-right: 80px; /* space for button */
+  box-sizing: border-box;
+  position: relative;
+  z-index: 1;
+}
+ 
+/* 🔥 VERIFY BUTTON */
+.field-work-email-id .email-verify-btn {
+  position: absolute;
+  right: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+ 
+  z-index: 2;
+ 
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+ 
+  color: #5a78ff;
+  font-size: 16px !important;
+  font-weight: 600;
+ 
+  cursor: pointer;
+  padding: 0;
+}
+ 
+/* remove hover bg */
+.field-work-email-id .email-verify-btn:hover,
+.field-work-email-id .email-verify-btn:focus,
+.field-work-email-id .email-verify-btn:active {
+  background: transparent !important;
+  box-shadow: none !important;
+  outline: none;
 }
 
 
 
-/* =========================================
-   🔥 FINAL FORCE SMALL GAP (WORKING FIX)
-========================================= */
 
-/* Override ALL existing margins */
-main .form fieldset.panel-wrapper.field-employer-details,
-main .form fieldset.panel-wrapper.field-income-details,
-main .form fieldset.panel-wrapper.field-work-email-id-panel,
-main .form fieldset.panel-wrapper.field-type-of-loan-panel {
-  margin-top: 6px !important;
-  margin-bottom: 6px !important;
-}
 
-/* Kill AEM default spacing completely */
-main .form fieldset.panel-wrapper {
-  margin-bottom: 6px !important;
-}
 
-/* Fix stacked spacing (this is the main issue) */
-main .form fieldset.panel-wrapper + fieldset.panel-wrapper {
-  margin-top: 6px !important;
-}
-/* =========================================
-   🔥 FIX ONLY EMPLOYER → INCOME GAP
-========================================= */
-
-/* Reduce ONLY this gap */
-main .form 
-fieldset.panel-wrapper.field-employer-details {
-  margin-bottom: 6px !important;
-}
-
-main .form 
-fieldset.panel-wrapper.field-income-details {
-  margin-top: 0 !important;
-}
 
 
 
