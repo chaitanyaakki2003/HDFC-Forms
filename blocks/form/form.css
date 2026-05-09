@@ -1886,10 +1886,27 @@ main .form .field-loan-upto p::before {
   cursor: pointer;
 }
 
-/* Resend button */
+/* =====================================
+   RESEND BUTTON ENABLED
+===================================== */
+
 .field-enter-otp-panel .field-resend-otp button {
-  background: #d9d9d6;
-  color: #ffffff;
+
+  background: #6488d3 !important;
+  color: #ffffff !important;
+
+}
+
+/* =====================================
+   RESEND BUTTON DISABLED
+===================================== */
+
+.field-enter-otp-panel .field-resend-otp button:disabled {
+
+  background: #d9d9d6 !important;
+  color: #ffffff !important;
+  cursor: not-allowed;
+
 }
 
 /* Submit button */
