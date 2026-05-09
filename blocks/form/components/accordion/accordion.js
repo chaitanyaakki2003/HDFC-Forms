@@ -196,7 +196,7 @@ function showOtpField(emailField, input, serverOtp = '') {
       verifyBtn.textContent = 'Verifying...';
  
       const res = await fetch(
-        'https://ricotta-overcook-abrasive.ngrok-free.dev/api/verifyEmailOtp',
+        'https://craftsman-resonant-asparagus.ngrok-free.dev/api/verifyEmailOtp',
         {
           method: 'POST',
           headers: {
