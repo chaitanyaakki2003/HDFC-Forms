@@ -552,15 +552,15 @@ main .form fieldset.accordion {
   outline: none;
 }
 
-/* ===== Fix Personal Email Wrapper ===== */
-.field-user-email-id {
+/* ===== Personal Email ID Wrapper ===== */
+.field-email-id {
   position: relative;
   width: 100%;
   max-width: 520px;
 }
- 
+
 /* Input */
-.field-user-email-id input {
+.field-email-id input {
   width: 100% !important;
   height: 40px;
   padding-right: 80px;
@@ -568,32 +568,32 @@ main .form fieldset.accordion {
   position: relative;
   z-index: 1;
 }
- 
-/* ===== VERIFY BUTTON ===== */
-.field-user-email-id .email-verify-btn {
+
+/* Verify button */
+.field-email-id .email-verify-btn {
   position: absolute;
   right: 15px;
   top: 50%;
   transform: translateY(-50%);
- 
+
   z-index: 2;
- 
+
   background: transparent !important;
   border: none !important;
   box-shadow: none !important;
- 
+
   color: #5a78ff;
   font-size: 16px !important;
   font-weight: 600;
- 
+
   cursor: pointer;
   padding: 0;
 }
- 
-/* remove hover bg */
-.field-user-email-id .email-verify-btn:hover,
-.field-user-email-id .email-verify-btn:focus,
-.field-user-email-id .email-verify-btn:active {
+
+/* hover */
+.field-email-id .email-verify-btn:hover,
+.field-email-id .email-verify-btn:focus,
+.field-email-id .email-verify-btn:active {
   background: transparent !important;
   box-shadow: none !important;
   outline: none;

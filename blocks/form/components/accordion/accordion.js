@@ -19,9 +19,9 @@ export function handleAccordionNavigation(panel, tab, forceOpen = false) {
 ========================================================= */
 function addVerifyButton(panel) {
  
-  const emailFields = panel.querySelectorAll(
-    '.field-user-email-id, .field-work-email-id'
-  );
+const emailFields = panel.querySelectorAll(
+  '.field-user-email-id, .field-work-email-id, .field-email-id'
+);
  
   emailFields.forEach((emailField) => {
  
