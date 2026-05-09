@@ -73,16 +73,20 @@ function addVerifyButton(panel) {
         btn.disabled = true;
         btn.textContent = 'Sending...';
  
-        const res = await fetch(
-          'https://craftsman-resonant-asparagus.ngrok-free.dev/api/sendEmailOtp',
-          {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ email })
-          }
-        );
+const res = await fetch(
+  'https://craftsman-resonant-asparagus.ngrok-free.dev/api/sendEmailOtp',
+  {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      requestString: {
+        email: email
+      }
+    })
+  }
+);
  
         const data = await res.json();
  
@@ -191,19 +195,21 @@ function showOtpField(emailField, input, serverOtp = '') {
       verifyBtn.disabled = true;
       verifyBtn.textContent = 'Verifying...';
  
-      const res = await fetch(
-        'https://craftsman-resonant-asparagus.ngrok-free.dev/api/verifyEmailOtp',
-        {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify({
-            email,
-            otpValue: otp
-          })
-        }
-      );
+  const res = await fetch(
+  'https://craftsman-resonant-asparagus.ngrok-free.dev/api/verifyEmailOtp',
+  {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      requestString: {
+        email: email,
+        otpValue: otp
+      }
+    })
+  }
+);
  
       const data = await res.json();
  
