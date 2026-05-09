@@ -269,82 +269,205 @@ function calculateEMI(globals) {
  * @param {scope} globals
  */
 function generateOtp(globals) {
+
   debugger;
 
+  const form = globals.form;
+
   const mobile =
-    globals.form.personal_loan_offer.mobile_number?.$value || "";
+    form.personal_loan_offer.mobile_number?.$value || "";
 
   const dob =
-    globals.form.personal_loan_offer.date_of_birth?.$value || "";
+    form.personal_loan_offer.date_of_birth?.$value || "";
 
   const pan =
-    globals.form.personal_loan_offer.pan?.$value || "";
+    form.personal_loan_offer.pan?.$value || "";
+
+  // =========================
+  // VALIDATION
+  // =========================
 
   if (!mobile) {
+
     globals.functions.setProperty(
-      globals.form.enter_otp_panel.otp_help_text,
-      { value: "Mobile is required", visible: true }
+      form.enter_otp_panel.otp_help_text,
+      {
+        value: "Mobile is required",
+        visible: true
+      }
     );
+
     return;
   }
 
   if (!dob && !pan) {
+
     globals.functions.setProperty(
-      globals.form.enter_otp_panel.otp_help_text,
-      { value: "Enter DOB or PAN", visible: true }
+      form.enter_otp_panel.otp_help_text,
+      {
+        value: "Enter DOB or PAN",
+        visible: true
+      }
     );
+
     return;
   }
 
-  fetch("https://craftsman-resonant-asparagus.ngrok-free.dev/generate-otp", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ mobile, dob, pan })
+  // =========================
+  // RESET ATTEMPTS FIRST TIME
+  // =========================
+
+  if (
+    window.otpState.attempts === undefined ||
+    window.otpState.attempts <= 0
+  ) {
+
+    window.otpState.attempts = 3;
+
+  }
+
+  // =========================
+  // API CALL
+  // =========================
+
+  fetch(
+    "https://craftsman-resonant-asparagus.ngrok-free.dev/generate-otp",
+    {
+
+      method: "POST",
+
+      headers: {
+        "Content-Type": "application/json"
+      },
+
+      body: JSON.stringify({
+        mobile,
+        dob,
+        pan
+      })
+
+    }
+  )
+
+  .then(function(res) {
+
+    return res.json();
+
   })
-  .then(res => res.json())
-  .then(response => {
+
+  .then(function(response) {
+
+    console.log("GENERATE OTP RESPONSE:", response);
+
+    // =========================
+    // SUCCESS MESSAGE
+    // =========================
 
     globals.functions.setProperty(
-      globals.form.enter_otp_panel.otp_help_text,
-      { value: response.message || "OTP Sent", visible: true }
+      form.enter_otp_panel.otp_help_text,
+      {
+        value:
+          response.message ||
+          "OTP Generated Successfully",
+        visible: true
+      }
     );
 
-    if (response.status === "success") {
+    // =========================
+    // SUCCESS
+    // =========================
 
-      // ✅ ONLY FIRST TIME
-      if (window.otpState.attempts === undefined) {
-        window.otpState.attempts = 3;
-      }
+    if (
+      response &&
+      response.status === "success"
+    ) {
 
+      // SHOW OTP PANEL
       globals.functions.setProperty(
-        globals.form.enter_otp_panel,
-        { visible: true }
-      );
-
-      if (response.otp) {
-        globals.functions.setProperty(
-          globals.form.enter_otp_panel.otp_code,
-          { value: String(response.otp) }
-        );
-      }
-
-      globals.functions.setProperty(
-        globals.form.enter_otp_panel.attempts,
+        form.enter_otp_panel,
         {
-          value: window.otpState.attempts + "/3 attempts left"
+          visible: true
         }
       );
 
+      // SET OTP VALUE
       globals.functions.setProperty(
-        globals.form.enter_otp_panel.resend_otp,
+        form.enter_otp_panel.otp_code,
+        {
+          value:
+            response.otp
+              ? String(response.otp)
+              : ""
+        }
+      );
+
+      // ATTEMPTS TEXT
+      globals.functions.setProperty(
+        form.enter_otp_panel.attempts,
+        {
+          value:
+            window.otpState.attempts +
+            "/3 attempts left"
+        }
+      );
+
+      // DISABLE RESEND BUTTON
+      globals.functions.setProperty(
+        form.enter_otp_panel.resend_otp,
         {
           enabled: false,
+          visible: true,
           value: "Resend OTP in : 5 sec"
         }
       );
 
+      // ENABLE SUBMIT BUTTON
+      globals.functions.setProperty(
+        form.enter_otp_panel.submit_otp,
+        {
+          enabled: true,
+          visible: true
+        }
+      );
+
+      // START TIMER
       startOtpTimer(globals);
+
     }
+
+    // =========================
+    // FAILURE
+    // =========================
+
+    else {
+
+      globals.functions.setProperty(
+        form.enter_otp_panel.success_msg,
+        {
+          value: "OTP Generation Failed",
+          visible: true
+        }
+      );
+
+    }
+
+  })
+
+  .catch(function(error) {
+
+    console.error(
+      "Generate OTP Error:",
+      error
+    );
+
+    globals.functions.setProperty(
+      form.enter_otp_panel.success_msg,
+      {
+        value: "Server Error",
+        visible: true
+      }
+    );
+
   });
 
   return "OTP generated";
