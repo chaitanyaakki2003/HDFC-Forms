@@ -257,22 +257,14 @@ function calculateEMI(globals) {
         value: "₹" + tax.toLocaleString("en-IN"),
       }
     );
-    // ✅ UPDATE REVIEW TENURE FIELD
-
-const tenureField =
+    globals.functions.setProperty(
   globals.form.review_details
-    ?.loan_details
-    ?.tenure;
-
-if (tenureField) {
-
-  globals.functions.setProperty(
-    tenureField,
-    {
-      value: String(tenure)
-    }
-  );
-}
+    .loan_details
+    .loan_tenure_months,
+  {
+    value: String(tenure),
+  }
+);
   } catch (e) {
     console.error("EMI ERROR:", e);
   }
