@@ -316,28 +316,42 @@ export default async function decorate(
     // =========================
 
     if (
-      input.name === "loan_tenure_months"
-    ) {
+  input.name === "loan_tenure_months"
+) {
 
-      const values = [
-        12, 24, 36, 48, 60, 72, 84
-      ];
+  const values = [
+    12, 24, 36, 48, 60, 72, 84
+  ];
 
-      const segment =
-        100 / (values.length - 1);
+  const segment =
+    100 / (values.length - 1);
 
-      let snapped =
-        Math.round(
-          e.target.value / segment
-        ) * segment;
+  let index =
+    Math.round(
+      e.target.value / segment
+    );
 
-      // FIX 84
-      if (snapped > 99) {
-        snapped = 100;
-      }
+  // FIX LAST VALUE
+  if (index >= values.length) {
+    index = values.length - 1;
+  }
 
-      e.target.value = snapped;
-    }
+  // EXACT VALUE
+  const actualValue =
+    values[index];
+
+  // EXACT SLIDER POSITION
+  if (index === values.length - 1) {
+    e.target.value = 100;
+  } else {
+    e.target.value =
+      index * segment;
+  }
+
+  // ✅ VERY IMPORTANT FIX
+  e.target.dataset.actualValue =
+    actualValue;
+}
 
     // =========================
     // UPDATE UI
