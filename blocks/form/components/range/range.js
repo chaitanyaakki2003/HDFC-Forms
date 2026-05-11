@@ -184,18 +184,19 @@ if (
     emiField.innerText =
       `₹${Math.round(emi).toLocaleString('en-IN')}`;
   }
-  // =========================
-// UPDATE REVIEW TENURE ONLY
+ // =========================
+// UPDATE REVIEW TENURE
 // =========================
 
 const reviewTenureField =
   document.querySelector(
-    '.panel-wrapper .field-loan-tenure-months input[type="text"]'
+    '.field-loan-tenure-months input[type="text"]'
   );
 
 if (reviewTenureField) {
 
-  reviewTenureField.value = tenure;
+  reviewTenureField.value =
+    `${tenure}`;
 }
 }
 
