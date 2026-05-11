@@ -24,29 +24,7 @@ function updateLoanDetails() {
 // GET EXACT TENURE VALUE
 // =========================
 
-const tenureSlider =
-  document.querySelector(
-    '[name="loan_tenure_months"]'
-  );
 
-const tenureValues = [
-  12, 24, 36, 48, 60, 72, 84
-];
-
-const segment =
-  100 / (tenureValues.length - 1);
-
-let tenureIndex =
-  Math.round(
-    Number(tenureSlider.value) / segment
-  );
-
-if (tenureIndex >= tenureValues.length) {
-  tenureIndex = tenureValues.length - 1;
-}
-
-const tenure =
-  tenureValues[tenureIndex];
 
   // =========================
   // EMI CALCULATION
@@ -291,9 +269,9 @@ export default async function decorate(
     input.max = 100;
     input.step = 1;
 
-    if (!input.value) {
-      input.value = 50;
-    }
+   if (!input.value) {
+  input.value = 66.666;
+}
   }
 
   /* =========================
@@ -405,6 +383,25 @@ export default async function decorate(
   ========================= */
 
   updateBubble(input, div);
+  if (input.name === "loan_tenure_months") {
+
+  const values = [
+    12, 24, 36, 48, 60, 72, 84
+  ];
+
+  const segment =
+    100 / (values.length - 1);
+
+  let index =
+    Math.round(input.value / segment);
+
+  if (index >= values.length) {
+    index = values.length - 1;
+  }
+
+  input.dataset.actualValue =
+    values[index];
+}
 
   setTimeout(() => {
     updateLoanDetails();
