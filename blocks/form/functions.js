@@ -257,6 +257,25 @@ function calculateEMI(globals) {
         value: "₹" + tax.toLocaleString("en-IN"),
       }
     );
+    // ✅ UPDATE REVIEW PANEL TENURE
+
+if (
+  form.review?.form_fragment
+    ?.form_accordion1776858819829
+    ?.loan_details
+    ?.tenure
+) {
+
+  globals.functions.setProperty(
+    form.review.form_fragment
+      .form_accordion1776858819829
+      .loan_details
+      .tenure,
+    {
+      value: String(tenure)
+    }
+  );
+}
   } catch (e) {
     console.error("EMI ERROR:", e);
   }
