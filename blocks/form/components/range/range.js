@@ -168,30 +168,29 @@ if (
 // UPDATE REVIEW TENURE
 // =========================
 
-const allElements =
-  document.querySelectorAll('*');
+const allDivs =
+  document.querySelectorAll('div');
 
-allElements.forEach((el) => {
+allDivs.forEach((div) => {
 
-  // FIND TENURE LABEL
+  // FIND "Tenure" LABEL
   if (
-    el.innerText?.trim() === 'Tenure'
+    div.innerText?.trim() === 'Tenure'
   ) {
 
-    // GET VALUE ELEMENT
-    const valueElement =
-      el.parentElement.querySelector(
-        'p, span, div'
-      );
+    // GET VALUE NEXT TO LABEL
+    const valueField =
+      div.nextElementSibling;
 
     // UPDATE VALUE
-    if (valueElement) {
+    if (valueField) {
 
-      valueElement.innerText =
+      valueField.innerText =
         tenure;
     }
   }
 });
+
 
 /* =========================
    UPDATE BUBBLE
