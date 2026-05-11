@@ -163,33 +163,21 @@ if (
     emiField.innerText =
       `₹${Math.round(emi).toLocaleString('en-IN')}`;
   }
-}
-// =========================
+  // =========================
 // UPDATE REVIEW TENURE
 // =========================
 
-const allDivs =
-  document.querySelectorAll('div');
+const tenureField =
+  document.querySelector(
+    '.field-loan-tenure-months input'
+  );
 
-allDivs.forEach((div) => {
+if (tenureField) {
 
-  // FIND "Tenure" LABEL
-  if (
-    div.innerText?.trim() === 'Tenure'
-  ) {
+  tenureField.value = tenure;
+}
+}
 
-    // GET VALUE NEXT TO LABEL
-    const valueField =
-      div.nextElementSibling;
-
-    // UPDATE VALUE
-    if (valueField) {
-
-      valueField.innerText =
-        tenure;
-    }
-  }
-});
 
 
 /* =========================
