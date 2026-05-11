@@ -164,17 +164,17 @@ if (
       `₹${Math.round(emi).toLocaleString('en-IN')}`;
   }
   // =========================
-// UPDATE REVIEW TENURE
+// UPDATE REVIEW TENURE ONLY
 // =========================
 
-const tenureField =
+const reviewTenureField =
   document.querySelector(
-    '.field-loan-tenure-months input'
+    '.panel-wrapper .field-loan-tenure-months input[type="text"]'
   );
 
-if (tenureField) {
+if (reviewTenureField) {
 
-  tenureField.value = tenure;
+  reviewTenureField.value = tenure;
 }
 }
 
