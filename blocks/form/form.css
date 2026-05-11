@@ -1959,7 +1959,10 @@ main .form .field-loan-upto p::before {
     margin-bottom: 10px;
   }
 }
-
+/* Hide success message component completely */
+.field-enter-otp-panel .field-success-msg {
+   display: none !important;
+}
 
 
 
