@@ -20,12 +20,33 @@ function updateLoanDetails() {
       )?.dataset?.actualValue
     ) || 0;
 
-  const tenure =
-    Number(
-      document.querySelector(
-        '[name="loan_tenure_months"]'
-      )?.dataset?.actualValue
-    ) || 0;
+ // =========================
+// GET EXACT TENURE VALUE
+// =========================
+
+const tenureSlider =
+  document.querySelector(
+    '[name="loan_tenure_months"]'
+  );
+
+const tenureValues = [
+  12, 24, 36, 48, 60, 72, 84
+];
+
+const segment =
+  100 / (tenureValues.length - 1);
+
+let tenureIndex =
+  Math.round(
+    Number(tenureSlider.value) / segment
+  );
+
+if (tenureIndex >= tenureValues.length) {
+  tenureIndex = tenureValues.length - 1;
+}
+
+const tenure =
+  tenureValues[tenureIndex];
 
   // =========================
   // EMI CALCULATION
