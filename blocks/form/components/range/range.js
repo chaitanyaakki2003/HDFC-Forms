@@ -352,6 +352,12 @@ export default async function decorate(
   e.target.dataset.actualValue =
     actualValue;
 }
+e.target.setAttribute(
+  'value',
+  actualValue
+);
+
+e.target.value = actualValue;
 
     // =========================
     // UPDATE UI
