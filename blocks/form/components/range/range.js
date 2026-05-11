@@ -184,10 +184,10 @@ function updateBubble(input, element) {
   const value = Number(input.value) || 0;
 
   const current =
-    Math.ceil((value - min) / step);
+  ((value - min) / step);
 
-  const total =
-    Math.ceil((max - min) / step);
+const total =
+  ((max - min) / step);
 
   const bubble =
     element.querySelector('.range-bubble');
@@ -262,7 +262,7 @@ export default async function decorate(
     input.step = 1;
 
    if (!input.value) {
-  input.value = 66.666;
+ input.step = 0.01;
 }
   }
 
