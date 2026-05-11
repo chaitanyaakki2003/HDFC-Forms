@@ -164,6 +164,34 @@ if (
       `₹${Math.round(emi).toLocaleString('en-IN')}`;
   }
 }
+// =========================
+// UPDATE REVIEW TENURE
+// =========================
+
+const allElements =
+  document.querySelectorAll('*');
+
+allElements.forEach((el) => {
+
+  // FIND TENURE LABEL
+  if (
+    el.innerText?.trim() === 'Tenure'
+  ) {
+
+    // GET VALUE ELEMENT
+    const valueElement =
+      el.parentElement.querySelector(
+        'p, span, div'
+      );
+
+    // UPDATE VALUE
+    if (valueElement) {
+
+      valueElement.innerText =
+        tenure;
+    }
+  }
+});
 
 /* =========================
    UPDATE BUBBLE
