@@ -23,7 +23,12 @@ function updateLoanDetails() {
  // =========================
 // GET EXACT TENURE VALUE
 // =========================
-
+const tenure =
+  Number(
+    document.querySelector(
+      '[name="loan_tenure_months"]'
+    )?.dataset?.actualValue
+  ) || 0;
 
 
   // =========================
