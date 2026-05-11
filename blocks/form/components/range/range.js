@@ -167,20 +167,7 @@ if (
     emiField.innerText =
       `₹${Math.round(emi).toLocaleString('en-IN')}`;
   }
- // =========================
-// UPDATE REVIEW TENURE
-// =========================
-
-const reviewTenureField =
-  document.querySelector(
-    '.field-loan-tenure-months input[type="text"]'
-  );
-
-if (reviewTenureField) {
-
-  reviewTenureField.value =
-    `${tenure}`;
-}
+ 
 }
 
 

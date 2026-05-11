@@ -257,12 +257,19 @@ function calculateEMI(globals) {
         value: "₹" + tax.toLocaleString("en-IN"),
       }
     );
-  globals.functions.setProperty(
+ const exactTenure =
+  Number(
+    document.querySelector(
+      '[name="loan_tenure_months"]'
+    )?.dataset?.actualValue
+  ) || 0;
+
+globals.functions.setProperty(
   globals.form.review_details
     .loan_details
     .loan_tenure_months,
   {
-    value: String(tenure),
+    value: exactTenure + " months",
   }
 );
   } catch (e) {
